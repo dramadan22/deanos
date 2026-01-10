@@ -182,51 +182,14 @@ def fetch_feed_items(feeds):
     return deduped
 
 
-def build_meal_plan(recipes):
-    def pick(count, offset=0):
-        selection = recipes[offset : offset + count]
-        return [
-            {
-                "title": item["title"],
-                "url": item["url"],
-                "source": item["source"],
-                "tags": ["rss", "new"],
-            }
-            for item in selection
-        ]
-
-    lunches = pick(5, 0)
-    dinners = pick(3, 5)
-    weekend = pick(1, 8)
-
-    return [
-        {
-            "type": "Lunch Prep",
-            "description": "Prep on Sunday for 5 weekday lunches",
-            "items": lunches,
-        },
-        {
-            "type": "Weeknight Dinners",
-            "description": "Quick & easy (<45 min)",
-            "items": dinners,
-        },
-        {
-            "type": "Weekend Challenge",
-            "description": "One ambitious cook!",
-            "items": weekend,
-        },
-    ]
-
-
 def main():
     recipe_items = fetch_feed_items(RECIPE_FEEDS)
     longevity_items = fetch_feed_items(LONGEVITY_FEEDS)
 
-    meal_plan = build_meal_plan(recipe_items) if recipe_items else []
-
     weekly_recipes = {
         "updated": datetime.now(timezone.utc).isoformat(),
-        "meals": meal_plan,
+        "meals": [],
+        "items": recipe_items,
     }
 
     weekly_workouts = {
