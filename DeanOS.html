@@ -409,38 +409,6 @@
             flex: 1;
         }
 
-        .grocery-meal {
-            margin-bottom: 1rem;
-        }
-
-        .grocery-meal-title {
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: var(--forest);
-        }
-
-        .grocery-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 0.5rem;
-        }
-
-        .grocery-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-input);
-            border-radius: var(--radius-sm);
-            padding: 0.4rem 0.6rem;
-        }
-
-        .grocery-amount {
-            margin-left: auto;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-        }
-
         #weeklyMealPlan.mealplan-refresh {
             animation: mealPlanFade 0.45s ease;
         }
@@ -2186,7 +2154,6 @@
             },
             weeklyWorkouts: [],
             weeklyMeals: [],
-            weeklyGroceryList: [],
             selectedWorkoutDays: [],
             workoutDayTypes: {}
         };
@@ -3432,85 +3399,28 @@
         }
 
         function generateWorkouts() {
-            const ptDay = document.getElementById('ptSessionDay').value;
-            const travel = document.getElementById('travelWeek').value;
-
             appData.selectedWorkoutDays = [...selectedWorkoutDays];
             appData.workoutDayTypes = { ...workoutDayTypes };
-
-            // POTS-friendly exercises (seated/lying down) with YouTube links
-            const exercises = {
-                push: [
-                    { name: 'Seated Chest Press Machine', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=xUm0BiZCWlQ' },
-                    { name: 'Incline Dumbbell Press (Low Incline)', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=8iPEnn-ltC8' },
-                    { name: 'Seated Shoulder Press Machine', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=Wqq43dKW1TU' },
-                    { name: 'Cable Fly (Seated)', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=Iwe6AmxVf7o' },
-                    { name: 'Tricep Pushdown', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=2-LAMcpzODU' }
-                ],
-                pull: [
-                    { name: 'Seated Cable Row', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=GZbfZ033f74' },
-                    { name: 'Lat Pulldown', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=CAwf7n6Luuc' },
-                    { name: 'Seated Face Pulls', sets: '3x15', video: 'https://www.youtube.com/watch?v=rep-qVOkqgk' },
-                    { name: 'Bicep Curl Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=av7-8igSXTs' },
-                    { name: 'Rear Delt Fly Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=5YK4bgzXDp0' }
-                ],
-                legs: [
-                    { name: 'Leg Press', sets: '4x10-12', video: 'https://www.youtube.com/watch?v=IZxyjW7MPJQ' },
-                    { name: 'Leg Curl Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=1Tq3QdYUuHs' },
-                    { name: 'Leg Extension', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=YyvSfVjQeL0' },
-                    { name: 'Seated Calf Raise', sets: '3x15-20', video: 'https://www.youtube.com/watch?v=-M4-G8p8fmc' },
-                    { name: 'Hip Adductor Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=2cPwLG3MOLs' }
-                ],
-                cardio: [
-                    { name: 'Upright Bike', sets: '30 min, 90+ RPM, Level 12', video: 'https://www.youtube.com/watch?v=oBFhn-2BrEw' }
-                ]
-            };
-
-            const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-
-            // Generate workout plan based on selected days
-            const workouts = [];
-            let pushPullLegIndex = 0;
-            const splits = ['push', 'pull', 'legs'];
-
-            selectedWorkoutDays.sort((a, b) => {
-                const order = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-                return order.indexOf(a) - order.indexOf(b);
-            });
-
-            selectedWorkoutDays.forEach(day => {
-                if (day === ptDay) {
-                    workouts.push({
-                        day: dayNames[day],
-                        type: 'PT Session with Josh',
-                        location: 'Full Body',
-                        exercises: [{ name: 'Personal Training Session', sets: 'Full body, Josh will guide' }]
-                    });
-                } else {
-                    const dayType = workoutDayTypes[day] || 'strength';
-                    if (dayType === 'cardio') {
-                        workouts.push({
-                            day: dayNames[day],
-                            type: 'Cardio Day',
-                            location: 'LA Fitness',
-                            exercises: [...exercises.cardio]
-                        });
-                    } else {
-                        const split = splits[pushPullLegIndex % 3];
-                        workouts.push({
-                            day: dayNames[day],
-                            type: split.charAt(0).toUpperCase() + split.slice(1) + ' Day',
-                            location: 'LA Fitness',
-                            exercises: [...exercises[split]]
-                        });
-                        pushPullLegIndex++;
-                    }
+            loadWeeklyWorkouts().then(feed => {
+                const feedWorkouts = (feed.workouts || []).filter(w => w.day && w.exercises);
+                if (feedWorkouts.length === 0) {
+                    showNotification('No RSS workouts yet. Try again later.', 'error');
+                    return;
                 }
-            });
 
-            appData.weeklyWorkouts = workouts;
-            saveData();
-            renderWeeklyWorkoutPlan();
+                const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+                const selectedNames = selectedWorkoutDays.map(day => dayNames[day]).filter(Boolean);
+                let workouts = feedWorkouts;
+
+                if (selectedNames.length > 0) {
+                    const filtered = feedWorkouts.filter(w => selectedNames.includes(w.day));
+                    workouts = filtered.length > 0 ? filtered : feedWorkouts;
+                }
+
+                appData.weeklyWorkouts = workouts;
+                saveData();
+                renderWeeklyWorkoutPlan();
+            });
         }
 
         function renderWeeklyWorkoutPlan() {
@@ -3619,76 +3529,6 @@
             }
         }
 
-        function buildGroceryList(meals) {
-            const list = [];
-            meals.forEach(category => {
-                category.items.forEach(item => {
-                    if (!item.ingredients || item.ingredients.length === 0) return;
-                    list.push({
-                        meal: item.title,
-                        category: category.type,
-                        ingredients: item.ingredients
-                    });
-                });
-            });
-            return list;
-        }
-
-        function parseFraction(value) {
-            if (!value) return null;
-            if (value.includes('/')) {
-                const parts = value.split('/');
-                if (parts.length === 2) {
-                    const numerator = parseFloat(parts[0]);
-                    const denominator = parseFloat(parts[1]);
-                    if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
-                        return numerator / denominator;
-                    }
-                }
-                return null;
-            }
-            const parsed = parseFloat(value);
-            return isNaN(parsed) ? null : parsed;
-        }
-
-        function parseAmount(amount) {
-            if (!amount) return { value: null, unit: '' };
-            const trimmed = amount.trim();
-            const match = trimmed.match(/^([0-9]+(?:\.[0-9]+)?|[0-9]+\/[0-9]+)\s*(.*)$/);
-            if (!match) return { value: null, unit: trimmed };
-            return {
-                value: parseFraction(match[1]),
-                unit: match[2].trim() || 'unit'
-            };
-        }
-
-        function formatNumber(value) {
-            if (value === null || value === undefined) return '';
-            const rounded = Math.round(value * 100) / 100;
-            return rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(2).replace(/\.?0+$/, '');
-        }
-
-        function aggregateGroceryTotals(groceryList) {
-            const totals = new Map();
-            groceryList.forEach(entry => {
-                entry.ingredients.forEach(ing => {
-                    const key = ing.name.toLowerCase();
-                    if (!totals.has(key)) {
-                        totals.set(key, { name: ing.name, units: new Map(), extras: [] });
-                    }
-                    const item = totals.get(key);
-                    const parsed = parseAmount(ing.amount);
-                    if (parsed.value === null || !parsed.unit) {
-                        item.extras.push(ing.amount);
-                        return;
-                    }
-                    const unit = parsed.unit;
-                    const nextValue = (item.units.get(unit) || 0) + parsed.value;
-                    item.units.set(unit, nextValue);
-                });
-            });
-            return Array.from(totals.values()).sort((a, b) => a.name.localeCompare(b.name));
-        }
 
         function filterRecipesByCuisine(items, cuisine) {
             if (cuisine === 'mixed') return items;
@@ -3777,7 +3617,6 @@
                 const meals = buildMealPlanFromFeed(filtered, lunchCount, dinnerCount, ambitious);
 
                 appData.weeklyMeals = meals;
-                appData.weeklyGroceryList = [];
                 saveData();
                 triggerMealPlanRefresh();
 
@@ -3832,65 +3671,6 @@
                     </div>
                 </div>
             `).join('');
-
-            // Add grocery list
-            const groceryList = appData.weeklyGroceryList || [];
-            if (showGrocery && groceryList.length > 0) {
-                const isLegacyList = typeof groceryList[0] === 'string';
-                const totals = isLegacyList ? [] : aggregateGroceryTotals(groceryList);
-                html += `
-                    <div class="card" style="margin-bottom: 1rem;">
-                        <div class="card-header">
-                            <div class="card-title">&#128722; Grocery List</div>
-                            <span style="font-size: 0.85rem; color: var(--text-secondary);">${groceryList.length} ${isLegacyList ? 'items' : 'meals'}${isLegacyList ? '' : ` • ${totals.length} ingredients`}</span>
-                        </div>
-                        <div class="card-body">
-                            ${isLegacyList ? `
-                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem;">
-                                    ${groceryList.map(item => `
-                                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                            <input type="checkbox" style="width: 18px; height: 18px;">
-                                            <span>${item}</span>
-                                        </label>
-                                    `).join('')}
-                                </div>
-                            ` : `
-                                <div class="grocery-meal" style="margin-bottom: 1.25rem;">
-                                    <div class="grocery-meal-title">Totals</div>
-                                    <div class="grocery-items">
-                                        ${totals.map(item => {
-                                            const unitParts = Array.from(item.units.entries()).map(([unit, value]) => `${formatNumber(value)} ${unit === 'unit' ? '' : unit}`.trim());
-                                            const extras = item.extras.filter(Boolean);
-                                            const amountText = [...unitParts, ...extras].join(' + ');
-                                            return `
-                                                <label class="grocery-item">
-                                                    <input type="checkbox" style="width: 16px; height: 16px;">
-                                                    <span>${item.name}</span>
-                                                    <span class="grocery-amount">${amountText}</span>
-                                                </label>
-                                            `;
-                                        }).join('')}
-                                    </div>
-                                </div>
-                                ${groceryList.map(entry => `
-                                <div class="grocery-meal">
-                                    <div class="grocery-meal-title">${entry.meal} <span style="font-size: 0.75rem; color: var(--text-muted);">(${entry.category})</span></div>
-                                    <div class="grocery-items">
-                                        ${entry.ingredients.map(ing => `
-                                            <label class="grocery-item">
-                                                <input type="checkbox" style="width: 16px; height: 16px;">
-                                                <span>${ing.name}</span>
-                                                <span class="grocery-amount">${ing.amount}</span>
-                                            </label>
-                                        `).join('')}
-                                    </div>
-                                </div>
-                                `).join('')}
-                            `}
-                        </div>
-                    </div>
-                `;
-            }
 
             container.innerHTML = `
                 ${updatedHtml ? `<div style="margin-bottom: 0.75rem;">${updatedHtml}</div>` : ''}
