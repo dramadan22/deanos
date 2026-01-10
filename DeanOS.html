@@ -450,6 +450,37 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .research-feed-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .research-feed-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .research-feed-item:last-child {
+            border-bottom: none;
+        }
+
+        .research-feed-title a {
+            color: var(--forest);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .research-feed-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
         /* Priority Tasks */
         .priority-section {
             margin-bottom: 1rem;
@@ -1698,6 +1729,16 @@
                     <input type="text" class="input-field" id="researchSearch" placeholder="Search notes..." oninput="searchNotes()">
                 </div>
 
+                <div class="research-feed-card">
+                    <div class="card-header" style="padding: 0 0 0.75rem;">
+                        <div class="card-title">Latest Research Updates</div>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);" id="researchFeedUpdated">Loading...</span>
+                    </div>
+                    <div id="researchFeedList">
+                        <div class="empty-state"><p>Loading research feed...</p></div>
+                    </div>
+                </div>
+
                 <div id="notesList"></div>
             </div>
 
@@ -2385,6 +2426,7 @@
         let currentConsumptionTab = 'tvshow';
         let selectedTier = 'B';
         let selectedMood = 3;
+        let researchFeedCache = null;
 
         function showView(viewName) {
             document.querySelectorAll('.module-view').forEach(v => v.classList.remove('active'));
@@ -3048,7 +3090,53 @@
             renderResearch(document.getElementById('researchSearch').value.toLowerCase());
         }
 
+        async function loadResearchFeed() {
+            if (researchFeedCache) return researchFeedCache;
+            try {
+                const response = await fetch('research-feed.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to load feed');
+                const data = await response.json();
+                researchFeedCache = data;
+                return data;
+            } catch (error) {
+                researchFeedCache = { updated: null, items: [], error: true };
+                return researchFeedCache;
+            }
+        }
+
+        function formatFeedDate(value) {
+            if (!value) return '';
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return value;
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        function renderResearchFeed() {
+            const container = document.getElementById('researchFeedList');
+            const updatedLabel = document.getElementById('researchFeedUpdated');
+            if (!container) return;
+
+            loadResearchFeed().then(feed => {
+                if (!feed || feed.items.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>No research updates yet</p></div>';
+                } else {
+                    container.innerHTML = feed.items.slice(0, 8).map(item => `
+                        <div class="research-feed-item">
+                            <div class="research-feed-title">
+                                <a href="${item.url}" target="_blank">${item.title}</a>
+                            </div>
+                            <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
+                        </div>
+                    `).join('');
+                }
+                if (updatedLabel) {
+                    updatedLabel.textContent = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated time unknown';
+                }
+            });
+        }
+
         function renderResearch(search = '') {
+            renderResearchFeed();
             const container = document.getElementById('notesList');
             let notes = appData.notes;
 
