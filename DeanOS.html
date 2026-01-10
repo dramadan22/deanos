@@ -481,6 +481,14 @@
             color: var(--text-muted);
         }
 
+        .auto-feed-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
         /* Priority Tasks */
         .priority-section {
             margin-bottom: 1rem;
@@ -2427,6 +2435,8 @@
         let selectedTier = 'B';
         let selectedMood = 3;
         let researchFeedCache = null;
+        let weeklyRecipesCache = null;
+        let weeklyWorkoutsCache = null;
 
         function showView(viewName) {
             document.querySelectorAll('.module-view').forEach(v => v.classList.remove('active'));
@@ -3104,6 +3114,34 @@
             }
         }
 
+        async function loadWeeklyRecipes() {
+            if (weeklyRecipesCache) return weeklyRecipesCache;
+            try {
+                const response = await fetch('weekly-recipes.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to load weekly recipes');
+                const data = await response.json();
+                weeklyRecipesCache = data;
+                return data;
+            } catch (error) {
+                weeklyRecipesCache = { updated: null, meals: [], error: true };
+                return weeklyRecipesCache;
+            }
+        }
+
+        async function loadWeeklyWorkouts() {
+            if (weeklyWorkoutsCache) return weeklyWorkoutsCache;
+            try {
+                const response = await fetch('weekly-workouts.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to load weekly workouts');
+                const data = await response.json();
+                weeklyWorkoutsCache = data;
+                return data;
+            } catch (error) {
+                weeklyWorkoutsCache = { updated: null, workouts: [], sources: [], error: true };
+                return weeklyWorkoutsCache;
+            }
+        }
+
         function formatFeedDate(value) {
             if (!value) return '';
             const date = new Date(value);
@@ -3359,6 +3397,8 @@
             // Render weekly plan if exists
             if (appData.weeklyWorkouts && appData.weeklyWorkouts.length > 0) {
                 renderWeeklyWorkoutPlan();
+            } else {
+                renderAutoWeeklyWorkouts();
             }
         }
 
@@ -3507,10 +3547,75 @@
             `).join('');
         }
 
+        function renderAutoWeeklyWorkouts() {
+            const container = document.getElementById('weeklyWorkoutPlan');
+            if (!container) return;
+
+            loadWeeklyWorkouts().then(feed => {
+                if (!feed || feed.workouts.length === 0) return;
+
+                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated recently';
+                const sourceLinks = (feed.sources || []).slice(0, 3);
+
+                const workoutCards = feed.workouts.map(w => `
+                    <div class="workout-card">
+                        <div class="workout-card-header">
+                            <span class="workout-card-day">${w.day}</span>
+                            <span class="workout-card-type">${w.type} - ${w.location}</span>
+                        </div>
+                        <div class="workout-card-body">
+                            ${w.exercises.map(e => `
+                                <div class="exercise-item">
+                                    <span class="exercise-name">
+                                        ${e.video ? `<a href="${e.video}" target="_blank" style="color: var(--forest); text-decoration: none;">${e.name} &#127909;</a>` : e.name}
+                                    </span>
+                                    <span class="exercise-detail">${e.sets}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                const sourceHtml = sourceLinks.length > 0 ? `
+                    <div class="card" style="margin-top: 1rem;">
+                        <div class="card-header">
+                            <div class="card-title">Longevity Reads</div>
+                            <span class="auto-feed-badge">${updatedLabel}</span>
+                        </div>
+                        <div class="card-body">
+                            ${sourceLinks.map(item => `
+                                <div class="research-feed-item">
+                                    <div class="research-feed-title">
+                                        <a href="${item.url}" target="_blank">${item.title}</a>
+                                    </div>
+                                    <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : '';
+
+                container.innerHTML = `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div class="card-header">
+                            <div class="card-title">&#9889; Auto Workout Plan</div>
+                            <span class="auto-feed-badge">${updatedLabel}</span>
+                        </div>
+                        <div class="card-body">
+                            ${workoutCards}
+                        </div>
+                    </div>
+                    ${sourceHtml}
+                `;
+            });
+        }
+
         // ==================== RECIPES ====================
         function renderRecipes() {
             if (appData.weeklyMeals && appData.weeklyMeals.length > 0) {
-                renderWeeklyMealPlan();
+                renderWeeklyMealPlan(appData.weeklyMeals);
+            } else {
+                renderAutoWeeklyMeals();
             }
         }
 
@@ -3681,12 +3786,11 @@
             appData.weeklyGroceryList = buildGroceryList(meals);
             saveData();
             triggerMealPlanRefresh();
-            renderWeeklyMealPlan();
+            renderWeeklyMealPlan(meals);
         }
 
-        function renderWeeklyMealPlan() {
+        function renderWeeklyMealPlan(meals, updatedLabel = '', showGrocery = true) {
             const container = document.getElementById('weeklyMealPlan');
-            const meals = appData.weeklyMeals || [];
 
             if (meals.length === 0) {
                 container.innerHTML = `
@@ -3698,6 +3802,7 @@
                 return;
             }
 
+            const updatedHtml = updatedLabel ? `<span class="auto-feed-badge">${updatedLabel}</span>` : '';
             let html = meals.map(category => `
                 <div class="card" style="margin-bottom: 1rem;">
                     <div class="card-header">
@@ -3708,16 +3813,21 @@
                         ${category.items.map(item => {
                             const itemUrl = item.url || createSearchUrl(`${item.title} recipe`);
                             const itemLink = itemUrl ? `<a href="${itemUrl}" target="_blank" style="color: var(--forest); text-decoration: none;">${item.title} &#128279;</a>` : item.title;
+                            const metaParts = [];
+                            if (item.time) metaParts.push(item.time);
+                            if (item.protein) metaParts.push(`${item.protein} protein`);
+                            if (item.source) metaParts.push(item.source);
+                            const metaText = metaParts.length > 0 ? metaParts.join(' | ') : 'From your weekly feed';
                             return `
                                 <div class="recipe-card">
                                     <div class="recipe-card-header">
                                         <div class="recipe-card-title">
                                             ${itemLink}
                                         </div>
-                                        <div class="recipe-card-meta">${item.time} | ${item.protein} protein</div>
+                                        <div class="recipe-card-meta">${metaText}</div>
                                     </div>
                                     <div class="recipe-card-body">
-                                        ${item.tags.map(t => `<span class="recipe-tag">${t}</span>`).join('')}
+                                        ${(item.tags || []).map(t => `<span class="recipe-tag">${t}</span>`).join('')}
                                     </div>
                                 </div>
                             `;
@@ -3728,7 +3838,7 @@
 
             // Add grocery list
             const groceryList = appData.weeklyGroceryList || [];
-            if (groceryList.length > 0) {
+            if (showGrocery && groceryList.length > 0) {
                 const isLegacyList = typeof groceryList[0] === 'string';
                 const totals = isLegacyList ? [] : aggregateGroceryTotals(groceryList);
                 html += `
@@ -3785,7 +3895,18 @@
                 `;
             }
 
-            container.innerHTML = html;
+            container.innerHTML = `
+                ${updatedHtml ? `<div style="margin-bottom: 0.75rem;">${updatedHtml}</div>` : ''}
+                ${html}
+            `;
+        }
+
+        function renderAutoWeeklyMeals() {
+            loadWeeklyRecipes().then(feed => {
+                if (!feed || feed.meals.length === 0) return;
+                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated recently';
+                renderWeeklyMealPlan(feed.meals, updatedLabel, false);
+            });
         }
 
         // ==================== YEARLY TRACKER ====================
