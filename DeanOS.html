@@ -3399,8 +3399,10 @@
         }
 
         function generateWorkouts() {
+            const ptDay = document.getElementById('ptSessionDay').value;
             appData.selectedWorkoutDays = [...selectedWorkoutDays];
             appData.workoutDayTypes = { ...workoutDayTypes };
+
             loadWeeklyWorkouts().then(feed => {
                 const feedWorkouts = (feed.workouts || []).filter(w => w.day && w.exercises);
                 if (feedWorkouts.length === 0) {
@@ -3409,13 +3411,54 @@
                 }
 
                 const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-                const selectedNames = selectedWorkoutDays.map(day => dayNames[day]).filter(Boolean);
-                let workouts = feedWorkouts;
+                const order = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+                const selectedDays = [...selectedWorkoutDays].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
-                if (selectedNames.length > 0) {
-                    const filtered = feedWorkouts.filter(w => selectedNames.includes(w.day));
-                    workouts = filtered.length > 0 ? filtered : feedWorkouts;
+                if (selectedDays.length === 0) {
+                    appData.weeklyWorkouts = feedWorkouts;
+                    saveData();
+                    renderWeeklyWorkoutPlan();
+                    return;
                 }
+
+                const cardioPool = feedWorkouts.filter(w => /cardio/i.test(w.type));
+                const strengthPool = feedWorkouts.filter(w => /strength|upper|lower|push|pull|legs/i.test(w.type));
+                const ptPool = feedWorkouts.filter(w => /pt|personal training/i.test(w.type));
+                const fallbackPool = feedWorkouts;
+
+                let cardioIndex = 0;
+                let strengthIndex = 0;
+                let ptIndex = 0;
+
+                const workouts = selectedDays.map(day => {
+                    const dayLabel = dayNames[day];
+                    if (day === ptDay) {
+                        const ptWorkout = ptPool[ptIndex % (ptPool.length || 1)] || {
+                            day: dayLabel,
+                            type: 'PT Session with Josh',
+                            location: 'Full Body',
+                            exercises: [{ name: 'Personal Training Session', sets: 'Full body, guided by Josh' }]
+                        };
+                        ptIndex++;
+                        return { ...ptWorkout, day: dayLabel };
+                    }
+
+                    const desiredType = workoutDayTypes[day] || 'strength';
+                    if (desiredType === 'cardio' && cardioPool.length > 0) {
+                        const workout = cardioPool[cardioIndex % cardioPool.length];
+                        cardioIndex++;
+                        return { ...workout, day: dayLabel };
+                    }
+
+                    if (desiredType === 'strength' && strengthPool.length > 0) {
+                        const workout = strengthPool[strengthIndex % strengthPool.length];
+                        strengthIndex++;
+                        return { ...workout, day: dayLabel };
+                    }
+
+                    const fallback = fallbackPool[(strengthIndex + cardioIndex + ptIndex) % fallbackPool.length];
+                    return { ...fallback, day: dayLabel };
+                });
 
                 appData.weeklyWorkouts = workouts;
                 saveData();
