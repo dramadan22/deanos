@@ -3,8 +3,14 @@ import json
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
+import ssl
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+
+try:
+    import certifi
+except Exception:  # pragma: no cover - optional dependency
+    certifi = None
 
 RECIPE_FEEDS = [
     {
@@ -18,8 +24,8 @@ RECIPE_FEEDS = [
         "type": "rss",
     },
     {
-        "name": "EatingWell",
-        "url": "https://www.eatingwell.com/rss/recipes/",
+        "name": "The Kitchn",
+        "url": "https://www.thekitchn.com/main.rss",
         "type": "rss",
     },
     {
@@ -42,12 +48,7 @@ LONGEVITY_FEEDS = [
     },
     {
         "name": "Peter Attia",
-        "url": "https://peterattiamd.com/feed/podcast/",
-        "type": "rss",
-    },
-    {
-        "name": "Bryan Johnson",
-        "url": "https://www.bryanjohnson.com/blogs/rss.xml",
+        "url": "https://peterattiamd.com/feed/",
         "type": "rss",
     },
 ]
@@ -98,11 +99,14 @@ WORKOUT_TEMPLATE = [
 
 
 def fetch_url(url):
+    context = ssl.create_default_context(
+        cafile=certifi.where() if certifi else None
+    )
     request = urllib.request.Request(
         url,
         headers={"User-Agent": "DeanOS Weekly Feed/1.0"},
     )
-    with urllib.request.urlopen(request, timeout=25) as response:
+    with urllib.request.urlopen(request, timeout=25, context=context) as response:
         return response.read()
 
 
@@ -129,8 +133,19 @@ def parse_date(value):
         return None
 
 
+def sanitize_xml(xml_data):
+    if isinstance(xml_data, bytes):
+        text = xml_data.decode("utf-8", errors="ignore")
+    else:
+        text = str(xml_data)
+    cleaned = "".join(
+        ch for ch in text if ch == "\t" or ch == "\n" or ch == "\r" or ord(ch) >= 32
+    )
+    return cleaned.encode("utf-8")
+
+
 def parse_rss(xml_data, source):
-    root = ET.fromstring(xml_data)
+    root = ET.fromstring(sanitize_xml(xml_data))
     channel = root.find("channel")
     if channel is None:
         return []
@@ -139,6 +154,33 @@ def parse_rss(xml_data, source):
         title = (item.findtext("title") or "").strip()
         link = (item.findtext("link") or "").strip()
         pub_date = parse_date(item.findtext("pubDate") or item.findtext("dc:date"))
+        if not title or not link:
+            continue
+        items.append(
+            {
+                "title": title,
+                "url": link,
+                "source": source,
+                "published": pub_date.isoformat() if pub_date else None,
+            }
+        )
+    return items
+
+
+def parse_atom(xml_data, source):
+    root = ET.fromstring(sanitize_xml(xml_data))
+    ns = {"atom": "http://www.w3.org/2005/Atom"}
+    items = []
+    for entry in root.findall("atom:entry", ns):
+        title = (entry.findtext("atom:title", default="", namespaces=ns) or "").strip()
+        link_elem = entry.find("atom:link[@rel='alternate']", ns)
+        if link_elem is None:
+            link_elem = entry.find("atom:link", ns)
+        link = (link_elem.attrib.get("href") if link_elem is not None else "").strip()
+        pub_text = entry.findtext("atom:published", default="", namespaces=ns) or entry.findtext(
+            "atom:updated", default="", namespaces=ns
+        )
+        pub_date = parse_date(pub_text)
         if not title or not link:
             continue
         items.append(
@@ -173,7 +215,10 @@ def fetch_feed_items(feeds):
             print(f"Failed to fetch {feed['name']}: {exc}", file=sys.stderr)
             continue
         try:
-            items = parse_rss(xml_data, feed["name"])
+            if feed["type"] == "atom":
+                items = parse_atom(xml_data, feed["name"])
+            else:
+                items = parse_rss(xml_data, feed["name"])
             all_items.extend(items)
         except Exception as exc:
             print(f"Failed to parse {feed['name']}: {exc}", file=sys.stderr)

@@ -1,5 +1,128 @@
 {
-  "updated": null,
-  "workouts": [],
-  "sources": []
+  "updated": "2026-01-10T23:26:52.104858+00:00",
+  "workouts": [
+    {
+      "day": "Monday",
+      "type": "Upper Body Strength",
+      "location": "LA Fitness",
+      "exercises": [
+        {
+          "name": "Seated Chest Press Machine",
+          "sets": "3x10-12",
+          "video": "https://www.youtube.com/watch?v=xUm0BiZCWlQ"
+        },
+        {
+          "name": "Lat Pulldown",
+          "sets": "3x10-12",
+          "video": "https://www.youtube.com/watch?v=CAwf7n6Luuc"
+        },
+        {
+          "name": "Seated Shoulder Press Machine",
+          "sets": "3x10-12",
+          "video": "https://www.youtube.com/watch?v=Wqq43dKW1TU"
+        },
+        {
+          "name": "Seated Cable Row",
+          "sets": "3x10-12",
+          "video": "https://www.youtube.com/watch?v=GZbfZ033f74"
+        },
+        {
+          "name": "Tricep Pushdown",
+          "sets": "3x12-15",
+          "video": "https://www.youtube.com/watch?v=2-LAMcpzODU"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "type": "Lower Body Strength",
+      "location": "LA Fitness",
+      "exercises": [
+        {
+          "name": "Leg Press",
+          "sets": "4x10-12",
+          "video": "https://www.youtube.com/watch?v=IZxyjW7MPJQ"
+        },
+        {
+          "name": "Leg Curl Machine",
+          "sets": "3x12-15",
+          "video": "https://www.youtube.com/watch?v=1Tq3QdYUuHs"
+        },
+        {
+          "name": "Leg Extension",
+          "sets": "3x12-15",
+          "video": "https://www.youtube.com/watch?v=YyvSfVjQeL0"
+        },
+        {
+          "name": "Seated Calf Raise",
+          "sets": "3x15-20",
+          "video": "https://www.youtube.com/watch?v=-M4-G8p8fmc"
+        },
+        {
+          "name": "Hip Adductor Machine",
+          "sets": "3x12-15",
+          "video": "https://www.youtube.com/watch?v=2cPwLG3MOLs"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "type": "PT Session with Josh",
+      "location": "Full Body",
+      "exercises": [
+        {
+          "name": "Personal Training Session",
+          "sets": "Full body, guided by Josh"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "type": "Cardio + Mobility",
+      "location": "LA Fitness",
+      "exercises": [
+        {
+          "name": "Upright Bike",
+          "sets": "30 min, 90+ RPM, Level 12",
+          "video": "https://www.youtube.com/watch?v=oBFhn-2BrEw"
+        },
+        {
+          "name": "Seated Stretch Flow",
+          "sets": "10-12 min, easy pace"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Pitting facts against sensationalism regarding the role of LDL cholesterol in ASCVD",
+      "url": "https://peterattiamd.com/the-role-of-ldl-cholesterol-in-ascvd/",
+      "source": "Peter Attia",
+      "published": "2026-01-10T12:00:00+00:00"
+    },
+    {
+      "title": "Essentials: Optimizing Workspace for Productivity, Focus & Creativity",
+      "url": "https://www.hubermanlab.com/episode/essentials-optimizing-workspace-for-productivity-focus-and-creativity",
+      "source": "Huberman Lab",
+      "published": "2026-01-08T09:00:00+00:00"
+    },
+    {
+      "title": "Best Ways to Build Better Habits & Break Bad Ones | James Clear",
+      "url": "https://www.hubermanlab.com/episode/best-ways-to-build-better-habits-and-break-bad-ones-james-clear",
+      "source": "Huberman Lab",
+      "published": "2026-01-05T09:00:00+00:00"
+    },
+    {
+      "title": "#378 \u2012 Women\u2019s health and performance: how training, nutrition, and hormones interact across life stages | Abbie Smith-Ryan, Ph.D.",
+      "url": "https://peterattiamd.com/abbiesmithryan/",
+      "source": "Peter Attia",
+      "published": "2026-01-05T05:15:00+00:00"
+    },
+    {
+      "title": "Oldies-But-Goodies: January 2026 Edition",
+      "url": "https://peterattiamd.com/oldies-but-goodies-january-2026/",
+      "source": "Peter Attia",
+      "published": "2026-01-03T12:00:00+00:00"
+    }
+  ]
 }

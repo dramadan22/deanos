@@ -3,18 +3,19 @@ import json
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
+import ssl
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+
+try:
+    import certifi
+except Exception:  # pragma: no cover - optional dependency
+    certifi = None
 
 FEEDS = [
     {
         "name": "Google News",
         "url": "https://news.google.com/rss/search?q=POTS%20OR%20dysautonomia&hl=en-US&gl=US&ceid=US:en",
-        "type": "rss",
-    },
-    {
-        "name": "PubMed",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=postural+orthostatic+tachycardia+syndrome+OR+dysautonomia&format=rss",
         "type": "rss",
     },
     {
@@ -31,11 +32,14 @@ FEEDS = [
 
 
 def fetch_url(url):
+    context = ssl.create_default_context(
+        cafile=certifi.where() if certifi else None
+    )
     request = urllib.request.Request(
         url,
         headers={"User-Agent": "DeanOS Research Feed/1.0"},
     )
-    with urllib.request.urlopen(request, timeout=20) as response:
+    with urllib.request.urlopen(request, timeout=20, context=context) as response:
         return response.read()
 
 
@@ -62,8 +66,19 @@ def parse_date(value):
         return None
 
 
+def sanitize_xml(xml_data):
+    if isinstance(xml_data, bytes):
+        text = xml_data.decode("utf-8", errors="ignore")
+    else:
+        text = str(xml_data)
+    cleaned = "".join(
+        ch for ch in text if ch == "\t" or ch == "\n" or ch == "\r" or ord(ch) >= 32
+    )
+    return cleaned.encode("utf-8")
+
+
 def parse_rss(xml_data, source):
-    root = ET.fromstring(xml_data)
+    root = ET.fromstring(sanitize_xml(xml_data))
     channel = root.find("channel")
     if channel is None:
         return []
