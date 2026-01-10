@@ -1,0 +1,3834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeanOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --bg-input: #F5F1EA;
+            --bg-hover: #F0EBE3;
+            --text-primary: #2C2C2C;
+            --text-secondary: #6B6358;
+            --text-muted: #9B9286;
+            --border: #E5DED3;
+            --forest: #2D5A3D;
+            --forest-light: #3D7A52;
+            --forest-bg: #E8F0EA;
+            --brown: #8B6F47;
+            --brown-light: #A6895E;
+            --amber: #D4A84B;
+            --amber-light: #F0D78A;
+            --red-soft: #C75D5D;
+            --red-bg: #FCEAEA;
+            --blue-soft: #5D8AC7;
+            --purple-soft: #8B5DC7;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-weight: 700;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-card);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--forest);
+        }
+
+        .logo span {
+            color: var(--brown);
+        }
+
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-input);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .streak-badge {
+            background: var(--amber-light);
+            color: var(--brown);
+            font-weight: 600;
+        }
+
+        .level-badge {
+            background: var(--forest);
+            color: white;
+            font-weight: 600;
+        }
+
+        .xp-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .xp-bar {
+            width: 120px;
+            height: 8px;
+            background: var(--bg-input);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--forest), var(--forest-light));
+            transition: width 0.5s ease;
+        }
+
+        .xp-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        .sidebar {
+            width: 220px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 0 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.6rem 1.25rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .sidebar-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-btn.active {
+            background: var(--forest-bg);
+            color: var(--forest);
+            font-weight: 600;
+            border-right: 3px solid var(--forest);
+        }
+
+        .sidebar-icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        /* Morning Dashboard */
+        .greeting {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+        }
+
+        .date-display {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-log-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .quick-btn:hover {
+            background: var(--forest-bg);
+            border-color: var(--forest);
+        }
+
+        .quick-btn.logged {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Vitals Entry */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .vital-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .vital-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .vital-input {
+            padding: 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-family: inherit;
+            background: var(--bg-input);
+            text-align: center;
+            width: 100%;
+        }
+
+        .vital-input:focus {
+            outline: none;
+            border-color: var(--forest);
+            background: white;
+        }
+
+        /* Hydration Tracker */
+        .hydration-display {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .hydration-count {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--forest);
+            font-family: 'Merriweather', serif;
+        }
+
+        .hydration-goal {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .hydration-bar {
+            height: 12px;
+            background: var(--bg-input);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .hydration-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue-soft), var(--forest));
+            transition: width 0.3s;
+        }
+
+        .hydration-slider {
+            margin: 0.75rem 0 1rem;
+        }
+
+        .hydration-slider input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .hydration-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        .hydration-btns {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .hydration-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .hydration-btn:hover {
+            background: var(--forest-bg);
+        }
+
+        .is-hidden {
+            display: none;
+        }
+
+        .workout-day-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .workout-day-type-card {
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .workout-day-type-card select {
+            flex: 1;
+        }
+
+        .grocery-meal {
+            margin-bottom: 1rem;
+        }
+
+        .grocery-meal-title {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--forest);
+        }
+
+        .grocery-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .grocery-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            padding: 0.4rem 0.6rem;
+        }
+
+        .grocery-amount {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        #weeklyMealPlan.mealplan-refresh {
+            animation: mealPlanFade 0.45s ease;
+        }
+
+        @keyframes mealPlanFade {
+            from { opacity: 0.25; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Priority Tasks */
+        .priority-section {
+            margin-bottom: 1rem;
+        }
+
+        .priority-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .priority-high .priority-dot { background: var(--red-soft); }
+        .priority-medium .priority-dot { background: var(--amber); }
+        .priority-low .priority-dot { background: var(--forest); }
+
+        .priority-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.5rem;
+            transition: all 0.15s;
+        }
+
+        .task-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .task-item.completed {
+            opacity: 0.5;
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.15s;
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--forest);
+        }
+
+        .task-checkbox.checked {
+            background: var(--forest);
+            border-color: var(--forest);
+            color: white;
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .task-xp {
+            font-size: 0.75rem;
+            color: var(--amber);
+            font-weight: 600;
+        }
+
+        .task-delete {
+            opacity: 0;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .task-item:hover .task-delete {
+            opacity: 1;
+        }
+
+        .task-delete:hover {
+            color: var(--red-soft);
+        }
+
+        /* Symptoms Quick Log */
+        .symptom-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .symptom-btn {
+            padding: 0.6rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .symptom-btn:hover {
+            border-color: var(--red-soft);
+            background: var(--red-bg);
+        }
+
+        .symptom-btn.active {
+            background: var(--red-bg);
+            border-color: var(--red-soft);
+            color: var(--red-soft);
+        }
+
+        /* Module Views */
+        .module-view {
+            display: none;
+        }
+
+        .module-view.active {
+            display: block;
+        }
+
+        .view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-title {
+            font-size: 1.5rem;
+            color: var(--forest);
+        }
+
+        /* Forms & Inputs */
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-input);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--forest);
+            background: white;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.15s;
+        }
+
+        .btn-primary {
+            background: var(--forest);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--forest-light);
+        }
+
+        .btn-secondary {
+            background: var(--bg-input);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Consumption Tracker */
+        .consumption-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .consumption-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+        }
+
+        .consumption-tab.active {
+            background: var(--forest-bg);
+            color: var(--forest);
+            font-weight: 600;
+        }
+
+        .consumption-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .consumption-poster {
+            width: 80px;
+            height: 100px;
+            background: var(--bg-hover);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .consumption-info {
+            flex: 1;
+        }
+
+        .consumption-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .consumption-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .consumption-notes {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .tier-badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .tier-S { background: #FFD700; color: #5C4A00; }
+        .tier-A { background: #90EE90; color: #1B5E20; }
+        .tier-B { background: #87CEEB; color: #0D47A1; }
+        .tier-C { background: #DDA0DD; color: #4A148C; }
+        .tier-F { background: #FFB6B6; color: #8B0000; }
+
+        /* Tier Selector */
+        .tier-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tier-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.15s;
+        }
+
+        .tier-option:hover, .tier-option.selected {
+            transform: scale(1.05);
+        }
+
+        .tier-option.selected {
+            border-color: currentColor;
+        }
+
+        .tier-option[data-tier="S"] { color: #B8860B; }
+        .tier-option[data-tier="A"] { color: #228B22; }
+        .tier-option[data-tier="B"] { color: #4169E1; }
+        .tier-option[data-tier="C"] { color: #8B008B; }
+        .tier-option[data-tier="F"] { color: #B22222; }
+
+        /* Journal */
+        .journal-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+        }
+
+        .journal-sidebar {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 1rem;
+        }
+
+        .journal-entry-card {
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            transition: background 0.15s;
+        }
+
+        .journal-entry-card:hover {
+            background: var(--bg-hover);
+        }
+
+        .journal-entry-card.active {
+            background: var(--forest-bg);
+        }
+
+        .journal-entry-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .journal-entry-preview {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .journal-editor {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .journal-textarea {
+            width: 100%;
+            min-height: 300px;
+            border: none;
+            background: transparent;
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: none;
+            color: var(--text-primary);
+        }
+
+        .journal-textarea:focus {
+            outline: none;
+        }
+
+        .mood-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mood-btn {
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border: 2px solid transparent;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.15s;
+        }
+
+        .mood-btn:hover, .mood-btn.selected {
+            opacity: 1;
+            border-color: var(--forest);
+            background: var(--forest-bg);
+        }
+
+        /* Insights Panel */
+        .insight-card {
+            background: linear-gradient(135deg, var(--forest-bg), var(--bg-card));
+            border: 1px solid var(--forest);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .insight-data {
+            font-weight: 600;
+            color: var(--forest);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            text-align: center;
+            opacity: 0.4;
+            transition: all 0.2s;
+        }
+
+        .achievement-card.unlocked {
+            opacity: 1;
+            border-color: var(--amber);
+            background: linear-gradient(180deg, var(--bg-card), #FFFBF0);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .achievement-progress {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--forest);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .notification.xp {
+            background: var(--forest);
+            color: white;
+        }
+
+        .notification.level-up {
+            background: linear-gradient(135deg, var(--amber), var(--amber-light));
+            color: var(--brown);
+            font-size: 1.1rem;
+        }
+
+        .notification.success {
+            background: var(--forest-bg);
+            color: var(--forest);
+            border: 1px solid var(--forest);
+        }
+
+        .notification.streak {
+            background: var(--amber-light);
+            color: var(--brown);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Health Charts Placeholder */
+        .chart-placeholder {
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Progress Ring */
+        .progress-ring {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 6;
+        }
+
+        .progress-ring .bg {
+            stroke: var(--bg-input);
+        }
+
+        .progress-ring .progress {
+            stroke: var(--forest);
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.5s;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--forest);
+            font-family: 'Merriweather', serif;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-warm);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: var(--forest-bg);
+            color: var(--forest);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+        }
+
+        /* Research */
+        .note-card {
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .note-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .note-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Health Metrics Log */
+        .metric-log-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-log-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Bad Behavior Buttons */
+        .behavior-bad {
+            background: var(--bg-card);
+            border-color: var(--border);
+        }
+
+        .behavior-bad.triggered {
+            background: var(--red-bg);
+            border-color: var(--red-soft);
+            color: var(--red-soft);
+        }
+
+        .behavior-bad:hover:not(.triggered) {
+            border-color: var(--red-soft);
+            background: var(--red-bg);
+        }
+
+        /* Workout Day Selector */
+        .workout-day-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .workout-day-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .workout-day-btn:hover {
+            border-color: var(--forest);
+            background: var(--forest-bg);
+        }
+
+        .workout-day-btn.selected {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+        }
+
+        /* Workout Card */
+        .workout-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .workout-card-header {
+            background: var(--forest-bg);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .workout-card-day {
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .workout-card-type {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .workout-card-body {
+            padding: 1rem;
+        }
+
+        .exercise-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-name {
+            font-weight: 500;
+        }
+
+        .exercise-detail {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Recipe Card */
+        .recipe-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .recipe-card-header {
+            background: var(--amber-light);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .recipe-card-title {
+            font-weight: 700;
+            color: var(--brown);
+        }
+
+        .recipe-card-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .recipe-card-body {
+            padding: 1rem;
+        }
+
+        .recipe-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: var(--forest-bg);
+            color: var(--forest);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Tasks Complete Animation */
+        .tasks-complete-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .confetti-container {
+            text-align: center;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .celebration-text {
+            font-size: 2rem;
+            font-family: 'Merriweather', serif;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Year Item */
+        .year-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .year-item:last-child {
+            border-bottom: none;
+        }
+
+        .year-item-title {
+            font-weight: 500;
+        }
+
+        .year-item-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .content-area {
+                padding: 1rem;
+            }
+            .journal-layout {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Dean<span>OS</span></div>
+        <div class="header-stats">
+            <div class="stat-badge streak-badge">
+                <span>&#128293;</span>
+                <span id="currentStreak">0</span> day streak
+            </div>
+            <div class="stat-badge level-badge" id="levelBadge">Level 1</div>
+            <div class="xp-container">
+                <div class="xp-bar">
+                    <div class="xp-fill" id="xpFill" style="width: 0%"></div>
+                </div>
+                <span class="xp-text" id="xpText">0/100</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">Daily</div>
+                <button class="sidebar-btn active" data-view="morning">
+                    <span class="sidebar-icon">&#9728;</span> Morning
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Track</div>
+                <button class="sidebar-btn" data-view="health">
+                    <span class="sidebar-icon">&#128154;</span> Health
+                </button>
+                <button class="sidebar-btn" data-view="tasks">
+                    <span class="sidebar-icon">&#9745;</span> Tasks
+                </button>
+                <button class="sidebar-btn" data-view="consumption">
+                    <span class="sidebar-icon">&#127916;</span> Consumed
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Plan</div>
+                <button class="sidebar-btn" data-view="workouts">
+                    <span class="sidebar-icon">&#128170;</span> Workouts
+                </button>
+                <button class="sidebar-btn" data-view="recipes">
+                    <span class="sidebar-icon">&#127869;</span> Meal Plans
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Reflect</div>
+                <button class="sidebar-btn" data-view="journal">
+                    <span class="sidebar-icon">&#128214;</span> Journal
+                </button>
+                <button class="sidebar-btn" data-view="research">
+                    <span class="sidebar-icon">&#128218;</span> Research
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Progress</div>
+                <button class="sidebar-btn" data-view="insights">
+                    <span class="sidebar-icon">&#128200;</span> Insights
+                </button>
+                <button class="sidebar-btn" data-view="yearlyTracker">
+                    <span class="sidebar-icon">&#128197;</span> 2026 Tracker
+                </button>
+                <button class="sidebar-btn" data-view="achievements">
+                    <span class="sidebar-icon">&#127942;</span> Achievements
+                </button>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <main class="content-area">
+            <!-- Morning Dashboard -->
+            <div class="module-view active" id="morningView">
+                <div class="greeting" id="greeting">Good morning, Dean</div>
+                <div class="date-display" id="dateDisplay"></div>
+
+                <!-- Quick Log Bar -->
+                <div class="quick-log-bar" id="quickLogBar">
+                    <button class="quick-btn" onclick="quickLog('meds')">&#128138; Meds</button>
+                    <button class="quick-btn" onclick="quickLog('creatine')">&#128170; Creatine</button>
+                    <button class="quick-btn" onclick="quickLog('compression')">&#129466; Compression</button>
+                    <button class="quick-btn" onclick="quickLog('exercise')">&#127939; Moved</button>
+                </div>
+
+                <!-- Behavior Checks - Red if used -->
+                <div class="quick-log-bar" id="behaviorChecks">
+                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('instagram')" id="instagramBtn">&#128247; Instagram</button>
+                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('twitter')" id="twitterBtn">&#128038; Twitter</button>
+                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('sugar')" id="sugarBtn">&#127852; Sugar</button>
+                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('junkfood')" id="junkfoodBtn">&#127839; Junk Food</button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Vitals Card -->
+                    <div class="card" id="vitalsCard">
+                        <div class="card-header">
+                            <div class="card-title">&#128147; Morning Vitals</div>
+                            <span class="task-xp">+10 XP</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="vitals-grid">
+                                <div class="vital-input-group">
+                                    <label class="vital-label">&#128148; Resting HR</label>
+                                    <input type="number" class="vital-input" id="restingHR" placeholder="bpm">
+                                </div>
+                                <div class="vital-input-group">
+                                    <label class="vital-label">&#129485; Standing HR</label>
+                                    <input type="number" class="vital-input" id="standingHR" placeholder="bpm">
+                                </div>
+                                <div class="vital-input-group">
+                                    <label class="vital-label">&#128200; Systolic</label>
+                                    <input type="number" class="vital-input" id="systolic" placeholder="mmHg">
+                                </div>
+                                <div class="vital-input-group">
+                                    <label class="vital-label">&#128201; Diastolic</label>
+                                    <input type="number" class="vital-input" id="diastolic" placeholder="mmHg">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-small" onclick="saveVitals()" style="margin-top: 1rem; width: 100%;">Log Vitals</button>
+                        </div>
+                    </div>
+
+                    <!-- Today's Priorities -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#127919; Today's Priorities</div>
+                            <button class="btn btn-small btn-secondary" onclick="openTaskModal()">+ Add</button>
+                        </div>
+                        <div class="card-body" id="todayTasks">
+                            <div class="empty-state">
+                                <p>No tasks for today</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meal Tracker -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#127858; Yesterday's Meals</div>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);" id="mealTrackerDate"></span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Breakfast</label>
+                                <textarea class="input-field" id="mealBreakfast" rows="2" placeholder="What did you eat?"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lunch</label>
+                                <textarea class="input-field" id="mealLunch" rows="2" placeholder="What did you eat?"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Dinner</label>
+                                <textarea class="input-field" id="mealDinner" rows="2" placeholder="What did you eat?"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Snacks</label>
+                                <textarea class="input-field" id="mealSnacks" rows="2" placeholder="What did you snack on?"></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-small" onclick="saveMealTracker()" style="margin-top: 0.5rem; width: 100%;">Save Meals</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health View -->
+            <div class="module-view" id="healthView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128154; Health Hub</h2>
+                </div>
+
+                <div class="stats-grid" style="margin-bottom: 1.5rem;">
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgHR">--</div>
+                        <div class="stat-label">Avg Resting HR</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgStandingHR">--</div>
+                        <div class="stat-label">Avg Standing HR</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgBP">--</div>
+                        <div class="stat-label">Avg BP</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgFeeling">--</div>
+                        <div class="stat-label">Avg Feeling</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Recent Vitals</div>
+                    </div>
+                    <div class="card-body" id="vitalsLog">
+                        <div class="empty-state">No vitals logged yet</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Symptom History</div>
+                    </div>
+                    <div class="card-body" id="symptomLog">
+                        <div class="empty-state">No symptoms logged yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks View -->
+            <div class="module-view" id="tasksView">
+                <div class="view-header">
+                    <h2 class="view-title">&#9745; Tasks</h2>
+                    <button class="btn btn-primary" onclick="openTaskModalWithContext()">+ Add Task</button>
+                </div>
+
+                <div class="consumption-tabs" id="taskTabs">
+                    <button class="consumption-tab active" data-tasktab="work">&#128188; Work</button>
+                    <button class="consumption-tab" data-tasktab="personal">&#127968; Personal</button>
+                </div>
+
+                <div id="workTasksSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#128188; Work - Short Term</div>
+                        </div>
+                        <div class="card-body" id="workShortTasks">
+                            <div class="empty-state"><p>No tasks</p></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#128188; Work - Long Term</div>
+                        </div>
+                        <div class="card-body" id="workLongTasks">
+                            <div class="empty-state"><p>No tasks</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="personalTasksSection" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#127968; Personal - Short Term</div>
+                        </div>
+                        <div class="card-body" id="personalShortTasks">
+                            <div class="empty-state"><p>No tasks</p></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">&#127968; Personal - Long Term</div>
+                        </div>
+                        <div class="card-body" id="personalLongTasks">
+                            <div class="empty-state"><p>No tasks</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All Tasks Complete Animation -->
+                <div id="tasksCompleteAnimation" class="tasks-complete-animation" style="display: none;">
+                    <div class="confetti-container">
+                        <div class="celebration-text">All Tasks Complete!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consumption View -->
+            <div class="module-view" id="consumptionView">
+                <div class="view-header">
+                    <h2 class="view-title">&#127916; Consumed</h2>
+                    <button class="btn btn-primary" onclick="openConsumptionModalWithContext()">+ Add</button>
+                </div>
+
+                <div class="consumption-tabs">
+                    <button class="consumption-tab active" data-tab="tvshow">&#128250; TV Shows</button>
+                    <button class="consumption-tab" data-tab="movie">&#127910; Movies</button>
+                    <button class="consumption-tab" data-tab="book">&#128218; Books</button>
+                    <button class="consumption-tab" data-tab="recipe">&#127869; Recipes</button>
+                    <button class="consumption-tab" data-tab="restaurant">&#127860; Restaurants</button>
+                </div>
+
+                <div id="consumptionList"></div>
+            </div>
+
+            <!-- Journal View -->
+            <div class="module-view" id="journalView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128214; Journal</h2>
+                </div>
+
+                <div class="journal-layout">
+                    <div class="journal-sidebar">
+                        <button class="btn btn-primary btn-small" onclick="newJournalEntry()" style="width: 100%; margin-bottom: 1rem;">+ New Entry</button>
+                        <div id="journalEntries"></div>
+                    </div>
+                    <div class="journal-editor">
+                        <div style="margin-bottom: 1rem; color: var(--text-secondary);" id="journalDateLabel">Today's Entry</div>
+                        <div class="mood-selector">
+                            <button class="mood-btn" data-mood="1">&#128546;</button>
+                            <button class="mood-btn" data-mood="2">&#128533;</button>
+                            <button class="mood-btn" data-mood="3" >&#128528;</button>
+                            <button class="mood-btn" data-mood="4">&#128522;</button>
+                            <button class="mood-btn" data-mood="5">&#128513;</button>
+                        </div>
+                        <textarea class="journal-textarea" id="journalContent" placeholder="How are you feeling today? What's on your mind?"></textarea>
+                        <button class="btn btn-primary" onclick="saveJournal()" style="margin-top: 1rem;">Save Entry (+15 XP)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Research View -->
+            <div class="module-view" id="researchView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128218; Research</h2>
+                    <button class="btn btn-primary" onclick="openNoteModal()">+ Add Note</button>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="input-field" id="researchSearch" placeholder="Search notes..." oninput="searchNotes()">
+                </div>
+
+                <div id="notesList"></div>
+            </div>
+
+            <!-- Insights View -->
+            <div class="module-view" id="insightsView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128200; Insights</h2>
+                </div>
+
+                <div id="insightsList">
+                    <div class="insight-card">
+                        <div class="insight-icon">&#128161;</div>
+                        <div class="insight-text">Keep logging data to unlock personalized insights about your patterns!</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">Your Stats</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid" id="overallStats"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements View -->
+            <div class="module-view" id="achievementsView">
+                <div class="view-header">
+                    <h2 class="view-title">&#127942; Achievements</h2>
+                </div>
+
+                <div style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    <span id="achievementCount">0</span> / <span id="achievementTotal">0</span> unlocked
+                </div>
+
+                <div class="achievements-grid" id="achievementsList"></div>
+            </div>
+
+            <!-- Workouts View -->
+            <div class="module-view" id="workoutsView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128170; This Week's Workouts</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#128197; Weekly Schedule</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Training Days This Week</label>
+                            <div class="workout-day-selector" id="workoutDays">
+                                <button class="workout-day-btn" data-day="mon" onclick="toggleWorkoutDay('mon')">Mon</button>
+                                <button class="workout-day-btn" data-day="tue" onclick="toggleWorkoutDay('tue')">Tue</button>
+                                <button class="workout-day-btn" data-day="wed" onclick="toggleWorkoutDay('wed')">Wed</button>
+                                <button class="workout-day-btn" data-day="thu" onclick="toggleWorkoutDay('thu')">Thu</button>
+                                <button class="workout-day-btn" data-day="fri" onclick="toggleWorkoutDay('fri')">Fri</button>
+                                <button class="workout-day-btn" data-day="sat" onclick="toggleWorkoutDay('sat')">Sat</button>
+                                <button class="workout-day-btn" data-day="sun" onclick="toggleWorkoutDay('sun')">Sun</button>
+                            </div>
+                            <div class="workout-day-types" id="workoutDayTypes"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">PT Session Day (Josh)</label>
+                                <select class="input-field" id="ptSessionDay">
+                                    <option value="">No PT this week</option>
+                                    <option value="mon">Monday</option>
+                                    <option value="tue">Tuesday</option>
+                                    <option value="wed">Wednesday</option>
+                                    <option value="thu">Thursday</option>
+                                    <option value="fri" selected>Friday (usual)</option>
+                                    <option value="sat">Saturday</option>
+                                    <option value="sun">Sunday</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Travel This Week?</label>
+                                <select class="input-field" id="travelWeek">
+                                    <option value="no">No travel</option>
+                                    <option value="partial">Partial week travel</option>
+                                    <option value="full">Full week travel</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateWorkouts()" style="margin-top: 1rem;">Generate Weekly Plan</button>
+                    </div>
+                </div>
+
+                <div id="weeklyWorkoutPlan">
+                    <div class="empty-state">
+                        <div class="empty-icon">&#128170;</div>
+                        <p>Configure your schedule above and generate your personalized workout plan</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">All exercises are POTS-friendly: seated or lying down</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meal Plans View -->
+            <div class="module-view" id="recipesView">
+                <div class="view-header">
+                    <h2 class="view-title">&#127869; This Week's Meal Plans</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#128197; Weekly Meal Preferences</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Lunches to Prep</label>
+                                <select class="input-field" id="lunchPrepCount">
+                                    <option value="3">3 lunches</option>
+                                    <option value="4">4 lunches</option>
+                                    <option value="5" selected>5 lunches</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Weeknight Dinners</label>
+                                <select class="input-field" id="weeknightDinners">
+                                    <option value="2">2 dinners</option>
+                                    <option value="3" selected>3 dinners</option>
+                                    <option value="4">4 dinners</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cuisine Preference This Week</label>
+                            <select class="input-field" id="cuisinePreference">
+                                <option value="mixed" selected>Mixed variety</option>
+                                <option value="asian">Asian-focused</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="american">American comfort</option>
+                                <option value="mexican">Mexican</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ambitious Weekend Dinner?</label>
+                            <select class="input-field" id="ambitiousDinner">
+                                <option value="yes" selected>Yes, I want a challenge!</option>
+                                <option value="no">No, keep it simple</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateMealPlan()" style="margin-top: 1rem;">Generate Meal Plan</button>
+                    </div>
+                </div>
+
+                <div id="weeklyMealPlan">
+                    <div class="empty-state">
+                        <div class="empty-icon">&#127869;</div>
+                        <p>Configure your preferences and generate your weekly meal plan</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">High protein, less processed, longevity-focused</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yearly Tracker View -->
+            <div class="module-view" id="yearlyTrackerView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128197; 2026 Year Tracker</h2>
+                </div>
+
+                <!-- Consumption Stats -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#127916; Media & Dining Consumed</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearBooks">0</div>
+                                <div class="stat-label">Books</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearMovies">0</div>
+                                <div class="stat-label">Movies</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearTVShows">0</div>
+                                <div class="stat-label">TV Shows</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearRecipes">0</div>
+                                <div class="stat-label">Recipes</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearRestaurants">0</div>
+                                <div class="stat-label">Restaurants</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nutrition Stats -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#129385; Nutrition Totals</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearProtein">0</div>
+                                <div class="stat-label">Grams Protein</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearWater">0</div>
+                                <div class="stat-label">Oz Water</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="yearSalt">0</div>
+                                <div class="stat-label">mg Salt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#128218; Books</div>
+                    </div>
+                    <div class="card-body" id="yearBooksList">
+                        <div class="empty-state"><p>No books logged yet</p></div>
+                    </div>
+                </div>
+
+                <!-- Movies List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#127910; Movies</div>
+                    </div>
+                    <div class="card-body" id="yearMoviesList">
+                        <div class="empty-state"><p>No movies logged yet</p></div>
+                    </div>
+                </div>
+
+                <!-- TV Shows List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#128250; TV Shows</div>
+                    </div>
+                    <div class="card-body" id="yearTVShowsList">
+                        <div class="empty-state"><p>No TV shows logged yet</p></div>
+                    </div>
+                </div>
+
+                <!-- Restaurants List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#127860; Restaurants</div>
+                    </div>
+                    <div class="card-body" id="yearRestaurantsList">
+                        <div class="empty-state"><p>No restaurants logged yet</p></div>
+                    </div>
+                </div>
+
+                <!-- Recipes List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#127869; Recipes Cooked</div>
+                    </div>
+                    <div class="card-body" id="yearRecipesList">
+                        <div class="empty-state"><p>No recipes logged yet</p></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal">
+            <h3 class="modal-title">Add Task</h3>
+            <div class="form-group">
+                <label class="form-label">What needs to be done?</label>
+                <input type="text" class="input-field" id="taskTitle" placeholder="Task description">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="input-field" id="taskCategory">
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Term</label>
+                    <select class="input-field" id="taskTerm">
+                        <option value="short" selected>Short Term</option>
+                        <option value="long">Long Term</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="input-field" id="taskPriority">
+                        <option value="high">High</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Due Date (optional)</label>
+                    <input type="date" class="input-field" id="taskDue">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeTaskModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consumption Modal -->
+    <div class="modal-overlay" id="consumptionModal">
+        <div class="modal">
+            <h3 class="modal-title">Log Something You Consumed</h3>
+            <div class="form-group">
+                <label class="form-label">Type</label>
+                <select class="input-field" id="consumptionType">
+                    <option value="tvshow">TV Show</option>
+                    <option value="movie">Movie</option>
+                    <option value="book">Book</option>
+                    <option value="recipe">Recipe</option>
+                    <option value="restaurant">Restaurant</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" class="input-field" id="consumptionTitle" placeholder="What did you consume?">
+            </div>
+            <div class="form-group is-hidden" id="consumptionUrlGroup">
+                <label class="form-label">URL (optional)</label>
+                <input type="url" class="input-field" id="consumptionUrl" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Score (1-100)</label>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <input type="range" min="1" max="100" value="70" id="consumptionScore" style="flex: 1;" oninput="updateScoreDisplay()">
+                    <span id="scoreDisplay" style="font-size: 1.5rem; font-weight: 700; color: var(--forest); min-width: 50px; text-align: center;">70</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes/Thoughts</label>
+                <textarea class="input-field" id="consumptionNotes" rows="3" placeholder="What did you think?"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeConsumptionModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addConsumption()">Add (+5 XP)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal-overlay" id="noteModal">
+        <div class="modal">
+            <h3 class="modal-title">Add Research Note</h3>
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" class="input-field" id="noteTitle" placeholder="Note title">
+            </div>
+            <div class="form-group">
+                <label class="form-label">URL (optional)</label>
+                <input type="url" class="input-field" id="noteUrl" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="input-field" id="noteCategory">
+                    <option value="health">Health Research</option>
+                    <option value="learning">Learning</option>
+                    <option value="work">Work Reference</option>
+                    <option value="ideas">Ideas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Content</label>
+                <textarea class="input-field" id="noteContent" rows="5" placeholder="Your note..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tags (comma-separated)</label>
+                <input type="text" class="input-field" id="noteTags" placeholder="pots, treatment, research">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeNoteModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addNote()">Add Note (+5 XP)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year Item Modal -->
+    <div class="modal-overlay" id="yearItemModal">
+        <div class="modal">
+            <h3 class="modal-title" id="yearItemModalTitle">Add Item</h3>
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" class="input-field" id="yearItemTitle" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes (optional)</label>
+                <textarea class="input-field" id="yearItemNotes" rows="2" placeholder="Any thoughts..."></textarea>
+            </div>
+            <input type="hidden" id="yearItemType">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeYearItemModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addYearItem()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DATA LAYER ====================
+        const DEFAULT_DATA = {
+            user: {
+                name: 'Dean',
+                level: 1,
+                xp: 0,
+                achievements: [],
+                streakDays: 0,
+                lastActiveDate: null
+            },
+            dailyLogs: {}, // Keyed by date string: { water, salt, protein, meds, creatine, compression, exercise, instagram, twitter, sugar, junkfood, bedtime, waketime, screenTime, ouraScore }
+            vitals: [],
+            symptoms: [],
+            tasks: [],
+            consumption: [],
+            journal: [],
+            notes: [],
+            quickLogs: {}, // Keyed by date string
+            yearlyItems: {
+                books: [],
+                podcasts: [],
+                meals: [],
+                workouts: []
+            },
+            weeklyWorkouts: [],
+            weeklyMeals: [],
+            weeklyGroceryList: [],
+            selectedWorkoutDays: [],
+            workoutDayTypes: {}
+        };
+
+        const ACHIEVEMENTS = [
+            { id: 'first_log', name: 'First Steps', desc: 'Log your first vitals', icon: '&#128095;', check: d => d.vitals.length >= 1 },
+            { id: 'week_vitals', name: 'Vital Tracker', desc: 'Log vitals for 7 days', icon: '&#128147;', check: d => countUniqueDays(d.vitals) >= 7 },
+            { id: 'month_vitals', name: 'Health Warrior', desc: 'Log vitals for 30 days', icon: '&#128170;', check: d => countUniqueDays(d.vitals) >= 30 },
+            { id: 'hydration_hero', name: 'Hydration Hero', desc: 'Hit 12 glasses in a day', icon: '&#128167;', check: d => Object.values(d.dailyLogs).some(l => l.water >= 12) },
+            { id: 'streak_7', name: 'Week Warrior', desc: '7 day streak', icon: '&#128293;', check: d => d.user.streakDays >= 7 },
+            { id: 'streak_30', name: 'Monthly Master', desc: '30 day streak', icon: '&#9889;', check: d => d.user.streakDays >= 30 },
+            { id: 'level_5', name: 'Rising Star', desc: 'Reach level 5', icon: '&#11088;', check: d => d.user.level >= 5 },
+            { id: 'level_10', name: 'Dedicated', desc: 'Reach level 10', icon: '&#127775;', check: d => d.user.level >= 10 },
+            { id: 'level_25', name: 'Veteran', desc: 'Reach level 25', icon: '&#128081;', check: d => d.user.level >= 25 },
+            { id: 'tasks_10', name: 'Productive', desc: 'Complete 10 tasks', icon: '&#9745;', check: d => d.tasks.filter(t => t.completed).length >= 10 },
+            { id: 'tasks_50', name: 'Task Master', desc: 'Complete 50 tasks', icon: '&#127919;', check: d => d.tasks.filter(t => t.completed).length >= 50 },
+            { id: 'tasks_100', name: 'Centurion', desc: 'Complete 100 tasks', icon: '&#128176;', check: d => d.tasks.filter(t => t.completed).length >= 100 },
+            { id: 'journal_7', name: 'Reflector', desc: 'Write 7 journal entries', icon: '&#128214;', check: d => d.journal.length >= 7 },
+            { id: 'journal_30', name: 'Chronicler', desc: 'Write 30 journal entries', icon: '&#128220;', check: d => d.journal.length >= 30 },
+            { id: 'consumption_10', name: 'Curator', desc: 'Log 10 things consumed', icon: '&#127916;', check: d => d.consumption.length >= 10 },
+            { id: 'consumption_50', name: 'Archivist', desc: 'Log 50 things consumed', icon: '&#127942;', check: d => d.consumption.length >= 50 },
+            { id: 's_tier', name: 'S-Tier Finder', desc: 'Rate something S-tier', icon: '&#128171;', check: d => d.consumption.some(c => c.tier === 'S') },
+            { id: 'notes_10', name: 'Note Taker', desc: 'Create 10 research notes', icon: '&#128221;', check: d => d.notes.length >= 10 },
+            { id: 'notes_50', name: 'Researcher', desc: 'Create 50 research notes', icon: '&#128300;', check: d => d.notes.length >= 50 },
+            { id: 'good_day', name: 'Good Day', desc: 'Log a 9 or 10 feeling', icon: '&#128578;', check: d => d.symptoms.some(s => s.overall >= 9) },
+            { id: 'fighter', name: 'Fighter', desc: 'Log a day despite feeling 3 or below', icon: '&#128170;', check: d => d.symptoms.some(s => s.overall <= 3) }
+        ];
+
+        function countUniqueDays(arr) {
+            const dates = new Set(arr.map(item => new Date(item.date).toDateString()));
+            return dates.size;
+        }
+
+        function loadData() {
+            const stored = localStorage.getItem('deanOSData');
+            if (stored) {
+                const data = JSON.parse(stored);
+                return { ...DEFAULT_DATA, ...data, user: { ...DEFAULT_DATA.user, ...data.user } };
+            }
+            return JSON.parse(JSON.stringify(DEFAULT_DATA));
+        }
+
+        function saveData() {
+            localStorage.setItem('deanOSData', JSON.stringify(appData));
+        }
+
+        let appData = loadData();
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function getYesterday() {
+            const date = new Date();
+            date.setDate(date.getDate() - 1);
+            return date.toISOString().split('T')[0];
+        }
+
+        function createEmptyLog() {
+            return {
+                water: 0,
+                salt: 0,
+                protein: 0,
+                meds: false,
+                creatine: false,
+                compression: false,
+                exercise: false,
+                instagram: false,
+                twitter: false,
+                sugar: false,
+                junkfood: false,
+                bedtime: '',
+                waketime: '',
+                screenTime: 0,
+                ouraScore: 0,
+                meals: {
+                    breakfast: '',
+                    lunch: '',
+                    dinner: '',
+                    snacks: ''
+                }
+            };
+        }
+
+        function getLogByDate(dateStr) {
+            if (!appData.dailyLogs[dateStr]) {
+                appData.dailyLogs[dateStr] = createEmptyLog();
+            } else if (!appData.dailyLogs[dateStr].meals) {
+                appData.dailyLogs[dateStr].meals = {
+                    breakfast: '',
+                    lunch: '',
+                    dinner: '',
+                    snacks: ''
+                };
+            }
+            return appData.dailyLogs[dateStr];
+        }
+
+        function getTodayLog() {
+            const today = getToday();
+            return getLogByDate(today);
+        }
+
+        function normalizeUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            if (!trimmed) return '';
+            if (/^https?:\/\//i.test(trimmed)) return trimmed;
+            return `https://${trimmed}`;
+        }
+
+        function createSearchUrl(query) {
+            return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        }
+
+        function shuffleArray(items) {
+            const copy = [...items];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function pickRandomItems(items, count) {
+            return shuffleArray(items).slice(0, Math.min(count, items.length));
+        }
+
+        function triggerMealPlanRefresh() {
+            const container = document.getElementById('weeklyMealPlan');
+            if (!container) return;
+            container.classList.remove('mealplan-refresh');
+            void container.offsetWidth;
+            container.classList.add('mealplan-refresh');
+            setTimeout(() => container.classList.remove('mealplan-refresh'), 500);
+        }
+
+        // ==================== XP & LEVELING ====================
+        function getXpForLevel(level) {
+            return Math.floor(100 * Math.pow(1.1, level - 1));
+        }
+
+        function addXP(amount) {
+            appData.user.xp += amount;
+            let needed = getXpForLevel(appData.user.level);
+
+            while (appData.user.xp >= needed) {
+                appData.user.xp -= needed;
+                appData.user.level++;
+                showNotification(`Level Up! You're now Level ${appData.user.level}!`, 'level-up');
+                needed = getXpForLevel(appData.user.level);
+            }
+
+            showNotification(`+${amount} XP`, 'xp');
+            checkAchievements();
+            saveData();
+            updateHeader();
+        }
+
+        function updateHeader() {
+            document.getElementById('levelBadge').textContent = `Level ${appData.user.level}`;
+            const needed = getXpForLevel(appData.user.level);
+            const percent = (appData.user.xp / needed) * 100;
+            document.getElementById('xpFill').style.width = `${percent}%`;
+            document.getElementById('xpText').textContent = `${appData.user.xp}/${needed}`;
+            document.getElementById('currentStreak').textContent = appData.user.streakDays;
+        }
+
+        // ==================== STREAKS ====================
+        function updateStreak() {
+            const today = getToday();
+            const lastActive = appData.user.lastActiveDate;
+
+            if (lastActive === today) return;
+
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            if (lastActive === yesterdayStr) {
+                appData.user.streakDays++;
+                if (appData.user.streakDays % 7 === 0) {
+                    showNotification(`${appData.user.streakDays} day streak! Keep it up!`, 'streak');
+                }
+            } else if (lastActive !== today) {
+                appData.user.streakDays = 1;
+            }
+
+            appData.user.lastActiveDate = today;
+            saveData();
+            updateHeader();
+        }
+
+        // ==================== ACHIEVEMENTS ====================
+        function checkAchievements() {
+            let newUnlocks = [];
+            ACHIEVEMENTS.forEach(ach => {
+                if (!appData.user.achievements.includes(ach.id) && ach.check(appData)) {
+                    appData.user.achievements.push(ach.id);
+                    newUnlocks.push(ach.name);
+                }
+            });
+            if (newUnlocks.length > 0) {
+                saveData();
+                setTimeout(() => {
+                    newUnlocks.forEach(name => {
+                        showNotification(`Achievement Unlocked: ${name}!`, 'level-up');
+                    });
+                }, 1000);
+            }
+        }
+
+        function renderAchievements() {
+            const container = document.getElementById('achievementsList');
+            const unlocked = appData.user.achievements.length;
+            document.getElementById('achievementCount').textContent = unlocked;
+            document.getElementById('achievementTotal').textContent = ACHIEVEMENTS.length;
+
+            container.innerHTML = ACHIEVEMENTS.map(ach => {
+                const isUnlocked = appData.user.achievements.includes(ach.id);
+                return `
+                    <div class="achievement-card ${isUnlocked ? 'unlocked' : ''}">
+                        <div class="achievement-icon">${ach.icon}</div>
+                        <div class="achievement-name">${ach.name}</div>
+                        <div class="achievement-desc">${ach.desc}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==================== NOTIFICATIONS ====================
+        function showNotification(message, type = 'success') {
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            notif.innerHTML = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        // ==================== NAVIGATION ====================
+        let currentConsumptionTab = 'tvshow';
+        let selectedTier = 'B';
+        let selectedMood = 3;
+
+        function showView(viewName) {
+            document.querySelectorAll('.module-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`${viewName}View`).classList.add('active');
+
+            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.sidebar-btn[data-view="${viewName}"]`)?.classList.add('active');
+
+            // Render view content
+            if (viewName === 'morning') renderMorning();
+            else if (viewName === 'health') renderHealth();
+            else if (viewName === 'tasks') renderTasks();
+            else if (viewName === 'consumption') renderConsumption();
+            else if (viewName === 'journal') renderJournal();
+            else if (viewName === 'research') renderResearch();
+            else if (viewName === 'insights') renderInsights();
+            else if (viewName === 'achievements') renderAchievements();
+            else if (viewName === 'workouts') renderWorkouts();
+            else if (viewName === 'recipes') renderRecipes();
+            else if (viewName === 'yearlyTracker') renderYearlyTracker();
+        }
+
+        document.querySelectorAll('.sidebar-btn').forEach(btn => {
+            btn.addEventListener('click', () => showView(btn.dataset.view));
+        });
+
+        // ==================== MORNING DASHBOARD ====================
+        function renderMorning() {
+            // Update greeting based on time
+            const hour = new Date().getHours();
+            let greeting = 'Good morning';
+            if (hour >= 12 && hour < 17) greeting = 'Good afternoon';
+            else if (hour >= 17) greeting = 'Good evening';
+            document.getElementById('greeting').textContent = `${greeting}, Dean`;
+
+            // Update date
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('en-US', options);
+
+            // Update quick log buttons
+            const todayLog = getTodayLog();
+            document.querySelectorAll('#quickLogBar .quick-btn').forEach(btn => {
+                const match = btn.onclick.toString().match(/'(\w+)'/);
+                if (match) {
+                    const type = match[1];
+                    if (todayLog[type]) {
+                        btn.classList.add('logged');
+                    } else {
+                        btn.classList.remove('logged');
+                    }
+                }
+            });
+
+            // Update bad behavior buttons
+            updateBadBehaviorButtons();
+
+            // Only show vitals on Mondays
+            const vitalsCard = document.getElementById('vitalsCard');
+            if (vitalsCard) {
+                const isMonday = new Date().getDay() === 1;
+                vitalsCard.style.display = isMonday ? '' : 'none';
+            }
+
+            // Update today's tasks
+            renderTodayTasks();
+
+            // Update meal tracker
+            renderMealTracker();
+        }
+
+        function updateBadBehaviorButtons() {
+            const todayLog = getTodayLog();
+            const behaviors = ['instagram', 'twitter', 'sugar', 'junkfood'];
+            behaviors.forEach(behavior => {
+                const btn = document.getElementById(`${behavior}Btn`);
+                if (btn) {
+                    if (todayLog[behavior]) {
+                        btn.classList.add('triggered');
+                    } else {
+                        btn.classList.remove('triggered');
+                    }
+                }
+            });
+        }
+
+        function toggleBadBehavior(type) {
+            const todayLog = getTodayLog();
+            todayLog[type] = !todayLog[type];
+            saveData();
+            updateBadBehaviorButtons();
+
+            if (todayLog[type]) {
+                // Deduct XP for bad behaviors
+                appData.user.xp = Math.max(0, appData.user.xp - 25);
+                saveData();
+                updateHeader();
+                showNotification(`-25 XP (${type} used)`, 'streak');
+            }
+        }
+
+        function addSalt(amount) {
+            const todayLog = getTodayLog();
+            todayLog.salt = (todayLog.salt || 0) + amount;
+            saveData();
+            document.getElementById('saltTotal').textContent = todayLog.salt;
+        }
+
+        function addProtein(amount) {
+            const todayLog = getTodayLog();
+            todayLog.protein = (todayLog.protein || 0) + amount;
+            saveData();
+            document.getElementById('proteinTotal').textContent = todayLog.protein;
+        }
+
+        function saveSleepData() {
+            const todayLog = getTodayLog();
+            todayLog.bedtime = document.getElementById('bedtimeInput').value;
+            todayLog.waketime = document.getElementById('waketimeInput').value;
+            todayLog.screenTime = parseFloat(document.getElementById('screenTimeInput').value) || 0;
+            todayLog.ouraScore = parseInt(document.getElementById('ouraScoreInput').value) || 0;
+
+            saveData();
+            addXP(5);
+            showNotification('Sleep data logged!', 'success');
+        }
+
+        function quickLog(type) {
+            const todayLog = getTodayLog();
+            if (type === 'water' || type === 'salt') {
+                todayLog[type]++;
+            } else {
+                todayLog[type] = !todayLog[type];
+            }
+            saveData();
+            renderMorning();
+
+            if (type !== 'water' && type !== 'salt' && todayLog[type]) {
+                addXP(2);
+            }
+        }
+
+        function addWater(amount) {
+            const todayLog = getTodayLog();
+            todayLog.water = Math.max(0, todayLog.water + amount);
+            saveData();
+            renderMorning();
+
+            if (amount > 0) {
+                // Check for hydration achievement
+                if (todayLog.water >= 12 && !appData.user.achievements.includes('hydration_hero')) {
+                    checkAchievements();
+                }
+            }
+        }
+
+        function updateWaterFromSlider(value) {
+            const todayLog = getTodayLog();
+            const nextValue = Math.max(0, parseInt(value, 10) || 0);
+            if (todayLog.water === nextValue) return;
+            todayLog.water = nextValue;
+            saveData();
+            renderMorning();
+            if (todayLog.water >= 12 && !appData.user.achievements.includes('hydration_hero')) {
+                checkAchievements();
+            }
+        }
+
+        function saveVitals() {
+            const restingHR = parseInt(document.getElementById('restingHR').value);
+            const standingHR = parseInt(document.getElementById('standingHR').value);
+            const systolic = parseInt(document.getElementById('systolic').value);
+            const diastolic = parseInt(document.getElementById('diastolic').value);
+
+            if (!restingHR && !standingHR && !systolic && !diastolic) {
+                showNotification('Please enter at least one vital', 'error');
+                return;
+            }
+
+            appData.vitals.push({
+                id: generateId(),
+                date: new Date().toISOString(),
+                restingHR,
+                standingHR,
+                systolic,
+                diastolic
+            });
+
+            // Clear inputs
+            document.getElementById('restingHR').value = '';
+            document.getElementById('standingHR').value = '';
+            document.getElementById('systolic').value = '';
+            document.getElementById('diastolic').value = '';
+
+            addXP(10);
+            updateStreak();
+            saveData();
+            showNotification('Vitals logged!', 'success');
+        }
+
+        function toggleSymptom(symptom) {
+            const btn = document.querySelector(`[data-symptom="${symptom}"]`);
+            btn.classList.toggle('active');
+        }
+
+        function logSymptoms() {
+            const activeSymptoms = Array.from(document.querySelectorAll('.symptom-btn.active')).map(btn => btn.dataset.symptom);
+            const overall = parseInt(document.getElementById('overallFeeling').value);
+
+            appData.symptoms.push({
+                id: generateId(),
+                date: new Date().toISOString(),
+                symptoms: activeSymptoms,
+                overall
+            });
+
+            saveData();
+            checkAchievements();
+        }
+
+        // Auto-save symptoms when feeling changes (if the slider is present)
+        const overallFeelingSlider = document.getElementById('overallFeeling');
+        if (overallFeelingSlider) {
+            overallFeelingSlider.addEventListener('change', logSymptoms);
+        }
+
+        // ==================== TASKS ====================
+        let currentTaskTab = 'work';
+
+        function openTaskModal() { document.getElementById('taskModal').classList.add('active'); }
+        function openTaskModalWithContext() {
+            document.getElementById('taskCategory').value = currentTaskTab;
+            document.getElementById('taskModal').classList.add('active');
+        }
+        function closeTaskModal() {
+            document.getElementById('taskModal').classList.remove('active');
+            document.getElementById('taskTitle').value = '';
+        }
+
+        function addTask() {
+            const title = document.getElementById('taskTitle').value.trim();
+            if (!title) return;
+
+            const priority = document.getElementById('taskPriority').value;
+            const xpValues = { high: 20, medium: 10, low: 5 };
+
+            appData.tasks.push({
+                id: generateId(),
+                title,
+                priority,
+                category: document.getElementById('taskCategory').value,
+                term: document.getElementById('taskTerm').value,
+                dueDate: document.getElementById('taskDue').value || null,
+                completed: false,
+                xpValue: xpValues[priority],
+                createdAt: new Date().toISOString()
+            });
+
+            saveData();
+            closeTaskModal();
+            renderTasks();
+            renderTodayTasks();
+        }
+
+        function toggleTask(id) {
+            const task = appData.tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                if (task.completed) {
+                    addXP(task.xpValue);
+                    checkAllTasksComplete();
+                }
+                saveData();
+                renderTasks();
+                renderTodayTasks();
+            }
+        }
+
+        function checkAllTasksComplete() {
+            const incompleteTasks = appData.tasks.filter(t => !t.completed);
+            if (appData.tasks.length > 0 && incompleteTasks.length === 0) {
+                showTasksCompleteAnimation();
+            }
+        }
+
+        function showTasksCompleteAnimation() {
+            const anim = document.getElementById('tasksCompleteAnimation');
+            anim.style.display = 'flex';
+            setTimeout(() => {
+                anim.style.display = 'none';
+            }, 3000);
+        }
+
+        function deleteTask(id) {
+            appData.tasks = appData.tasks.filter(t => t.id !== id);
+            saveData();
+            renderTasks();
+            renderTodayTasks();
+        }
+
+        function renderTasks() {
+            // Update tab highlighting
+            document.querySelectorAll('#taskTabs .consumption-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.tasktab === currentTaskTab);
+            });
+
+            // Show/hide sections
+            document.getElementById('workTasksSection').style.display = currentTaskTab === 'work' ? 'block' : 'none';
+            document.getElementById('personalTasksSection').style.display = currentTaskTab === 'personal' ? 'block' : 'none';
+
+            // Render work tasks
+            renderTaskSection('work', 'short', 'workShortTasks');
+            renderTaskSection('work', 'long', 'workLongTasks');
+
+            // Render personal tasks
+            renderTaskSection('personal', 'short', 'personalShortTasks');
+            renderTaskSection('personal', 'long', 'personalLongTasks');
+        }
+
+        function renderTaskSection(category, term, containerId) {
+            const container = document.getElementById(containerId);
+            const tasks = appData.tasks.filter(t => t.category === category && (t.term || 'short') === term && !t.completed);
+
+            if (tasks.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>No tasks</p></div>';
+            } else {
+                container.innerHTML = tasks.map(task => renderTaskItem(task)).join('');
+            }
+        }
+
+        // Task tab switching
+        document.querySelectorAll('#taskTabs .consumption-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentTaskTab = tab.dataset.tasktab;
+                renderTasks();
+            });
+        });
+
+        function renderTodayTasks() {
+            const container = document.getElementById('todayTasks');
+            const today = getToday();
+            const todayDate = new Date(`${today}T00:00:00`);
+            const weekOut = new Date(todayDate);
+            weekOut.setDate(weekOut.getDate() + 7);
+            const todayTasks = appData.tasks
+                .filter(t => !t.completed && t.dueDate)
+                .map(t => ({ ...t, dueDateObj: new Date(`${t.dueDate}T00:00:00`) }))
+                .filter(t => t.dueDateObj >= todayDate && t.dueDateObj <= weekOut)
+                .sort((a, b) => a.dueDateObj - b.dueDateObj)
+                .slice(0, 5);
+
+            if (todayTasks.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>No tasks due in the next week</p></div>';
+            } else {
+                container.innerHTML = todayTasks.map(task => renderTaskItem(task)).join('');
+            }
+        }
+
+        function renderMealTracker() {
+            const dateLabel = document.getElementById('mealTrackerDate');
+            const breakfastInput = document.getElementById('mealBreakfast');
+            const lunchInput = document.getElementById('mealLunch');
+            const dinnerInput = document.getElementById('mealDinner');
+            const snacksInput = document.getElementById('mealSnacks');
+
+            if (!breakfastInput || !lunchInput || !dinnerInput || !snacksInput) return;
+
+            const yesterday = getYesterday();
+            const log = getLogByDate(yesterday);
+            const meals = log.meals || { breakfast: '', lunch: '', dinner: '', snacks: '' };
+
+            breakfastInput.value = meals.breakfast || '';
+            lunchInput.value = meals.lunch || '';
+            dinnerInput.value = meals.dinner || '';
+            snacksInput.value = meals.snacks || '';
+
+            if (dateLabel) {
+                dateLabel.textContent = new Date(`${yesterday}T00:00:00`).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+        }
+
+        function saveMealTracker() {
+            const yesterday = getYesterday();
+            const log = getLogByDate(yesterday);
+
+            log.meals = {
+                breakfast: document.getElementById('mealBreakfast').value.trim(),
+                lunch: document.getElementById('mealLunch').value.trim(),
+                dinner: document.getElementById('mealDinner').value.trim(),
+                snacks: document.getElementById('mealSnacks').value.trim()
+            };
+
+            saveData();
+            addXP(5);
+            showNotification('Meals logged!', 'success');
+        }
+
+        function renderTaskItem(task) {
+            const categoryIcon = task.category === 'work' ? '&#128188;' : '&#127968;';
+            return `
+                <div class="task-item ${task.completed ? 'completed' : ''}">
+                    <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask('${task.id}')">
+                        ${task.completed ? '&#10003;' : ''}
+                    </div>
+                    <span class="task-text">${task.title}</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">${categoryIcon}</span>
+                    <span class="task-xp">+${task.xpValue}</span>
+                    <button class="task-delete" onclick="deleteTask('${task.id}')">&#128465;</button>
+                </div>
+            `;
+        }
+
+        // ==================== CONSUMPTION ====================
+        function openConsumptionModal() {
+            document.getElementById('consumptionModal').classList.add('active');
+            document.getElementById('consumptionScore').value = 70;
+            document.getElementById('scoreDisplay').textContent = '70';
+            toggleConsumptionUrlField();
+        }
+        function openConsumptionModalWithContext() {
+            document.getElementById('consumptionType').value = currentConsumptionTab;
+            document.getElementById('consumptionModal').classList.add('active');
+            document.getElementById('consumptionScore').value = 70;
+            document.getElementById('scoreDisplay').textContent = '70';
+            toggleConsumptionUrlField();
+        }
+        function closeConsumptionModal() {
+            document.getElementById('consumptionModal').classList.remove('active');
+            document.getElementById('consumptionTitle').value = '';
+            document.getElementById('consumptionNotes').value = '';
+            document.getElementById('consumptionUrl').value = '';
+        }
+
+        function updateScoreDisplay() {
+            const score = document.getElementById('consumptionScore').value;
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        function getScoreColor(score) {
+            if (score >= 90) return '#2D5A3D'; // Forest green
+            if (score >= 70) return '#3D7A52'; // Light forest
+            if (score >= 50) return '#D4A84B'; // Amber
+            if (score >= 30) return '#C75D5D'; // Red soft
+            return '#8B0000'; // Dark red
+        }
+
+        function toggleConsumptionUrlField() {
+            const type = document.getElementById('consumptionType').value;
+            const shouldShow = type === 'recipe' || type === 'restaurant';
+            document.getElementById('consumptionUrlGroup').classList.toggle('is-hidden', !shouldShow);
+            if (!shouldShow) {
+                document.getElementById('consumptionUrl').value = '';
+            }
+        }
+
+        function addConsumption() {
+            const title = document.getElementById('consumptionTitle').value.trim();
+            if (!title) return;
+
+            const score = parseInt(document.getElementById('consumptionScore').value);
+            const url = normalizeUrl(document.getElementById('consumptionUrl').value);
+
+            appData.consumption.push({
+                id: generateId(),
+                type: document.getElementById('consumptionType').value,
+                title,
+                score: score,
+                notes: document.getElementById('consumptionNotes').value.trim(),
+                url: url || null,
+                date: new Date().toISOString()
+            });
+
+            addXP(5);
+            saveData();
+            closeConsumptionModal();
+            renderConsumption();
+        }
+
+        function deleteConsumption(id) {
+            appData.consumption = appData.consumption.filter(c => c.id !== id);
+            saveData();
+            renderConsumption();
+        }
+
+        function renderConsumption() {
+            // Update tab highlighting
+            document.querySelectorAll('.consumption-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.tab === currentConsumptionTab);
+            });
+
+            const container = document.getElementById('consumptionList');
+            const items = appData.consumption
+                .filter(c => c.type === currentConsumptionTab)
+                .sort((a, b) => (b.score || 0) - (a.score || 0)); // Sort by score descending
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#127916;</div><p>Nothing logged yet</p></div>';
+                return;
+            }
+
+            const icons = { tvshow: '&#128250;', movie: '&#127910;', book: '&#128218;', recipe: '&#127869;', restaurant: '&#127860;' };
+
+            container.innerHTML = items.map(item => {
+                const score = item.score || 50;
+                const scoreColor = getScoreColor(score);
+                const itemUrl = normalizeUrl(item.url);
+                const titleHtml = itemUrl ? `<a href="${itemUrl}" target="_blank" style="color: inherit; text-decoration: none;">${item.title} &#128279;</a>` : item.title;
+                return `
+                    <div class="consumption-item">
+                        <div class="consumption-poster">${icons[item.type] || '&#127916;'}</div>
+                        <div class="consumption-info">
+                            <div class="consumption-title">${titleHtml}</div>
+                            <div class="consumption-meta">${new Date(item.date).toLocaleDateString()}</div>
+                            ${item.notes ? `<div class="consumption-notes">"${item.notes}"</div>` : ''}
+                        </div>
+                        <span style="font-size: 1.5rem; font-weight: 700; color: ${scoreColor}; min-width: 50px; text-align: center;">${score}</span>
+                        <button class="task-delete" onclick="deleteConsumption('${item.id}')" style="opacity: 1;">&#128465;</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.querySelectorAll('.consumption-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentConsumptionTab = tab.dataset.tab;
+                renderConsumption();
+            });
+        });
+
+        document.getElementById('consumptionType').addEventListener('change', toggleConsumptionUrlField);
+
+        // ==================== JOURNAL ====================
+        let currentJournalId = null;
+
+        function renderJournal() {
+            const container = document.getElementById('journalEntries');
+            const entries = [...appData.journal].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (entries.length === 0) {
+                container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.9rem;">No entries yet</div>';
+            } else {
+                const moods = ['', '&#128546;', '&#128533;', '&#128528;', '&#128522;', '&#128513;'];
+                container.innerHTML = entries.map(entry => `
+                    <div class="journal-entry-card ${currentJournalId === entry.id ? 'active' : ''}" onclick="loadJournalEntry('${entry.id}')">
+                        <div class="journal-entry-date">
+                            <span>${new Date(entry.date).toLocaleDateString()}</span>
+                            <span>${moods[entry.mood]}</span>
+                        </div>
+                        <div class="journal-entry-preview">${entry.content.substring(0, 50)}...</div>
+                    </div>
+                `).join('');
+            }
+
+            // Update mood selector
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.dataset.mood) === selectedMood);
+            });
+        }
+
+        document.querySelectorAll('.mood-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedMood = parseInt(btn.dataset.mood);
+                document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+            });
+        });
+
+        function newJournalEntry() {
+            currentJournalId = null;
+            selectedMood = 3;
+            document.getElementById('journalContent').value = '';
+            document.getElementById('journalDateLabel').textContent = "Today's Entry";
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.dataset.mood) === 3);
+            });
+            renderJournal();
+        }
+
+        function loadJournalEntry(id) {
+            const entry = appData.journal.find(e => e.id === id);
+            if (entry) {
+                currentJournalId = id;
+                selectedMood = entry.mood;
+                document.getElementById('journalContent').value = entry.content;
+                document.getElementById('journalDateLabel').textContent = new Date(entry.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+                document.querySelectorAll('.mood-btn').forEach(btn => {
+                    btn.classList.toggle('selected', parseInt(btn.dataset.mood) === entry.mood);
+                });
+                renderJournal();
+            }
+        }
+
+        function saveJournal() {
+            const content = document.getElementById('journalContent').value.trim();
+            if (!content) return;
+
+            if (currentJournalId) {
+                const entry = appData.journal.find(e => e.id === currentJournalId);
+                if (entry) {
+                    entry.content = content;
+                    entry.mood = selectedMood;
+                }
+            } else {
+                appData.journal.push({
+                    id: generateId(),
+                    date: new Date().toISOString(),
+                    content,
+                    mood: selectedMood
+                });
+                addXP(15);
+                updateStreak();
+            }
+
+            saveData();
+            renderJournal();
+            showNotification('Journal saved!', 'success');
+        }
+
+        // ==================== RESEARCH ====================
+        function openNoteModal() { document.getElementById('noteModal').classList.add('active'); }
+        function closeNoteModal() {
+            document.getElementById('noteModal').classList.remove('active');
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteUrl').value = '';
+            document.getElementById('noteContent').value = '';
+            document.getElementById('noteTags').value = '';
+        }
+
+        function addNote() {
+            const title = document.getElementById('noteTitle').value.trim();
+            const content = document.getElementById('noteContent').value.trim();
+            const url = normalizeUrl(document.getElementById('noteUrl').value);
+            if (!title) return;
+
+            appData.notes.push({
+                id: generateId(),
+                title,
+                url: url || null,
+                content,
+                category: document.getElementById('noteCategory').value,
+                tags: document.getElementById('noteTags').value.split(',').map(t => t.trim()).filter(t => t),
+                date: new Date().toISOString()
+            });
+
+            addXP(5);
+            saveData();
+            closeNoteModal();
+            renderResearch();
+        }
+
+        function deleteNote(id) {
+            appData.notes = appData.notes.filter(n => n.id !== id);
+            saveData();
+            renderResearch();
+        }
+
+        function searchNotes() {
+            renderResearch(document.getElementById('researchSearch').value.toLowerCase());
+        }
+
+        function renderResearch(search = '') {
+            const container = document.getElementById('notesList');
+            let notes = appData.notes;
+
+            if (search) {
+                notes = notes.filter(n =>
+                    n.title.toLowerCase().includes(search) ||
+                    n.content.toLowerCase().includes(search) ||
+                    n.tags.some(t => t.toLowerCase().includes(search))
+                );
+            }
+
+            if (notes.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128218;</div><p>No notes yet</p></div>';
+                return;
+            }
+
+            const categoryIcons = { health: '&#128154;', learning: '&#128218;', work: '&#128188;', ideas: '&#128161;' };
+
+            container.innerHTML = notes.map(note => {
+                const noteUrl = normalizeUrl(note.url);
+                return `
+                <div class="note-card">
+                    <div class="note-title">
+                        <span>${categoryIcons[note.category]} ${noteUrl ? `<a href="${noteUrl}" target="_blank" style="color: var(--forest);">${note.title} &#128279;</a>` : note.title}</span>
+                        <button class="task-delete" onclick="deleteNote('${note.id}')" style="opacity: 1;">&#128465;</button>
+                    </div>
+                    ${noteUrl ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; word-break: break-all;">${noteUrl}</div>` : ''}
+                    <div class="note-content">${note.content ? (note.content.substring(0, 200) + (note.content.length > 200 ? '...' : '')) : ''}</div>
+                    ${note.tags && note.tags.length ? `<div>${note.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+                </div>
+            `;
+            }).join('');
+        }
+
+        // ==================== HEALTH ====================
+        function renderHealth() {
+            // Calculate averages
+            const recentVitals = appData.vitals.slice(-7);
+            if (recentVitals.length > 0) {
+                const avgResting = Math.round(recentVitals.filter(v => v.restingHR).reduce((sum, v) => sum + v.restingHR, 0) / recentVitals.filter(v => v.restingHR).length) || '--';
+                const avgStanding = Math.round(recentVitals.filter(v => v.standingHR).reduce((sum, v) => sum + v.standingHR, 0) / recentVitals.filter(v => v.standingHR).length) || '--';
+                const withBP = recentVitals.filter(v => v.systolic && v.diastolic);
+                const avgBP = withBP.length > 0 ?
+                    `${Math.round(withBP.reduce((sum, v) => sum + v.systolic, 0) / withBP.length)}/${Math.round(withBP.reduce((sum, v) => sum + v.diastolic, 0) / withBP.length)}` : '--';
+
+                document.getElementById('avgHR').textContent = avgResting;
+                document.getElementById('avgStandingHR').textContent = avgStanding;
+                document.getElementById('avgBP').textContent = avgBP;
+            }
+
+            const recentSymptoms = appData.symptoms.slice(-7);
+            if (recentSymptoms.length > 0) {
+                const avgFeeling = (recentSymptoms.reduce((sum, s) => sum + s.overall, 0) / recentSymptoms.length).toFixed(1);
+                document.getElementById('avgFeeling').textContent = avgFeeling;
+            }
+
+            // Render vitals log
+            const vitalsContainer = document.getElementById('vitalsLog');
+            const recentVitalsDisplay = appData.vitals.slice(-10).reverse();
+            if (recentVitalsDisplay.length === 0) {
+                vitalsContainer.innerHTML = '<div class="empty-state">No vitals logged yet</div>';
+            } else {
+                vitalsContainer.innerHTML = recentVitalsDisplay.map(v => `
+                    <div class="metric-log-item">
+                        <span>${new Date(v.date).toLocaleDateString()}</span>
+                        <span>
+                            ${v.restingHR ? `HR: ${v.restingHR}` : ''}
+                            ${v.standingHR ? ` / Standing: ${v.standingHR}` : ''}
+                            ${v.systolic ? ` | BP: ${v.systolic}/${v.diastolic}` : ''}
+                        </span>
+                    </div>
+                `).join('');
+            }
+
+            // Render symptoms log
+            const symptomsContainer = document.getElementById('symptomLog');
+            const recentSymptomsDisplay = appData.symptoms.slice(-10).reverse();
+            if (recentSymptomsDisplay.length === 0) {
+                symptomsContainer.innerHTML = '<div class="empty-state">No symptoms logged yet</div>';
+            } else {
+                symptomsContainer.innerHTML = recentSymptomsDisplay.map(s => `
+                    <div class="metric-log-item">
+                        <span>${new Date(s.date).toLocaleDateString()} - Feeling: ${s.overall}/10</span>
+                        <span>${s.symptoms.length > 0 ? s.symptoms.join(', ') : 'No symptoms'}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ==================== INSIGHTS ====================
+        function renderInsights() {
+            const insights = [];
+
+            // Analyze data for patterns
+            if (appData.vitals.length >= 7) {
+                const avgResting = appData.vitals.slice(-7).filter(v => v.restingHR).reduce((sum, v) => sum + v.restingHR, 0) / appData.vitals.slice(-7).filter(v => v.restingHR).length;
+                if (avgResting) {
+                    insights.push({
+                        icon: '&#128147;',
+                        text: `Your average resting heart rate this week is <span class="insight-data">${Math.round(avgResting)} bpm</span>`
+                    });
+                }
+            }
+
+            if (appData.symptoms.length >= 7) {
+                const goodDays = appData.symptoms.slice(-7).filter(s => s.overall >= 7).length;
+                insights.push({
+                    icon: '&#128578;',
+                    text: `You've had <span class="insight-data">${goodDays} good days</span> (7+ feeling) in the past week`
+                });
+            }
+
+            const todayLog = getTodayLog();
+            if (todayLog.water >= 8) {
+                insights.push({
+                    icon: '&#128167;',
+                    text: `Great hydration today! You're at <span class="insight-data">${todayLog.water} glasses</span>`
+                });
+            }
+
+            if (appData.user.streakDays >= 3) {
+                insights.push({
+                    icon: '&#128293;',
+                    text: `You're on a <span class="insight-data">${appData.user.streakDays} day streak</span>! Keep it going!`
+                });
+            }
+
+            const completedTasks = appData.tasks.filter(t => t.completed).length;
+            if (completedTasks > 0) {
+                insights.push({
+                    icon: '&#9745;',
+                    text: `You've completed <span class="insight-data">${completedTasks} tasks</span> total`
+                });
+            }
+
+            const container = document.getElementById('insightsList');
+            if (insights.length === 0) {
+                container.innerHTML = `
+                    <div class="insight-card">
+                        <div class="insight-icon">&#128161;</div>
+                        <div class="insight-text">Keep logging data to unlock personalized insights about your patterns!</div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = insights.map(i => `
+                    <div class="insight-card">
+                        <div class="insight-icon">${i.icon}</div>
+                        <div class="insight-text">${i.text}</div>
+                    </div>
+                `).join('');
+            }
+
+            // Overall stats
+            const statsContainer = document.getElementById('overallStats');
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${appData.vitals.length}</div>
+                    <div class="stat-label">Vitals Logged</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${appData.tasks.filter(t => t.completed).length}</div>
+                    <div class="stat-label">Tasks Done</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${appData.journal.length}</div>
+                    <div class="stat-label">Journal Entries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${appData.consumption.length}</div>
+                    <div class="stat-label">Things Consumed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${appData.notes.length}</div>
+                    <div class="stat-label">Research Notes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${appData.user.streakDays}</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+            `;
+        }
+
+        // ==================== WORKOUTS ====================
+        let selectedWorkoutDays = [];
+        let workoutDayTypes = {};
+
+        function toggleWorkoutDay(day) {
+            const btn = document.querySelector(`[data-day="${day}"]`);
+            const index = selectedWorkoutDays.indexOf(day);
+            if (index === -1) {
+                selectedWorkoutDays.push(day);
+                btn.classList.add('selected');
+                if (!workoutDayTypes[day]) {
+                    workoutDayTypes[day] = 'strength';
+                }
+            } else {
+                selectedWorkoutDays.splice(index, 1);
+                btn.classList.remove('selected');
+                delete workoutDayTypes[day];
+            }
+            renderWorkoutDayTypes();
+        }
+
+        function renderWorkouts() {
+            document.querySelectorAll('.workout-day-btn').forEach(btn => btn.classList.remove('selected'));
+            // Restore selected days from appData
+            if (appData.selectedWorkoutDays) {
+                selectedWorkoutDays = [...appData.selectedWorkoutDays];
+                selectedWorkoutDays.forEach(day => {
+                    const btn = document.querySelector(`[data-day="${day}"]`);
+                    if (btn) btn.classList.add('selected');
+                });
+            }
+            workoutDayTypes = { ...(appData.workoutDayTypes || {}) };
+            selectedWorkoutDays.forEach(day => {
+                if (!workoutDayTypes[day]) workoutDayTypes[day] = 'strength';
+            });
+            renderWorkoutDayTypes();
+
+            // Render weekly plan if exists
+            if (appData.weeklyWorkouts && appData.weeklyWorkouts.length > 0) {
+                renderWeeklyWorkoutPlan();
+            }
+        }
+
+        function setWorkoutDayType(day, value) {
+            workoutDayTypes[day] = value;
+            appData.workoutDayTypes = { ...workoutDayTypes };
+            saveData();
+        }
+
+        function renderWorkoutDayTypes() {
+            const container = document.getElementById('workoutDayTypes');
+            if (!container) return;
+            if (selectedWorkoutDays.length === 0) {
+                container.innerHTML = '<div style="font-size: 0.85rem; color: var(--text-muted);">Pick training days to set cardio vs strength.</div>';
+                return;
+            }
+
+            const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+            const order = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            const orderedDays = [...selectedWorkoutDays].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+
+            container.innerHTML = orderedDays.map(day => `
+                <div class="workout-day-type-card">
+                    <span>${dayNames[day]}</span>
+                    <select class="input-field" onchange="setWorkoutDayType('${day}', this.value)">
+                        <option value="strength" ${workoutDayTypes[day] === 'strength' ? 'selected' : ''}>Strength</option>
+                        <option value="cardio" ${workoutDayTypes[day] === 'cardio' ? 'selected' : ''}>Cardio</option>
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        function generateWorkouts() {
+            const ptDay = document.getElementById('ptSessionDay').value;
+            const travel = document.getElementById('travelWeek').value;
+
+            appData.selectedWorkoutDays = [...selectedWorkoutDays];
+            appData.workoutDayTypes = { ...workoutDayTypes };
+
+            // POTS-friendly exercises (seated/lying down) with YouTube links
+            const exercises = {
+                push: [
+                    { name: 'Seated Chest Press Machine', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=xUm0BiZCWlQ' },
+                    { name: 'Incline Dumbbell Press (Low Incline)', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=8iPEnn-ltC8' },
+                    { name: 'Seated Shoulder Press Machine', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=Wqq43dKW1TU' },
+                    { name: 'Cable Fly (Seated)', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=Iwe6AmxVf7o' },
+                    { name: 'Tricep Pushdown', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=2-LAMcpzODU' }
+                ],
+                pull: [
+                    { name: 'Seated Cable Row', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=GZbfZ033f74' },
+                    { name: 'Lat Pulldown', sets: '3x10-12', video: 'https://www.youtube.com/watch?v=CAwf7n6Luuc' },
+                    { name: 'Seated Face Pulls', sets: '3x15', video: 'https://www.youtube.com/watch?v=rep-qVOkqgk' },
+                    { name: 'Bicep Curl Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=av7-8igSXTs' },
+                    { name: 'Rear Delt Fly Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=5YK4bgzXDp0' }
+                ],
+                legs: [
+                    { name: 'Leg Press', sets: '4x10-12', video: 'https://www.youtube.com/watch?v=IZxyjW7MPJQ' },
+                    { name: 'Leg Curl Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=1Tq3QdYUuHs' },
+                    { name: 'Leg Extension', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=YyvSfVjQeL0' },
+                    { name: 'Seated Calf Raise', sets: '3x15-20', video: 'https://www.youtube.com/watch?v=-M4-G8p8fmc' },
+                    { name: 'Hip Adductor Machine', sets: '3x12-15', video: 'https://www.youtube.com/watch?v=2cPwLG3MOLs' }
+                ],
+                cardio: [
+                    { name: 'Upright Bike', sets: '30 min, 90+ RPM, Level 12', video: 'https://www.youtube.com/watch?v=oBFhn-2BrEw' }
+                ]
+            };
+
+            const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+
+            // Generate workout plan based on selected days
+            const workouts = [];
+            let pushPullLegIndex = 0;
+            const splits = ['push', 'pull', 'legs'];
+
+            selectedWorkoutDays.sort((a, b) => {
+                const order = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+                return order.indexOf(a) - order.indexOf(b);
+            });
+
+            selectedWorkoutDays.forEach(day => {
+                if (day === ptDay) {
+                    workouts.push({
+                        day: dayNames[day],
+                        type: 'PT Session with Josh',
+                        location: 'Full Body',
+                        exercises: [{ name: 'Personal Training Session', sets: 'Full body, Josh will guide' }]
+                    });
+                } else {
+                    const dayType = workoutDayTypes[day] || 'strength';
+                    if (dayType === 'cardio') {
+                        workouts.push({
+                            day: dayNames[day],
+                            type: 'Cardio Day',
+                            location: 'LA Fitness',
+                            exercises: [...exercises.cardio]
+                        });
+                    } else {
+                        const split = splits[pushPullLegIndex % 3];
+                        workouts.push({
+                            day: dayNames[day],
+                            type: split.charAt(0).toUpperCase() + split.slice(1) + ' Day',
+                            location: 'LA Fitness',
+                            exercises: [...exercises[split]]
+                        });
+                        pushPullLegIndex++;
+                    }
+                }
+            });
+
+            appData.weeklyWorkouts = workouts;
+            saveData();
+            renderWeeklyWorkoutPlan();
+        }
+
+        function renderWeeklyWorkoutPlan() {
+            const container = document.getElementById('weeklyWorkoutPlan');
+            const workouts = appData.weeklyWorkouts || [];
+
+            if (workouts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">&#128170;</div>
+                        <p>Configure your schedule above and generate your personalized workout plan</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = workouts.map(w => `
+                <div class="workout-card">
+                    <div class="workout-card-header">
+                        <span class="workout-card-day">${w.day}</span>
+                        <span class="workout-card-type">${w.type} - ${w.location}</span>
+                    </div>
+                    <div class="workout-card-body">
+                        ${w.exercises.map(e => `
+                            <div class="exercise-item">
+                                <span class="exercise-name">
+                                    ${e.video ? `<a href="${e.video}" target="_blank" style="color: var(--forest); text-decoration: none;">${e.name} &#127909;</a>` : e.name}
+                                </span>
+                                <span class="exercise-detail">${e.sets}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== RECIPES ====================
+        function renderRecipes() {
+            if (appData.weeklyMeals && appData.weeklyMeals.length > 0) {
+                renderWeeklyMealPlan();
+            }
+        }
+
+        function buildGroceryList(meals) {
+            const list = [];
+            meals.forEach(category => {
+                category.items.forEach(item => {
+                    if (!item.ingredients || item.ingredients.length === 0) return;
+                    list.push({
+                        meal: item.title,
+                        category: category.type,
+                        ingredients: item.ingredients
+                    });
+                });
+            });
+            return list;
+        }
+
+        function parseFraction(value) {
+            if (!value) return null;
+            if (value.includes('/')) {
+                const parts = value.split('/');
+                if (parts.length === 2) {
+                    const numerator = parseFloat(parts[0]);
+                    const denominator = parseFloat(parts[1]);
+                    if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+                        return numerator / denominator;
+                    }
+                }
+                return null;
+            }
+            const parsed = parseFloat(value);
+            return isNaN(parsed) ? null : parsed;
+        }
+
+        function parseAmount(amount) {
+            if (!amount) return { value: null, unit: '' };
+            const trimmed = amount.trim();
+            const match = trimmed.match(/^([0-9]+(?:\.[0-9]+)?|[0-9]+\/[0-9]+)\s*(.*)$/);
+            if (!match) return { value: null, unit: trimmed };
+            return {
+                value: parseFraction(match[1]),
+                unit: match[2].trim() || 'unit'
+            };
+        }
+
+        function formatNumber(value) {
+            if (value === null || value === undefined) return '';
+            const rounded = Math.round(value * 100) / 100;
+            return rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(2).replace(/\.?0+$/, '');
+        }
+
+        function aggregateGroceryTotals(groceryList) {
+            const totals = new Map();
+            groceryList.forEach(entry => {
+                entry.ingredients.forEach(ing => {
+                    const key = ing.name.toLowerCase();
+                    if (!totals.has(key)) {
+                        totals.set(key, { name: ing.name, units: new Map(), extras: [] });
+                    }
+                    const item = totals.get(key);
+                    const parsed = parseAmount(ing.amount);
+                    if (parsed.value === null || !parsed.unit) {
+                        item.extras.push(ing.amount);
+                        return;
+                    }
+                    const unit = parsed.unit;
+                    const nextValue = (item.units.get(unit) || 0) + parsed.value;
+                    item.units.set(unit, nextValue);
+                });
+            });
+            return Array.from(totals.values()).sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        function generateMealPlan() {
+            const lunchCount = parseInt(document.getElementById('lunchPrepCount').value);
+            const dinnerCount = parseInt(document.getElementById('weeknightDinners').value);
+            const cuisine = document.getElementById('cuisinePreference').value;
+            const ambitious = document.getElementById('ambitiousDinner').value === 'yes';
+
+            // Recipe database (high protein, less processed, longevity-focused) with recipe links and ingredients
+            const recipes = {
+                lunchPrep: {
+                    mixed: [
+                        { title: 'Mediterranean Chicken Salad', time: '45 min prep', protein: '40g', tags: ['meal-prep', 'high-protein'], url: createSearchUrl('Mediterranean Chicken Salad recipe'), ingredients: [{ name: 'chicken breast', amount: '1.5 lb' }, { name: 'cucumber', amount: '1' }, { name: 'tomatoes', amount: '2' }, { name: 'red onion', amount: '1/2' }, { name: 'feta cheese', amount: '1/2 cup' }, { name: 'kalamata olives', amount: '1/3 cup' }, { name: 'olive oil', amount: '2 tbsp' }, { name: 'lemon', amount: '1' }, { name: 'oregano', amount: '1 tsp' }] },
+                        { title: 'Asian Beef & Broccoli Bowls', time: '40 min prep', protein: '35g', tags: ['meal-prep', 'high-protein'], url: createSearchUrl('Asian Beef and Broccoli Bowls recipe'), ingredients: [{ name: 'flank steak', amount: '1.25 lb' }, { name: 'broccoli', amount: '1 head' }, { name: 'soy sauce', amount: '3 tbsp' }, { name: 'sesame oil', amount: '1 tbsp' }, { name: 'garlic', amount: '3 cloves' }, { name: 'ginger', amount: '1 tbsp' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'green onions', amount: '2' }] },
+                        { title: 'Greek Chicken & Quinoa', time: '35 min prep', protein: '42g', tags: ['meal-prep', 'mediterranean'], url: createSearchUrl('Greek Chicken and Quinoa bowls recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'quinoa', amount: '1 cup dry' }, { name: 'cucumber', amount: '1' }, { name: 'cherry tomatoes', amount: '1 cup' }, { name: 'red onion', amount: '1/2' }, { name: 'feta', amount: '1/2 cup' }, { name: 'tzatziki', amount: '1/2 cup' }, { name: 'lemon', amount: '1' }] },
+                        { title: 'Teriyaki Salmon Rice Bowls', time: '40 min prep', protein: '38g', tags: ['meal-prep', 'omega-3'], url: createSearchUrl('Teriyaki Salmon Rice Bowls recipe'), ingredients: [{ name: 'salmon fillets', amount: '1.5 lb' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'soy sauce', amount: '3 tbsp' }, { name: 'mirin', amount: '2 tbsp' }, { name: 'honey', amount: '1 tbsp' }, { name: 'ginger', amount: '1 tbsp' }, { name: 'edamame', amount: '1 cup' }, { name: 'avocado', amount: '1' }] },
+                        { title: 'Turkey Taco Bowls', time: '35 min prep', protein: '36g', tags: ['meal-prep', 'lean-protein'], url: createSearchUrl('Turkey Taco Bowls recipe'), ingredients: [{ name: 'ground turkey', amount: '1.5 lb' }, { name: 'black beans', amount: '1 can' }, { name: 'corn', amount: '1 cup' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'taco seasoning', amount: '2 tbsp' }, { name: 'salsa', amount: '1/2 cup' }, { name: 'cheese', amount: '1/2 cup' }, { name: 'lettuce', amount: '1 head' }] }
+                    ],
+                    asian: [
+                        { title: 'Korean BBQ Beef Bowls', time: '40 min prep', protein: '38g', tags: ['meal-prep', 'high-protein'], url: createSearchUrl('Korean BBQ Beef Bowls recipe'), ingredients: [{ name: 'ground beef', amount: '1.5 lb' }, { name: 'soy sauce', amount: '3 tbsp' }, { name: 'brown sugar', amount: '2 tbsp' }, { name: 'sesame oil', amount: '1 tbsp' }, { name: 'gochujang', amount: '1 tbsp' }, { name: 'garlic', amount: '3 cloves' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'green onions', amount: '2' }, { name: 'sesame seeds', amount: '1 tbsp' }] },
+                        { title: 'Thai Basil Chicken', time: '35 min prep', protein: '35g', tags: ['meal-prep', 'spicy'], url: createSearchUrl('Thai Basil Chicken recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'thai basil', amount: '1 cup' }, { name: 'garlic', amount: '3 cloves' }, { name: 'fish sauce', amount: '2 tbsp' }, { name: 'oyster sauce', amount: '1 tbsp' }, { name: 'chili', amount: '1-2' }, { name: 'jasmine rice', amount: '2 cups cooked' }] },
+                        { title: 'Teriyaki Salmon Rice Bowls', time: '40 min prep', protein: '38g', tags: ['meal-prep', 'omega-3'], url: createSearchUrl('Teriyaki Salmon Rice Bowls recipe'), ingredients: [{ name: 'salmon fillets', amount: '1.5 lb' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'soy sauce', amount: '3 tbsp' }, { name: 'mirin', amount: '2 tbsp' }, { name: 'honey', amount: '1 tbsp' }, { name: 'ginger', amount: '1 tbsp' }, { name: 'edamame', amount: '1 cup' }, { name: 'avocado', amount: '1' }] },
+                        { title: 'Ginger Garlic Shrimp Bowls', time: '30 min prep', protein: '32g', tags: ['meal-prep', 'quick'], url: createSearchUrl('Ginger Garlic Shrimp Bowls recipe'), ingredients: [{ name: 'shrimp', amount: '1.5 lb' }, { name: 'garlic', amount: '3 cloves' }, { name: 'ginger', amount: '1 tbsp' }, { name: 'soy sauce', amount: '2 tbsp' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'broccoli', amount: '1 head' }, { name: 'sesame oil', amount: '1 tbsp' }] },
+                        { title: 'Japanese Chicken Katsu Prep', time: '45 min prep', protein: '40g', tags: ['meal-prep', 'comfort'], url: createSearchUrl('Japanese Chicken Katsu recipe'), ingredients: [{ name: 'chicken breast', amount: '1.5 lb' }, { name: 'panko breadcrumbs', amount: '1 cup' }, { name: 'eggs', amount: '2' }, { name: 'flour', amount: '1/2 cup' }, { name: 'tonkatsu sauce', amount: '1/3 cup' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'cabbage', amount: '1/2 head' }] }
+                    ],
+                    mediterranean: [
+                        { title: 'Greek Chicken & Quinoa', time: '35 min prep', protein: '42g', tags: ['meal-prep', 'mediterranean'], url: createSearchUrl('Greek Chicken and Quinoa bowls recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'quinoa', amount: '1 cup dry' }, { name: 'cucumber', amount: '1' }, { name: 'cherry tomatoes', amount: '1 cup' }, { name: 'red onion', amount: '1/2' }, { name: 'feta', amount: '1/2 cup' }, { name: 'tzatziki', amount: '1/2 cup' }, { name: 'lemon', amount: '1' }] },
+                        { title: 'Lemon Herb Salmon & Couscous', time: '40 min prep', protein: '36g', tags: ['meal-prep', 'omega-3'], url: createSearchUrl('Lemon Herb Salmon Couscous recipe'), ingredients: [{ name: 'salmon', amount: '1.5 lb' }, { name: 'couscous', amount: '1 cup dry' }, { name: 'lemon', amount: '1' }, { name: 'dill', amount: '1 tbsp' }, { name: 'parsley', amount: '2 tbsp' }, { name: 'olive oil', amount: '2 tbsp' }, { name: 'cherry tomatoes', amount: '1 cup' }, { name: 'cucumber', amount: '1' }] },
+                        { title: 'Shawarma Chicken Bowls', time: '45 min prep', protein: '38g', tags: ['meal-prep', 'spiced'], url: createSearchUrl('Chicken Shawarma Bowls recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'shawarma spices', amount: '2 tbsp' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'hummus', amount: '1/2 cup' }, { name: 'pickled onions', amount: '1/2 cup' }, { name: 'cucumber', amount: '1' }, { name: 'tomatoes', amount: '2' }] },
+                        { title: 'Mediterranean Tuna Salad', time: '20 min prep', protein: '35g', tags: ['meal-prep', 'quick'], url: createSearchUrl('Mediterranean Tuna Salad recipe'), ingredients: [{ name: 'tuna', amount: '2 cans' }, { name: 'white beans', amount: '1 can' }, { name: 'olives', amount: '1/2 cup' }, { name: 'red onion', amount: '1/2' }, { name: 'capers', amount: '1 tbsp' }, { name: 'olive oil', amount: '2 tbsp' }, { name: 'lemon', amount: '1' }, { name: 'arugula', amount: '4 cups' }] },
+                        { title: 'Falafel & Hummus Bowls', time: '50 min prep', protein: '28g', tags: ['meal-prep', 'vegetarian-option'], url: createSearchUrl('Falafel and Hummus Bowls recipe'), ingredients: [{ name: 'chickpeas', amount: '1 can' }, { name: 'parsley', amount: '1/2 cup' }, { name: 'cilantro', amount: '1/2 cup' }, { name: 'garlic', amount: '2 cloves' }, { name: 'cumin', amount: '1 tsp' }, { name: 'hummus', amount: '1/2 cup' }, { name: 'tahini', amount: '2 tbsp' }, { name: 'pita', amount: '4' }] }
+                    ],
+                    american: [
+                        { title: 'BBQ Chicken & Sweet Potato', time: '40 min prep', protein: '40g', tags: ['meal-prep', 'comfort'], url: createSearchUrl('BBQ Chicken Sweet Potato meal prep recipe'), ingredients: [{ name: 'chicken breast', amount: '1.5 lb' }, { name: 'sweet potatoes', amount: '2' }, { name: 'bbq sauce', amount: '1/2 cup' }, { name: 'broccoli', amount: '1 head' }, { name: 'olive oil', amount: '1 tbsp' }] },
+                        { title: 'Turkey Meatball Bowls', time: '45 min prep', protein: '38g', tags: ['meal-prep', 'lean-protein'], url: createSearchUrl('Turkey Meatball Bowls recipe'), ingredients: [{ name: 'ground turkey', amount: '1.5 lb' }, { name: 'breadcrumbs', amount: '1/2 cup' }, { name: 'egg', amount: '1' }, { name: 'marinara', amount: '1 cup' }, { name: 'quinoa', amount: '1 cup dry' }, { name: 'spinach', amount: '4 cups' }, { name: 'parmesan', amount: '1/4 cup' }] },
+                        { title: 'Steak & Roasted Veggie Boxes', time: '50 min prep', protein: '42g', tags: ['meal-prep', 'high-protein'], url: createSearchUrl('Steak and roasted veggie meal prep recipe'), ingredients: [{ name: 'sirloin steak', amount: '1.5 lb' }, { name: 'bell peppers', amount: '2' }, { name: 'zucchini', amount: '2' }, { name: 'potatoes', amount: '3' }, { name: 'olive oil', amount: '2 tbsp' }, { name: 'garlic', amount: '3 cloves' }, { name: 'rosemary', amount: '1 tsp' }] },
+                        { title: 'Buffalo Chicken Salad', time: '35 min prep', protein: '36g', tags: ['meal-prep', 'spicy'], url: createSearchUrl('Buffalo Chicken Salad recipe'), ingredients: [{ name: 'chicken breast', amount: '1.5 lb' }, { name: 'buffalo sauce', amount: '1/3 cup' }, { name: 'romaine', amount: '1 head' }, { name: 'celery', amount: '2 stalks' }, { name: 'blue cheese', amount: '1/3 cup' }, { name: 'ranch', amount: '1/3 cup' }] },
+                        { title: 'Herb Roasted Chicken & Rice', time: '45 min prep', protein: '40g', tags: ['meal-prep', 'classic'], url: createSearchUrl('Herb Roasted Chicken Rice recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'rice', amount: '1 cup dry' }, { name: 'garlic', amount: '3 cloves' }, { name: 'rosemary', amount: '1 tsp' }, { name: 'thyme', amount: '1 tsp' }, { name: 'lemon', amount: '1' }, { name: 'green beans', amount: '12 oz' }] }
+                    ],
+                    mexican: [
+                        { title: 'Carnitas Bowls', time: '3 hr (slow cook)', protein: '38g', tags: ['meal-prep', 'slow-cooker'], url: createSearchUrl('Pork Carnitas Bowls recipe'), ingredients: [{ name: 'pork shoulder', amount: '2 lb' }, { name: 'orange', amount: '1' }, { name: 'lime', amount: '1' }, { name: 'cumin', amount: '1 tsp' }, { name: 'oregano', amount: '1 tsp' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'black beans', amount: '1 can' }, { name: 'salsa', amount: '1/2 cup' }] },
+                        { title: 'Chicken Burrito Bowls', time: '40 min prep', protein: '36g', tags: ['meal-prep', 'classic'], url: createSearchUrl('Chicken Burrito Bowls recipe'), ingredients: [{ name: 'chicken breast', amount: '1.5 lb' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'black beans', amount: '1 can' }, { name: 'corn', amount: '1 cup' }, { name: 'salsa', amount: '1/2 cup' }, { name: 'cheese', amount: '1/2 cup' }, { name: 'sour cream', amount: '1/3 cup' }, { name: 'lime', amount: '1' }] },
+                        { title: 'Steak Fajita Prep', time: '45 min prep', protein: '40g', tags: ['meal-prep', 'high-protein'], url: createSearchUrl('Steak Fajita meal prep recipe'), ingredients: [{ name: 'flank steak', amount: '1.5 lb' }, { name: 'bell peppers', amount: '3' }, { name: 'onion', amount: '1' }, { name: 'fajita seasoning', amount: '2 tbsp' }, { name: 'lime', amount: '1' }, { name: 'tortillas', amount: '8' }, { name: 'sour cream', amount: '1/3 cup' }] },
+                        { title: 'Ground Turkey Taco Bowls', time: '35 min prep', protein: '34g', tags: ['meal-prep', 'lean-protein'], url: createSearchUrl('Ground Turkey Taco Bowls recipe'), ingredients: [{ name: 'ground turkey', amount: '1.5 lb' }, { name: 'taco seasoning', amount: '2 tbsp' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'beans', amount: '1 can' }, { name: 'corn', amount: '1 cup' }, { name: 'cheese', amount: '1/2 cup' }, { name: 'salsa', amount: '1/2 cup' }, { name: 'avocado', amount: '1' }] },
+                        { title: 'Shrimp & Black Bean Bowls', time: '30 min prep', protein: '32g', tags: ['meal-prep', 'quick'], url: createSearchUrl('Shrimp Black Bean Bowls recipe'), ingredients: [{ name: 'shrimp', amount: '1.5 lb' }, { name: 'black beans', amount: '1 can' }, { name: 'rice', amount: '2 cups cooked' }, { name: 'corn', amount: '1 cup' }, { name: 'lime', amount: '1' }, { name: 'cilantro', amount: '1/2 cup' }, { name: 'avocado', amount: '1' }] }
+                    ]
+                },
+                weeknightDinners: {
+                    mixed: [
+                        { title: 'Sheet Pan Salmon & Asparagus', time: '25 min', protein: '35g', tags: ['quick', 'omega-3'], url: createSearchUrl('Sheet Pan Salmon Asparagus recipe'), ingredients: [{ name: 'salmon fillets', amount: '1.25 lb' }, { name: 'asparagus', amount: '1 lb' }, { name: 'lemon', amount: '1' }, { name: 'garlic', amount: '2 cloves' }, { name: 'olive oil', amount: '1 tbsp' }, { name: 'dill', amount: '1 tsp' }] },
+                        { title: 'One-Pan Chicken Thighs & Veggies', time: '35 min', protein: '38g', tags: ['one-pan', 'easy'], url: createSearchUrl('One pan chicken thighs and veggies recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'potatoes', amount: '3' }, { name: 'green beans', amount: '12 oz' }, { name: 'garlic', amount: '3 cloves' }, { name: 'olive oil', amount: '1 tbsp' }, { name: 'rosemary', amount: '1 tsp' }] },
+                        { title: 'Shrimp Stir-Fry', time: '20 min', protein: '30g', tags: ['quick', 'asian-inspired'], url: createSearchUrl('Shrimp Stir Fry recipe'), ingredients: [{ name: 'shrimp', amount: '1.25 lb' }, { name: 'broccoli', amount: '1 head' }, { name: 'bell peppers', amount: '2' }, { name: 'soy sauce', amount: '3 tbsp' }, { name: 'garlic', amount: '2 cloves' }, { name: 'ginger', amount: '1 tbsp' }, { name: 'sesame oil', amount: '1 tbsp' }] },
+                        { title: 'Turkey Lettuce Wraps', time: '25 min', protein: '32g', tags: ['low-carb', 'quick'], url: createSearchUrl('Turkey Lettuce Wraps recipe'), ingredients: [{ name: 'ground turkey', amount: '1.25 lb' }, { name: 'butter lettuce', amount: '1 head' }, { name: 'water chestnuts', amount: '1 can' }, { name: 'soy sauce', amount: '2 tbsp' }, { name: 'hoisin', amount: '2 tbsp' }, { name: 'garlic', amount: '2 cloves' }, { name: 'ginger', amount: '1 tbsp' }] }
+                    ]
+                },
+                ambitiousDinners: [
+                    { title: 'Homemade Ramen', time: '2 hours', protein: '35g', tags: ['ambitious', 'japanese', 'impressive'], url: createSearchUrl('Homemade Ramen recipe'), ingredients: [{ name: 'pork belly', amount: '1.5 lb' }, { name: 'ramen noodles', amount: '4 servings' }, { name: 'eggs', amount: '4' }, { name: 'miso', amount: '2 tbsp' }, { name: 'soy sauce', amount: '2 tbsp' }, { name: 'chicken stock', amount: '6 cups' }, { name: 'green onions', amount: '3' }, { name: 'nori', amount: '4 sheets' }, { name: 'sesame', amount: '1 tbsp' }] },
+                    { title: 'Beef Wellington', time: '2.5 hours', protein: '45g', tags: ['ambitious', 'date-night', 'impressive'], url: createSearchUrl('Beef Wellington recipe'), ingredients: [{ name: 'beef tenderloin', amount: '2 lb' }, { name: 'puff pastry', amount: '1 sheet' }, { name: 'mushrooms', amount: '12 oz' }, { name: 'shallots', amount: '2' }, { name: 'prosciutto', amount: '8 slices' }, { name: 'dijon', amount: '2 tbsp' }, { name: 'egg', amount: '1' }, { name: 'thyme', amount: '1 tsp' }] },
+                    { title: 'Homemade Pasta with Bolognese', time: '1.5 hours', protein: '38g', tags: ['ambitious', 'italian', 'comfort'], url: createSearchUrl('Homemade Pasta Bolognese recipe'), ingredients: [{ name: 'ground beef', amount: '1 lb' }, { name: 'ground pork', amount: '1/2 lb' }, { name: 'pasta flour', amount: '2 cups' }, { name: 'eggs', amount: '3' }, { name: 'tomatoes', amount: '1 can' }, { name: 'carrots', amount: '2' }, { name: 'celery', amount: '2 stalks' }, { name: 'onion', amount: '1' }, { name: 'wine', amount: '1/2 cup' }, { name: 'parmesan', amount: '1/2 cup' }] },
+                    { title: 'Thai Green Curry from Scratch', time: '1.5 hours', protein: '32g', tags: ['ambitious', 'thai', 'spicy'], url: createSearchUrl('Thai Green Curry recipe'), ingredients: [{ name: 'chicken thighs', amount: '1.5 lb' }, { name: 'green chilies', amount: '2' }, { name: 'lemongrass', amount: '1 stalk' }, { name: 'galangal', amount: '1 inch' }, { name: 'coconut milk', amount: '1 can' }, { name: 'thai basil', amount: '1/2 cup' }, { name: 'fish sauce', amount: '2 tbsp' }, { name: 'jasmine rice', amount: '2 cups cooked' }] },
+                    { title: 'Peking Duck Style Chicken', time: '2 hours', protein: '40g', tags: ['ambitious', 'chinese', 'impressive'], url: createSearchUrl('Peking Duck Style Chicken recipe'), ingredients: [{ name: 'whole chicken', amount: '1 (3-4 lb)' }, { name: 'five spice', amount: '2 tsp' }, { name: 'hoisin', amount: '1/3 cup' }, { name: 'maltose', amount: '2 tbsp' }, { name: 'scallions', amount: '4' }, { name: 'cucumber', amount: '1' }, { name: 'pancakes', amount: '8' }] }
+                ]
+            };
+
+            const meals = [];
+
+            // Select lunches
+            const lunchOptions = recipes.lunchPrep[cuisine] || recipes.lunchPrep.mixed;
+            const selectedLunches = pickRandomItems(lunchOptions, lunchCount);
+            meals.push({
+                type: 'Lunch Prep',
+                description: `Prep on Sunday for ${lunchCount} weekday lunches`,
+                items: selectedLunches
+            });
+
+            // Select weeknight dinners
+            const dinnerOptions = recipes.weeknightDinners.mixed;
+            const selectedDinners = pickRandomItems(dinnerOptions, dinnerCount);
+            meals.push({
+                type: 'Weeknight Dinners',
+                description: `Quick & easy (<45 min)`,
+                items: selectedDinners
+            });
+
+            // Ambitious weekend dinner
+            if (ambitious) {
+                const ambitiousDinner = recipes.ambitiousDinners[Math.floor(Math.random() * recipes.ambitiousDinners.length)];
+                meals.push({
+                    type: 'Weekend Challenge',
+                    description: 'One ambitious cook!',
+                    items: [ambitiousDinner]
+                });
+            }
+
+            appData.weeklyMeals = meals;
+            appData.weeklyGroceryList = buildGroceryList(meals);
+            saveData();
+            triggerMealPlanRefresh();
+            renderWeeklyMealPlan();
+        }
+
+        function renderWeeklyMealPlan() {
+            const container = document.getElementById('weeklyMealPlan');
+            const meals = appData.weeklyMeals || [];
+
+            if (meals.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">&#127869;</div>
+                        <p>Configure your preferences and generate your weekly meal plan</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = meals.map(category => `
+                <div class="card" style="margin-bottom: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">${category.type}</div>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">${category.description}</span>
+                    </div>
+                    <div class="card-body">
+                        ${category.items.map(item => {
+                            const itemUrl = item.url || createSearchUrl(`${item.title} recipe`);
+                            const itemLink = itemUrl ? `<a href="${itemUrl}" target="_blank" style="color: var(--forest); text-decoration: none;">${item.title} &#128279;</a>` : item.title;
+                            return `
+                                <div class="recipe-card">
+                                    <div class="recipe-card-header">
+                                        <div class="recipe-card-title">
+                                            ${itemLink}
+                                        </div>
+                                        <div class="recipe-card-meta">${item.time} | ${item.protein} protein</div>
+                                    </div>
+                                    <div class="recipe-card-body">
+                                        ${item.tags.map(t => `<span class="recipe-tag">${t}</span>`).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Add grocery list
+            const groceryList = appData.weeklyGroceryList || [];
+            if (groceryList.length > 0) {
+                const isLegacyList = typeof groceryList[0] === 'string';
+                const totals = isLegacyList ? [] : aggregateGroceryTotals(groceryList);
+                html += `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div class="card-header">
+                            <div class="card-title">&#128722; Grocery List</div>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">${groceryList.length} ${isLegacyList ? 'items' : 'meals'}${isLegacyList ? '' : ` • ${totals.length} ingredients`}</span>
+                        </div>
+                        <div class="card-body">
+                            ${isLegacyList ? `
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem;">
+                                    ${groceryList.map(item => `
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                            <input type="checkbox" style="width: 18px; height: 18px;">
+                                            <span>${item}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <div class="grocery-meal" style="margin-bottom: 1.25rem;">
+                                    <div class="grocery-meal-title">Totals</div>
+                                    <div class="grocery-items">
+                                        ${totals.map(item => {
+                                            const unitParts = Array.from(item.units.entries()).map(([unit, value]) => `${formatNumber(value)} ${unit === 'unit' ? '' : unit}`.trim());
+                                            const extras = item.extras.filter(Boolean);
+                                            const amountText = [...unitParts, ...extras].join(' + ');
+                                            return `
+                                                <label class="grocery-item">
+                                                    <input type="checkbox" style="width: 16px; height: 16px;">
+                                                    <span>${item.name}</span>
+                                                    <span class="grocery-amount">${amountText}</span>
+                                                </label>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                                ${groceryList.map(entry => `
+                                <div class="grocery-meal">
+                                    <div class="grocery-meal-title">${entry.meal} <span style="font-size: 0.75rem; color: var(--text-muted);">(${entry.category})</span></div>
+                                    <div class="grocery-items">
+                                        ${entry.ingredients.map(ing => `
+                                            <label class="grocery-item">
+                                                <input type="checkbox" style="width: 16px; height: 16px;">
+                                                <span>${ing.name}</span>
+                                                <span class="grocery-amount">${ing.amount}</span>
+                                            </label>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                `).join('')}
+                            `}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ==================== YEARLY TRACKER ====================
+        function openYearItemModal(type) {
+            const titles = { book: 'Add Book', podcast: 'Add Podcast', meal: 'Add Meal Cooked' };
+            document.getElementById('yearItemModalTitle').textContent = titles[type] || 'Add Item';
+            document.getElementById('yearItemType').value = type;
+            document.getElementById('yearItemModal').classList.add('active');
+        }
+
+        function closeYearItemModal() {
+            document.getElementById('yearItemModal').classList.remove('active');
+            document.getElementById('yearItemTitle').value = '';
+            document.getElementById('yearItemNotes').value = '';
+        }
+
+        function addYearItem() {
+            const type = document.getElementById('yearItemType').value;
+            const title = document.getElementById('yearItemTitle').value.trim();
+            if (!title) return;
+
+            if (!appData.yearlyItems) {
+                appData.yearlyItems = { books: [], podcasts: [], meals: [], workouts: [] };
+            }
+
+            const item = {
+                id: generateId(),
+                title,
+                notes: document.getElementById('yearItemNotes').value.trim(),
+                date: new Date().toISOString()
+            };
+
+            const typeMap = { book: 'books', podcast: 'podcasts', meal: 'meals' };
+            const category = typeMap[type];
+            if (category) {
+                appData.yearlyItems[category].push(item);
+            }
+
+            addXP(5);
+            saveData();
+            closeYearItemModal();
+            renderYearlyTracker();
+        }
+
+        function renderYearlyTracker() {
+            const yearStart = '2026-01-01';
+
+            // Count consumption items by type from the Consumed section
+            const yearBooks = appData.consumption.filter(c => c.type === 'book' && c.date >= yearStart).length;
+            const yearMovies = appData.consumption.filter(c => c.type === 'movie' && c.date >= yearStart).length;
+            const yearTVShows = appData.consumption.filter(c => c.type === 'tvshow' && c.date >= yearStart).length;
+            const yearRecipes = appData.consumption.filter(c => c.type === 'recipe' && c.date >= yearStart).length;
+            const yearRestaurants = appData.consumption.filter(c => c.type === 'restaurant' && c.date >= yearStart).length;
+
+            // Update consumption stats
+            document.getElementById('yearBooks').textContent = yearBooks;
+            document.getElementById('yearMovies').textContent = yearMovies;
+            document.getElementById('yearTVShows').textContent = yearTVShows;
+            document.getElementById('yearRecipes').textContent = yearRecipes;
+            document.getElementById('yearRestaurants').textContent = yearRestaurants;
+
+            // Calculate nutrition totals from daily logs
+            let totalProtein = 0;
+            let totalWater = 0;
+            let totalSalt = 0;
+
+            Object.keys(appData.dailyLogs).forEach(date => {
+                if (date >= yearStart) {
+                    const log = appData.dailyLogs[date];
+                    totalProtein += log.protein || 0;
+                    totalWater += log.water || 0; // Already in ounces
+                    totalSalt += log.salt || 0;
+                }
+            });
+
+            document.getElementById('yearProtein').textContent = totalProtein.toLocaleString();
+            document.getElementById('yearWater').textContent = totalWater.toLocaleString();
+            document.getElementById('yearSalt').textContent = totalSalt.toLocaleString();
+
+            // Render consumption lists from the Consumed section
+            renderYearConsumptionList('book', 'yearBooksList', 'books');
+            renderYearConsumptionList('movie', 'yearMoviesList', 'movies');
+            renderYearConsumptionList('tvshow', 'yearTVShowsList', 'TV shows');
+            renderYearConsumptionList('restaurant', 'yearRestaurantsList', 'restaurants');
+            renderYearConsumptionList('recipe', 'yearRecipesList', 'recipes');
+        }
+
+        function renderYearConsumptionList(type, containerId, label) {
+            const container = document.getElementById(containerId);
+            const yearStart = '2026-01-01';
+            const items = appData.consumption
+                .filter(c => c.type === type && c.date >= yearStart)
+                .sort((a, b) => (b.score || 0) - (a.score || 0));
+
+            if (items.length === 0) {
+                container.innerHTML = `<div class="empty-state"><p>No ${label} logged yet</p></div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                const score = item.score || 50;
+                const scoreColor = getScoreColor(score);
+                const itemUrl = normalizeUrl(item.url);
+                const titleHtml = itemUrl ? `<a href="${itemUrl}" target="_blank" style="color: inherit; text-decoration: none;">${item.title} &#128279;</a>` : item.title;
+                return `
+                    <div class="year-item">
+                        <div>
+                            <span class="year-item-title">${titleHtml}</span>
+                            ${item.notes ? `<div style="font-size: 0.85rem; color: var(--text-secondary);">${item.notes}</div>` : ''}
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-weight: 700; color: ${scoreColor};">${score}</span>
+                            <span class="year-item-date">${new Date(item.date).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==================== INIT ====================
+        function init() {
+            updateStreak();
+            updateHeader();
+            renderMorning();
+            checkAchievements();
+
+            // Set default tier selection
+            selectTier('B');
+        }
+
+        init();
+    </script>
+</body>
+</html>
