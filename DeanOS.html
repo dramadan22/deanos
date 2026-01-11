@@ -1760,56 +1760,10 @@
                     <h2 class="view-title">&#128170; This Week's Workouts</h2>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">&#128197; Weekly Schedule</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label class="form-label">Training Days This Week</label>
-                            <div class="workout-day-selector" id="workoutDays">
-                                <button class="workout-day-btn" data-day="mon" onclick="toggleWorkoutDay('mon')">Mon</button>
-                                <button class="workout-day-btn" data-day="tue" onclick="toggleWorkoutDay('tue')">Tue</button>
-                                <button class="workout-day-btn" data-day="wed" onclick="toggleWorkoutDay('wed')">Wed</button>
-                                <button class="workout-day-btn" data-day="thu" onclick="toggleWorkoutDay('thu')">Thu</button>
-                                <button class="workout-day-btn" data-day="fri" onclick="toggleWorkoutDay('fri')">Fri</button>
-                                <button class="workout-day-btn" data-day="sat" onclick="toggleWorkoutDay('sat')">Sat</button>
-                                <button class="workout-day-btn" data-day="sun" onclick="toggleWorkoutDay('sun')">Sun</button>
-                            </div>
-                            <div class="workout-day-types" id="workoutDayTypes"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">PT Session Day (Josh)</label>
-                                <select class="input-field" id="ptSessionDay">
-                                    <option value="">No PT this week</option>
-                                    <option value="mon">Monday</option>
-                                    <option value="tue">Tuesday</option>
-                                    <option value="wed">Wednesday</option>
-                                    <option value="thu">Thursday</option>
-                                    <option value="fri" selected>Friday (usual)</option>
-                                    <option value="sat">Saturday</option>
-                                    <option value="sun">Sunday</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Travel This Week?</label>
-                                <select class="input-field" id="travelWeek">
-                                    <option value="no">No travel</option>
-                                    <option value="partial">Partial week travel</option>
-                                    <option value="full">Full week travel</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary" onclick="generateWorkouts()" style="margin-top: 1rem;">Generate Weekly Plan</button>
-                    </div>
-                </div>
-
                 <div id="weeklyWorkoutPlan">
                     <div class="empty-state">
                         <div class="empty-icon">&#128170;</div>
-                        <p>Configure your schedule above and generate your personalized workout plan</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">All exercises are POTS-friendly: seated or lying down</p>
+                        <p>Loading your weekly workout plan...</p>
                     </div>
                 </div>
             </div>
@@ -3325,27 +3279,7 @@
         }
 
         function renderWorkouts() {
-            document.querySelectorAll('.workout-day-btn').forEach(btn => btn.classList.remove('selected'));
-            // Restore selected days from appData
-            if (appData.selectedWorkoutDays) {
-                selectedWorkoutDays = [...appData.selectedWorkoutDays];
-                selectedWorkoutDays.forEach(day => {
-                    const btn = document.querySelector(`[data-day="${day}"]`);
-                    if (btn) btn.classList.add('selected');
-                });
-            }
-            workoutDayTypes = { ...(appData.workoutDayTypes || {}) };
-            selectedWorkoutDays.forEach(day => {
-                if (!workoutDayTypes[day]) workoutDayTypes[day] = 'strength';
-            });
-            renderWorkoutDayTypes();
-
-            // Render weekly plan if exists
-            if (appData.weeklyWorkouts && appData.weeklyWorkouts.length > 0) {
-                renderWeeklyWorkoutPlan();
-            } else {
-                renderAutoWeeklyWorkouts();
-            }
+            renderAutoWeeklyWorkouts();
         }
 
         function setWorkoutDayType(day, value) {
