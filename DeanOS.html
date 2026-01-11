@@ -3471,18 +3471,54 @@
                         <span class="workout-card-type">${w.type} - ${w.location}</span>
                     </div>
                     <div class="workout-card-body">
-                        ${w.exercises.map(e => `
-                            <div class="exercise-item">
-                                <span class="exercise-name">
-                                    ${e.video ? `<a href="${e.video}" target="_blank" style="color: var(--forest); text-decoration: none;">${e.name} &#127909;</a>` : e.name}
-                                </span>
-                                <span class="exercise-detail">${e.sets}</span>
-                            </div>
-                        `).join('')}
+                        ${w.exercises.map((e, idx) => renderExerciseItem(e, w.day, idx)).join('')}
                     </div>
                 </div>
             `).join('')}
             `;
+        }
+
+        function renderExerciseItem(e, day, idx) {
+            const exerciseId = `exercise-${day}-${idx}`.replace(/\s+/g, '-').toLowerCase();
+            const hasInstructions = e.instructions && e.instructions.length > 0;
+
+            const instructionsHtml = hasInstructions
+                ? `<div id="${exerciseId}" class="exercise-instructions" style="display: none; margin-top: 0.5rem; padding: 0.75rem; background: var(--bg-warm); border-radius: var(--radius-sm);">
+                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-primary);">
+                        ${e.instructions.map(step => `<li style="margin-bottom: 0.4rem;">${step}</li>`).join('')}
+                    </ul>
+                </div>`
+                : '';
+
+            const toggleButton = hasInstructions
+                ? `<button onclick="toggleExerciseInstructions('${exerciseId}')" style="background: none; border: none; cursor: pointer; font-size: 0.75rem; color: var(--forest); padding: 0.2rem 0.4rem; margin-left: 0.5rem;">
+                    <span id="${exerciseId}-toggle">How to ▼</span>
+                </button>`
+                : '';
+
+            return `
+                <div class="exercise-item" style="flex-direction: column; align-items: flex-start;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                        <span class="exercise-name" style="display: flex; align-items: center;">
+                            ${e.name}${toggleButton}
+                        </span>
+                        <span class="exercise-detail">${e.sets}</span>
+                    </div>
+                    ${instructionsHtml}
+                </div>
+            `;
+        }
+
+        function toggleExerciseInstructions(exerciseId) {
+            const el = document.getElementById(exerciseId);
+            const toggle = document.getElementById(exerciseId + '-toggle');
+            if (el.style.display === 'none') {
+                el.style.display = 'block';
+                toggle.textContent = 'How to ▲';
+            } else {
+                el.style.display = 'none';
+                toggle.textContent = 'How to ▼';
+            }
         }
 
         function renderAutoWeeklyWorkouts() {
@@ -3502,14 +3538,7 @@
                             <span class="workout-card-type">${w.type} - ${w.location}</span>
                         </div>
                         <div class="workout-card-body">
-                            ${w.exercises.map(e => `
-                                <div class="exercise-item">
-                                    <span class="exercise-name">
-                                        ${e.video ? `<a href="${e.video}" target="_blank" style="color: var(--forest); text-decoration: none;">${e.name} &#127909;</a>` : e.name}
-                                    </span>
-                                    <span class="exercise-detail">${e.sets}</span>
-                                </div>
-                            `).join('')}
+                            ${w.exercises.map((e, idx) => renderExerciseItem(e, w.day, idx)).join('')}
                         </div>
                     </div>
                 `).join('');

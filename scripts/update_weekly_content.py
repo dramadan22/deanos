@@ -241,6 +241,7 @@ Requirements:
 - Include sets/reps in hypertrophy range (3-4 sets, 8-12 reps for compounds, 10-15 for isolation)
 - Vary exercises week to week for muscle confusion and engagement
 - Saturday should include 20-30 min cardio and mobility/stretching work
+- Include step-by-step instructions for each exercise (setup, execution, form cues)
 
 Return ONLY valid JSON in this exact format, no markdown or explanation:
 {{
@@ -250,8 +251,8 @@ Return ONLY valid JSON in this exact format, no markdown or explanation:
       "type": "Upper Body Strength",
       "location": "LA Fitness",
       "exercises": [
-        {{"name": "Exercise Name", "sets": "3x10-12"}},
-        {{"name": "Exercise Name", "sets": "3x10-12"}}
+        {{"name": "Exercise Name", "sets": "3x10-12", "instructions": ["Setup: Adjust seat height so...", "Execution: Push the handles forward...", "Form cue: Keep your back flat..."]}},
+        {{"name": "Exercise Name", "sets": "3x10-12", "instructions": ["Setup: ...", "Execution: ...", "Form cue: ..."]}}
       ]
     }},
     {{
@@ -259,8 +260,8 @@ Return ONLY valid JSON in this exact format, no markdown or explanation:
       "type": "Lower Body Strength",
       "location": "LA Fitness",
       "exercises": [
-        {{"name": "Exercise Name", "sets": "4x8-10"}},
-        {{"name": "Exercise Name", "sets": "3x12-15"}}
+        {{"name": "Exercise Name", "sets": "4x8-10", "instructions": ["Setup: ...", "Execution: ...", "Form cue: ..."]}},
+        {{"name": "Exercise Name", "sets": "3x12-15", "instructions": ["Setup: ...", "Execution: ...", "Form cue: ..."]}}
       ]
     }},
     {{
@@ -276,8 +277,8 @@ Return ONLY valid JSON in this exact format, no markdown or explanation:
       "type": "Cardio + Mobility",
       "location": "LA Fitness",
       "exercises": [
-        {{"name": "Cardio exercise", "sets": "duration/intensity"}},
-        {{"name": "Mobility work", "sets": "duration"}}
+        {{"name": "Cardio exercise", "sets": "duration/intensity", "instructions": ["Setup: ...", "Execution: ..."]}},
+        {{"name": "Mobility work", "sets": "duration", "instructions": ["Step 1: ...", "Step 2: ..."]}}
       ]
     }}
   ]
@@ -285,7 +286,7 @@ Return ONLY valid JSON in this exact format, no markdown or explanation:
 
         message = client.messages.create(
             model="claude-sonnet-4-20250514",
-            max_tokens=2000,
+            max_tokens=4000,
             messages=[
                 {"role": "user", "content": prompt}
             ]
