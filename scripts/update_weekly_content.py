@@ -325,6 +325,7 @@ Requirements:
 - Practical ingredients: Use common grocery store items
 - Variety: Mix different protein sources (chicken, fish, eggs, beef, legumes, dairy)
 - Balanced: Include vegetables and whole grains where appropriate
+- Include step-by-step recipe instructions for each meal
 
 Return ONLY valid JSON in this exact format, no markdown or explanation:
 {
@@ -335,29 +336,32 @@ Return ONLY valid JSON in this exact format, no markdown or explanation:
         "title": "Meal name",
         "description": "Brief 1-sentence description of the meal",
         "time": "X min",
-        "protein": "XXg"
+        "protein": "XXg",
+        "instructions": ["Step 1...", "Step 2...", "Step 3..."]
       },
       "lunch": {
         "title": "Meal name",
         "description": "Brief description",
         "time": "X min",
-        "protein": "XXg"
+        "protein": "XXg",
+        "instructions": ["Step 1...", "Step 2...", "Step 3..."]
       },
       "dinner": {
         "title": "Meal name",
         "description": "Brief description",
         "time": "X min",
-        "protein": "XXg"
+        "protein": "XXg",
+        "instructions": ["Step 1...", "Step 2...", "Step 3..."]
       }
     }
   ]
 }
 
-Generate for Monday, Tuesday, Wednesday, Thursday, and Friday."""
+Generate for Monday, Tuesday, Wednesday, Thursday, and Friday. Keep instructions concise (3-5 steps per meal)."""
 
         message = client.messages.create(
             model="claude-sonnet-4-20250514",
-            max_tokens=2000,
+            max_tokens=4000,
             messages=[
                 {"role": "user", "content": prompt}
             ]
