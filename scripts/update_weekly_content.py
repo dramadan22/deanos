@@ -67,11 +67,6 @@ YOUTUBE_QUERIES = [
         "type": "Strength",
         "location": "YouTube",
     },
-    {
-        "query": "POTS friendly seated workout",
-        "type": "Cardio + Mobility",
-        "location": "YouTube",
-    },
 ]
 
 WORKOUT_TEMPLATE = [
@@ -264,7 +259,7 @@ def fetch_youtube_videos(query, max_results=8):
 
 
 def build_weekly_workouts():
-    videos_by_type = {"Strength": [], "Cardio + Mobility": []}
+    videos_by_type = {"Strength": []}
     for item in YOUTUBE_QUERIES:
         videos = fetch_youtube_videos(item["query"])
         if not videos:
@@ -273,7 +268,6 @@ def build_weekly_workouts():
 
     workouts = []
     random.shuffle(videos_by_type["Strength"])
-    random.shuffle(videos_by_type["Cardio + Mobility"])
 
     def pick_videos(pool, count):
         if not pool:
@@ -297,13 +291,11 @@ def build_weekly_workouts():
         }
 
     strength_pool = videos_by_type["Strength"]
-    cardio_pool = videos_by_type["Cardio + Mobility"]
 
     workout_plan = [
         make_workout("Monday", "Strength", strength_pool, 2),
         make_workout("Wednesday", "Strength", strength_pool, 2),
         make_workout("Friday", "Strength", strength_pool, 2),
-        make_workout("Saturday", "Cardio + Mobility", cardio_pool, 2),
     ]
 
     return [w for w in workout_plan if w]
