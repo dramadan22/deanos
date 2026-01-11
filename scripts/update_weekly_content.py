@@ -56,18 +56,28 @@ LONGEVITY_FEEDS = [
     },
 ]
 
-YOUTUBE_QUERIES = [
-    {
-        "query": "seated strength workouts",
-        "type": "Strength",
-        "location": "YouTube",
-    },
-    {
-        "query": "machine workouts at gym for longevity",
-        "type": "Strength",
-        "location": "YouTube",
-    },
-]
+EXERCISE_POOLS = {
+    "upper": [
+        "Seated Chest Press Machine",
+        "Incline Dumbbell Press (Low Incline)",
+        "Seated Shoulder Press Machine",
+        "Cable Fly (Seated)",
+        "Tricep Pushdown",
+        "Seated Cable Row",
+        "Lat Pulldown",
+        "Seated Face Pulls",
+        "Bicep Curl Machine",
+        "Rear Delt Fly Machine",
+    ],
+    "lower": [
+        "Leg Press",
+        "Leg Curl Machine",
+        "Leg Extension",
+        "Seated Calf Raise",
+        "Hip Adductor Machine",
+        "Hip Abductor Machine",
+    ],
+}
 
 WORKOUT_TEMPLATE = [
     {
@@ -258,47 +268,56 @@ def fetch_youtube_videos(query, max_results=8):
     return videos
 
 
+def fetch_youtube_video_for_exercise(exercise):
+    videos = fetch_youtube_videos(f"{exercise} exercise tutorial", max_results=5)
+    if not videos:
+        return None
+    return videos[0]
+
+
 def build_weekly_workouts():
-    videos_by_type = {"Strength": []}
-    for item in YOUTUBE_QUERIES:
-        videos = fetch_youtube_videos(item["query"])
-        if not videos:
-            continue
-        videos_by_type[item["type"]].extend(videos)
+    upper_pool = EXERCISE_POOLS["upper"].copy()
+    lower_pool = EXERCISE_POOLS["lower"].copy()
+    random.shuffle(upper_pool)
+    random.shuffle(lower_pool)
 
-    workouts = []
-    random.shuffle(videos_by_type["Strength"])
+    def build_exercises(selection):
+        exercises = []
+        for name in selection:
+            video = fetch_youtube_video_for_exercise(name)
+            exercises.append(
+                {
+                    "name": name,
+                    "sets": "3x10-12",
+                    "video": video["url"] if video else "",
+                }
+            )
+        return exercises
 
-    def pick_videos(pool, count):
-        if not pool:
-            return []
-        selection = pool[:count]
-        del pool[:count]
-        return selection
+    monday_exercises = build_exercises(upper_pool[:4])
+    wednesday_exercises = build_exercises(lower_pool[:4])
+    friday_exercises = build_exercises(upper_pool[4:8] or upper_pool[:4])
 
-    def make_workout(day, workout_type, pool, count):
-        selected = pick_videos(pool, count)
-        if not selected:
-            return None
-        return {
-            "day": day,
-            "type": workout_type,
-            "location": "YouTube",
-            "exercises": [
-                {"name": v["title"], "sets": "Follow along", "video": v["url"]}
-                for v in selected
-            ],
-        }
-
-    strength_pool = videos_by_type["Strength"]
-
-    workout_plan = [
-        make_workout("Monday", "Strength", strength_pool, 2),
-        make_workout("Wednesday", "Strength", strength_pool, 2),
-        make_workout("Friday", "Strength", strength_pool, 2),
+    return [
+        {
+            "day": "Monday",
+            "type": "Strength",
+            "location": "LA Fitness",
+            "exercises": monday_exercises,
+        },
+        {
+            "day": "Wednesday",
+            "type": "Strength",
+            "location": "LA Fitness",
+            "exercises": wednesday_exercises,
+        },
+        {
+            "day": "Friday",
+            "type": "Strength",
+            "location": "LA Fitness",
+            "exercises": friday_exercises,
+        },
     ]
-
-    return [w for w in workout_plan if w]
 
 
 def is_recipe_item(item):
