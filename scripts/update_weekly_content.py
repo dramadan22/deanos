@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
-import random
 import sys
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import ssl
@@ -15,30 +13,30 @@ try:
 except Exception:  # pragma: no cover - optional dependency
     certifi = None
 
+try:
+    import anthropic
+except Exception:  # pragma: no cover - optional dependency
+    anthropic = None
+
 RECIPE_FEEDS = [
-    {
-        "name": "Serious Eats",
-        "url": "https://feeds.feedburner.com/seriouseats/recipes",
-        "type": "rss",
-    },
-    {
-        "name": "Bon Appetit",
-        "url": "https://www.bonappetit.com/feed/rss",
-        "type": "rss",
-    },
-    {
-        "name": "The Kitchn",
-        "url": "https://www.thekitchn.com/main.rss",
-        "type": "rss",
-    },
     {
         "name": "Skinnytaste",
         "url": "https://www.skinnytaste.com/feed/",
         "type": "rss",
     },
     {
-        "name": "Love and Lemons",
-        "url": "https://www.loveandlemons.com/feed/",
+        "name": "Serious Eats",
+        "url": "https://feeds.feedburner.com/seriouseats/recipes",
+        "type": "rss",
+    },
+    {
+        "name": "Allrecipes",
+        "url": "https://www.simplyrecipes.com/feed/",
+        "type": "rss",
+    },
+    {
+        "name": "EatingWell",
+        "url": "https://www.budgetbytes.com/feed/",
         "type": "rss",
     },
 ]
@@ -56,28 +54,13 @@ LONGEVITY_FEEDS = [
     },
 ]
 
-EXERCISE_POOLS = {
-    "upper": [
-        "Seated Chest Press Machine",
-        "Incline Dumbbell Press (Low Incline)",
-        "Seated Shoulder Press Machine",
-        "Cable Fly (Seated)",
-        "Tricep Pushdown",
-        "Seated Cable Row",
-        "Lat Pulldown",
-        "Seated Face Pulls",
-        "Bicep Curl Machine",
-        "Rear Delt Fly Machine",
-    ],
-    "lower": [
-        "Leg Press",
-        "Leg Curl Machine",
-        "Leg Extension",
-        "Seated Calf Raise",
-        "Hip Adductor Machine",
-        "Hip Abductor Machine",
-    ],
-}
+WORKOUT_PROFILE = """
+- Location: LA Fitness (commercial gym with full machine selection)
+- Schedule: Monday (Upper), Wednesday (Lower), Friday (PT with trainer Josh), Saturday (Cardio + Mobility)
+- Goals: Hypertrophy, general strength, longevity/joint health
+- Preferences: Machine-based and cable exercises preferred (joint-friendly, consistent resistance)
+- No current injuries or limitations
+"""
 
 WORKOUT_TEMPLATE = [
     {
@@ -232,99 +215,181 @@ def dedupe_items(items):
     return deduped
 
 
-def fetch_youtube_videos(query, max_results=8):
-    api_key = os.getenv("YOUTUBE_API_KEY")
+def generate_workouts_with_claude():
+    """Generate a weekly workout plan using Claude API."""
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        print("Missing YOUTUBE_API_KEY, skipping YouTube fetch.", file=sys.stderr)
+        print("Missing ANTHROPIC_API_KEY, skipping Claude workout generation.", file=sys.stderr)
         return []
 
-    params = urllib.parse.urlencode(
-        {
-            "part": "snippet",
-            "type": "video",
-            "maxResults": max_results,
-            "q": query,
-            "key": api_key,
-        }
-    )
-    url = f"https://www.googleapis.com/youtube/v3/search?{params}"
-    data = json.loads(fetch_url(url))
-    videos = []
-    for item in data.get("items", []):
-        video_id = item.get("id", {}).get("videoId")
-        snippet = item.get("snippet", {})
-        title = snippet.get("title", "").strip()
-        published = snippet.get("publishedAt")
-        if not video_id or not title:
-            continue
-        videos.append(
-            {
-                "title": title,
-                "url": f"https://www.youtube.com/watch?v={video_id}",
-                "source": "YouTube",
-                "published": published,
-            }
+    if anthropic is None:
+        print("anthropic package not installed, skipping Claude workout generation.", file=sys.stderr)
+        return []
+
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+
+        prompt = f"""Generate a weekly workout plan based on this profile:
+{WORKOUT_PROFILE}
+
+Create workouts for Monday (Upper Body), Wednesday (Lower Body), and Saturday (Cardio + Mobility).
+Friday is reserved for personal training - do not generate exercises for Friday.
+
+Requirements:
+- 4-5 exercises per strength day
+- Use machine and cable exercises primarily (available at LA Fitness)
+- Include sets/reps in hypertrophy range (3-4 sets, 8-12 reps for compounds, 10-15 for isolation)
+- Vary exercises week to week for muscle confusion and engagement
+- Saturday should include 20-30 min cardio and mobility/stretching work
+
+Return ONLY valid JSON in this exact format, no markdown or explanation:
+{{
+  "workouts": [
+    {{
+      "day": "Monday",
+      "type": "Upper Body Strength",
+      "location": "LA Fitness",
+      "exercises": [
+        {{"name": "Exercise Name", "sets": "3x10-12"}},
+        {{"name": "Exercise Name", "sets": "3x10-12"}}
+      ]
+    }},
+    {{
+      "day": "Wednesday",
+      "type": "Lower Body Strength",
+      "location": "LA Fitness",
+      "exercises": [
+        {{"name": "Exercise Name", "sets": "4x8-10"}},
+        {{"name": "Exercise Name", "sets": "3x12-15"}}
+      ]
+    }},
+    {{
+      "day": "Friday",
+      "type": "PT Session with Josh",
+      "location": "LA Fitness",
+      "exercises": [
+        {{"name": "Personal Training Session", "sets": "Full body, guided by Josh"}}
+      ]
+    }},
+    {{
+      "day": "Saturday",
+      "type": "Cardio + Mobility",
+      "location": "LA Fitness",
+      "exercises": [
+        {{"name": "Cardio exercise", "sets": "duration/intensity"}},
+        {{"name": "Mobility work", "sets": "duration"}}
+      ]
+    }}
+  ]
+}}"""
+
+        message = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=2000,
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
         )
-    return videos
+
+        response_text = message.content[0].text.strip()
+        workout_data = json.loads(response_text)
+        return workout_data.get("workouts", [])
+
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse Claude workout response as JSON: {e}", file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"Error generating workout plan with Claude: {e}", file=sys.stderr)
+        return []
 
 
-def fetch_youtube_video_for_exercise(exercise):
-    videos = fetch_youtube_videos(f"{exercise} exercise tutorial", max_results=5)
-    if not videos:
-        return None
-    return videos[0]
+def generate_meal_plan_with_claude():
+    """Generate a 5-day meal plan using Claude API."""
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("Missing ANTHROPIC_API_KEY, skipping Claude meal generation.", file=sys.stderr)
+        return []
 
+    if anthropic is None:
+        print("anthropic package not installed, skipping Claude meal generation.", file=sys.stderr)
+        return []
 
-def build_weekly_workouts():
-    upper_pool = EXERCISE_POOLS["upper"].copy()
-    lower_pool = EXERCISE_POOLS["lower"].copy()
-    random.shuffle(upper_pool)
-    random.shuffle(lower_pool)
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
 
-    def build_exercises(selection):
-        exercises = []
-        for name in selection:
-            video = fetch_youtube_video_for_exercise(name)
-            exercises.append(
-                {
-                    "name": name,
-                    "sets": "3x10-12",
-                    "video": video["url"] if video else "",
-                }
-            )
-        return exercises
+        prompt = """Generate a 5-day weekday meal plan (Monday through Friday) with breakfast, lunch, and dinner for each day.
 
-    monday_exercises = build_exercises(upper_pool[:4])
-    wednesday_exercises = build_exercises(lower_pool[:4])
-    friday_exercises = build_exercises(upper_pool[4:8] or upper_pool[:4])
+Requirements:
+- High protein focus: Each meal should have 25-40g of protein
+- Quick preparation: All meals must be under 30 minutes to prepare
+- Practical ingredients: Use common grocery store items
+- Variety: Mix different protein sources (chicken, fish, eggs, beef, legumes, dairy)
+- Balanced: Include vegetables and whole grains where appropriate
 
-    return [
-        {
-            "day": "Monday",
-            "type": "Strength",
-            "location": "LA Fitness",
-            "exercises": monday_exercises,
-        },
-        {
-            "day": "Wednesday",
-            "type": "Strength",
-            "location": "LA Fitness",
-            "exercises": wednesday_exercises,
-        },
-        {
-            "day": "Friday",
-            "type": "Strength",
-            "location": "LA Fitness",
-            "exercises": friday_exercises,
-        },
-    ]
+Return ONLY valid JSON in this exact format, no markdown or explanation:
+{
+  "days": [
+    {
+      "day": "Monday",
+      "breakfast": {
+        "title": "Meal name",
+        "description": "Brief 1-sentence description of the meal",
+        "time": "X min",
+        "protein": "XXg"
+      },
+      "lunch": {
+        "title": "Meal name",
+        "description": "Brief description",
+        "time": "X min",
+        "protein": "XXg"
+      },
+      "dinner": {
+        "title": "Meal name",
+        "description": "Brief description",
+        "time": "X min",
+        "protein": "XXg"
+      }
+    }
+  ]
+}
+
+Generate for Monday, Tuesday, Wednesday, Thursday, and Friday."""
+
+        message = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=2000,
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        response_text = message.content[0].text.strip()
+        meal_data = json.loads(response_text)
+        return meal_data.get("days", [])
+
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse Claude response as JSON: {e}", file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"Error generating meal plan with Claude: {e}", file=sys.stderr)
+        return []
 
 
 def is_recipe_item(item):
     title = (item.get("title") or "").lower()
     url = (item.get("url") or "").lower()
-    keywords = ["recipe", "recipes", "meal", "dinner", "lunch", "breakfast"]
-    return any(word in title or f"/{word}" in url for word in keywords)
+    recipe_sources = {"skinnytaste", "serious eats", "simply recipes", "budget bytes"}
+    source = (item.get("source") or "").lower()
+    has_recipe_url = "/recipe" in url or "/recipes/" in url
+    listicle_markers = [
+        "best", "favorite", "roundup", "list", "collection", "guide", "review", "ideas",
+        "meal plan", "meal prep", "top", "week", "gallery"
+    ]
+    has_listicle = any(marker in title for marker in listicle_markers)
+    has_list_number = any(char.isdigit() for char in title)
+    if has_listicle or has_list_number:
+        return False
+    return has_recipe_url or source in recipe_sources
 
 
 def fetch_feed_items(feeds):
@@ -351,11 +416,12 @@ def fetch_feed_items(feeds):
 def main():
     recipe_items = [item for item in fetch_feed_items(RECIPE_FEEDS) if is_recipe_item(item)]
     longevity_items = fetch_feed_items(LONGEVITY_FEEDS)
-    workout_items = build_weekly_workouts()
+    workout_items = generate_workouts_with_claude()
+    meal_plan = generate_meal_plan_with_claude()
 
     weekly_recipes = {
         "updated": datetime.now(timezone.utc).isoformat(),
-        "meals": [],
+        "meals": meal_plan,
         "items": recipe_items,
     }
 

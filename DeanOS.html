@@ -1817,58 +1817,24 @@
             <!-- Meal Plans View -->
             <div class="module-view" id="recipesView">
                 <div class="view-header">
-                    <h2 class="view-title">&#127869; This Week's Meal Plans</h2>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">&#128197; Weekly Meal Preferences</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Lunches to Prep</label>
-                                <select class="input-field" id="lunchPrepCount">
-                                    <option value="3">3 lunches</option>
-                                    <option value="4">4 lunches</option>
-                                    <option value="5" selected>5 lunches</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Weeknight Dinners</label>
-                                <select class="input-field" id="weeknightDinners">
-                                    <option value="2">2 dinners</option>
-                                    <option value="3" selected>3 dinners</option>
-                                    <option value="4">4 dinners</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Cuisine Preference This Week</label>
-                            <select class="input-field" id="cuisinePreference">
-                                <option value="mixed" selected>Mixed variety</option>
-                                <option value="asian">Asian-focused</option>
-                                <option value="mediterranean">Mediterranean</option>
-                                <option value="american">American comfort</option>
-                                <option value="mexican">Mexican</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Ambitious Weekend Dinner?</label>
-                            <select class="input-field" id="ambitiousDinner">
-                                <option value="yes" selected>Yes, I want a challenge!</option>
-                                <option value="no">No, keep it simple</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" onclick="generateMealPlan()" style="margin-top: 1rem;">Generate Meal Plan</button>
-                    </div>
+                    <h2 class="view-title">&#127869; This Week's Meal Plan</h2>
                 </div>
 
                 <div id="weeklyMealPlan">
                     <div class="empty-state">
                         <div class="empty-icon">&#127869;</div>
-                        <p>Configure your preferences and generate your weekly meal plan</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">High protein, less processed, longevity-focused</p>
+                        <p>Loading your weekly meal plan...</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">High protein, quick meals (&lt;30 min), Monday-Friday</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128240; Fresh Recipe Inspiration</div>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">From your favorite food blogs</span>
+                    </div>
+                    <div class="card-body" id="rssRecipeList">
+                        <p style="color: var(--text-secondary);">Loading recipes...</p>
                     </div>
                 </div>
             </div>
@@ -3109,6 +3075,19 @@
             }
         }
 
+        function isRecipeItem(item) {
+            const title = (item.title || '').toLowerCase();
+            const url = (item.url || '').toLowerCase();
+            const recipeSources = ['skinnytaste', 'serious eats', 'simply recipes', 'budget bytes'];
+            const source = (item.source || '').toLowerCase();
+            const hasRecipeUrl = url.includes('/recipe') || url.includes('/recipes/');
+            const listicleMarkers = ['best', 'favorite', 'roundup', 'list', 'collection', 'guide', 'review', 'ideas', 'meal plan', 'meal prep', 'top', 'week', 'gallery'];
+            const hasListicle = listicleMarkers.some(word => title.includes(word));
+            const hasListNumber = /\b\d+\b/.test(title);
+            if (hasListicle || hasListNumber) return false;
+            return hasRecipeUrl || recipeSources.includes(source);
+        }
+
         function formatFeedDate(value) {
             if (!value) return '';
             const date = new Date(value);
@@ -3414,10 +3393,12 @@
                 const order = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
                 const selectedDays = [...selectedWorkoutDays].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
+                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated recently';
+
                 if (selectedDays.length === 0) {
                     appData.weeklyWorkouts = feedWorkouts;
                     saveData();
-                    renderWeeklyWorkoutPlan();
+                    renderWeeklyWorkoutPlan(updatedLabel);
                     return;
                 }
 
@@ -3462,11 +3443,11 @@
 
                 appData.weeklyWorkouts = workouts;
                 saveData();
-                renderWeeklyWorkoutPlan();
+                renderWeeklyWorkoutPlan(updatedLabel);
             });
         }
 
-        function renderWeeklyWorkoutPlan() {
+        function renderWeeklyWorkoutPlan(updatedLabel = '') {
             const container = document.getElementById('weeklyWorkoutPlan');
             const workouts = appData.weeklyWorkouts || [];
 
@@ -3480,7 +3461,10 @@
                 return;
             }
 
-            container.innerHTML = workouts.map(w => `
+            const updatedHtml = updatedLabel ? `<div style="margin-bottom: 0.75rem;"><span class="auto-feed-badge">${updatedLabel}</span></div>` : '';
+            container.innerHTML = `
+                ${updatedHtml}
+                ${workouts.map(w => `
                 <div class="workout-card">
                     <div class="workout-card-header">
                         <span class="workout-card-day">${w.day}</span>
@@ -3497,7 +3481,8 @@
                         `).join('')}
                     </div>
                 </div>
-            `).join('');
+            `).join('')}
+            `;
         }
 
         function renderAutoWeeklyWorkouts() {
@@ -3565,183 +3550,97 @@
 
         // ==================== RECIPES ====================
         function renderRecipes() {
-            if (appData.weeklyMeals && appData.weeklyMeals.length > 0) {
-                renderWeeklyMealPlan(appData.weeklyMeals);
-            } else {
-                renderAutoWeeklyMeals();
-            }
-        }
-
-
-        function filterRecipesByCuisine(items, cuisine) {
-            if (cuisine === 'mixed') return items;
-            const keywords = {
-                asian: ['asian', 'thai', 'korean', 'japanese', 'chinese', 'vietnamese', 'teriyaki', 'miso', 'ramen'],
-                mediterranean: ['mediterranean', 'greek', 'italian', 'lemon', 'olive', 'feta', 'tahini'],
-                american: ['american', 'bbq', 'comfort', 'burger', 'steak', 'roast', 'mac'],
-                mexican: ['mexican', 'taco', 'fajita', 'burrito', 'enchilada', 'salsa', 'cilantro']
-            };
-            const list = keywords[cuisine] || [];
-            if (list.length === 0) return items;
-            const filtered = items.filter(item => {
-                const haystack = `${item.title} ${item.source || ''}`.toLowerCase();
-                return list.some(word => haystack.includes(word));
-            });
-            return filtered.length >= Math.min(3, items.length) ? filtered : items;
-        }
-
-        function takeUniqueItems(items, count, usedKeys) {
-            const selected = [];
-            const shuffled = shuffleArray(items);
-            shuffled.forEach(item => {
-                if (selected.length >= count) return;
-                const key = (item.url || item.title || '').toLowerCase();
-                if (usedKeys.has(key)) return;
-                usedKeys.add(key);
-                selected.push(item);
-            });
-            while (selected.length < count && items.length > 0) {
-                selected.push(items[selected.length % items.length]);
-            }
-            return selected;
-        }
-
-        function buildMealPlanFromFeed(items, lunchCount, dinnerCount, ambitious) {
-            const usedKeys = new Set();
-            const lunchItems = takeUniqueItems(items, lunchCount, usedKeys);
-            const dinnerItems = takeUniqueItems(items, dinnerCount, usedKeys);
-            const weekendItems = ambitious ? takeUniqueItems(items, 1, usedKeys) : [];
-
-            const normalizeItem = item => ({
-                title: item.title,
-                url: item.url,
-                source: item.source,
-                tags: ['rss', 'new']
-            });
-
-            const meals = [
-                {
-                    type: 'Lunch Prep',
-                    description: `Prep on Sunday for ${lunchCount} weekday lunches`,
-                    items: lunchItems.map(normalizeItem)
-                },
-                {
-                    type: 'Weeknight Dinners',
-                    description: `Quick & easy (<45 min)`,
-                    items: dinnerItems.map(normalizeItem)
-                }
-            ];
-
-            if (ambitious && weekendItems.length > 0) {
-                meals.push({
-                    type: 'Weekend Challenge',
-                    description: 'One ambitious cook!',
-                    items: weekendItems.map(normalizeItem)
-                });
-            }
-
-            return meals;
-        }
-
-        function generateMealPlan() {
-            const lunchCount = parseInt(document.getElementById('lunchPrepCount').value);
-            const dinnerCount = parseInt(document.getElementById('weeknightDinners').value);
-            const cuisine = document.getElementById('cuisinePreference').value;
-            const ambitious = document.getElementById('ambitiousDinner').value === 'yes';
-
             loadWeeklyRecipes().then(feed => {
-                const items = (feed.items || []).filter(item => item.title && item.url);
-                if (items.length === 0) {
-                    showNotification('No RSS recipes yet. Try again later.', 'error');
-                    return;
+                if (!feed) return;
+                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : '';
+
+                // Render Claude-generated meal plan
+                if (feed.meals && feed.meals.length > 0) {
+                    renderWeeklyMealPlan(feed.meals, updatedLabel);
+                } else {
+                    renderWeeklyMealPlan([], updatedLabel);
                 }
 
-                const filtered = filterRecipesByCuisine(items, cuisine);
-                const meals = buildMealPlanFromFeed(filtered, lunchCount, dinnerCount, ambitious);
-
-                appData.weeklyMeals = meals;
-                saveData();
-                triggerMealPlanRefresh();
-
-                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated recently';
-                renderWeeklyMealPlan(meals, updatedLabel, false);
+                // Render RSS recipes in supplementary section
+                renderRSSRecipes(feed.items || []);
             });
         }
 
-        function renderWeeklyMealPlan(meals, updatedLabel = '', showGrocery = true) {
+        function renderRSSRecipes(items) {
+            const container = document.getElementById('rssRecipeList');
+            if (!container) return;
+
+            const filtered = items.filter(item => item.title && item.url).slice(0, 6);
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary);">No new recipes this week</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => `
+                <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                    <a href="${item.url}" target="_blank" style="color: var(--forest); text-decoration: none;">
+                        ${item.title} &#128279;
+                    </a>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">${item.source || 'Recipe'}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderMealRow(mealType, meal) {
+            if (!meal) return '';
+            const searchUrl = createSearchUrl(`${meal.title} recipe`);
+            const metaParts = [];
+            if (meal.time) metaParts.push(meal.time);
+            if (meal.protein) metaParts.push(meal.protein + ' protein');
+            const metaText = metaParts.join(' | ');
+
+            return `
+                <div class="recipe-card" style="margin-bottom: 0.75rem;">
+                    <div class="recipe-card-header">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-weight: 600; color: var(--text-secondary); min-width: 70px;">${mealType}</span>
+                            <a href="${searchUrl}" target="_blank" style="color: var(--forest); text-decoration: none;">
+                                ${meal.title} &#128279;
+                            </a>
+                        </div>
+                        <div class="recipe-card-meta">${metaText}</div>
+                    </div>
+                    ${meal.description ? `<div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem; margin-left: 78px;">${meal.description}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderWeeklyMealPlan(meals, updatedLabel = '') {
             const container = document.getElementById('weeklyMealPlan');
 
-            if (meals.length === 0) {
+            if (!meals || meals.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-icon">&#127869;</div>
-                        <p>Configure your preferences and generate your weekly meal plan</p>
+                        <p>No meal plan available this week</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Check back Sunday after the weekly update</p>
                     </div>
                 `;
                 return;
             }
 
-            const updatedHtml = updatedLabel ? `<span class="auto-feed-badge">${updatedLabel}</span>` : '';
-            let html = meals.map(category => `
+            const updatedHtml = updatedLabel ? `<div style="margin-bottom: 0.75rem;"><span class="auto-feed-badge">${updatedLabel}</span></div>` : '';
+
+            const daysHtml = meals.map(day => `
                 <div class="card" style="margin-bottom: 1rem;">
                     <div class="card-header">
-                        <div class="card-title">${category.type}</div>
-                        <span style="font-size: 0.85rem; color: var(--text-secondary);">${category.description}</span>
+                        <div class="card-title">${day.day}</div>
                     </div>
                     <div class="card-body">
-                        ${category.items.map(item => {
-                            const itemUrl = item.url || createSearchUrl(`${item.title} recipe`);
-                            const itemLink = itemUrl ? `<a href="${itemUrl}" target="_blank" style="color: var(--forest); text-decoration: none;">${item.title} &#128279;</a>` : item.title;
-                            const metaParts = [];
-                            if (item.time) metaParts.push(item.time);
-                            if (item.protein) metaParts.push(`${item.protein} protein`);
-                            if (item.source) metaParts.push(item.source);
-                            const metaText = metaParts.length > 0 ? metaParts.join(' | ') : 'From your weekly feed';
-                            return `
-                                <div class="recipe-card">
-                                    <div class="recipe-card-header">
-                                        <div class="recipe-card-title">
-                                            ${itemLink}
-                                        </div>
-                                        <div class="recipe-card-meta">${metaText}</div>
-                                    </div>
-                                    <div class="recipe-card-body">
-                                        ${(item.tags || []).map(t => `<span class="recipe-tag">${t}</span>`).join('')}
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
+                        ${renderMealRow('Breakfast', day.breakfast)}
+                        ${renderMealRow('Lunch', day.lunch)}
+                        ${renderMealRow('Dinner', day.dinner)}
                     </div>
                 </div>
             `).join('');
 
-            container.innerHTML = `
-                ${updatedHtml ? `<div style="margin-bottom: 0.75rem;">${updatedHtml}</div>` : ''}
-                ${html}
-            `;
-        }
-
-        function renderAutoWeeklyMeals() {
-            loadWeeklyRecipes().then(feed => {
-                if (!feed) return;
-                const items = (feed.items || []).filter(item => item.title && item.url);
-                if (items.length === 0 && (!feed.meals || feed.meals.length === 0)) return;
-
-                const lunchCount = parseInt(document.getElementById('lunchPrepCount').value);
-                const dinnerCount = parseInt(document.getElementById('weeknightDinners').value);
-                const cuisine = document.getElementById('cuisinePreference').value;
-                const ambitious = document.getElementById('ambitiousDinner').value === 'yes';
-
-                const updatedLabel = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated recently';
-
-                if (items.length > 0) {
-                    const filtered = filterRecipesByCuisine(items, cuisine);
-                    const meals = buildMealPlanFromFeed(filtered, lunchCount, dinnerCount, ambitious);
-                    renderWeeklyMealPlan(meals, updatedLabel, false);
-                } else {
-                    renderWeeklyMealPlan(feed.meals, updatedLabel, false);
-                }
-            });
+            container.innerHTML = updatedHtml + daysHtml;
         }
 
         // ==================== YEARLY TRACKER ====================
