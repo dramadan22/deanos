@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import json
+import os
+import random
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import ssl
@@ -50,6 +53,24 @@ LONGEVITY_FEEDS = [
         "name": "Peter Attia",
         "url": "https://peterattiamd.com/feed/",
         "type": "rss",
+    },
+]
+
+YOUTUBE_QUERIES = [
+    {
+        "query": "seated strength workouts",
+        "type": "Strength",
+        "location": "YouTube",
+    },
+    {
+        "query": "machine workouts at gym for longevity",
+        "type": "Strength",
+        "location": "YouTube",
+    },
+    {
+        "query": "POTS friendly seated workout",
+        "type": "Cardio + Mobility",
+        "location": "YouTube",
     },
 ]
 
@@ -206,6 +227,95 @@ def dedupe_items(items):
     return deduped
 
 
+def fetch_youtube_videos(query, max_results=8):
+    api_key = os.getenv("YOUTUBE_API_KEY")
+    if not api_key:
+        print("Missing YOUTUBE_API_KEY, skipping YouTube fetch.", file=sys.stderr)
+        return []
+
+    params = urllib.parse.urlencode(
+        {
+            "part": "snippet",
+            "type": "video",
+            "maxResults": max_results,
+            "q": query,
+            "key": api_key,
+        }
+    )
+    url = f"https://www.googleapis.com/youtube/v3/search?{params}"
+    data = json.loads(fetch_url(url))
+    videos = []
+    for item in data.get("items", []):
+        video_id = item.get("id", {}).get("videoId")
+        snippet = item.get("snippet", {})
+        title = snippet.get("title", "").strip()
+        published = snippet.get("publishedAt")
+        if not video_id or not title:
+            continue
+        videos.append(
+            {
+                "title": title,
+                "url": f"https://www.youtube.com/watch?v={video_id}",
+                "source": "YouTube",
+                "published": published,
+            }
+        )
+    return videos
+
+
+def build_weekly_workouts():
+    videos_by_type = {"Strength": [], "Cardio + Mobility": []}
+    for item in YOUTUBE_QUERIES:
+        videos = fetch_youtube_videos(item["query"])
+        if not videos:
+            continue
+        videos_by_type[item["type"]].extend(videos)
+
+    workouts = []
+    random.shuffle(videos_by_type["Strength"])
+    random.shuffle(videos_by_type["Cardio + Mobility"])
+
+    def pick_videos(pool, count):
+        if not pool:
+            return []
+        selection = pool[:count]
+        del pool[:count]
+        return selection
+
+    def make_workout(day, workout_type, pool, count):
+        selected = pick_videos(pool, count)
+        if not selected:
+            return None
+        return {
+            "day": day,
+            "type": workout_type,
+            "location": "YouTube",
+            "exercises": [
+                {"name": v["title"], "sets": "Follow along", "video": v["url"]}
+                for v in selected
+            ],
+        }
+
+    strength_pool = videos_by_type["Strength"]
+    cardio_pool = videos_by_type["Cardio + Mobility"]
+
+    workout_plan = [
+        make_workout("Monday", "Strength", strength_pool, 2),
+        make_workout("Wednesday", "Strength", strength_pool, 2),
+        make_workout("Friday", "Strength", strength_pool, 2),
+        make_workout("Saturday", "Cardio + Mobility", cardio_pool, 2),
+    ]
+
+    return [w for w in workout_plan if w]
+
+
+def is_recipe_item(item):
+    title = (item.get("title") or "").lower()
+    url = (item.get("url") or "").lower()
+    keywords = ["recipe", "recipes", "meal", "dinner", "lunch", "breakfast"]
+    return any(word in title or f"/{word}" in url for word in keywords)
+
+
 def fetch_feed_items(feeds):
     all_items = []
     for feed in feeds:
@@ -228,8 +338,9 @@ def fetch_feed_items(feeds):
 
 
 def main():
-    recipe_items = fetch_feed_items(RECIPE_FEEDS)
+    recipe_items = [item for item in fetch_feed_items(RECIPE_FEEDS) if is_recipe_item(item)]
     longevity_items = fetch_feed_items(LONGEVITY_FEEDS)
+    workout_items = build_weekly_workouts()
 
     weekly_recipes = {
         "updated": datetime.now(timezone.utc).isoformat(),
@@ -239,7 +350,7 @@ def main():
 
     weekly_workouts = {
         "updated": datetime.now(timezone.utc).isoformat(),
-        "workouts": WORKOUT_TEMPLATE,
+        "workouts": workout_items or WORKOUT_TEMPLATE,
         "sources": longevity_items[:5],
     }
 
