@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-11T21:00:06.031676+00:00",
+  "updated": "2026-01-11T21:07:06.612732+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -12,15 +12,15 @@
         },
         {
           "name": "Cable Seated Row",
-          "sets": "4x8-10"
+          "sets": "3x10-12"
         },
         {
           "name": "Shoulder Press Machine",
           "sets": "3x10-12"
         },
         {
-          "name": "Cable Lat Pulldown",
-          "sets": "3x10-12"
+          "name": "Cable Lateral Raises",
+          "sets": "3x12-15"
         },
         {
           "name": "Cable Tricep Pushdowns",
@@ -38,19 +38,19 @@
           "sets": "4x8-10"
         },
         {
-          "name": "Leg Curl Machine (Hamstring)",
+          "name": "Seated Leg Curls",
           "sets": "3x10-12"
         },
         {
           "name": "Leg Extension Machine",
-          "sets": "3x10-12"
-        },
-        {
-          "name": "Cable Hip Abduction",
           "sets": "3x12-15"
         },
         {
-          "name": "Calf Press on Leg Press",
+          "name": "Cable Romanian Deadlifts",
+          "sets": "3x10-12"
+        },
+        {
+          "name": "Seated Calf Raise Machine",
           "sets": "3x15-20"
         }
       ]
@@ -76,16 +76,12 @@
           "sets": "25 minutes moderate intensity"
         },
         {
-          "name": "Upper Body Stretching Routine",
-          "sets": "10 minutes"
-        },
-        {
-          "name": "Lower Body Stretching Routine",
-          "sets": "10 minutes"
+          "name": "Full Body Stretching Routine",
+          "sets": "15 minutes"
         },
         {
           "name": "Foam Rolling",
-          "sets": "5 minutes"
+          "sets": "10 minutes"
         }
       ]
     }

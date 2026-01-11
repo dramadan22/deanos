@@ -1,23 +1,23 @@
 {
-  "updated": "2026-01-11T21:00:06.031655+00:00",
+  "updated": "2026-01-11T21:07:06.612714+00:00",
   "meals": [
     {
       "day": "Monday",
       "breakfast": {
         "title": "Greek Yogurt Protein Bowl",
-        "description": "Greek yogurt topped with granola, berries, and a scoop of protein powder for a quick morning boost.",
+        "description": "Greek yogurt topped with granola, berries, and a scoop of protein powder.",
         "time": "5 min",
         "protein": "35g"
       },
       "lunch": {
-        "title": "Chicken Caesar Wrap",
-        "description": "Grilled chicken breast with romaine lettuce, parmesan cheese, and caesar dressing in a whole wheat tortilla.",
+        "title": "Grilled Chicken Caesar Wrap",
+        "description": "Grilled chicken breast with romaine lettuce, parmesan, and caesar dressing in a whole wheat tortilla.",
         "time": "15 min",
         "protein": "32g"
       },
       "dinner": {
         "title": "Pan-Seared Salmon with Quinoa",
-        "description": "Quick-seared salmon fillet served over cooked quinoa with steamed broccoli and lemon.",
+        "description": "Seasoned salmon fillet served over quinoa with steamed broccoli.",
         "time": "25 min",
         "protein": "38g"
       }
@@ -26,84 +26,84 @@
       "day": "Tuesday",
       "breakfast": {
         "title": "Three-Egg Veggie Scramble",
-        "description": "Scrambled eggs with spinach, bell peppers, and cheddar cheese served with whole grain toast.",
+        "description": "Scrambled eggs with spinach, bell peppers, and cheese served with whole grain toast.",
         "time": "10 min",
         "protein": "28g"
       },
       "lunch": {
-        "title": "Tuna and White Bean Salad",
-        "description": "Canned tuna mixed with cannellini beans, cherry tomatoes, red onion, and olive oil dressing.",
-        "time": "8 min",
-        "protein": "30g"
+        "title": "Turkey and Black Bean Bowl",
+        "description": "Ground turkey cooked with black beans, brown rice, and topped with avocado.",
+        "time": "20 min",
+        "protein": "34g"
       },
       "dinner": {
-        "title": "Ground Beef Stir-Fry",
-        "description": "Lean ground beef stir-fried with mixed vegetables and served over brown rice with soy sauce.",
-        "time": "20 min",
-        "protein": "35g"
+        "title": "Beef Stir-Fry with Vegetables",
+        "description": "Lean beef strips stir-fried with mixed vegetables and served over brown rice.",
+        "time": "25 min",
+        "protein": "36g"
       }
     },
     {
       "day": "Wednesday",
       "breakfast": {
         "title": "Protein Pancakes",
-        "description": "Quick pancakes made with protein powder, eggs, and oats, topped with Greek yogurt and berries.",
-        "time": "12 min",
-        "protein": "32g"
+        "description": "High-protein pancakes made with protein powder, eggs, and oats, topped with Greek yogurt.",
+        "time": "15 min",
+        "protein": "30g"
       },
       "lunch": {
-        "title": "Turkey and Hummus Wrap",
-        "description": "Sliced turkey breast with hummus, cucumber, and lettuce wrapped in a large whole wheat tortilla.",
-        "time": "5 min",
-        "protein": "28g"
+        "title": "Tuna Chickpea Salad",
+        "description": "Canned tuna mixed with chickpeas, mixed greens, and olive oil dressing.",
+        "time": "10 min",
+        "protein": "29g"
       },
       "dinner": {
-        "title": "Baked Cod with Sweet Potato",
-        "description": "Herb-crusted baked cod fillet with roasted sweet potato wedges and green beans.",
-        "time": "25 min",
-        "protein": "36g"
+        "title": "Baked Chicken Thighs with Sweet Potato",
+        "description": "Seasoned chicken thighs baked with roasted sweet potato wedges and green beans.",
+        "time": "30 min",
+        "protein": "35g"
       }
     },
     {
       "day": "Thursday",
       "breakfast": {
         "title": "Cottage Cheese Power Bowl",
-        "description": "Cottage cheese mixed with chopped nuts, sliced banana, and a drizzle of honey for natural sweetness.",
+        "description": "Cottage cheese topped with nuts, seeds, and fresh fruit for a protein-packed start.",
         "time": "5 min",
-        "protein": "26g"
+        "protein": "27g"
       },
       "lunch": {
-        "title": "Chicken and Black Bean Bowl",
-        "description": "Seasoned grilled chicken over black beans and rice with salsa, avocado, and shredded cheese.",
-        "time": "18 min",
-        "protein": "34g"
+        "title": "Lentil and Chicken Soup",
+        "description": "Quick lentil soup with shredded chicken, vegetables, and whole grain bread.",
+        "time": "25 min",
+        "protein": "31g"
       },
       "dinner": {
-        "title": "Pork Tenderloin with Vegetables",
-        "description": "Sliced pork tenderloin pan-seared and served with roasted Brussels sprouts and quinoa pilaf.",
-        "time": "28 min",
-        "protein": "40g"
+        "title": "Shrimp and Quinoa Skillet",
+        "description": "Pan-cooked shrimp with quinoa, zucchini, and cherry tomatoes in garlic sauce.",
+        "time": "20 min",
+        "protein": "33g"
       }
     },
     {
       "day": "Friday",
       "breakfast": {
-        "title": "Protein Smoothie Bowl",
-        "description": "Blended protein smoothie with banana, spinach, and protein powder topped with granola and chia seeds.",
-        "time": "8 min",
-        "protein": "31g"
+        "title": "Breakfast Burrito",
+        "description": "Scrambled eggs with black beans, cheese, and salsa wrapped in a whole wheat tortilla.",
+        "time": "12 min",
+        "protein": "26g"
       },
       "lunch": {
-        "title": "Lentil and Chicken Soup",
-        "description": "Quick-cooking red lentils simmered with diced chicken breast, carrots, and celery in chicken broth.",
-        "time": "22 min",
-        "protein": "29g"
+        "title": "Chicken and White Bean Salad",
+        "description": "Grilled chicken over white beans with spinach, cucumber, and balsamic dressing.",
+        "time": "15 min",
+        "protein": "37g"
       },
       "dinner": {
-        "title": "Shrimp and Pasta",
-        "description": "Large shrimp saut\u00e9ed with garlic and served over whole wheat pasta with parmesan cheese and spinach.",
-        "time": "18 min",
-        "protein": "37g"
+        "title": "Pork Tenderloin with Roasted Vegetables",
+        "description": "Lean pork tenderloin with roasted Brussels sprouts and carrots, served with wild rice.",
+        "time": "28 min",
+        "protein": "40g"
       }
     }
   ],
