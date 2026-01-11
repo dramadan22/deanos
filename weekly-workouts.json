@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-10T23:26:52.104858+00:00",
+  "updated": "2026-01-11T21:00:06.031676+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -7,29 +7,24 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Seated Chest Press Machine",
-          "sets": "3x10-12",
-          "video": "https://www.youtube.com/watch?v=xUm0BiZCWlQ"
+          "name": "Chest Press Machine",
+          "sets": "4x8-10"
         },
         {
-          "name": "Lat Pulldown",
-          "sets": "3x10-12",
-          "video": "https://www.youtube.com/watch?v=CAwf7n6Luuc"
+          "name": "Cable Seated Row",
+          "sets": "4x8-10"
         },
         {
-          "name": "Seated Shoulder Press Machine",
-          "sets": "3x10-12",
-          "video": "https://www.youtube.com/watch?v=Wqq43dKW1TU"
+          "name": "Shoulder Press Machine",
+          "sets": "3x10-12"
         },
         {
-          "name": "Seated Cable Row",
-          "sets": "3x10-12",
-          "video": "https://www.youtube.com/watch?v=GZbfZ033f74"
+          "name": "Cable Lat Pulldown",
+          "sets": "3x10-12"
         },
         {
-          "name": "Tricep Pushdown",
-          "sets": "3x12-15",
-          "video": "https://www.youtube.com/watch?v=2-LAMcpzODU"
+          "name": "Cable Tricep Pushdowns",
+          "sets": "3x12-15"
         }
       ]
     },
@@ -39,36 +34,31 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Leg Press",
-          "sets": "4x10-12",
-          "video": "https://www.youtube.com/watch?v=IZxyjW7MPJQ"
+          "name": "Leg Press Machine",
+          "sets": "4x8-10"
         },
         {
-          "name": "Leg Curl Machine",
-          "sets": "3x12-15",
-          "video": "https://www.youtube.com/watch?v=1Tq3QdYUuHs"
+          "name": "Leg Curl Machine (Hamstring)",
+          "sets": "3x10-12"
         },
         {
-          "name": "Leg Extension",
-          "sets": "3x12-15",
-          "video": "https://www.youtube.com/watch?v=YyvSfVjQeL0"
+          "name": "Leg Extension Machine",
+          "sets": "3x10-12"
         },
         {
-          "name": "Seated Calf Raise",
-          "sets": "3x15-20",
-          "video": "https://www.youtube.com/watch?v=-M4-G8p8fmc"
+          "name": "Cable Hip Abduction",
+          "sets": "3x12-15"
         },
         {
-          "name": "Hip Adductor Machine",
-          "sets": "3x12-15",
-          "video": "https://www.youtube.com/watch?v=2cPwLG3MOLs"
+          "name": "Calf Press on Leg Press",
+          "sets": "3x15-20"
         }
       ]
     },
     {
       "day": "Friday",
       "type": "PT Session with Josh",
-      "location": "Full Body",
+      "location": "LA Fitness",
       "exercises": [
         {
           "name": "Personal Training Session",
@@ -82,13 +72,20 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Upright Bike",
-          "sets": "30 min, 90+ RPM, Level 12",
-          "video": "https://www.youtube.com/watch?v=oBFhn-2BrEw"
+          "name": "Elliptical Machine",
+          "sets": "25 minutes moderate intensity"
         },
         {
-          "name": "Seated Stretch Flow",
-          "sets": "10-12 min, easy pace"
+          "name": "Upper Body Stretching Routine",
+          "sets": "10 minutes"
+        },
+        {
+          "name": "Lower Body Stretching Routine",
+          "sets": "10 minutes"
+        },
+        {
+          "name": "Foam Rolling",
+          "sets": "5 minutes"
         }
       ]
     }
