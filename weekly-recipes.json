@@ -1,109 +1,214 @@
 {
-  "updated": "2026-01-11T21:07:06.612714+00:00",
+  "updated": "2026-01-11T21:12:48.218780+00:00",
   "meals": [
     {
       "day": "Monday",
       "breakfast": {
         "title": "Greek Yogurt Protein Bowl",
-        "description": "Greek yogurt topped with granola, berries, and a scoop of protein powder.",
+        "description": "High-protein Greek yogurt topped with granola, berries, and nuts for a quick energizing start.",
         "time": "5 min",
-        "protein": "35g"
+        "protein": "30g",
+        "instructions": [
+          "Scoop 1 cup Greek yogurt (24g protein) into bowl",
+          "Add 2 tbsp chopped almonds (4g protein)",
+          "Top with 1/2 cup mixed berries and 1/4 cup granola",
+          "Drizzle with honey if desired",
+          "Mix and enjoy immediately"
+        ]
       },
       "lunch": {
         "title": "Grilled Chicken Caesar Wrap",
-        "description": "Grilled chicken breast with romaine lettuce, parmesan, and caesar dressing in a whole wheat tortilla.",
+        "description": "Seasoned grilled chicken breast wrapped with romaine lettuce and parmesan in a whole wheat tortilla.",
         "time": "15 min",
-        "protein": "32g"
+        "protein": "35g",
+        "instructions": [
+          "Season and grill 5oz chicken breast for 6-7 minutes per side",
+          "Warm large whole wheat tortilla in microwave for 20 seconds",
+          "Spread 2 tbsp Caesar dressing on tortilla",
+          "Add sliced chicken, chopped romaine, and 2 tbsp parmesan cheese",
+          "Roll tightly and slice in half"
+        ]
       },
       "dinner": {
-        "title": "Pan-Seared Salmon with Quinoa",
-        "description": "Seasoned salmon fillet served over quinoa with steamed broccoli.",
-        "time": "25 min",
-        "protein": "38g"
+        "title": "Beef Stir-Fry with Broccoli",
+        "description": "Tender beef strips stir-fried with fresh broccoli and served over brown rice.",
+        "time": "20 min",
+        "protein": "32g",
+        "instructions": [
+          "Heat 1 tbsp oil in large pan over high heat",
+          "Add 5oz sliced beef sirloin, cook 3-4 minutes until browned",
+          "Add 2 cups broccoli florets, stir-fry 3 minutes",
+          "Add soy sauce, garlic powder, and ginger to taste",
+          "Serve over 1/2 cup cooked brown rice"
+        ]
       }
     },
     {
       "day": "Tuesday",
       "breakfast": {
-        "title": "Three-Egg Veggie Scramble",
-        "description": "Scrambled eggs with spinach, bell peppers, and cheese served with whole grain toast.",
+        "title": "Scrambled Eggs with Cottage Cheese Toast",
+        "description": "Fluffy scrambled eggs paired with protein-rich cottage cheese on whole grain toast.",
         "time": "10 min",
-        "protein": "28g"
+        "protein": "28g",
+        "instructions": [
+          "Scramble 2 whole eggs + 1 egg white in non-stick pan with butter",
+          "Toast 2 slices whole grain bread",
+          "Spread 1/2 cup cottage cheese on toast",
+          "Serve eggs alongside cottage cheese toast",
+          "Season eggs with salt, pepper, and chives"
+        ]
       },
       "lunch": {
-        "title": "Turkey and Black Bean Bowl",
-        "description": "Ground turkey cooked with black beans, brown rice, and topped with avocado.",
-        "time": "20 min",
-        "protein": "34g"
+        "title": "Tuna Salad Stuffed Avocados",
+        "description": "Fresh tuna salad made with Greek yogurt served in halved avocados with mixed greens.",
+        "time": "10 min",
+        "protein": "30g",
+        "instructions": [
+          "Mix 1 can tuna with 3 tbsp Greek yogurt and diced celery",
+          "Cut 1 large avocado in half and remove pit",
+          "Scoop tuna mixture into avocado halves",
+          "Serve on bed of mixed greens with cherry tomatoes",
+          "Season with lemon juice, salt, and pepper"
+        ]
       },
       "dinner": {
-        "title": "Beef Stir-Fry with Vegetables",
-        "description": "Lean beef strips stir-fried with mixed vegetables and served over brown rice.",
+        "title": "Baked Salmon with Quinoa",
+        "description": "Herb-seasoned baked salmon fillet served with fluffy quinoa and steamed asparagus.",
         "time": "25 min",
-        "protein": "36g"
+        "protein": "36g",
+        "instructions": [
+          "Preheat oven to 400\u00b0F and season 6oz salmon fillet",
+          "Bake salmon for 12-15 minutes until flaky",
+          "Cook 1/2 cup quinoa according to package directions",
+          "Steam asparagus spears for 5 minutes",
+          "Serve salmon over quinoa with asparagus on the side"
+        ]
       }
     },
     {
       "day": "Wednesday",
       "breakfast": {
         "title": "Protein Pancakes",
-        "description": "High-protein pancakes made with protein powder, eggs, and oats, topped with Greek yogurt.",
-        "time": "15 min",
-        "protein": "30g"
+        "description": "Quick blender pancakes made with protein powder, oats, and banana for a filling breakfast.",
+        "time": "12 min",
+        "protein": "32g",
+        "instructions": [
+          "Blend 1 scoop protein powder, 1/2 cup oats, 1 banana, 1 egg, and splash of milk",
+          "Heat non-stick pan over medium heat",
+          "Pour batter to make 3 pancakes, cook 2-3 minutes per side",
+          "Stack pancakes and top with berries",
+          "Serve with sugar-free syrup if desired"
+        ]
       },
       "lunch": {
-        "title": "Tuna Chickpea Salad",
-        "description": "Canned tuna mixed with chickpeas, mixed greens, and olive oil dressing.",
-        "time": "10 min",
-        "protein": "29g"
+        "title": "Black Bean and Chicken Quesadilla",
+        "description": "Melted cheese and seasoned chicken with black beans grilled between whole wheat tortillas.",
+        "time": "15 min",
+        "protein": "38g",
+        "instructions": [
+          "Mix 3oz cooked chicken with 1/3 cup black beans and seasonings",
+          "Place mixture and 1/4 cup cheese between 2 tortillas",
+          "Cook in pan 3-4 minutes per side until golden and cheese melts",
+          "Cut into wedges and serve with salsa",
+          "Add side of Greek yogurt for extra protein"
+        ]
       },
       "dinner": {
-        "title": "Baked Chicken Thighs with Sweet Potato",
-        "description": "Seasoned chicken thighs baked with roasted sweet potato wedges and green beans.",
-        "time": "30 min",
-        "protein": "35g"
+        "title": "Turkey Meatballs with Zucchini Noodles",
+        "description": "Lean turkey meatballs in marinara sauce served over spiralized zucchini noodles.",
+        "time": "25 min",
+        "protein": "34g",
+        "instructions": [
+          "Mix 5oz ground turkey with egg, breadcrumbs, and Italian seasonings",
+          "Form into 8 meatballs and bake at 375\u00b0F for 18 minutes",
+          "Spiralize 2 medium zucchini into noodles",
+          "Saut\u00e9 zucchini noodles for 2-3 minutes",
+          "Serve meatballs over noodles with marinara sauce"
+        ]
       }
     },
     {
       "day": "Thursday",
       "breakfast": {
-        "title": "Cottage Cheese Power Bowl",
-        "description": "Cottage cheese topped with nuts, seeds, and fresh fruit for a protein-packed start.",
-        "time": "5 min",
-        "protein": "27g"
+        "title": "Breakfast Burrito Bowl",
+        "description": "Scrambled eggs with black beans, cheese, and avocado served over a bed of spinach.",
+        "time": "12 min",
+        "protein": "29g",
+        "instructions": [
+          "Scramble 2 eggs with 1 tbsp milk in non-stick pan",
+          "Heat 1/3 cup black beans in microwave",
+          "Place handful of spinach in bowl",
+          "Top with scrambled eggs, beans, and 1/4 cup shredded cheese",
+          "Add diced avocado and salsa to taste"
+        ]
       },
       "lunch": {
-        "title": "Lentil and Chicken Soup",
-        "description": "Quick lentil soup with shredded chicken, vegetables, and whole grain bread.",
-        "time": "25 min",
-        "protein": "31g"
+        "title": "Chicken and Hummus Power Bowl",
+        "description": "Grilled chicken breast served with hummus, quinoa, and fresh vegetables in a nourishing bowl.",
+        "time": "18 min",
+        "protein": "40g",
+        "instructions": [
+          "Grill 5oz chicken breast seasoned with herbs for 12-14 minutes",
+          "Cook 1/3 cup quinoa according to package directions",
+          "Arrange quinoa in bowl with 3 tbsp hummus",
+          "Slice chicken and add to bowl with cucumber and tomatoes",
+          "Drizzle with olive oil and lemon juice"
+        ]
       },
       "dinner": {
-        "title": "Shrimp and Quinoa Skillet",
-        "description": "Pan-cooked shrimp with quinoa, zucchini, and cherry tomatoes in garlic sauce.",
-        "time": "20 min",
-        "protein": "33g"
+        "title": "Pork Tenderloin with Sweet Potato",
+        "description": "Seasoned pork tenderloin with roasted sweet potato wedges and green beans.",
+        "time": "28 min",
+        "protein": "35g",
+        "instructions": [
+          "Preheat oven to 425\u00b0F and season 5oz pork tenderloin",
+          "Cut sweet potato into wedges and toss with oil",
+          "Roast pork and sweet potatoes for 20 minutes",
+          "Steam green beans for last 5 minutes of cooking",
+          "Let pork rest 3 minutes before slicing"
+        ]
       }
     },
     {
       "day": "Friday",
       "breakfast": {
-        "title": "Breakfast Burrito",
-        "description": "Scrambled eggs with black beans, cheese, and salsa wrapped in a whole wheat tortilla.",
-        "time": "12 min",
-        "protein": "26g"
+        "title": "Smoked Salmon Bagel",
+        "description": "Everything bagel topped with cream cheese, smoked salmon, capers, and red onion.",
+        "time": "8 min",
+        "protein": "26g",
+        "instructions": [
+          "Toast 1 everything bagel until golden brown",
+          "Spread 2 tbsp cream cheese on both halves",
+          "Layer 3oz smoked salmon on bottom half",
+          "Top with thin red onion slices and capers",
+          "Close sandwich and serve immediately"
+        ]
       },
       "lunch": {
-        "title": "Chicken and White Bean Salad",
-        "description": "Grilled chicken over white beans with spinach, cucumber, and balsamic dressing.",
-        "time": "15 min",
-        "protein": "37g"
+        "title": "Lentil and Turkey Soup",
+        "description": "Hearty soup with ground turkey, red lentils, and vegetables in a savory broth.",
+        "time": "25 min",
+        "protein": "33g",
+        "instructions": [
+          "Brown 4oz ground turkey in large pot with diced onion",
+          "Add 1/2 cup red lentils, 2 cups broth, and diced carrots",
+          "Simmer 15 minutes until lentils are tender",
+          "Season with herbs, salt, and pepper",
+          "Serve hot with crusty bread if desired"
+        ]
       },
       "dinner": {
-        "title": "Pork Tenderloin with Roasted Vegetables",
-        "description": "Lean pork tenderloin with roasted Brussels sprouts and carrots, served with wild rice.",
-        "time": "28 min",
-        "protein": "40g"
+        "title": "Shrimp Scampi with Whole Wheat Pasta",
+        "description": "Garlic butter shrimp served over whole wheat linguine with parmesan cheese and parsley.",
+        "time": "20 min",
+        "protein": "38g",
+        "instructions": [
+          "Cook 2oz whole wheat pasta according to package directions",
+          "Saut\u00e9 6oz shrimp with garlic and butter for 3-4 minutes",
+          "Add white wine and lemon juice to pan",
+          "Toss cooked pasta with shrimp and sauce",
+          "Garnish with parmesan cheese and fresh parsley"
+        ]
       }
     }
   ],

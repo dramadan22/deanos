@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-11T21:07:06.612732+00:00",
+  "updated": "2026-01-11T21:12:48.218799+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -8,23 +8,48 @@
       "exercises": [
         {
           "name": "Chest Press Machine",
-          "sets": "4x8-10"
+          "sets": "3x10-12",
+          "instructions": [
+            "Setup: Adjust seat height so handles align with mid-chest level",
+            "Execution: Push handles forward in controlled motion, squeeze chest at top",
+            "Form cue: Keep shoulder blades pressed against pad, avoid locking elbows"
+          ]
         },
         {
-          "name": "Cable Seated Row",
-          "sets": "3x10-12"
-        },
-        {
-          "name": "Shoulder Press Machine",
-          "sets": "3x10-12"
+          "name": "Cable Lat Pulldown",
+          "sets": "3x10-12",
+          "instructions": [
+            "Setup: Adjust thigh pad and select wide grip bar at comfortable width",
+            "Execution: Pull bar down to upper chest, squeeze shoulder blades together",
+            "Form cue: Lean back slightly, avoid using momentum or swinging"
+          ]
         },
         {
           "name": "Cable Lateral Raises",
-          "sets": "3x12-15"
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Set cables to lowest position, grab handles with arms at sides",
+            "Execution: Raise arms out to sides until parallel with floor",
+            "Form cue: Keep slight bend in elbows, lead with pinkies, control the negative"
+          ]
+        },
+        {
+          "name": "Seated Cable Row",
+          "sets": "3x10-12",
+          "instructions": [
+            "Setup: Sit with chest up, grab handle with both hands, slight bend in knees",
+            "Execution: Pull handle to lower chest, squeeze shoulder blades together",
+            "Form cue: Keep torso upright, avoid using lower back to pull"
+          ]
         },
         {
           "name": "Cable Tricep Pushdowns",
-          "sets": "3x12-15"
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Stand facing cable machine with straight bar attached high",
+            "Execution: Push bar down until arms are straight, squeeze triceps",
+            "Form cue: Keep elbows tucked at sides, only forearms should move"
+          ]
         }
       ]
     },
@@ -35,23 +60,48 @@
       "exercises": [
         {
           "name": "Leg Press Machine",
-          "sets": "4x8-10"
+          "sets": "4x8-10",
+          "instructions": [
+            "Setup: Sit in machine with feet shoulder-width apart on platform",
+            "Execution: Lower weight until knees reach 90 degrees, press through heels",
+            "Form cue: Keep knees aligned with toes, maintain contact with back pad"
+          ]
         },
         {
-          "name": "Seated Leg Curls",
-          "sets": "3x10-12"
+          "name": "Seated Leg Curl",
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Adjust back pad and leg pad to fit comfortably behind calves",
+            "Execution: Curl heels toward glutes, squeeze hamstrings at top",
+            "Form cue: Keep hips pressed into seat, control the weight on return"
+          ]
         },
         {
           "name": "Leg Extension Machine",
-          "sets": "3x12-15"
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Adjust back pad and position leg pad above ankles",
+            "Execution: Extend legs until straight, squeeze quadriceps at top",
+            "Form cue: Keep back against pad, avoid locking knees aggressively"
+          ]
         },
         {
-          "name": "Cable Romanian Deadlifts",
-          "sets": "3x10-12"
+          "name": "Standing Calf Raise Machine",
+          "sets": "3x15-20",
+          "instructions": [
+            "Setup: Position shoulders under pads, balls of feet on platform",
+            "Execution: Rise up on toes as high as possible, squeeze calves",
+            "Form cue: Keep legs straight, get full range of motion, pause at top"
+          ]
         },
         {
-          "name": "Seated Calf Raise Machine",
-          "sets": "3x15-20"
+          "name": "Cable Glute Kickbacks",
+          "sets": "3x12-15 each leg",
+          "instructions": [
+            "Setup: Attach ankle strap to low cable, face machine holding handles",
+            "Execution: Kick leg straight back, squeeze glute at top position",
+            "Form cue: Keep hips square, avoid arching lower back, control the return"
+          ]
         }
       ]
     },
@@ -72,16 +122,39 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Elliptical Machine",
-          "sets": "25 minutes moderate intensity"
+          "name": "Recumbent Bike",
+          "sets": "25 minutes moderate intensity",
+          "instructions": [
+            "Setup: Adjust seat so legs have slight bend at full extension",
+            "Execution: Maintain steady pace at 65-75% perceived effort with 2-minute intervals at higher intensity every 5 minutes"
+          ]
         },
         {
-          "name": "Full Body Stretching Routine",
-          "sets": "15 minutes"
+          "name": "Dynamic Warm-up Stretches",
+          "sets": "10 minutes",
+          "instructions": [
+            "Step 1: Arm circles forward and backward 10 each direction",
+            "Step 2: Leg swings front to back and side to side 10 each leg",
+            "Step 3: Hip circles and ankle rolls 10 each direction"
+          ]
+        },
+        {
+          "name": "Static Stretching Routine",
+          "sets": "15 minutes",
+          "instructions": [
+            "Step 1: Hold each stretch for 30-45 seconds without bouncing",
+            "Step 2: Focus on chest, shoulders, hip flexors, hamstrings, and calves",
+            "Step 3: Include spinal twists and cat-cow stretches for back mobility"
+          ]
         },
         {
           "name": "Foam Rolling",
-          "sets": "10 minutes"
+          "sets": "10 minutes",
+          "instructions": [
+            "Step 1: Roll each muscle group slowly for 60-90 seconds",
+            "Step 2: Focus on IT bands, quads, hamstrings, and upper back",
+            "Step 3: Apply moderate pressure and pause on tender spots"
+          ]
         }
       ]
     }
