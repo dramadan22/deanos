@@ -1756,6 +1756,17 @@
                     </div>
                 </div>
 
+                <!-- Meal Log History -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128221; Meal Log History</div>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Your logged meals (stored locally)</span>
+                    </div>
+                    <div class="card-body" id="mealLogHistory">
+                        <p style="color: var(--text-secondary);">Loading meal history...</p>
+                    </div>
+                </div>
+
                 <div class="card" style="margin-top: 1.5rem;">
                     <div class="card-header">
                         <div class="card-title">&#128240; Fresh Recipe Inspiration</div>
@@ -2045,6 +2056,34 @@
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeNoteModal()">Cancel</button>
                 <button class="btn btn-primary" onclick="addNote()">Add Note </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Meal Modal -->
+    <div class="modal-overlay" id="editMealModal">
+        <div class="modal">
+            <h3 class="modal-title" id="editMealModalTitle">Edit Meals</h3>
+            <div class="form-group">
+                <label class="form-label">Breakfast</label>
+                <textarea class="input-field" id="editMealBreakfast" rows="2" placeholder="What did you eat?"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Lunch</label>
+                <textarea class="input-field" id="editMealLunch" rows="2" placeholder="What did you eat?"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Dinner</label>
+                <textarea class="input-field" id="editMealDinner" rows="2" placeholder="What did you eat?"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Snacks</label>
+                <textarea class="input-field" id="editMealSnacks" rows="2" placeholder="What did you snack on?"></textarea>
+            </div>
+            <input type="hidden" id="editMealDate">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeEditMealModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEditedMeal()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -2549,6 +2588,113 @@
 
             saveData();
             showNotification('Meals logged!', 'success');
+
+            // Auto-sync to gist if configured
+            const settings = getGitHubSettings();
+            if (settings.token) {
+                syncMealsToGist().then(result => {
+                    if (result.success) {
+                        showNotification('Synced to cloud', 'success');
+                    }
+                });
+            }
+        }
+
+        function renderMealLogHistory() {
+            const container = document.getElementById('mealLogHistory');
+            if (!container) return;
+
+            // Get all dates with meal logs, sorted newest first
+            const mealDates = Object.keys(appData.dailyLogs)
+                .filter(date => {
+                    const log = appData.dailyLogs[date];
+                    const meals = log.meals || {};
+                    return meals.breakfast || meals.lunch || meals.dinner || meals.snacks;
+                })
+                .sort((a, b) => b.localeCompare(a))
+                .slice(0, 14); // Show last 14 days
+
+            if (mealDates.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p style="color: var(--text-secondary);">No meals logged yet</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log yesterday's meals from the homepage to start tracking.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = mealDates.map(date => {
+                const log = appData.dailyLogs[date];
+                const meals = log.meals || {};
+                const dateObj = new Date(date + 'T00:00:00');
+                const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+                const dateDisplay = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                const mealItems = [];
+                if (meals.breakfast) mealItems.push(`<span style="color: var(--text-secondary);">B:</span> ${meals.breakfast}`);
+                if (meals.lunch) mealItems.push(`<span style="color: var(--text-secondary);">L:</span> ${meals.lunch}`);
+                if (meals.dinner) mealItems.push(`<span style="color: var(--text-secondary);">D:</span> ${meals.dinner}`);
+                if (meals.snacks) mealItems.push(`<span style="color: var(--text-secondary);">S:</span> ${meals.snacks}`);
+
+                return `
+                    <div style="padding: 0.75rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--forest); margin-bottom: 0.25rem;">${dayName}, ${dateDisplay}</div>
+                            <div style="font-size: 0.9rem; line-height: 1.5;">
+                                ${mealItems.join('<br>')}
+                            </div>
+                        </div>
+                        <button onclick="openEditMealModal('${date}')" style="background: none; border: none; cursor: pointer; padding: 0.25rem 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
+                            Edit
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openEditMealModal(dateStr) {
+            const log = appData.dailyLogs[dateStr];
+            const meals = log?.meals || {};
+
+            const dateObj = new Date(dateStr + 'T00:00:00');
+            const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+            document.getElementById('editMealModalTitle').textContent = `Edit Meals - ${dateDisplay}`;
+            document.getElementById('editMealBreakfast').value = meals.breakfast || '';
+            document.getElementById('editMealLunch').value = meals.lunch || '';
+            document.getElementById('editMealDinner').value = meals.dinner || '';
+            document.getElementById('editMealSnacks').value = meals.snacks || '';
+            document.getElementById('editMealDate').value = dateStr;
+
+            document.getElementById('editMealModal').classList.add('active');
+        }
+
+        function closeEditMealModal() {
+            document.getElementById('editMealModal').classList.remove('active');
+        }
+
+        function saveEditedMeal() {
+            const dateStr = document.getElementById('editMealDate').value;
+            const log = getLogByDate(dateStr);
+
+            log.meals = {
+                breakfast: document.getElementById('editMealBreakfast').value.trim(),
+                lunch: document.getElementById('editMealLunch').value.trim(),
+                dinner: document.getElementById('editMealDinner').value.trim(),
+                snacks: document.getElementById('editMealSnacks').value.trim()
+            };
+
+            saveData();
+            closeEditMealModal();
+            renderMealLogHistory();
+            showNotification('Meals updated!', 'success');
+
+            // Also update the homepage meal tracker if it's for yesterday
+            const yesterday = getYesterday();
+            if (dateStr === yesterday) {
+                renderMealTracker();
+            }
 
             // Auto-sync to gist if configured
             const settings = getGitHubSettings();
@@ -3364,6 +3510,9 @@
             loadNutritionReport().then(report => {
                 renderNutritionReport(report);
             });
+
+            // Render meal log history
+            renderMealLogHistory();
         }
 
         function renderRSSRecipes(items) {
