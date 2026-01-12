@@ -1,0 +1,45 @@
+name: Daily Oura Sync & Analysis
+
+on:
+  schedule:
+    - cron: "0 15 * * *"  # 7am PST (15:00 UTC) every day
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  sync-oura:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Sync Oura data
+        run: python scripts/sync_oura.py
+        env:
+          OURA_PAT: ${{ secrets.OURA_PAT }}
+
+      - name: Run Oura analysis
+        run: python scripts/analyze_oura.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add oura-data.json oura-analysis.json
+          git commit -m "Daily Oura sync and analysis"
+          git push

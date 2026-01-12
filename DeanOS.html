@@ -1316,6 +1316,16 @@
             border-bottom: none;
         }
 
+        /* Oura Data Rows */
+        .oura-day-row {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .oura-day-row:hover {
+            background: var(--bg-hover);
+        }
+
         /* Bad Behavior Buttons */
         .behavior-bad {
             background: var(--bg-card);
@@ -1560,6 +1570,9 @@
                 <button class="sidebar-btn" data-view="recipes">
                     <span class="sidebar-icon">&#127869;</span> Meal Plans
                 </button>
+                <button class="sidebar-btn" data-view="nutrition">
+                    <span class="sidebar-icon">&#129367;</span> Nutrition Log
+                </button>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-label">Reflect</div>
@@ -1707,6 +1720,19 @@
                         <div class="empty-state">No symptoms logged yet</div>
                     </div>
                 </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128141; Oura Ring Data</div>
+                        <button class="btn btn-secondary" onclick="syncOuraData()" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Sync</button>
+                    </div>
+                    <div class="card-body" id="ouraDataDisplay">
+                        <div class="empty-state">
+                            <p style="color: var(--text-secondary);">No Oura data synced</p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Add your Oura token in Settings to sync sleep and HRV data.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Tasks View -->
@@ -1834,16 +1860,6 @@
                     </div>
                 </div>
 
-                <div class="research-feed-card" style="margin-top: 1.5rem;">
-                    <div class="card-header" style="padding: 0 0 0.75rem;">
-                        <div class="card-title">Latest News Updates</div>
-                        <span style="font-size: 0.8rem; color: var(--text-secondary);" id="researchFeedUpdated">Loading...</span>
-                    </div>
-                    <div id="researchFeedList">
-                        <div class="empty-state"><p>Loading research feed...</p></div>
-                    </div>
-                </div>
-
                 <div id="notesList"></div>
             </div>
 
@@ -1898,8 +1914,38 @@
                     </div>
                 </div>
 
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128722; Shopping List</div>
+                        <button class="btn btn-primary" onclick="generateShoppingList()" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Generate</button>
+                    </div>
+                    <div class="card-body" id="shoppingListContent">
+                        <div class="empty-state">
+                            <p style="color: var(--text-secondary);">No shopping list generated yet</p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Click "Generate" to create a shopping list from this week's meal plan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128240; Fresh Recipe Inspiration</div>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">From your favorite food blogs</span>
+                    </div>
+                    <div class="card-body" id="rssRecipeList">
+                        <p style="color: var(--text-secondary);">Loading recipes...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition Log View -->
+            <div class="module-view" id="nutritionView">
+                <div class="view-header">
+                    <h2 class="view-title">&#129367; Nutrition Log</h2>
+                </div>
+
                 <!-- Weekly Nutrition Report -->
-                <div class="card" style="margin-top: 1.5rem;" id="nutritionReportCard">
+                <div class="card" id="nutritionReportCard">
                     <div class="card-header">
                         <div class="card-title">&#128202; Weekly Nutrition Analysis</div>
                         <span id="nutritionReportDate" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
@@ -1916,20 +1962,10 @@
                 <div class="card" style="margin-top: 1.5rem;">
                     <div class="card-header">
                         <div class="card-title">&#128221; Meal Log History</div>
-                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Your logged meals (stored locally)</span>
+                        <button class="btn btn-primary" onclick="openAddMealModal()" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">+ Add Meal Log</button>
                     </div>
                     <div class="card-body" id="mealLogHistory">
                         <p style="color: var(--text-secondary);">Loading meal history...</p>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1.5rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#128240; Fresh Recipe Inspiration</div>
-                        <span style="font-size: 0.85rem; color: var(--text-secondary);">From your favorite food blogs</span>
-                    </div>
-                    <div class="card-body" id="rssRecipeList">
-                        <p style="color: var(--text-secondary);">Loading recipes...</p>
                     </div>
                 </div>
             </div>
@@ -1966,29 +2002,6 @@
                             <div class="stat-card">
                                 <div class="stat-value" id="yearRestaurants">0</div>
                                 <div class="stat-label">Restaurants</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Nutrition Stats -->
-                <div class="card" style="margin-bottom: 1.5rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#129385; Nutrition Totals</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-value" id="yearProtein">0</div>
-                                <div class="stat-label">Grams Protein</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="yearWater">0</div>
-                                <div class="stat-label">Oz Water</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="yearSalt">0</div>
-                                <div class="stat-label">mg Salt</div>
                             </div>
                         </div>
                     </div>
@@ -2091,6 +2104,27 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128141; Oura Ring Integration</div>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            Sync your Oura Ring data using the Python script. Due to browser security restrictions, Oura data must be fetched via command line.
+                        </p>
+                        <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">How to sync:</p>
+                            <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                <li style="margin-bottom: 0.25rem;">Get your token from <a href="https://cloud.ouraring.com/personal-access-tokens" target="_blank" style="color: var(--forest);">cloud.ouraring.com/personal-access-tokens</a></li>
+                                <li style="margin-bottom: 0.25rem;">Run in terminal:<br><code style="background: var(--bg-card); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-top: 0.25rem; font-size: 0.85rem;">OURA_PAT=your_token_here python3 scripts/sync_oura.py</code></li>
+                                <li>Click "Load Oura Data" below or refresh the page</li>
+                            </ol>
+                        </div>
+                        <button class="btn btn-secondary" onclick="loadOuraFromFile()">Load Oura Data</button>
+                        <div id="ouraStatus" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -2098,7 +2132,7 @@
     <!-- Task Modal -->
     <div class="modal-overlay" id="taskModal">
         <div class="modal">
-            <h3 class="modal-title">Add Task</h3>
+            <h3 class="modal-title" id="taskModalTitle">Add Task</h3>
             <div class="form-group">
                 <label class="form-label">What needs to be done?</label>
                 <input type="text" class="input-field" id="taskTitle" placeholder="Task description">
@@ -2130,12 +2164,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Due Date (optional)</label>
-                    <input type="date" class="input-field" id="taskDue">
+                    <input type="date" class="input-field" id="taskDueDate">
                 </div>
             </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeTaskModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+                <button class="btn btn-primary" onclick="addTask()" id="taskSubmitBtn">Add Task</button>
             </div>
         </div>
     </div>
@@ -2143,7 +2177,7 @@
     <!-- Consumption Modal -->
     <div class="modal-overlay" id="consumptionModal">
         <div class="modal">
-            <h3 class="modal-title">Log Something You Consumed</h3>
+            <h3 class="modal-title" id="consumptionModalTitle">Log Something You Consumed</h3>
             <div class="form-group">
                 <label class="form-label">Type</label>
                 <select class="input-field" id="consumptionType">
@@ -2163,10 +2197,14 @@
                 <input type="url" class="input-field" id="consumptionUrl" placeholder="https://...">
             </div>
             <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="date" class="input-field" id="consumptionDate">
+            </div>
+            <div class="form-group">
                 <label class="form-label">Score (1-100)</label>
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <input type="range" min="1" max="100" value="70" id="consumptionScore" style="flex: 1;" oninput="updateScoreDisplay()">
-                    <span id="scoreDisplay" style="font-size: 1.5rem; font-weight: 700; color: var(--forest); min-width: 50px; text-align: center;">70</span>
+                    <span id="consumptionScoreDisplay" style="font-size: 1.5rem; font-weight: 700; color: var(--forest); min-width: 50px; text-align: center;">70</span>
                 </div>
             </div>
             <div class="form-group">
@@ -2175,7 +2213,7 @@
             </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeConsumptionModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addConsumption()">Add </button>
+                <button class="btn btn-primary" onclick="addConsumption()" id="consumptionSubmitBtn">Add</button>
             </div>
         </div>
     </div>
@@ -2220,6 +2258,10 @@
     <div class="modal-overlay" id="editMealModal">
         <div class="modal">
             <h3 class="modal-title" id="editMealModalTitle">Edit Meals</h3>
+            <div class="form-group" id="editMealDateGroup" style="display: none;">
+                <label class="form-label">Date</label>
+                <input type="date" class="input-field" id="editMealDatePicker">
+            </div>
             <div class="form-group">
                 <label class="form-label">Breakfast</label>
                 <textarea class="input-field" id="editMealBreakfast" rows="2" placeholder="What did you eat?"></textarea>
@@ -2237,9 +2279,10 @@
                 <textarea class="input-field" id="editMealSnacks" rows="2" placeholder="What did you snack on?"></textarea>
             </div>
             <input type="hidden" id="editMealDate">
+            <input type="hidden" id="editMealMode" value="edit">
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeEditMealModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveEditedMeal()">Save Changes</button>
+                <button class="btn btn-primary" id="editMealSubmitBtn" onclick="saveEditedMeal()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -2442,6 +2485,7 @@
             else if (viewName === 'insights') renderInsights();
             else if (viewName === 'workouts') renderWorkouts();
             else if (viewName === 'recipes') renderRecipes();
+            else if (viewName === 'nutrition') renderNutrition();
             else if (viewName === 'yearlyTracker') renderYearlyTracker();
             else if (viewName === 'settings') renderSettings();
         }
@@ -2576,14 +2620,24 @@
         // ==================== TASKS ====================
         let currentTaskTab = 'work';
 
-        function openTaskModal() { document.getElementById('taskModal').classList.add('active'); }
+        function openTaskModal() {
+            editingTaskId = null;
+            document.getElementById('taskModalTitle').textContent = 'Add Task';
+            document.getElementById('taskSubmitBtn').textContent = 'Add Task';
+            document.getElementById('taskModal').classList.add('active');
+        }
         function openTaskModalWithContext() {
+            editingTaskId = null;
+            document.getElementById('taskModalTitle').textContent = 'Add Task';
+            document.getElementById('taskSubmitBtn').textContent = 'Add Task';
             document.getElementById('taskCategory').value = currentTaskTab;
             document.getElementById('taskModal').classList.add('active');
         }
         function closeTaskModal() {
             document.getElementById('taskModal').classList.remove('active');
             document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDueDate').value = '';
+            editingTaskId = null;
         }
 
         function addTask() {
@@ -2593,17 +2647,32 @@
             const priority = document.getElementById('taskPriority').value;
             const xpValues = { high: 20, medium: 10, low: 5 };
 
-            appData.tasks.push({
-                id: generateId(),
-                title,
-                priority,
-                category: document.getElementById('taskCategory').value,
-                term: document.getElementById('taskTerm').value,
-                dueDate: document.getElementById('taskDue').value || null,
-                completed: false,
-                xpValue: xpValues[priority],
-                createdAt: new Date().toISOString()
-            });
+            if (editingTaskId) {
+                // Update existing task
+                const task = appData.tasks.find(t => t.id === editingTaskId);
+                if (task) {
+                    task.title = title;
+                    task.priority = priority;
+                    task.category = document.getElementById('taskCategory').value;
+                    task.term = document.getElementById('taskTerm').value;
+                    task.dueDate = document.getElementById('taskDueDate').value || null;
+                    task.xpValue = xpValues[priority];
+                }
+                editingTaskId = null;
+            } else {
+                // Add new task
+                appData.tasks.push({
+                    id: generateId(),
+                    title,
+                    priority,
+                    category: document.getElementById('taskCategory').value,
+                    term: document.getElementById('taskTerm').value,
+                    dueDate: document.getElementById('taskDueDate').value || null,
+                    completed: false,
+                    xpValue: xpValues[priority],
+                    createdAt: new Date().toISOString()
+                });
+            }
 
             saveData();
             closeTaskModal();
@@ -2809,6 +2878,28 @@
             }).join('');
         }
 
+        function openAddMealModal() {
+            // Set to add mode
+            document.getElementById('editMealMode').value = 'add';
+            document.getElementById('editMealModalTitle').textContent = 'Log Meals';
+            document.getElementById('editMealSubmitBtn').textContent = 'Save';
+            document.getElementById('editMealDateGroup').style.display = 'block';
+
+            // Default to yesterday
+            const yesterday = getYesterday();
+            document.getElementById('editMealDatePicker').value = yesterday;
+            document.getElementById('editMealDatePicker').max = new Date().toISOString().split('T')[0];
+
+            // Clear fields
+            document.getElementById('editMealBreakfast').value = '';
+            document.getElementById('editMealLunch').value = '';
+            document.getElementById('editMealDinner').value = '';
+            document.getElementById('editMealSnacks').value = '';
+            document.getElementById('editMealDate').value = '';
+
+            document.getElementById('editMealModal').classList.add('active');
+        }
+
         function openEditMealModal(dateStr) {
             const log = appData.dailyLogs[dateStr];
             const meals = log?.meals || {};
@@ -2816,7 +2907,12 @@
             const dateObj = new Date(dateStr + 'T00:00:00');
             const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 
+            // Set to edit mode
+            document.getElementById('editMealMode').value = 'edit';
             document.getElementById('editMealModalTitle').textContent = `Edit Meals - ${dateDisplay}`;
+            document.getElementById('editMealSubmitBtn').textContent = 'Save Changes';
+            document.getElementById('editMealDateGroup').style.display = 'none';
+
             document.getElementById('editMealBreakfast').value = meals.breakfast || '';
             document.getElementById('editMealLunch').value = meals.lunch || '';
             document.getElementById('editMealDinner').value = meals.dinner || '';
@@ -2828,10 +2924,23 @@
 
         function closeEditMealModal() {
             document.getElementById('editMealModal').classList.remove('active');
+            document.getElementById('editMealDateGroup').style.display = 'none';
         }
 
         function saveEditedMeal() {
-            const dateStr = document.getElementById('editMealDate').value;
+            const mode = document.getElementById('editMealMode').value;
+            let dateStr;
+
+            if (mode === 'add') {
+                dateStr = document.getElementById('editMealDatePicker').value;
+                if (!dateStr) {
+                    showNotification('Please select a date', 'error');
+                    return;
+                }
+            } else {
+                dateStr = document.getElementById('editMealDate').value;
+            }
+
             const log = getLogByDate(dateStr);
 
             log.meals = {
@@ -2844,7 +2953,7 @@
             saveData();
             closeEditMealModal();
             renderMealLogHistory();
-            showNotification('Meals updated!', 'success');
+            showNotification(mode === 'add' ? 'Meals logged!' : 'Meals updated!', 'success');
 
             // Also update the homepage meal tracker if it's for yesterday
             const yesterday = getYesterday();
@@ -2872,23 +2981,49 @@
                     </div>
                     <span class="task-text">${task.title}</span>
                     <span style="font-size: 0.8rem; color: var(--text-muted);">${categoryIcon}</span>
-                    <button class="task-delete" onclick="deleteTask('${task.id}')">&#128465;</button>
+                    <button class="task-delete" onclick="editTask('${task.id}')" title="Edit">&#9998;</button>
+                    <button class="task-delete" onclick="deleteTask('${task.id}')" title="Delete">&#128465;</button>
                 </div>
             `;
         }
 
+        let editingTaskId = null;
+
+        function editTask(id) {
+            const task = appData.tasks.find(t => t.id === id);
+            if (!task) return;
+
+            editingTaskId = id;
+            document.getElementById('taskModalTitle').textContent = 'Edit Task';
+            document.getElementById('taskSubmitBtn').textContent = 'Save';
+            document.getElementById('taskTitle').value = task.title;
+            document.getElementById('taskCategory').value = task.category || 'personal';
+            document.getElementById('taskTerm').value = task.term || 'short';
+            document.getElementById('taskDueDate').value = task.dueDate || '';
+
+            document.getElementById('taskModal').classList.add('active');
+        }
+
         // ==================== CONSUMPTION ====================
         function openConsumptionModal() {
+            editingConsumptionId = null;
+            document.getElementById('consumptionModalTitle').textContent = 'Log Something You Consumed';
+            document.getElementById('consumptionSubmitBtn').textContent = 'Add';
             document.getElementById('consumptionModal').classList.add('active');
             document.getElementById('consumptionScore').value = 70;
-            document.getElementById('scoreDisplay').textContent = '70';
+            document.getElementById('consumptionScoreDisplay').textContent = '70';
+            document.getElementById('consumptionDate').value = new Date().toISOString().split('T')[0];
             toggleConsumptionUrlField();
         }
         function openConsumptionModalWithContext() {
+            editingConsumptionId = null;
+            document.getElementById('consumptionModalTitle').textContent = 'Log Something You Consumed';
+            document.getElementById('consumptionSubmitBtn').textContent = 'Add';
             document.getElementById('consumptionType').value = currentConsumptionTab;
             document.getElementById('consumptionModal').classList.add('active');
             document.getElementById('consumptionScore').value = 70;
-            document.getElementById('scoreDisplay').textContent = '70';
+            document.getElementById('consumptionScoreDisplay').textContent = '70';
+            document.getElementById('consumptionDate').value = new Date().toISOString().split('T')[0];
             toggleConsumptionUrlField();
         }
         function closeConsumptionModal() {
@@ -2896,11 +3031,12 @@
             document.getElementById('consumptionTitle').value = '';
             document.getElementById('consumptionNotes').value = '';
             document.getElementById('consumptionUrl').value = '';
+            editingConsumptionId = null;
         }
 
         function updateScoreDisplay() {
             const score = document.getElementById('consumptionScore').value;
-            document.getElementById('scoreDisplay').textContent = score;
+            document.getElementById('consumptionScoreDisplay').textContent = score;
         }
 
         function getScoreColor(score) {
@@ -2927,15 +3063,30 @@
             const score = parseInt(document.getElementById('consumptionScore').value);
             const url = normalizeUrl(document.getElementById('consumptionUrl').value);
 
-            appData.consumption.push({
-                id: generateId(),
-                type: document.getElementById('consumptionType').value,
-                title,
-                score: score,
-                notes: document.getElementById('consumptionNotes').value.trim(),
-                url: url || null,
-                date: new Date().toISOString()
-            });
+            if (editingConsumptionId) {
+                // Update existing item
+                const item = appData.consumption.find(c => c.id === editingConsumptionId);
+                if (item) {
+                    item.type = document.getElementById('consumptionType').value;
+                    item.title = title;
+                    item.score = score;
+                    item.notes = document.getElementById('consumptionNotes').value.trim();
+                    item.url = url || null;
+                    item.date = document.getElementById('consumptionDate').value || item.date;
+                }
+                editingConsumptionId = null;
+            } else {
+                // Add new item
+                appData.consumption.push({
+                    id: generateId(),
+                    type: document.getElementById('consumptionType').value,
+                    title,
+                    score: score,
+                    notes: document.getElementById('consumptionNotes').value.trim(),
+                    url: url || null,
+                    date: new Date().toISOString()
+                });
+            }
 
             saveData();
             closeConsumptionModal();
@@ -2980,10 +3131,32 @@
                             ${item.notes ? `<div class="consumption-notes">"${item.notes}"</div>` : ''}
                         </div>
                         <span style="font-size: 1.5rem; font-weight: 700; color: ${scoreColor}; min-width: 50px; text-align: center;">${score}</span>
-                        <button class="task-delete" onclick="deleteConsumption('${item.id}')" style="opacity: 1;">&#128465;</button>
+                        <button class="task-delete" onclick="editConsumption('${item.id}')" style="opacity: 1;" title="Edit">&#9998;</button>
+                        <button class="task-delete" onclick="deleteConsumption('${item.id}')" style="opacity: 1;" title="Delete">&#128465;</button>
                     </div>
                 `;
             }).join('');
+        }
+
+        let editingConsumptionId = null;
+
+        function editConsumption(id) {
+            const item = appData.consumption.find(c => c.id === id);
+            if (!item) return;
+
+            editingConsumptionId = id;
+            document.getElementById('consumptionModalTitle').textContent = 'Edit Consumed Item';
+            document.getElementById('consumptionSubmitBtn').textContent = 'Save';
+            document.getElementById('consumptionType').value = item.type;
+            document.getElementById('consumptionTitle').value = item.title;
+            document.getElementById('consumptionDate').value = item.date ? item.date.split('T')[0] : '';
+            document.getElementById('consumptionScore').value = item.score || 50;
+            document.getElementById('consumptionScoreDisplay').textContent = item.score || 50;
+            document.getElementById('consumptionNotes').value = item.notes || '';
+            document.getElementById('consumptionUrl').value = item.url || '';
+            toggleConsumptionUrlField();
+
+            document.getElementById('consumptionModal').classList.add('active');
         }
 
         document.querySelectorAll('.consumption-tab').forEach(tab => {
@@ -3282,7 +3455,6 @@
 
         function renderResearch(search = '') {
             renderPotsResearch();
-            renderResearchFeed();
             const container = document.getElementById('notesList');
             let notes = appData.notes;
 
@@ -3370,6 +3542,9 @@
                     </div>
                 `).join('');
             }
+
+            // Render Oura data
+            renderOuraData();
         }
 
         // ==================== INSIGHTS ====================
@@ -3735,7 +3910,9 @@
                 // Render RSS recipes in supplementary section
                 renderRSSRecipes(feed.items || []);
             });
+        }
 
+        function renderNutrition() {
             // Load and render nutrition report
             loadNutritionReport().then(report => {
                 renderNutritionReport(report);
@@ -3764,6 +3941,205 @@
                     <div style="font-size: 0.8rem; color: var(--text-secondary);">${item.source || 'Recipe'}</div>
                 </div>
             `).join('');
+        }
+
+        // ==================== SHOPPING LIST ====================
+        async function generateShoppingList() {
+            const container = document.getElementById('shoppingListContent');
+            if (!container) return;
+
+            container.innerHTML = '<p style="color: var(--text-secondary);">Generating shopping list...</p>';
+
+            try {
+                const feed = await loadWeeklyRecipes();
+                if (!feed || !feed.meals || feed.meals.length === 0) {
+                    container.innerHTML = '<p style="color: var(--red-soft);">No meal plan loaded. Check weekly-recipes.json.</p>';
+                    return;
+                }
+
+                // Extract ingredients from all meal instructions
+                const ingredients = extractIngredients(feed.meals);
+
+                // Categorize ingredients
+                const categories = categorizeIngredients(ingredients);
+
+                // Render shopping list
+                renderShoppingList(categories, container);
+
+                // Save to localStorage
+                localStorage.setItem('deanOS_shoppingList', JSON.stringify({
+                    generated: new Date().toISOString(),
+                    categories: categories
+                }));
+
+            } catch (error) {
+                console.error('Shopping list error:', error);
+                container.innerHTML = '<p style="color: var(--red-soft);">Error generating shopping list.</p>';
+            }
+        }
+
+        function extractIngredients(meals) {
+            const ingredients = new Map(); // Use Map to aggregate quantities
+
+            // Common ingredient patterns to extract
+            const patterns = [
+                // Quantities with units
+                /(\d+(?:\/\d+)?)\s*(oz|cup|cups|tbsp|tsp|lb|lbs|clove|cloves|can|slice|slices|scoop|handful|splash)\s+(?:of\s+)?([a-zA-Z\s]+?)(?:\s*(?:,|\(|and|for|in|with|until|according|if)|$)/gi,
+                // Simple quantities
+                /(\d+)\s+(egg|eggs|banana|bananas|avocado|avocados|bagel|bagels|tortilla|tortillas|zucchini)/gi,
+            ];
+
+            for (const day of meals) {
+                for (const mealType of ['breakfast', 'lunch', 'dinner']) {
+                    const meal = day[mealType];
+                    if (!meal || !meal.instructions) continue;
+
+                    for (const instruction of meal.instructions) {
+                        // Extract using patterns
+                        for (const pattern of patterns) {
+                            pattern.lastIndex = 0;
+                            let match;
+                            while ((match = pattern.exec(instruction)) !== null) {
+                                const qty = match[1];
+                                const unit = match[2] || '';
+                                const item = match[3] ? match[3].trim().toLowerCase() : match[2].toLowerCase();
+
+                                // Clean up item name
+                                const cleanItem = item
+                                    .replace(/\s+/g, ' ')
+                                    .replace(/^\s+|\s+$/g, '')
+                                    .replace(/^(cooked|fresh|diced|sliced|chopped|minced|whole|large|small|medium)\s+/i, '');
+
+                                if (cleanItem && cleanItem.length > 2) {
+                                    const key = cleanItem;
+                                    if (!ingredients.has(key)) {
+                                        ingredients.set(key, { name: cleanItem, mentions: [] });
+                                    }
+                                    ingredients.get(key).mentions.push({ qty, unit, meal: meal.title });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return ingredients;
+        }
+
+        function categorizeIngredients(ingredientsMap) {
+            const categories = {
+                'Proteins': [],
+                'Dairy & Eggs': [],
+                'Produce': [],
+                'Grains & Bread': [],
+                'Pantry': [],
+                'Other': []
+            };
+
+            const proteinKeywords = ['chicken', 'beef', 'pork', 'turkey', 'salmon', 'shrimp', 'tuna', 'fish', 'meat', 'steak', 'sirloin', 'tenderloin', 'meatball'];
+            const dairyKeywords = ['egg', 'cheese', 'yogurt', 'milk', 'cream', 'butter', 'parmesan', 'cottage', 'ricotta'];
+            const produceKeywords = ['broccoli', 'spinach', 'lettuce', 'tomato', 'onion', 'garlic', 'avocado', 'banana', 'berry', 'berries', 'asparagus', 'zucchini', 'cucumber', 'carrot', 'celery', 'potato', 'bean', 'lentil', 'vegetable', 'green', 'pepper', 'lemon'];
+            const grainKeywords = ['rice', 'pasta', 'bread', 'tortilla', 'bagel', 'oat', 'quinoa', 'granola', 'noodle', 'linguine'];
+            const pantryKeywords = ['oil', 'sauce', 'broth', 'honey', 'syrup', 'seasoning', 'herb', 'spice', 'salt', 'pepper', 'soy', 'hummus', 'salsa', 'dressing', 'wine'];
+
+            for (const [key, data] of ingredientsMap) {
+                const name = data.name;
+                let category = 'Other';
+
+                if (proteinKeywords.some(k => name.includes(k))) category = 'Proteins';
+                else if (dairyKeywords.some(k => name.includes(k))) category = 'Dairy & Eggs';
+                else if (produceKeywords.some(k => name.includes(k))) category = 'Produce';
+                else if (grainKeywords.some(k => name.includes(k))) category = 'Grains & Bread';
+                else if (pantryKeywords.some(k => name.includes(k))) category = 'Pantry';
+
+                // Format the display
+                const timesUsed = data.mentions.length;
+                const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+
+                categories[category].push({
+                    name: displayName,
+                    timesUsed: timesUsed,
+                    checked: false
+                });
+            }
+
+            // Sort each category alphabetically and remove empty categories
+            for (const cat in categories) {
+                categories[cat].sort((a, b) => a.name.localeCompare(b.name));
+                if (categories[cat].length === 0) delete categories[cat];
+            }
+
+            return categories;
+        }
+
+        function renderShoppingList(categories, container) {
+            if (Object.keys(categories).length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary);">No ingredients found in meal plan.</p>';
+                return;
+            }
+
+            let html = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Check off items as you shop</span>
+                    <button onclick="copyShoppingList()" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Copy List</button>
+                </div>
+            `;
+
+            for (const [category, items] of Object.entries(categories)) {
+                html += `
+                    <div style="margin-bottom: 1rem;">
+                        <h4 style="color: var(--forest); margin-bottom: 0.5rem; font-size: 0.95rem;">${category}</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                            ${items.map((item, idx) => `
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem 0;">
+                                    <input type="checkbox" class="shopping-item" data-category="${category}" data-index="${idx}"
+                                           onchange="toggleShoppingItem(this)" style="width: 18px; height: 18px; cursor: pointer;">
+                                    <span class="shopping-item-text">${item.name}</span>
+                                    ${item.timesUsed > 1 ? `<span style="font-size: 0.75rem; color: var(--text-muted);">(x${item.timesUsed})</span>` : ''}
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function toggleShoppingItem(checkbox) {
+            const textEl = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                textEl.style.textDecoration = 'line-through';
+                textEl.style.color = 'var(--text-muted)';
+            } else {
+                textEl.style.textDecoration = 'none';
+                textEl.style.color = 'inherit';
+            }
+        }
+
+        function copyShoppingList() {
+            const stored = localStorage.getItem('deanOS_shoppingList');
+            if (!stored) {
+                showNotification('No shopping list to copy', 'error');
+                return;
+            }
+
+            const data = JSON.parse(stored);
+            let text = 'Shopping List\n============\n\n';
+
+            for (const [category, items] of Object.entries(data.categories)) {
+                text += `${category}:\n`;
+                for (const item of items) {
+                    text += `  - ${item.name}${item.timesUsed > 1 ? ` (x${item.timesUsed})` : ''}\n`;
+                }
+                text += '\n';
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Shopping list copied!', 'success');
+            }).catch(() => {
+                showNotification('Failed to copy', 'error');
+            });
         }
 
         function renderMealRow(mealType, meal) {
@@ -3906,24 +4282,6 @@
             document.getElementById('yearRecipes').textContent = yearRecipes;
             document.getElementById('yearRestaurants').textContent = yearRestaurants;
 
-            // Calculate nutrition totals from daily logs
-            let totalProtein = 0;
-            let totalWater = 0;
-            let totalSalt = 0;
-
-            Object.keys(appData.dailyLogs).forEach(date => {
-                if (date >= yearStart) {
-                    const log = appData.dailyLogs[date];
-                    totalProtein += log.protein || 0;
-                    totalWater += log.water || 0; // Already in ounces
-                    totalSalt += log.salt || 0;
-                }
-            });
-
-            document.getElementById('yearProtein').textContent = totalProtein.toLocaleString();
-            document.getElementById('yearWater').textContent = totalWater.toLocaleString();
-            document.getElementById('yearSalt').textContent = totalSalt.toLocaleString();
-
             // Render consumption lists from the Consumed section
             renderYearConsumptionList('book', 'yearBooksList', 'books');
             renderYearConsumptionList('movie', 'yearMoviesList', 'movies');
@@ -4000,6 +4358,429 @@
             }
 
             updateSyncStatus();
+        }
+
+        // ==================== OURA RING INTEGRATION ====================
+        async function loadOuraFromFile() {
+            const statusEl = document.getElementById('ouraStatus');
+
+            if (statusEl) statusEl.innerHTML = '<p style="color: var(--text-secondary);">Loading Oura data...</p>';
+
+            try {
+                const response = await fetch('oura-data.json', { cache: 'no-store' });
+
+                if (!response.ok) {
+                    throw new Error('oura-data.json not found. Run the sync script first.');
+                }
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                const days = data.days || [];
+
+                if (days.length === 0) {
+                    throw new Error('No Oura data in file. Run the sync script.');
+                }
+
+                // Store full data in localStorage (no transformation needed)
+                localStorage.setItem('deanOS_ouraData', JSON.stringify({
+                    updated: data.updated,
+                    start_date: data.start_date,
+                    end_date: data.end_date,
+                    days_returned: data.days_returned,
+                    workouts: data.workouts || [],
+                    days: days
+                }));
+
+                // Also update daily logs with Oura data
+                for (const day of days) {
+                    const log = getLogByDate(day.date);
+                    if (day.sleep_score) log.ouraScore = day.sleep_score;
+                    if (day.bedtime_start) {
+                        const bedtimeTime = day.bedtime_start.split('T')[1];
+                        if (bedtimeTime) log.bedtime = bedtimeTime.substring(0, 5);
+                    }
+                    if (day.bedtime_end) {
+                        const wakeTimeTime = day.bedtime_end.split('T')[1];
+                        if (wakeTimeTime) log.waketime = wakeTimeTime.substring(0, 5);
+                    }
+                }
+                saveData();
+
+                if (statusEl) statusEl.innerHTML = `<p style="color: var(--forest);">Loaded ${days.length} days of Oura data!</p>`;
+                showNotification(`Loaded ${days.length} days of Oura data!`, 'success');
+
+                // Refresh displays
+                renderOuraData();
+                renderMorning();
+
+            } catch (error) {
+                console.error('Oura load error:', error);
+                if (statusEl) statusEl.innerHTML = `<p style="color: var(--red-soft);">Error: ${error.message}</p>`;
+                showNotification('Failed to load Oura data', 'error');
+            }
+        }
+
+        function formatSeconds(seconds) {
+            if (!seconds) return '--';
+            const hours = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+        }
+
+        function renderOuraData() {
+            const container = document.getElementById('ouraDataDisplay');
+            if (!container) return;
+
+            const stored = localStorage.getItem('deanOS_ouraData');
+            if (!stored) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p style="color: var(--text-secondary);">No Oura data synced</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Run the sync script in Settings to load your Oura data.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const data = JSON.parse(stored);
+            const days = data.days || [];
+            const workouts = data.workouts || [];
+
+            if (days.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary);">No recent Oura data found</p>';
+                return;
+            }
+
+            // Calculate averages for the period
+            const recentDays = days.slice(0, 14);
+            const avgSleep = Math.round(recentDays.filter(d => d.sleep_score).reduce((s, d) => s + d.sleep_score, 0) / recentDays.filter(d => d.sleep_score).length) || '--';
+            const avgReadiness = Math.round(recentDays.filter(d => d.readiness_score).reduce((s, d) => s + d.readiness_score, 0) / recentDays.filter(d => d.readiness_score).length) || '--';
+            const avgHRV = Math.round(recentDays.filter(d => d.average_hrv).reduce((s, d) => s + d.average_hrv, 0) / recentDays.filter(d => d.average_hrv).length) || '--';
+            const avgSteps = Math.round(recentDays.filter(d => d.steps).reduce((s, d) => s + d.steps, 0) / recentDays.filter(d => d.steps).length) || '--';
+
+            container.innerHTML = `
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Last synced: ${new Date(data.updated).toLocaleString()} | ${data.days_returned || days.length} days loaded
+                </div>
+
+                <!-- 14-day Averages -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <div style="text-align: center; padding: 0.75rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--forest);">${avgSleep}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Avg Sleep</div>
+                    </div>
+                    <div style="text-align: center; padding: 0.75rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--blue-soft);">${avgReadiness}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Avg Readiness</div>
+                    </div>
+                    <div style="text-align: center; padding: 0.75rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--purple-soft);">${avgHRV}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Avg HRV</div>
+                    </div>
+                    <div style="text-align: center; padding: 0.75rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--amber);">${avgSteps.toLocaleString()}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Avg Steps</div>
+                    </div>
+                </div>
+
+                <!-- Daily Data Table -->
+                <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border);">
+                                <th style="text-align: left; padding: 0.5rem;">Date</th>
+                                <th style="text-align: center; padding: 0.5rem;">Sleep</th>
+                                <th style="text-align: center; padding: 0.5rem;">Ready</th>
+                                <th style="text-align: center; padding: 0.5rem;">Activity</th>
+                                <th style="text-align: center; padding: 0.5rem;">HRV</th>
+                                <th style="text-align: center; padding: 0.5rem;">Rest HR</th>
+                                <th style="text-align: center; padding: 0.5rem;">Steps</th>
+                                <th style="text-align: center; padding: 0.5rem;">Sleep Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${days.slice(0, 14).map(day => {
+                                const dateObj = new Date(day.date + 'T00:00:00');
+                                const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+                                const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                                const sleepColor = getScoreColor(day.sleep_score || 0);
+                                const readinessColor = getScoreColor(day.readiness_score || 0);
+                                const activityColor = getScoreColor(day.activity_score || 0);
+                                const sleepHours = day.total_sleep_seconds ? (day.total_sleep_seconds / 3600).toFixed(1) : '--';
+                                return `
+                                    <tr style="border-bottom: 1px solid var(--border);" onclick="showOuraDayDetail('${day.date}')" class="oura-day-row">
+                                        <td style="padding: 0.5rem;"><strong>${dayName}</strong> ${dateStr}</td>
+                                        <td style="text-align: center; padding: 0.5rem; color: ${sleepColor}; font-weight: 600;">${day.sleep_score || '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem; color: ${readinessColor}; font-weight: 600;">${day.readiness_score || '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem; color: ${activityColor}; font-weight: 600;">${day.activity_score || '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem;">${day.average_hrv || '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem;">${day.lowest_hr || day.resting_hr || '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem;">${day.steps ? day.steps.toLocaleString() : '--'}</td>
+                                        <td style="text-align: center; padding: 0.5rem;">${sleepHours}h</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- AI Analysis Section -->
+                <div id="ouraAnalysisSection" style="margin-top: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <h4 style="color: var(--forest); margin: 0;">AI Health Insights</h4>
+                        <button onclick="showAnalysisInstructions()" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Update Analysis</button>
+                    </div>
+                    <div id="ouraAnalysisContent">
+                        <div style="padding: 1rem; background: var(--bg-input); border-radius: var(--radius-sm); text-align: center;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">No AI analysis yet</p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Run: <code>ANTHROPIC_API_KEY=your_key python3 scripts/analyze_oura.py</code></p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; text-align: center;">
+                    Click any row to see detailed breakdown
+                </p>
+            `;
+
+            // Load AI analysis
+            loadOuraAnalysis();
+        }
+
+        function showOuraDayDetail(dateStr) {
+            const stored = localStorage.getItem('deanOS_ouraData');
+            if (!stored) return;
+
+            const data = JSON.parse(stored);
+            const day = data.days.find(d => d.date === dateStr);
+            if (!day) return;
+
+            const dateObj = new Date(dateStr + 'T00:00:00');
+            const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+            const sleepHours = day.total_sleep_seconds ? (day.total_sleep_seconds / 3600).toFixed(1) : '--';
+            const deepHours = day.deep_sleep_seconds ? (day.deep_sleep_seconds / 3600).toFixed(1) : '--';
+            const remHours = day.rem_sleep_seconds ? (day.rem_sleep_seconds / 3600).toFixed(1) : '--';
+            const lightHours = day.light_sleep_seconds ? (day.light_sleep_seconds / 3600).toFixed(1) : '--';
+
+            const bedtime = day.bedtime_start ? new Date(day.bedtime_start).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '--';
+            const waketime = day.bedtime_end ? new Date(day.bedtime_end).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '--';
+
+            const detail = `
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;" onclick="this.remove()">
+                    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;" onclick="event.stopPropagation()">
+                        <h3 style="margin-bottom: 1rem; color: var(--forest);">${dateDisplay}</h3>
+
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
+                            <div style="text-align: center; padding: 0.5rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                                <div style="font-size: 1.25rem; font-weight: 700; color: ${getScoreColor(day.sleep_score || 0)};">${day.sleep_score || '--'}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">Sleep</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                                <div style="font-size: 1.25rem; font-weight: 700; color: ${getScoreColor(day.readiness_score || 0)};">${day.readiness_score || '--'}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">Readiness</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: var(--bg-input); border-radius: var(--radius-sm);">
+                                <div style="font-size: 1.25rem; font-weight: 700; color: ${getScoreColor(day.activity_score || 0)};">${day.activity_score || '--'}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">Activity</div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 1rem 0 0.5rem; color: var(--text-primary);">Sleep Breakdown</h4>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Bedtime</span><span>${bedtime}</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Wake time</span><span>${waketime}</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Total Sleep</span><span>${sleepHours}h</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Deep Sleep</span><span>${deepHours}h</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>REM Sleep</span><span>${remHours}h</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Light Sleep</span><span>${lightHours}h</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Efficiency</span><span>${day.sleep_efficiency || '--'}%</span></div>
+                        </div>
+
+                        <h4 style="margin: 1rem 0 0.5rem; color: var(--text-primary);">Heart & Recovery</h4>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>HRV</span><span>${day.average_hrv || '--'} ms</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Resting HR</span><span>${day.lowest_hr || day.resting_hr || '--'} bpm</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Avg HR (sleep)</span><span>${day.average_hr_sleep || '--'} bpm</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Breathing Rate</span><span>${day.average_breath || '--'}/min</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Temp Deviation</span><span>${day.temperature_deviation ? day.temperature_deviation.toFixed(2) + '°' : '--'}</span></div>
+                            ${day.spo2_average ? `<div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>SpO2</span><span>${day.spo2_average}%</span></div>` : ''}
+                        </div>
+
+                        <h4 style="margin: 1rem 0 0.5rem; color: var(--text-primary);">Activity</h4>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Steps</span><span>${day.steps ? day.steps.toLocaleString() : '--'}</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Active Calories</span><span>${day.active_calories || '--'}</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Total Calories</span><span>${day.total_calories || '--'}</span></div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span>Distance</span><span>${day.distance_meters ? (day.distance_meters / 1000).toFixed(1) + ' km' : '--'}</span></div>
+                        </div>
+
+                        <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; margin-top: 1rem; padding: 0.75rem; background: var(--forest); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600;">Close</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', detail);
+        }
+
+        async function triggerOuraWorkflow() {
+            const settings = getGitHubSettings();
+            if (!settings.token) {
+                showNotification('Add GitHub token in Settings first', 'error');
+                return;
+            }
+
+            showNotification('Starting Oura sync...', 'success');
+
+            try {
+                const response = await fetch('https://api.github.com/repos/deanramadan/DeanOS/actions/workflows/oura-sync.yml/dispatches', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `token ${settings.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ ref: 'main' })
+                });
+
+                if (response.status === 204 || response.ok) {
+                    showNotification('Oura sync started! Refresh page in ~2 minutes.', 'success');
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to trigger workflow');
+                }
+            } catch (error) {
+                console.error('Workflow trigger error:', error);
+                showNotification('Error: ' + error.message, 'error');
+            }
+        }
+
+        function showAnalysisInstructions() {
+            const settings = getGitHubSettings();
+            const hasToken = settings.token ? true : false;
+
+            const modal = `
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;" onclick="this.remove()">
+                    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); max-width: 500px; width: 90%;" onclick="event.stopPropagation()">
+                        <h3 style="margin-bottom: 1rem; color: var(--forest);">Update Oura Data & Analysis</h3>
+
+                        ${hasToken ? `
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                Click below to sync your latest Oura data and generate a new AI analysis. This runs on GitHub and takes about 2 minutes.
+                            </p>
+                            <button onclick="triggerOuraWorkflow(); this.parentElement.parentElement.remove();" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+                                Sync Oura & Update Analysis
+                            </button>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; text-align: center;">
+                                — or reload from existing file —
+                            </p>
+                        ` : `
+                            <p style="color: var(--amber); margin-bottom: 1rem;">
+                                Add your GitHub token in Settings to enable one-click sync.
+                            </p>
+                        `}
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button onclick="this.parentElement.parentElement.parentElement.remove()" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                            <button onclick="loadOuraFromFile(); loadOuraAnalysis(); this.parentElement.parentElement.parentElement.remove(); showNotification('Data reloaded', 'success');" class="btn btn-secondary" style="flex: 1;">Reload Data</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modal);
+        }
+
+        async function loadOuraAnalysis() {
+            const container = document.getElementById('ouraAnalysisContent');
+            if (!container) return;
+
+            try {
+                const response = await fetch('oura-analysis.json', { cache: 'no-store' });
+
+                if (!response.ok) {
+                    container.innerHTML = `
+                        <div style="padding: 1rem; background: var(--bg-input); border-radius: var(--radius-sm); text-align: center;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">No AI analysis yet</p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Run: <code>python3 scripts/analyze_oura.py</code></p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (data.error || !data.analysis) {
+                    container.innerHTML = `
+                        <div style="padding: 1rem; background: var(--bg-input); border-radius: var(--radius-sm); text-align: center;">
+                            <p style="color: var(--text-secondary);">${data.error || 'Analysis not available'}</p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Run: <code>ANTHROPIC_API_KEY=your_key python3 scripts/analyze_oura.py</code></p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const analysis = data.analysis;
+                const updatedDate = new Date(data.updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+                container.innerHTML = `
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        Analysis from ${updatedDate} | ${data.days_analyzed || '--'} days analyzed
+                    </div>
+
+                    <!-- Overall Assessment -->
+                    <div style="padding: 1rem; background: var(--bg-input); border-radius: var(--radius-sm); margin-bottom: 1rem;">
+                        <p style="font-size: 0.95rem; color: var(--text-primary); line-height: 1.5;">${analysis.overall_assessment || 'No assessment available'}</p>
+                    </div>
+
+                    <!-- What's Going Well -->
+                    <div style="margin-bottom: 1rem;">
+                        <h5 style="color: var(--forest); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.1rem;">✓</span> What's Going Well
+                        </h5>
+                        <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            ${(analysis.whats_going_well || []).map(item => `<li style="margin-bottom: 0.35rem;">${item}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- Areas to Improve -->
+                    <div style="margin-bottom: 1rem;">
+                        <h5 style="color: var(--amber); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.1rem;">↑</span> Areas to Improve
+                        </h5>
+                        <ul style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            ${(analysis.areas_to_improve || []).map(item => `<li style="margin-bottom: 0.35rem;">${item}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- POTS Insights -->
+                    ${analysis.pots_specific_insights ? `
+                        <div style="padding: 0.75rem 1rem; background: var(--blue-bg); border-left: 3px solid var(--blue-soft); border-radius: var(--radius-sm); margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--blue-soft); font-size: 0.85rem; margin-bottom: 0.25rem;">POTS-Specific Insight</div>
+                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.pots_specific_insights}</p>
+                        </div>
+                    ` : ''}
+
+                    <!-- Focus for Next Week -->
+                    ${analysis.focus_for_next_week ? `
+                        <div style="padding: 0.75rem 1rem; background: var(--forest-bg); border-left: 3px solid var(--forest); border-radius: var(--radius-sm);">
+                            <div style="font-weight: 600; color: var(--forest); font-size: 0.85rem; margin-bottom: 0.25rem;">Focus This Week</div>
+                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.focus_for_next_week}</p>
+                        </div>
+                    ` : ''}
+                `;
+
+            } catch (error) {
+                console.error('Error loading Oura analysis:', error);
+                container.innerHTML = `
+                    <div style="padding: 1rem; background: var(--bg-input); border-radius: var(--radius-sm); text-align: center;">
+                        <p style="color: var(--text-secondary);">Error loading analysis</p>
+                    </div>
+                `;
+            }
         }
 
         function updateSyncStatus() {
