@@ -1385,19 +1385,6 @@
     <!-- Header -->
     <header class="header">
         <div class="logo">Dean<span>OS</span></div>
-        <div class="header-stats">
-            <div class="stat-badge streak-badge">
-                <span>&#128293;</span>
-                <span id="currentStreak">0</span> day streak
-            </div>
-            <div class="stat-badge level-badge" id="levelBadge">Level 1</div>
-            <div class="xp-container">
-                <div class="xp-bar">
-                    <div class="xp-fill" id="xpFill" style="width: 0%"></div>
-                </div>
-                <span class="xp-text" id="xpText">0/100</span>
-            </div>
-        </div>
     </header>
 
     <div class="main-container">
@@ -1447,9 +1434,6 @@
                 <button class="sidebar-btn" data-view="yearlyTracker">
                     <span class="sidebar-icon">&#128197;</span> 2026 Tracker
                 </button>
-                <button class="sidebar-btn" data-view="achievements">
-                    <span class="sidebar-icon">&#127942;</span> Achievements
-                </button>
             </div>
         </nav>
 
@@ -1460,21 +1444,6 @@
                 <div class="greeting" id="greeting">Good morning, Dean</div>
                 <div class="date-display" id="dateDisplay"></div>
 
-                <!-- Quick Log Bar -->
-                <div class="quick-log-bar" id="quickLogBar">
-                    <button class="quick-btn" onclick="quickLog('meds')">&#128138; Meds</button>
-                    <button class="quick-btn" onclick="quickLog('creatine')">&#128170; Creatine</button>
-                    <button class="quick-btn" onclick="quickLog('compression')">&#129466; Compression</button>
-                    <button class="quick-btn" onclick="quickLog('exercise')">&#127939; Moved</button>
-                </div>
-
-                <!-- Behavior Checks - Red if used -->
-                <div class="quick-log-bar" id="behaviorChecks">
-                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('instagram')" id="instagramBtn">&#128247; Instagram</button>
-                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('twitter')" id="twitterBtn">&#128038; Twitter</button>
-                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('sugar')" id="sugarBtn">&#127852; Sugar</button>
-                    <button class="quick-btn behavior-bad" onclick="toggleBadBehavior('junkfood')" id="junkfoodBtn">&#127839; Junk Food</button>
-                </div>
 
                 <div class="dashboard-grid">
                     <!-- Vitals Card -->
@@ -1739,19 +1708,6 @@
                         <div class="stats-grid" id="overallStats"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Achievements View -->
-            <div class="module-view" id="achievementsView">
-                <div class="view-header">
-                    <h2 class="view-title">&#127942; Achievements</h2>
-                </div>
-
-                <div style="margin-bottom: 1rem; color: var(--text-secondary);">
-                    <span id="achievementCount">0</span> / <span id="achievementTotal">0</span> unlocked
-                </div>
-
-                <div class="achievements-grid" id="achievementsList"></div>
             </div>
 
             <!-- Workouts View -->
@@ -2078,30 +2034,6 @@
             workoutDayTypes: {}
         };
 
-        const ACHIEVEMENTS = [
-            { id: 'first_log', name: 'First Steps', desc: 'Log your first vitals', icon: '&#128095;', check: d => d.vitals.length >= 1 },
-            { id: 'week_vitals', name: 'Vital Tracker', desc: 'Log vitals for 7 days', icon: '&#128147;', check: d => countUniqueDays(d.vitals) >= 7 },
-            { id: 'month_vitals', name: 'Health Warrior', desc: 'Log vitals for 30 days', icon: '&#128170;', check: d => countUniqueDays(d.vitals) >= 30 },
-            { id: 'hydration_hero', name: 'Hydration Hero', desc: 'Hit 12 glasses in a day', icon: '&#128167;', check: d => Object.values(d.dailyLogs).some(l => l.water >= 12) },
-            { id: 'streak_7', name: 'Week Warrior', desc: '7 day streak', icon: '&#128293;', check: d => d.user.streakDays >= 7 },
-            { id: 'streak_30', name: 'Monthly Master', desc: '30 day streak', icon: '&#9889;', check: d => d.user.streakDays >= 30 },
-            { id: 'level_5', name: 'Rising Star', desc: 'Reach level 5', icon: '&#11088;', check: d => d.user.level >= 5 },
-            { id: 'level_10', name: 'Dedicated', desc: 'Reach level 10', icon: '&#127775;', check: d => d.user.level >= 10 },
-            { id: 'level_25', name: 'Veteran', desc: 'Reach level 25', icon: '&#128081;', check: d => d.user.level >= 25 },
-            { id: 'tasks_10', name: 'Productive', desc: 'Complete 10 tasks', icon: '&#9745;', check: d => d.tasks.filter(t => t.completed).length >= 10 },
-            { id: 'tasks_50', name: 'Task Master', desc: 'Complete 50 tasks', icon: '&#127919;', check: d => d.tasks.filter(t => t.completed).length >= 50 },
-            { id: 'tasks_100', name: 'Centurion', desc: 'Complete 100 tasks', icon: '&#128176;', check: d => d.tasks.filter(t => t.completed).length >= 100 },
-            { id: 'journal_7', name: 'Reflector', desc: 'Write 7 journal entries', icon: '&#128214;', check: d => d.journal.length >= 7 },
-            { id: 'journal_30', name: 'Chronicler', desc: 'Write 30 journal entries', icon: '&#128220;', check: d => d.journal.length >= 30 },
-            { id: 'consumption_10', name: 'Curator', desc: 'Log 10 things consumed', icon: '&#127916;', check: d => d.consumption.length >= 10 },
-            { id: 'consumption_50', name: 'Archivist', desc: 'Log 50 things consumed', icon: '&#127942;', check: d => d.consumption.length >= 50 },
-            { id: 's_tier', name: 'S-Tier Finder', desc: 'Rate something S-tier', icon: '&#128171;', check: d => d.consumption.some(c => c.tier === 'S') },
-            { id: 'notes_10', name: 'Note Taker', desc: 'Create 10 research notes', icon: '&#128221;', check: d => d.notes.length >= 10 },
-            { id: 'notes_50', name: 'Researcher', desc: 'Create 50 research notes', icon: '&#128300;', check: d => d.notes.length >= 50 },
-            { id: 'good_day', name: 'Good Day', desc: 'Log a 9 or 10 feeling', icon: '&#128578;', check: d => d.symptoms.some(s => s.overall >= 9) },
-            { id: 'fighter', name: 'Fighter', desc: 'Log a day despite feeling 3 or below', icon: '&#128170;', check: d => d.symptoms.some(s => s.overall <= 3) }
-        ];
-
         function countUniqueDays(arr) {
             const dates = new Set(arr.map(item => new Date(item.date).toDateString()));
             return dates.size;
@@ -2215,99 +2147,6 @@
             setTimeout(() => container.classList.remove('mealplan-refresh'), 500);
         }
 
-        // ==================== XP & LEVELING ====================
-        function getXpForLevel(level) {
-            return Math.floor(100 * Math.pow(1.1, level - 1));
-        }
-
-        function addXP(amount) {
-            appData.user.xp += amount;
-            let needed = getXpForLevel(appData.user.level);
-
-            while (appData.user.xp >= needed) {
-                appData.user.xp -= needed;
-                appData.user.level++;
-                showNotification(`Level Up! You're now Level ${appData.user.level}!`, 'level-up');
-                needed = getXpForLevel(appData.user.level);
-            }
-
-            showNotification(`+${amount} XP`, 'xp');
-            checkAchievements();
-            saveData();
-            updateHeader();
-        }
-
-        function updateHeader() {
-            document.getElementById('levelBadge').textContent = `Level ${appData.user.level}`;
-            const needed = getXpForLevel(appData.user.level);
-            const percent = (appData.user.xp / needed) * 100;
-            document.getElementById('xpFill').style.width = `${percent}%`;
-            document.getElementById('xpText').textContent = `${appData.user.xp}/${needed}`;
-            document.getElementById('currentStreak').textContent = appData.user.streakDays;
-        }
-
-        // ==================== STREAKS ====================
-        function updateStreak() {
-            const today = getToday();
-            const lastActive = appData.user.lastActiveDate;
-
-            if (lastActive === today) return;
-
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayStr = yesterday.toISOString().split('T')[0];
-
-            if (lastActive === yesterdayStr) {
-                appData.user.streakDays++;
-                if (appData.user.streakDays % 7 === 0) {
-                    showNotification(`${appData.user.streakDays} day streak! Keep it up!`, 'streak');
-                }
-            } else if (lastActive !== today) {
-                appData.user.streakDays = 1;
-            }
-
-            appData.user.lastActiveDate = today;
-            saveData();
-            updateHeader();
-        }
-
-        // ==================== ACHIEVEMENTS ====================
-        function checkAchievements() {
-            let newUnlocks = [];
-            ACHIEVEMENTS.forEach(ach => {
-                if (!appData.user.achievements.includes(ach.id) && ach.check(appData)) {
-                    appData.user.achievements.push(ach.id);
-                    newUnlocks.push(ach.name);
-                }
-            });
-            if (newUnlocks.length > 0) {
-                saveData();
-                setTimeout(() => {
-                    newUnlocks.forEach(name => {
-                        showNotification(`Achievement Unlocked: ${name}!`, 'level-up');
-                    });
-                }, 1000);
-            }
-        }
-
-        function renderAchievements() {
-            const container = document.getElementById('achievementsList');
-            const unlocked = appData.user.achievements.length;
-            document.getElementById('achievementCount').textContent = unlocked;
-            document.getElementById('achievementTotal').textContent = ACHIEVEMENTS.length;
-
-            container.innerHTML = ACHIEVEMENTS.map(ach => {
-                const isUnlocked = appData.user.achievements.includes(ach.id);
-                return `
-                    <div class="achievement-card ${isUnlocked ? 'unlocked' : ''}">
-                        <div class="achievement-icon">${ach.icon}</div>
-                        <div class="achievement-name">${ach.name}</div>
-                        <div class="achievement-desc">${ach.desc}</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
         // ==================== NOTIFICATIONS ====================
         function showNotification(message, type = 'success') {
             const notif = document.createElement('div');
@@ -2340,7 +2179,6 @@
             else if (viewName === 'journal') renderJournal();
             else if (viewName === 'research') renderResearch();
             else if (viewName === 'insights') renderInsights();
-            else if (viewName === 'achievements') renderAchievements();
             else if (viewName === 'workouts') renderWorkouts();
             else if (viewName === 'recipes') renderRecipes();
             else if (viewName === 'yearlyTracker') renderYearlyTracker();
@@ -2363,23 +2201,6 @@
             const options = { weekday: 'long', month: 'long', day: 'numeric' };
             document.getElementById('dateDisplay').textContent = new Date().toLocaleDateString('en-US', options);
 
-            // Update quick log buttons
-            const todayLog = getTodayLog();
-            document.querySelectorAll('#quickLogBar .quick-btn').forEach(btn => {
-                const match = btn.onclick.toString().match(/'(\w+)'/);
-                if (match) {
-                    const type = match[1];
-                    if (todayLog[type]) {
-                        btn.classList.add('logged');
-                    } else {
-                        btn.classList.remove('logged');
-                    }
-                }
-            });
-
-            // Update bad behavior buttons
-            updateBadBehaviorButtons();
-
             // Only show vitals on Mondays
             const vitalsCard = document.getElementById('vitalsCard');
             if (vitalsCard) {
@@ -2392,36 +2213,6 @@
 
             // Update meal tracker
             renderMealTracker();
-        }
-
-        function updateBadBehaviorButtons() {
-            const todayLog = getTodayLog();
-            const behaviors = ['instagram', 'twitter', 'sugar', 'junkfood'];
-            behaviors.forEach(behavior => {
-                const btn = document.getElementById(`${behavior}Btn`);
-                if (btn) {
-                    if (todayLog[behavior]) {
-                        btn.classList.add('triggered');
-                    } else {
-                        btn.classList.remove('triggered');
-                    }
-                }
-            });
-        }
-
-        function toggleBadBehavior(type) {
-            const todayLog = getTodayLog();
-            todayLog[type] = !todayLog[type];
-            saveData();
-            updateBadBehaviorButtons();
-
-            if (todayLog[type]) {
-                // Deduct XP for bad behaviors
-                appData.user.xp = Math.max(0, appData.user.xp - 25);
-                saveData();
-                updateHeader();
-                showNotification(`-25 XP (${type} used)`, 'streak');
-            }
         }
 
         function addSalt(amount) {
@@ -2446,23 +2237,7 @@
             todayLog.ouraScore = parseInt(document.getElementById('ouraScoreInput').value) || 0;
 
             saveData();
-            addXP(5);
             showNotification('Sleep data logged!', 'success');
-        }
-
-        function quickLog(type) {
-            const todayLog = getTodayLog();
-            if (type === 'water' || type === 'salt') {
-                todayLog[type]++;
-            } else {
-                todayLog[type] = !todayLog[type];
-            }
-            saveData();
-            renderMorning();
-
-            if (type !== 'water' && type !== 'salt' && todayLog[type]) {
-                addXP(2);
-            }
         }
 
         function addWater(amount) {
@@ -2470,13 +2245,6 @@
             todayLog.water = Math.max(0, todayLog.water + amount);
             saveData();
             renderMorning();
-
-            if (amount > 0) {
-                // Check for hydration achievement
-                if (todayLog.water >= 12 && !appData.user.achievements.includes('hydration_hero')) {
-                    checkAchievements();
-                }
-            }
         }
 
         function updateWaterFromSlider(value) {
@@ -2486,9 +2254,6 @@
             todayLog.water = nextValue;
             saveData();
             renderMorning();
-            if (todayLog.water >= 12 && !appData.user.achievements.includes('hydration_hero')) {
-                checkAchievements();
-            }
         }
 
         function saveVitals() {
@@ -2517,8 +2282,6 @@
             document.getElementById('systolic').value = '';
             document.getElementById('diastolic').value = '';
 
-            addXP(10);
-            updateStreak();
             saveData();
             showNotification('Vitals logged!', 'success');
         }
@@ -2540,7 +2303,6 @@
             });
 
             saveData();
-            checkAchievements();
         }
 
         // Auto-save symptoms when feeling changes (if the slider is present)
@@ -2592,7 +2354,6 @@
             if (task) {
                 task.completed = !task.completed;
                 if (task.completed) {
-                    addXP(task.xpValue);
                     checkAllTasksComplete();
                 }
                 saveData();
@@ -2720,7 +2481,6 @@
             };
 
             saveData();
-            addXP(5);
             showNotification('Meals logged!', 'success');
         }
 
@@ -2733,7 +2493,6 @@
                     </div>
                     <span class="task-text">${task.title}</span>
                     <span style="font-size: 0.8rem; color: var(--text-muted);">${categoryIcon}</span>
-                    <span class="task-xp">+${task.xpValue}</span>
                     <button class="task-delete" onclick="deleteTask('${task.id}')">&#128465;</button>
                 </div>
             `;
@@ -2799,7 +2558,6 @@
                 date: new Date().toISOString()
             });
 
-            addXP(5);
             saveData();
             closeConsumptionModal();
             renderConsumption();
@@ -2936,8 +2694,6 @@
                     content,
                     mood: selectedMood
                 });
-                addXP(15);
-                updateStreak();
             }
 
             saveData();
@@ -2971,7 +2727,6 @@
                 date: new Date().toISOString()
             });
 
-            addXP(5);
             saveData();
             closeNoteModal();
             renderResearch();
@@ -3668,7 +3423,6 @@
                 appData.yearlyItems[category].push(item);
             }
 
-            addXP(5);
             saveData();
             closeYearItemModal();
             renderYearlyTracker();
@@ -3751,10 +3505,7 @@
 
         // ==================== INIT ====================
         function init() {
-            updateStreak();
-            updateHeader();
             renderMorning();
-            checkAchievements();
 
             // Set default tier selection
             selectTier('B');
