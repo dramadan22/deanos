@@ -1,0 +1,42 @@
+name: Weekly Nutrition Analysis
+
+on:
+  schedule:
+    - cron: "0 14 * * 6"  # 6am PST (14:00 UTC) every Saturday
+  workflow_dispatch:
+
+jobs:
+  analyze-nutrition:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Run nutrition analysis
+        run: python scripts/analyze_nutrition.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GIST_ID: ${{ secrets.NUTRITION_GIST_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nutrition-report.json
+          git commit -m "Update weekly nutrition analysis"
+          git push

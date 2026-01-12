@@ -1435,6 +1435,11 @@
                     <span class="sidebar-icon">&#128197;</span> 2026 Tracker
                 </button>
             </div>
+            <div class="sidebar-section" style="margin-top: auto;">
+                <button class="sidebar-btn" data-view="settings">
+                    <span class="sidebar-icon">&#9881;</span> Settings
+                </button>
+            </div>
         </nav>
 
         <!-- Content -->
@@ -1450,7 +1455,6 @@
                     <div class="card" id="vitalsCard">
                         <div class="card-header">
                             <div class="card-title">&#128147; Morning Vitals</div>
-                            <span class="task-xp">+10 XP</span>
                         </div>
                         <div class="card-body">
                             <div class="vitals-grid">
@@ -1658,7 +1662,7 @@
                             <button class="mood-btn" data-mood="5">&#128513;</button>
                         </div>
                         <textarea class="journal-textarea" id="journalContent" placeholder="How are you feeling today? What's on your mind?"></textarea>
-                        <button class="btn btn-primary" onclick="saveJournal()" style="margin-top: 1rem;">Save Entry (+15 XP)</button>
+                        <button class="btn btn-primary" onclick="saveJournal()" style="margin-top: 1rem;">Save Entry </button>
                     </div>
                 </div>
             </div>
@@ -1735,6 +1739,20 @@
                         <div class="empty-icon">&#127869;</div>
                         <p>Loading your weekly meal plan...</p>
                         <p style="font-size: 0.85rem; margin-top: 0.5rem;">High protein, quick meals (&lt;30 min), Monday-Friday</p>
+                    </div>
+                </div>
+
+                <!-- Weekly Nutrition Report -->
+                <div class="card" style="margin-top: 1.5rem;" id="nutritionReportCard">
+                    <div class="card-header">
+                        <div class="card-title">&#128202; Weekly Nutrition Analysis</div>
+                        <span id="nutritionReportDate" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+                    </div>
+                    <div class="card-body" id="nutritionReportContent">
+                        <div class="empty-state">
+                            <p style="color: var(--text-secondary);">No nutrition report yet</p>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log your meals daily and connect GitHub sync in Settings to receive weekly insights every Saturday.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -1859,6 +1877,54 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Settings View -->
+            <div class="module-view" id="settingsView">
+                <div class="view-header">
+                    <h2 class="view-title">&#9881; Settings</h2>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">&#128274; Nutrition Analysis Sync</div>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            To enable weekly nutrition analysis, connect a GitHub Personal Access Token. Your meal logs will sync to a private Gist, then analyzed by Claude AI every Saturday morning.
+                        </p>
+                        <div class="form-group">
+                            <label class="form-label">GitHub Personal Access Token</label>
+                            <input type="password" class="input-field" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                            <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                                Create at github.com/settings/tokens with "gist" scope only. Stored locally in your browser.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Gist ID (auto-created if empty)</label>
+                            <input type="text" class="input-field" id="gistId" placeholder="Will be created automatically">
+                            <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                                Leave blank - a private gist will be created on first sync.
+                            </small>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                            <button class="btn btn-primary" onclick="saveGitHubSettings()">Save Settings</button>
+                            <button class="btn btn-secondary" onclick="testGistSync()">Test Sync</button>
+                        </div>
+                        <div id="syncStatus" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128203; Sync Status</div>
+                    </div>
+                    <div class="card-body">
+                        <div id="lastSyncInfo">
+                            <p style="color: var(--text-secondary);">No sync performed yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -1942,7 +2008,7 @@
             </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeConsumptionModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addConsumption()">Add (+5 XP)</button>
+                <button class="btn btn-primary" onclick="addConsumption()">Add </button>
             </div>
         </div>
     </div>
@@ -1978,7 +2044,7 @@
             </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeNoteModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addNote()">Add Note (+5 XP)</button>
+                <button class="btn btn-primary" onclick="addNote()">Add Note </button>
             </div>
         </div>
     </div>
@@ -2182,6 +2248,7 @@
             else if (viewName === 'workouts') renderWorkouts();
             else if (viewName === 'recipes') renderRecipes();
             else if (viewName === 'yearlyTracker') renderYearlyTracker();
+            else if (viewName === 'settings') renderSettings();
         }
 
         document.querySelectorAll('.sidebar-btn').forEach(btn => {
@@ -2482,6 +2549,16 @@
 
             saveData();
             showNotification('Meals logged!', 'success');
+
+            // Auto-sync to gist if configured
+            const settings = getGitHubSettings();
+            if (settings.token) {
+                syncMealsToGist().then(result => {
+                    if (result.success) {
+                        showNotification('Synced to cloud', 'success');
+                    }
+                });
+            }
         }
 
         function renderTaskItem(task) {
@@ -3282,6 +3359,11 @@
                 // Render RSS recipes in supplementary section
                 renderRSSRecipes(feed.items || []);
             });
+
+            // Load and render nutrition report
+            loadNutritionReport().then(report => {
+                renderNutritionReport(report);
+            });
         }
 
         function renderRSSRecipes(items) {
@@ -3501,6 +3583,243 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        // ==================== GITHUB GIST SYNC ====================
+        function getGitHubSettings() {
+            return {
+                token: localStorage.getItem('deanOS_githubToken') || '',
+                gistId: localStorage.getItem('deanOS_gistId') || ''
+            };
+        }
+
+        function saveGitHubSettings() {
+            const token = document.getElementById('githubToken').value.trim();
+            const gistId = document.getElementById('gistId').value.trim();
+
+            if (token) {
+                localStorage.setItem('deanOS_githubToken', token);
+            }
+            if (gistId) {
+                localStorage.setItem('deanOS_gistId', gistId);
+            }
+
+            showNotification('GitHub settings saved!', 'success');
+            updateSyncStatus();
+        }
+
+        function renderSettings() {
+            const settings = getGitHubSettings();
+            const tokenInput = document.getElementById('githubToken');
+            const gistInput = document.getElementById('gistId');
+
+            if (tokenInput && settings.token) {
+                tokenInput.value = settings.token;
+            }
+            if (gistInput && settings.gistId) {
+                gistInput.value = settings.gistId;
+            }
+
+            updateSyncStatus();
+        }
+
+        function updateSyncStatus() {
+            const lastSync = localStorage.getItem('deanOS_lastMealSync');
+            const container = document.getElementById('lastSyncInfo');
+            if (!container) return;
+
+            if (lastSync) {
+                const date = new Date(lastSync);
+                container.innerHTML = `
+                    <p><strong>Last sync:</strong> ${date.toLocaleString()}</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Meals are synced automatically when you save them.</p>
+                `;
+            } else {
+                container.innerHTML = `<p style="color: var(--text-secondary);">No sync performed yet</p>`;
+            }
+        }
+
+        function getWeekMealLogs() {
+            const logs = [];
+            const today = new Date();
+
+            // Get last 7 days of meal logs
+            for (let i = 1; i <= 7; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const log = appData.dailyLogs[dateStr];
+
+                if (log && log.meals) {
+                    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+                    logs.push({
+                        date: dateStr,
+                        day: dayName,
+                        meals: log.meals
+                    });
+                }
+            }
+
+            return logs.reverse(); // Oldest first
+        }
+
+        async function syncMealsToGist() {
+            const settings = getGitHubSettings();
+            if (!settings.token) {
+                return { success: false, error: 'No GitHub token configured' };
+            }
+
+            const mealLogs = getWeekMealLogs();
+            const content = JSON.stringify({
+                updated: new Date().toISOString(),
+                weekOf: new Date().toISOString().split('T')[0],
+                meals: mealLogs
+            }, null, 2);
+
+            try {
+                let gistId = settings.gistId;
+
+                if (!gistId) {
+                    // Create new gist
+                    const createResponse = await fetch('https://api.github.com/gists', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `token ${settings.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            description: 'DeanOS Meal Logs - Nutrition Analysis',
+                            public: false,
+                            files: {
+                                'meal-logs.json': { content }
+                            }
+                        })
+                    });
+
+                    if (!createResponse.ok) {
+                        throw new Error(`Failed to create gist: ${createResponse.status}`);
+                    }
+
+                    const gistData = await createResponse.json();
+                    gistId = gistData.id;
+                    localStorage.setItem('deanOS_gistId', gistId);
+                    document.getElementById('gistId').value = gistId;
+                } else {
+                    // Update existing gist
+                    const updateResponse = await fetch(`https://api.github.com/gists/${gistId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `token ${settings.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            files: {
+                                'meal-logs.json': { content }
+                            }
+                        })
+                    });
+
+                    if (!updateResponse.ok) {
+                        throw new Error(`Failed to update gist: ${updateResponse.status}`);
+                    }
+                }
+
+                localStorage.setItem('deanOS_lastMealSync', new Date().toISOString());
+                updateSyncStatus();
+                return { success: true, gistId };
+
+            } catch (error) {
+                console.error('Gist sync error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function testGistSync() {
+            const statusEl = document.getElementById('syncStatus');
+            statusEl.innerHTML = '<p style="color: var(--blue-soft);">Testing sync...</p>';
+
+            const result = await syncMealsToGist();
+
+            if (result.success) {
+                statusEl.innerHTML = `
+                    <p style="color: var(--forest);">Sync successful!</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Gist ID: ${result.gistId}</p>
+                `;
+            } else {
+                statusEl.innerHTML = `<p style="color: var(--red-soft);">Sync failed: ${result.error}</p>`;
+            }
+        }
+
+        // ==================== NUTRITION REPORT ====================
+        async function loadNutritionReport() {
+            try {
+                const response = await fetch('nutrition-report.json');
+                if (!response.ok) return null;
+                return await response.json();
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function renderNutritionReport(report) {
+            const container = document.getElementById('nutritionReportContent');
+            const dateEl = document.getElementById('nutritionReportDate');
+
+            if (!report || !report.analysis) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p style="color: var(--text-secondary);">No nutrition report yet</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log your meals daily and connect GitHub sync in Settings to receive weekly insights every Saturday.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (dateEl && report.weekOf) {
+                dateEl.textContent = `Week of ${new Date(report.weekOf).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`;
+            }
+
+            const analysis = report.analysis;
+
+            let html = '';
+
+            // What you did well
+            if (analysis.strengths && analysis.strengths.length > 0) {
+                html += `
+                    <div style="margin-bottom: 1.25rem;">
+                        <h4 style="color: var(--forest); margin-bottom: 0.5rem; font-size: 1rem;">What You Did Well</h4>
+                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
+                            ${analysis.strengths.map(s => `<li style="margin-bottom: 0.3rem;">${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Areas to improve
+            if (analysis.gaps && analysis.gaps.length > 0) {
+                html += `
+                    <div style="margin-bottom: 1.25rem;">
+                        <h4 style="color: var(--amber); margin-bottom: 0.5rem; font-size: 1rem;">Nutrient Gaps to Address</h4>
+                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
+                            ${analysis.gaps.map(g => `<li style="margin-bottom: 0.3rem;">${g}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Meal prep suggestions
+            if (analysis.suggestions && analysis.suggestions.length > 0) {
+                html += `
+                    <div>
+                        <h4 style="color: var(--blue-soft); margin-bottom: 0.5rem; font-size: 1rem;">Meal Prep Suggestions</h4>
+                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
+                            ${analysis.suggestions.map(s => `<li style="margin-bottom: 0.3rem;">${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html || '<p style="color: var(--text-secondary);">Report data incomplete</p>';
         }
 
         // ==================== INIT ====================
