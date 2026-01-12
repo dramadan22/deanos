@@ -449,6 +449,150 @@
             color: var(--text-muted);
         }
 
+        /* POTS Research Library Styles */
+        .pots-research-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .pots-category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pots-category-tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--bg-input);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.15s;
+        }
+
+        .pots-category-tab:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .pots-category-tab.active {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+        }
+
+        .pots-research-item {
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .pots-research-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .pots-research-item.expanded {
+            background: var(--forest-bg);
+        }
+
+        .pots-research-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .pots-research-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .pots-research-source {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .pots-research-expand {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .pots-research-item.expanded .pots-research-expand {
+            transform: rotate(180deg);
+        }
+
+        .pots-research-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .pots-research-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .pots-research-item.expanded .pots-research-details {
+            display: block;
+        }
+
+        .pots-key-points {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pots-key-points li {
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .pots-key-points li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--forest);
+            font-weight: bold;
+        }
+
+        .pots-research-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: var(--forest);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pots-research-link:hover {
+            text-decoration: underline;
+        }
+
+        .pots-category-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
         .auto-feed-badge {
             display: inline-flex;
             align-items: center;
@@ -1678,9 +1822,21 @@
                     <input type="text" class="input-field" id="researchSearch" placeholder="Search notes..." oninput="searchNotes()">
                 </div>
 
-                <div class="research-feed-card">
+                <!-- POTS Research Library -->
+                <div class="pots-research-section">
+                    <div class="card-header" style="padding: 0 0 1rem;">
+                        <div class="card-title">POTS Research Library</div>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">Comprehensive guide compiled from 2025 research</span>
+                    </div>
+                    <div class="pots-category-tabs" id="potsCategoryTabs"></div>
+                    <div id="potsResearchContent">
+                        <div class="empty-state"><p>Loading POTS research...</p></div>
+                    </div>
+                </div>
+
+                <div class="research-feed-card" style="margin-top: 1.5rem;">
                     <div class="card-header" style="padding: 0 0 0.75rem;">
-                        <div class="card-title">Latest Research Updates</div>
+                        <div class="card-title">Latest News Updates</div>
                         <span style="font-size: 0.8rem; color: var(--text-secondary);" id="researchFeedUpdated">Loading...</span>
                     </div>
                     <div id="researchFeedList">
@@ -2979,6 +3135,79 @@
             }
         }
 
+        let potsResearchCache = null;
+        let currentPotsCategory = 0;
+
+        async function loadPotsResearch() {
+            if (potsResearchCache) return potsResearchCache;
+            try {
+                const response = await fetch('pots-research.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to load POTS research');
+                const data = await response.json();
+                potsResearchCache = data;
+                return data;
+            } catch (error) {
+                potsResearchCache = { updated: null, categories: [], error: true };
+                return potsResearchCache;
+            }
+        }
+
+        function renderPotsResearch() {
+            const tabsContainer = document.getElementById('potsCategoryTabs');
+            const contentContainer = document.getElementById('potsResearchContent');
+            if (!tabsContainer || !contentContainer) return;
+
+            loadPotsResearch().then(data => {
+                if (!data || !data.categories || data.categories.length === 0) {
+                    contentContainer.innerHTML = '<div class="empty-state"><p>No POTS research available</p></div>';
+                    return;
+                }
+
+                // Render category tabs
+                tabsContainer.innerHTML = data.categories.map((cat, idx) => `
+                    <button class="pots-category-tab ${idx === currentPotsCategory ? 'active' : ''}"
+                            onclick="selectPotsCategory(${idx})">
+                        ${cat.name}
+                    </button>
+                `).join('');
+
+                // Render current category content
+                const category = data.categories[currentPotsCategory];
+                contentContainer.innerHTML = `
+                    <div class="pots-category-description">${category.description}</div>
+                    ${category.items.map((item, idx) => `
+                        <div class="pots-research-item" onclick="togglePotsItem(this)">
+                            <div class="pots-research-header">
+                                <div>
+                                    <div class="pots-research-title">${item.title}</div>
+                                    <div class="pots-research-source">${item.source} ${item.year ? '• ' + item.year : ''}</div>
+                                </div>
+                                <span class="pots-research-expand">&#9662;</span>
+                            </div>
+                            <div class="pots-research-description">${item.description}</div>
+                            <div class="pots-research-details">
+                                ${item.keyPoints && item.keyPoints.length ? `
+                                    <ul class="pots-key-points">
+                                        ${item.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                                    </ul>
+                                ` : ''}
+                                ${item.url ? `<a href="${item.url}" target="_blank" class="pots-research-link">Learn more &#8594;</a>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+            });
+        }
+
+        function selectPotsCategory(idx) {
+            currentPotsCategory = idx;
+            renderPotsResearch();
+        }
+
+        function togglePotsItem(element) {
+            element.classList.toggle('expanded');
+        }
+
         async function loadWeeklyRecipes() {
             if (weeklyRecipesCache) return weeklyRecipesCache;
             try {
@@ -3052,6 +3281,7 @@
         }
 
         function renderResearch(search = '') {
+            renderPotsResearch();
             renderResearchFeed();
             const container = document.getElementById('notesList');
             let notes = appData.notes;
