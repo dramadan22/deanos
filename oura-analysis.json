@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-12T22:27:09.622500+00:00",
+  "updated": "2026-01-12T22:43:17.091052+00:00",
   "data_range": "2025-12-30 to 2026-01-12",
   "days_analyzed": 14,
   "summary_stats": {
@@ -7,10 +7,10 @@
     "date_range": "2025-12-30 to 2026-01-12",
     "sleep": {
       "avg_score": 80.4,
-      "avg_hours": 5.4,
-      "avg_deep_hours": 1.0,
+      "avg_hours": 7.5,
+      "avg_deep_hours": 1.2,
       "avg_rem_hours": 1.3,
-      "avg_efficiency": 74.9,
+      "avg_efficiency": 80.5,
       "scores": [
         83,
         81,
@@ -69,8 +69,8 @@
       ]
     },
     "heart": {
-      "avg_hrv": 59.5,
-      "avg_resting_hr": 51.0,
+      "avg_hrv": 55.4,
+      "avg_resting_hr": 49.0,
       "hrv_values": [
         null,
         51,
@@ -81,32 +81,32 @@
         50,
         53,
         57,
-        null,
-        97,
-        null,
-        66,
+        52,
+        57,
+        68,
+        52,
         62
       ]
     },
     "recovery": {
       "avg_temp_deviation": 0.1,
-      "avg_breath_rate": 15.2
+      "avg_breath_rate": 14.9
     },
     "workouts_count": 14
   },
   "analysis": {
-    "overall_assessment": "Your recovery metrics are strong with an excellent average readiness score of 80.6 and good HRV at 59.5 ms, indicating your autonomic nervous system is functioning well. However, your sleep duration is significantly below optimal at just 5.4 hours average (though recent days show 7.2-7.8 hours), which is particularly concerning for POTS management where consistent, adequate sleep is crucial for autonomic stability.",
+    "overall_assessment": "Your health metrics show strong consistency with excellent sleep scores averaging 80.4/100 and solid readiness scores at 80.6/100. Your resting heart rate of 49 bpm is well-controlled, though your HRV shows some variability (ranging from 50-63 ms) that warrants attention for optimal POTS management.",
     "whats_going_well": [
-      "Excellent readiness scores averaging 80.6, with recent days showing consistent 77-88 range, indicating good overall recovery capacity",
-      "Strong HRV readings around 50-63 ms in recent days, suggesting your autonomic nervous system is responding well to current management strategies",
-      "Consistent activity levels with 14 workouts completed and reasonable step counts (3570-8526 daily), showing you're maintaining good movement without overexertion"
+      "Sleep duration is consistently excellent at 7.5 hours average with scores consistently in the 80s (76-83/100), providing crucial autonomic nervous system recovery time",
+      "Resting heart rate remains well-controlled averaging 49 bpm with minimal daily variation (47-53 bpm), indicating good cardiovascular stability for POTS",
+      "Activity levels are well-balanced averaging 6,068 steps with 14 workouts completed, showing you're maintaining fitness without overexertion"
     ],
     "areas_to_improve": [
-      "Sleep duration needs immediate attention - while recent 7+ hour nights are excellent, the 5.4 hour average suggests earlier periods had insufficient sleep that's critical for POTS symptom management",
-      "Sleep efficiency at 74.9% could be optimized through better sleep hygiene, as POTS patients need high-quality restorative sleep for autonomic regulation",
-      "Deep sleep averaging only 1.0 hour is below the typical 1.5-2 hour target needed for physical recovery and autonomic nervous system restoration"
+      "Deep sleep averages only 1.2 hours and shows inconsistency (0.9-1.8h), focus on sleep hygiene and earlier bedtime to improve restorative sleep phases",
+      "HRV variability is concerning with a 26% fluctuation (50-63 ms), indicating autonomic instability - prioritize stress management and consistent sleep/wake times",
+      "Sleep efficiency at 80.5% suggests frequent awakenings, consider reducing evening stimulants and optimizing bedroom temperature for deeper, more continuous sleep"
     ],
-    "pots_specific_insights": "Your stable resting heart rate (47-53 bpm range) and consistent HRV suggest your POTS is well-managed currently, but the sleep deficits could trigger symptom flares if not addressed. The recent improvement to 7+ hours nightly is encouraging for maintaining autonomic stability.",
-    "focus_for_next_week": "Maintain the recent 7+ hour sleep pattern consistently every night, as this appears to be supporting your strong readiness scores and stable heart rate metrics essential for POTS management"
+    "pots_specific_insights": "Your controlled resting heart rate is excellent for POTS management, but the HRV fluctuations suggest your autonomic nervous system is still experiencing some instability. The consistent sleep scores are providing good foundational support for your condition.",
+    "focus_for_next_week": "Prioritize consistent bedtimes and wake times within 30 minutes daily to stabilize your circadian rhythm and reduce HRV variability, which is crucial for POTS symptom management"
   }
 }
