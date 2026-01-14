@@ -1582,6 +1582,21 @@
                 left: 0;
             }
 
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
             .content-area {
                 padding: 1rem;
                 margin-left: 0;
@@ -1720,6 +1735,8 @@
         </button>
         <div class="logo">Dean<span>OS</span></div>
     </header>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
     <div class="main-container">
         <!-- Sidebar -->
@@ -5327,31 +5344,37 @@
         function toggleMobileMenu() {
             const sidebar = document.querySelector('.sidebar');
             const menuBtn = document.querySelector('.mobile-menu-btn');
-            sidebar.classList.toggle('mobile-open');
-            menuBtn.classList.toggle('active');
+            const overlay = document.getElementById('mobileOverlay');
+
+            const isOpen = sidebar.classList.contains('mobile-open');
+
+            if (isOpen) {
+                sidebar.classList.remove('mobile-open');
+                menuBtn.classList.remove('active');
+                overlay.classList.remove('active');
+            } else {
+                sidebar.classList.add('mobile-open');
+                menuBtn.classList.add('active');
+                overlay.classList.add('active');
+            }
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const overlay = document.getElementById('mobileOverlay');
+            sidebar.classList.remove('mobile-open');
+            menuBtn.classList.remove('active');
+            overlay.classList.remove('active');
         }
 
         // Close mobile menu when clicking a nav item
         document.querySelectorAll('.sidebar-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
-                    document.querySelector('.sidebar').classList.remove('mobile-open');
-                    document.querySelector('.mobile-menu-btn').classList.remove('active');
+                    closeMobileMenu();
                 }
             });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const sidebar = document.querySelector('.sidebar');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            if (window.innerWidth <= 768 &&
-                sidebar.classList.contains('mobile-open') &&
-                !sidebar.contains(e.target) &&
-                !menuBtn.contains(e.target)) {
-                sidebar.classList.remove('mobile-open');
-                menuBtn.classList.remove('active');
-            }
         });
     </script>
     </div><!-- End mainApp -->
