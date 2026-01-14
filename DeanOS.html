@@ -2177,29 +2177,30 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">&#128274; Nutrition Analysis Sync</div>
+                        <div class="card-title">&#9729; Cloud Sync</div>
                     </div>
                     <div class="card-body">
                         <p style="margin-bottom: 1rem; color: var(--text-secondary);">
-                            To enable weekly nutrition analysis, connect a GitHub Personal Access Token. Your meal logs will sync to a private Gist, then analyzed by Claude AI every Saturday morning.
+                            Sync all your data (tasks, notes, consumption, daily logs) across devices using a private GitHub Gist. Your data stays private and accessible from any device.
                         </p>
                         <div class="form-group">
                             <label class="form-label">GitHub Personal Access Token</label>
                             <input type="password" class="input-field" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
                             <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
-                                Create at github.com/settings/tokens with "gist" scope only. Stored locally in your browser.
+                                Create at github.com/settings/tokens with "gist" scope only.
                             </small>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Gist ID (auto-created if empty)</label>
                             <input type="text" class="input-field" id="gistId" placeholder="Will be created automatically">
                             <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
-                                Leave blank - a private gist will be created on first sync.
+                                Leave blank on first setup. Copy this ID to other devices to sync.
                             </small>
                         </div>
-                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
                             <button class="btn btn-primary" onclick="saveGitHubSettings()">Save Settings</button>
-                            <button class="btn btn-secondary" onclick="testGistSync()">Test Sync</button>
+                            <button class="btn btn-secondary" onclick="syncAllDataToCloud()">Sync to Cloud</button>
+                            <button class="btn btn-secondary" onclick="restoreFromCloud()">Restore from Cloud</button>
                         </div>
                         <div id="syncStatus" style="margin-top: 1rem;"></div>
                     </div>
@@ -2500,6 +2501,20 @@
 
         function saveData() {
             localStorage.setItem('deanOSData', JSON.stringify(appData));
+            // Debounced auto-sync to cloud
+            scheduleCloudSync();
+        }
+
+        let cloudSyncTimeout = null;
+        function scheduleCloudSync() {
+            // Debounce: wait 30 seconds after last change before syncing
+            if (cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
+            cloudSyncTimeout = setTimeout(() => {
+                const settings = getGitHubSettings();
+                if (settings.token && settings.gistId) {
+                    syncAllDataToCloud().catch(err => console.log('Auto-sync skipped:', err));
+                }
+            }, 30000); // 30 second debounce
         }
 
         let appData = loadData();
@@ -4838,16 +4853,26 @@
         }
 
         function updateSyncStatus() {
-            const lastSync = localStorage.getItem('deanOS_lastMealSync');
+            const lastCloudSync = localStorage.getItem('deanOS_lastCloudSync');
+            const lastMealSync = localStorage.getItem('deanOS_lastMealSync');
             const container = document.getElementById('lastSyncInfo');
             if (!container) return;
 
-            if (lastSync) {
-                const date = new Date(lastSync);
-                container.innerHTML = `
-                    <p><strong>Last sync:</strong> ${date.toLocaleString()}</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Meals are synced automatically when you save them.</p>
-                `;
+            let html = '';
+
+            if (lastCloudSync) {
+                const date = new Date(lastCloudSync);
+                html += `<p><strong>Last full sync:</strong> ${date.toLocaleString()}</p>`;
+            }
+
+            if (lastMealSync) {
+                const date = new Date(lastMealSync);
+                html += `<p><strong>Last meal sync:</strong> ${date.toLocaleString()}</p>`;
+            }
+
+            if (html) {
+                html += `<p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Use "Sync to Cloud" to backup all data. Use "Restore from Cloud" on new devices.</p>`;
+                container.innerHTML = html;
             } else {
                 container.innerHTML = `<p style="color: var(--text-secondary);">No sync performed yet</p>`;
             }
@@ -4961,6 +4986,158 @@
                 `;
             } else {
                 statusEl.innerHTML = `<p style="color: var(--red-soft);">Sync failed: ${result.error}</p>`;
+            }
+        }
+
+        // ==================== FULL CLOUD SYNC ====================
+        async function syncAllDataToCloud() {
+            const settings = getGitHubSettings();
+            const statusEl = document.getElementById('syncStatus');
+
+            if (!settings.token) {
+                statusEl.innerHTML = '<p style="color: var(--red-soft);">Please add your GitHub token first</p>';
+                return;
+            }
+
+            statusEl.innerHTML = '<p style="color: var(--blue-soft);">Syncing all data to cloud...</p>';
+
+            const dataToSync = {
+                version: 1,
+                updated: new Date().toISOString(),
+                appData: appData
+            };
+
+            const content = JSON.stringify(dataToSync, null, 2);
+
+            try {
+                let gistId = settings.gistId;
+
+                if (!gistId) {
+                    // Create new gist
+                    const createResponse = await fetch('https://api.github.com/gists', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `token ${settings.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            description: 'DeanOS Data Backup',
+                            public: false,
+                            files: {
+                                'deanos-data.json': { content },
+                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) }
+                            }
+                        })
+                    });
+
+                    if (!createResponse.ok) {
+                        throw new Error(`Failed to create gist: ${createResponse.status}`);
+                    }
+
+                    const gistData = await createResponse.json();
+                    gistId = gistData.id;
+                    localStorage.setItem('deanOS_gistId', gistId);
+                    document.getElementById('gistId').value = gistId;
+                } else {
+                    // Update existing gist
+                    const updateResponse = await fetch(`https://api.github.com/gists/${gistId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `token ${settings.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            files: {
+                                'deanos-data.json': { content },
+                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) }
+                            }
+                        })
+                    });
+
+                    if (!updateResponse.ok) {
+                        throw new Error(`Failed to update gist: ${updateResponse.status}`);
+                    }
+                }
+
+                localStorage.setItem('deanOS_lastCloudSync', new Date().toISOString());
+                updateSyncStatus();
+                statusEl.innerHTML = `
+                    <p style="color: var(--forest);">All data synced to cloud!</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Gist ID: ${gistId}</p>
+                `;
+                showNotification('Data synced to cloud!', 'success');
+
+            } catch (error) {
+                console.error('Cloud sync error:', error);
+                statusEl.innerHTML = `<p style="color: var(--red-soft);">Sync failed: ${error.message}</p>`;
+                showNotification('Sync failed', 'error');
+            }
+        }
+
+        async function restoreFromCloud() {
+            const settings = getGitHubSettings();
+            const statusEl = document.getElementById('syncStatus');
+
+            if (!settings.token) {
+                statusEl.innerHTML = '<p style="color: var(--red-soft);">Please add your GitHub token first</p>';
+                return;
+            }
+
+            if (!settings.gistId) {
+                statusEl.innerHTML = '<p style="color: var(--red-soft);">Please enter your Gist ID to restore from</p>';
+                return;
+            }
+
+            if (!confirm('This will replace all local data with cloud data. Continue?')) {
+                return;
+            }
+
+            statusEl.innerHTML = '<p style="color: var(--blue-soft);">Restoring from cloud...</p>';
+
+            try {
+                const response = await fetch(`https://api.github.com/gists/${settings.gistId}`, {
+                    headers: {
+                        'Authorization': `token ${settings.token}`,
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch gist: ${response.status}`);
+                }
+
+                const gistData = await response.json();
+                const dataFile = gistData.files['deanos-data.json'];
+
+                if (!dataFile) {
+                    throw new Error('No DeanOS data found in this Gist');
+                }
+
+                const cloudData = JSON.parse(dataFile.content);
+
+                if (!cloudData.appData) {
+                    throw new Error('Invalid data format');
+                }
+
+                // Restore the data
+                appData = cloudData.appData;
+                saveData();
+
+                localStorage.setItem('deanOS_lastCloudSync', new Date().toISOString());
+                updateSyncStatus();
+
+                statusEl.innerHTML = `
+                    <p style="color: var(--forest);">Data restored from cloud!</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Last updated: ${new Date(cloudData.updated).toLocaleString()}</p>
+                `;
+                showNotification('Data restored from cloud!', 'success');
+
+                // Refresh all views
+                renderMorning();
+
+            } catch (error) {
+                console.error('Cloud restore error:', error);
+                statusEl.innerHTML = `<p style="color: var(--red-soft);">Restore failed: ${error.message}</p>`;
+                showNotification('Restore failed', 'error');
             }
         }
 
