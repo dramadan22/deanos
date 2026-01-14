@@ -1518,6 +1518,99 @@
             color: var(--brown);
         }
 
+        /* Sync Status Button */
+        .sync-status-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            transition: background 0.15s;
+        }
+
+        .sync-status-btn:hover {
+            background: var(--bg-hover);
+        }
+
+        .sync-icon {
+            display: inline-block;
+        }
+
+        .sync-icon.synced {
+            color: var(--forest);
+        }
+
+        .sync-icon.warning {
+            color: var(--amber);
+        }
+
+        .sync-icon.error {
+            color: var(--red-soft);
+        }
+
+        .sync-icon.syncing {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sync Modal */
+        .sync-modal {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 1rem;
+            z-index: 1001;
+            width: 280px;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .sync-modal.active {
+            display: block;
+        }
+
+        .sync-modal-header {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sync-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .sync-modal-status {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .sync-modal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .sync-modal-buttons .btn {
+            flex: 1;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+        }
+
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
@@ -1745,7 +1838,25 @@
             <span></span>
         </button>
         <div class="logo">Dean<span>OS</span></div>
+        <button class="sync-status-btn" id="syncStatusBtn" onclick="showSyncModal()" title="Sync Status">
+            <span class="sync-icon" id="syncIcon">&#9729;</span>
+        </button>
     </header>
+
+    <!-- Sync Modal -->
+    <div class="sync-modal" id="syncModal">
+        <div class="sync-modal-header">
+            <span>&#9729; Cloud Sync</span>
+            <button class="sync-modal-close" onclick="closeSyncModal()">&times;</button>
+        </div>
+        <div class="sync-modal-status" id="syncModalStatus">
+            Checking sync status...
+        </div>
+        <div class="sync-modal-buttons">
+            <button class="btn btn-primary" onclick="quickSync()">Sync Up</button>
+            <button class="btn btn-secondary" onclick="quickRestore()">Pull Down</button>
+        </div>
+    </div>
 
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
@@ -5350,6 +5461,127 @@
                 showApp();
             }
         })();
+
+        // ==================== SYNC STATUS UI ====================
+        function showSyncModal() {
+            const modal = document.getElementById('syncModal');
+            modal.classList.add('active');
+            updateSyncModalStatus();
+        }
+
+        function closeSyncModal() {
+            document.getElementById('syncModal').classList.remove('active');
+        }
+
+        // Close sync modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('syncModal');
+            const btn = document.getElementById('syncStatusBtn');
+            if (modal.classList.contains('active') &&
+                !modal.contains(e.target) &&
+                !btn.contains(e.target)) {
+                closeSyncModal();
+            }
+        });
+
+        function updateSyncModalStatus() {
+            const statusEl = document.getElementById('syncModalStatus');
+            const iconEl = document.getElementById('syncIcon');
+            const settings = getGitHubSettings();
+            const lastSync = localStorage.getItem('deanOS_lastCloudSync');
+
+            if (!settings.token || !settings.gistId) {
+                statusEl.innerHTML = `
+                    <p style="color: var(--amber);">&#9888; Not configured</p>
+                    <p style="margin-top: 0.5rem;">Set up GitHub token in Settings to enable sync.</p>
+                `;
+                iconEl.className = 'sync-icon warning';
+                return;
+            }
+
+            if (lastSync) {
+                const date = new Date(lastSync);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+
+                let timeAgo;
+                if (diffMins < 1) timeAgo = 'just now';
+                else if (diffMins < 60) timeAgo = `${diffMins}m ago`;
+                else if (diffHours < 24) timeAgo = `${diffHours}h ago`;
+                else timeAgo = date.toLocaleDateString();
+
+                statusEl.innerHTML = `
+                    <p><strong>Last sync:</strong> ${timeAgo}</p>
+                    <p style="margin-top: 0.25rem; font-size: 0.8rem;">${date.toLocaleString()}</p>
+                `;
+
+                // Set icon color based on how recent
+                if (diffMins < 5) {
+                    iconEl.className = 'sync-icon synced';
+                } else if (diffHours < 1) {
+                    iconEl.className = 'sync-icon synced';
+                } else {
+                    iconEl.className = 'sync-icon warning';
+                }
+            } else {
+                statusEl.innerHTML = `
+                    <p style="color: var(--amber);">&#9888; Never synced</p>
+                    <p style="margin-top: 0.5rem;">Tap "Sync Up" to backup your data.</p>
+                `;
+                iconEl.className = 'sync-icon warning';
+            }
+        }
+
+        async function quickSync() {
+            const iconEl = document.getElementById('syncIcon');
+            const statusEl = document.getElementById('syncModalStatus');
+            const settings = getGitHubSettings();
+
+            if (!settings.token) {
+                statusEl.innerHTML = '<p style="color: var(--red-soft);">Set up GitHub token in Settings first</p>';
+                return;
+            }
+
+            iconEl.className = 'sync-icon syncing';
+            statusEl.innerHTML = '<p>Syncing to cloud...</p>';
+
+            try {
+                await syncAllDataToCloud();
+                updateSyncModalStatus();
+                showNotification('Synced!', 'success');
+            } catch (err) {
+                statusEl.innerHTML = `<p style="color: var(--red-soft);">Sync failed: ${err.message}</p>`;
+                iconEl.className = 'sync-icon error';
+            }
+        }
+
+        async function quickRestore() {
+            const iconEl = document.getElementById('syncIcon');
+            const statusEl = document.getElementById('syncModalStatus');
+            const settings = getGitHubSettings();
+
+            if (!settings.token || !settings.gistId) {
+                statusEl.innerHTML = '<p style="color: var(--red-soft);">Set up GitHub token and Gist ID in Settings first</p>';
+                return;
+            }
+
+            iconEl.className = 'sync-icon syncing';
+            statusEl.innerHTML = '<p>Pulling from cloud...</p>';
+
+            try {
+                await restoreFromCloud();
+                updateSyncModalStatus();
+                closeSyncModal();
+            } catch (err) {
+                statusEl.innerHTML = `<p style="color: var(--red-soft);">Restore failed: ${err.message}</p>`;
+                iconEl.className = 'sync-icon error';
+            }
+        }
+
+        // Update sync icon on page load
+        setTimeout(updateSyncModalStatus, 500);
 
         // ==================== MOBILE MENU ====================
         function toggleMobileMenu() {
