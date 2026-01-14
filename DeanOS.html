@@ -1572,10 +1572,15 @@
                 top: 0;
                 left: -280px;
                 height: 100vh;
+                height: 100dvh;
                 z-index: 1000;
                 transition: left 0.3s ease;
                 box-shadow: var(--shadow-md);
                 padding-top: 60px;
+                padding-bottom: 20px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
             }
 
             .sidebar.mobile-open {
@@ -1595,6 +1600,12 @@
 
             .mobile-overlay.active {
                 display: block;
+            }
+
+            body.menu-open {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
             }
 
             .content-area {
@@ -5352,10 +5363,12 @@
                 sidebar.classList.remove('mobile-open');
                 menuBtn.classList.remove('active');
                 overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
             } else {
                 sidebar.classList.add('mobile-open');
                 menuBtn.classList.add('active');
                 overlay.classList.add('active');
+                document.body.classList.add('menu-open');
             }
         }
 
@@ -5366,6 +5379,7 @@
             sidebar.classList.remove('mobile-open');
             menuBtn.classList.remove('active');
             overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
         }
 
         // Close mobile menu when clicking a nav item
