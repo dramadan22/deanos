@@ -2945,31 +2945,31 @@
 
     <!-- Edit Meal Modal -->
     <div class="modal-overlay" id="editMealModal">
-        <div class="modal">
+        <div class="modal" style="max-width: 420px;">
             <h3 class="modal-title" id="editMealModalTitle">Edit Meals</h3>
             <div class="form-group" id="editMealDateGroup" style="display: none;">
                 <label class="form-label">Date</label>
                 <input type="date" class="input-field" id="editMealDatePicker">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0.875rem;">
                 <label class="form-label">Breakfast</label>
-                <textarea class="input-field" id="editMealBreakfast" rows="2" placeholder="What did you eat?"></textarea>
+                <input type="text" class="input-field" id="editMealBreakfast" placeholder="What did you eat?">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0.875rem;">
                 <label class="form-label">Lunch</label>
-                <textarea class="input-field" id="editMealLunch" rows="2" placeholder="What did you eat?"></textarea>
+                <input type="text" class="input-field" id="editMealLunch" placeholder="What did you eat?">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0.875rem;">
                 <label class="form-label">Dinner</label>
-                <textarea class="input-field" id="editMealDinner" rows="2" placeholder="What did you eat?"></textarea>
+                <input type="text" class="input-field" id="editMealDinner" placeholder="What did you eat?">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0.875rem;">
                 <label class="form-label">Snacks</label>
-                <textarea class="input-field" id="editMealSnacks" rows="2" placeholder="What did you snack on?"></textarea>
+                <input type="text" class="input-field" id="editMealSnacks" placeholder="What did you snack on?">
             </div>
             <input type="hidden" id="editMealDate">
             <input type="hidden" id="editMealMode" value="edit">
-            <div class="modal-actions">
+            <div class="modal-actions" style="margin-top: 1rem; padding-top: 1rem;">
                 <button class="btn btn-secondary" onclick="closeEditMealModal()">Cancel</button>
                 <button class="btn btn-primary" id="editMealSubmitBtn" onclick="saveEditedMeal()">Save Changes</button>
             </div>
@@ -4230,6 +4230,12 @@
 
             // Overall stats
             const statsContainer = document.getElementById('overallStats');
+            const books = appData.consumption.filter(c => c.type === 'book').length;
+            const movies = appData.consumption.filter(c => c.type === 'movie').length;
+            const tvShows = appData.consumption.filter(c => c.type === 'tv').length;
+            const recipes = appData.consumption.filter(c => c.type === 'recipe').length;
+            const restaurants = appData.consumption.filter(c => c.type === 'restaurant').length;
+
             statsContainer.innerHTML = `
                 <div class="stat-card">
                     <div class="stat-value">${appData.tasks.filter(t => t.completed).length}</div>
@@ -4240,8 +4246,24 @@
                     <div class="stat-label">Notes</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">${appData.consumption.length}</div>
-                    <div class="stat-label">Things Consumed</div>
+                    <div class="stat-value">${books}</div>
+                    <div class="stat-label">Books Read</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${movies}</div>
+                    <div class="stat-label">Movies Watched</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${tvShows}</div>
+                    <div class="stat-label">TV Shows</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${recipes}</div>
+                    <div class="stat-label">Recipes Tried</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${restaurants}</div>
+                    <div class="stat-label">Restaurants</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">${appData.user.streakDays}</div>
