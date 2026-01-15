@@ -1654,23 +1654,38 @@
 
             .header {
                 padding: 0.75rem 1rem;
+                gap: 0.5rem;
             }
 
             .header-stats {
                 display: none;
             }
 
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .sync-status-btn {
+                padding: 0.5rem;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             .sidebar {
                 position: fixed;
                 top: 0;
                 left: -280px;
+                width: 280px;
                 height: 100vh;
                 height: 100dvh;
                 z-index: 1000;
                 transition: left 0.3s ease;
                 box-shadow: var(--shadow-md);
                 padding-top: 60px;
-                padding-bottom: 20px;
+                padding-bottom: env(safe-area-inset-bottom, 20px);
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
                 overscroll-behavior: contain;
@@ -1678,6 +1693,11 @@
 
             .sidebar.mobile-open {
                 left: 0;
+            }
+
+            .sidebar-btn {
+                padding: 0.875rem 1rem;
+                min-height: 48px;
             }
 
             .mobile-overlay {
@@ -1703,6 +1723,7 @@
 
             .content-area {
                 padding: 1rem;
+                padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
                 margin-left: 0;
             }
 
@@ -1712,14 +1733,20 @@
 
             .notes-layout {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .dashboard-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .greeting {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            .date-display {
+                font-size: 0.9rem;
             }
 
             .view-header {
@@ -1728,89 +1755,314 @@
                 gap: 0.75rem;
             }
 
+            .view-title {
+                font-size: 1.25rem;
+            }
+
             .card {
-                padding: 1rem;
+                margin-bottom: 1rem;
+                border-radius: 10px;
             }
 
             .card-header {
-                flex-direction: column;
-                align-items: flex-start;
+                padding: 0.875rem 1rem;
+                flex-direction: row;
+                align-items: center;
                 gap: 0.5rem;
             }
 
+            .card-title {
+                font-size: 0.95rem;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+            /* Better touch targets for buttons */
+            .btn {
+                min-height: 44px;
+                padding: 0.625rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-small {
+                min-height: 38px;
+                padding: 0.5rem 0.875rem;
+                font-size: 0.85rem;
+            }
+
+            /* Quick log improvements */
             .quick-log-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 0.625rem;
+            }
+
+            .quick-log-btn {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.7rem;
+                min-height: 70px;
+                border-radius: 10px;
+            }
+
+            .quick-log-btn span:first-child {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+            }
+
+            /* Form inputs */
+            .input-field, .form-control, select, textarea {
+                min-height: 44px;
+                font-size: 16px; /* Prevents iOS zoom */
+                padding: 0.625rem 0.875rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-label {
+                font-size: 0.85rem;
+                margin-bottom: 0.375rem;
+            }
+
+            /* Modal improvements */
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+
+            .modal {
+                margin: 0;
+                max-height: 90vh;
+                max-height: 90dvh;
+                width: 100%;
+                border-radius: 16px 16px 0 0;
+                padding: 1.25rem;
+                padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .modal-title {
+                font-size: 1.1rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .modal-actions .btn {
+                width: 100%;
+            }
+
+            /* Task list improvements */
+            .task-item {
+                padding: 0.875rem;
+                flex-wrap: nowrap;
+                gap: 0.75rem;
+            }
+
+            .task-checkbox {
+                width: 22px;
+                height: 22px;
+                flex-shrink: 0;
+            }
+
+            .task-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .task-title {
+                font-size: 0.9rem;
+                word-break: break-word;
+            }
+
+            .task-meta {
+                font-size: 0.75rem;
+                flex-wrap: wrap;
+                gap: 0.375rem;
+            }
+
+            .task-actions {
+                flex-shrink: 0;
+                margin-top: 0;
+                width: auto;
+            }
+
+            .task-actions .btn {
+                min-height: 36px;
+                min-width: 36px;
+                padding: 0.375rem;
+            }
+
+            /* Notes improvements */
+            .notes-sidebar {
+                max-height: 180px;
+                margin-bottom: 1rem;
+            }
+
+            .note-card {
+                padding: 0.875rem;
+            }
+
+            .notes-textarea {
+                min-height: 200px;
+                font-size: 16px;
+            }
+
+            #noteTitle {
+                font-size: 16px;
+            }
+
+            /* Stats grid */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 0.875rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+            }
+
+            /* Consumption/Research list */
+            .consumption-item, .research-item {
+                padding: 0.875rem;
+            }
+
+            /* Workout/Recipe cards */
+            .workout-day, .recipe-day {
+                padding: 1rem;
+            }
+
+            /* Settings */
+            .card .form-group:last-child {
+                margin-bottom: 0;
+            }
+
+            /* Table responsiveness */
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.5rem 0.375rem;
+            }
+
+            /* Oura data table */
+            .oura-day-row td {
+                padding: 0.625rem 0.25rem;
+            }
+
+            /* Sync modal */
+            .sync-modal {
+                right: 0.5rem;
+                left: 0.5rem;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-area {
+                padding: 0.75rem;
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .greeting {
+                font-size: 1.25rem;
+            }
+
+            .quick-log-grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.5rem;
             }
 
             .quick-log-btn {
-                padding: 0.5rem;
-                font-size: 0.75rem;
+                min-height: 65px;
+                padding: 0.625rem 0.375rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .sidebar {
+                width: 260px;
+                left: -260px;
+            }
+
+            .card-header {
+                padding: 0.75rem;
+            }
+
+            .card-body {
+                padding: 0.75rem;
+            }
+
+            /* Form row stacking */
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-row .form-group {
+                width: 100%;
+            }
+
+            /* Hydration display */
+            .hydration-count {
+                font-size: 2.5rem;
+            }
+
+            /* Table horizontal scroll */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 500px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            .header {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .quick-log-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .quick-log-btn span:first-child {
                 font-size: 1.25rem;
             }
 
-            .modal-content {
-                margin: 1rem;
-                max-height: calc(100vh - 2rem);
-                width: calc(100% - 2rem);
+            .quick-log-btn {
+                font-size: 0.65rem;
+                min-height: 60px;
             }
 
-            .task-item {
-                flex-wrap: wrap;
-            }
-
-            .task-actions {
-                width: 100%;
-                justify-content: flex-end;
-                margin-top: 0.5rem;
-            }
-
-            .notes-sidebar {
-                max-height: 200px;
-            }
-
-            .notes-textarea {
-                min-height: 250px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* Workout/Recipe cards on mobile */
-            .workout-day, .recipe-day {
+            .modal {
                 padding: 1rem;
-            }
-
-            /* Settings sections */
-            .settings-section {
-                padding: 1rem;
-            }
-
-            /* Table responsiveness */
-            table {
-                font-size: 0.85rem;
-            }
-
-            th, td {
-                padding: 0.5rem 0.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .quick-log-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logo {
-                font-size: 1.25rem;
+                padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
             }
         }
     </style>
