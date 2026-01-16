@@ -2420,6 +2420,19 @@
                             <div class="empty-state"><p>No tasks</p></div>
                         </div>
                     </div>
+                    <!-- Work Completed Tasks -->
+                    <div class="card" style="margin-top: 1.5rem;">
+                        <div class="card-header" style="cursor: pointer;" onclick="toggleCompletedTasks('work')">
+                            <div class="card-title">&#9989; Completed</div>
+                            <span id="workCompletedToggle" style="color: var(--text-muted); font-size: 0.85rem;">Show</span>
+                        </div>
+                        <div class="card-body" id="workCompletedSection" style="display: none;">
+                            <div id="workCompletedList">
+                                <div class="empty-state"><p>No completed work tasks</p></div>
+                            </div>
+                            <button class="btn btn-secondary btn-small" onclick="clearCompletedTasks('work')" style="margin-top: 1rem; display: none;" id="workClearCompletedBtn">Clear All Completed</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="personalTasksSection" style="display: none;">
@@ -2439,19 +2452,18 @@
                             <div class="empty-state"><p>No tasks</p></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Completed Tasks Section -->
-                <div class="card" style="margin-top: 1.5rem;">
-                    <div class="card-header" style="cursor: pointer;" onclick="toggleCompletedTasks()">
-                        <div class="card-title">&#9989; Completed</div>
-                        <span id="completedTasksToggle" style="color: var(--text-muted); font-size: 0.85rem;">Show</span>
-                    </div>
-                    <div class="card-body" id="completedTasksSection" style="display: none;">
-                        <div id="completedTasksList">
-                            <div class="empty-state"><p>No completed tasks</p></div>
+                    <!-- Personal Completed Tasks -->
+                    <div class="card" style="margin-top: 1.5rem;">
+                        <div class="card-header" style="cursor: pointer;" onclick="toggleCompletedTasks('personal')">
+                            <div class="card-title">&#9989; Completed</div>
+                            <span id="personalCompletedToggle" style="color: var(--text-muted); font-size: 0.85rem;">Show</span>
                         </div>
-                        <button class="btn btn-secondary btn-small" onclick="clearCompletedTasks()" style="margin-top: 1rem; display: none;" id="clearCompletedBtn">Clear All Completed</button>
+                        <div class="card-body" id="personalCompletedSection" style="display: none;">
+                            <div id="personalCompletedList">
+                                <div class="empty-state"><p>No completed personal tasks</p></div>
+                            </div>
+                            <button class="btn btn-secondary btn-small" onclick="clearCompletedTasks('personal')" style="margin-top: 1rem; display: none;" id="personalClearCompletedBtn">Clear All Completed</button>
+                        </div>
                     </div>
                 </div>
 
@@ -3415,19 +3427,20 @@
             renderTaskSection('personal', 'short', 'personalShortTasks');
             renderTaskSection('personal', 'long', 'personalLongTasks');
 
-            // Render completed tasks
-            renderCompletedTasks();
+            // Render completed tasks for both categories
+            renderCompletedTasks('work');
+            renderCompletedTasks('personal');
         }
 
-        function renderCompletedTasks() {
-            const container = document.getElementById('completedTasksList');
-            const clearBtn = document.getElementById('clearCompletedBtn');
+        function renderCompletedTasks(category) {
+            const container = document.getElementById(`${category}CompletedList`);
+            const clearBtn = document.getElementById(`${category}ClearCompletedBtn`);
             const completedTasks = appData.tasks
-                .filter(t => t.completed)
+                .filter(t => t.completed && t.category === category)
                 .sort((a, b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0));
 
             if (completedTasks.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>No completed tasks</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>No completed ${category} tasks</p></div>`;
                 if (clearBtn) clearBtn.style.display = 'none';
             } else {
                 container.innerHTML = completedTasks.map(task => `
@@ -3436,7 +3449,7 @@
                         <div class="task-content">
                             <div class="task-title" style="text-decoration: line-through;">${task.title}</div>
                             <div class="task-meta">
-                                <span>${task.category}</span>
+                                <span>${task.term === 'short' ? 'Short Term' : 'Long Term'}</span>
                                 ${task.completedAt ? `<span>Completed ${new Date(task.completedAt).toLocaleDateString()}</span>` : ''}
                             </div>
                         </div>
@@ -3447,9 +3460,9 @@
             }
         }
 
-        function toggleCompletedTasks() {
-            const section = document.getElementById('completedTasksSection');
-            const toggle = document.getElementById('completedTasksToggle');
+        function toggleCompletedTasks(category) {
+            const section = document.getElementById(`${category}CompletedSection`);
+            const toggle = document.getElementById(`${category}CompletedToggle`);
             const isHidden = section.style.display === 'none';
             section.style.display = isHidden ? 'block' : 'none';
             toggle.textContent = isHidden ? 'Hide' : 'Show';
@@ -3467,12 +3480,12 @@
             }
         }
 
-        function clearCompletedTasks() {
-            if (confirm('Delete all completed tasks? This cannot be undone.')) {
-                appData.tasks = appData.tasks.filter(t => !t.completed);
+        function clearCompletedTasks(category) {
+            if (confirm(`Delete all completed ${category} tasks? This cannot be undone.`)) {
+                appData.tasks = appData.tasks.filter(t => !(t.completed && t.category === category));
                 saveData();
                 renderTasks();
-                showNotification('Completed tasks cleared', 'success');
+                showNotification(`Completed ${category} tasks cleared`, 'success');
             }
         }
 

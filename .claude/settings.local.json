@@ -4,7 +4,13 @@
       "Bash(open:*)",
       "Bash(git fetch:*)",
       "Bash(git commit:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(git pull:*)",
+      "Bash(crontab -l:*)",
+      "Bash(git add:*)",
+      "Bash(git push)",
+      "Bash(git stash:*)",
+      "Bash(git mv:*)"
     ]
   }
 }
