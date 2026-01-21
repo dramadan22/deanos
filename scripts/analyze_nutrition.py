@@ -85,28 +85,30 @@ def analyze_with_claude(meal_data):
 
     meals_text = "\n".join(meal_summary)
 
-    prompt = f"""Analyze the following week of meal logs for nutritional patterns. Focus on longevity and health optimization based on research from experts like Peter Attia and Andrew Huberman.
+    prompt = f"""Analyze the following meal logs for nutritional patterns. Focus on longevity and health optimization based on research from experts like Peter Attia and Andrew Huberman.
+
+IMPORTANT: Only analyze the meals that were actually logged. If some days or meals are missing, do NOT flag this as a gap or problem - the user may have simply not logged those meals. Focus your analysis purely on the nutritional content of what WAS recorded.
 
 MEAL LOGS:
 {meals_text}
 
 Based on these meals, provide analysis in the following areas:
 
-1. STRENGTHS (2-4 points): What did this person do well nutritionally this week? Consider:
+1. STRENGTHS (2-4 points): What did this person do well nutritionally based on what they logged? Consider:
    - Protein intake and variety of sources
    - Vegetable and fiber intake
    - Omega-3 sources (fish, etc.)
    - Whole foods vs processed foods
-   - Meal timing and consistency
 
-2. GAPS (2-4 points): What nutrients or food groups are likely missing or insufficient? Consider longevity-focused targets:
+2. GAPS (2-4 points): Based on the foods that were logged, what nutrients or food groups appear to be missing or insufficient? Consider longevity-focused targets:
    - Protein: ~1g per pound of body weight for muscle preservation
    - Fiber: 30g+ daily for gut health
    - Omega-3s: 2-3 servings of fatty fish per week
    - Micronutrients: magnesium, vitamin D, B12, potassium
    - Colorful vegetables for polyphenols
+   Do NOT mention skipped meals, missing days, or inconsistent logging as gaps.
 
-3. SUGGESTIONS (2-3 points): Specific, actionable meal prep suggestions for next week to address the gaps.
+3. SUGGESTIONS (2-3 points): Specific, actionable meal prep suggestions for next week to address the nutrient gaps identified in the logged meals.
 
 Return ONLY valid JSON in this exact format, no markdown or explanation:
 {{
