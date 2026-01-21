@@ -1,17 +1,18 @@
 {
-  "updated": "2026-01-20T15:19:44.862017+00:00",
-  "data_range": "2026-01-07 to 2026-01-20",
+  "updated": "2026-01-21T15:19:52.276191+00:00",
+  "data_range": "2026-01-08 to 2026-01-21",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-01-07 to 2026-01-20",
+    "date_range": "2026-01-08 to 2026-01-21",
     "sleep": {
-      "avg_score": 79.8,
-      "avg_hours": 7.5,
+      "avg_score": 80.1,
+      "avg_hours": 7.4,
       "avg_deep_hours": 1.1,
       "avg_rem_hours": 1.3,
-      "avg_efficiency": 82.2,
+      "avg_efficiency": 82.0,
       "scores": [
+        87,
         82,
         67,
         68,
@@ -24,13 +25,13 @@
         81,
         80,
         83,
-        82,
-        83
+        82
       ]
     },
     "readiness": {
-      "avg_score": 79.2,
+      "avg_score": 79.6,
       "scores": [
+        83,
         81,
         37,
         77,
@@ -43,15 +44,15 @@
         83,
         78,
         78,
-        83,
-        78
+        83
       ]
     },
     "activity": {
       "avg_score": 85.1,
-      "avg_steps": 5885.1,
-      "avg_calories": 484.5,
+      "avg_steps": 5614.1,
+      "avg_calories": 457.9,
       "scores": [
+        null,
         null,
         null,
         null,
@@ -64,15 +65,15 @@
         93,
         79,
         71,
-        73,
-        85
+        73
       ]
     },
     "heart": {
-      "avg_hrv": 54.9,
-      "avg_resting_hr": 49.4,
+      "avg_hrv": 54.8,
+      "avg_resting_hr": 49.0,
       "hrv_values": [
         null,
+        48,
         43,
         54,
         50,
@@ -84,29 +85,28 @@
         51,
         63,
         50,
-        55,
-        50
+        55
       ]
     },
     "recovery": {
       "avg_temp_deviation": 0.2,
       "avg_breath_rate": 15.0
     },
-    "workouts_count": 14
+    "workouts_count": 12
   },
   "analysis": {
-    "overall_assessment": "Your health metrics show generally strong performance with an average sleep score of 79.8/100 and good activity consistency (14 workouts in 14 days). However, there's concerning variability in your recovery patterns, particularly the dramatic drop in readiness to 37 on January 19th following poor deep sleep (0.3h), which is especially important for POTS management.",
+    "overall_assessment": "Your metrics show generally good health management with an average sleep score of 80.1 and strong activity levels (85.1 average score with 12 workouts). However, there's concerning variability in your data, particularly the dramatic drop on January 19th when your readiness plummeted to 37 with only 0.3h deep sleep and elevated RHR of 57 bpm.",
     "whats_going_well": [
-      "Excellent activity consistency with 14 workouts completed over the 14-day period and a strong average activity score of 85.1/100, showing good adherence to regular movement which helps POTS symptoms",
-      "Your resting heart rate averages a healthy 49.4 bpm and shows good variability (45-57 range), indicating your cardiovascular system is responding well to your current management approach",
-      "Strong sleep scores on your best days (88/100 on Jan 14th, 84/100 on Jan 16th) with adequate deep sleep (1.1-1.2h) demonstrate your body can achieve restorative sleep when conditions are right"
+      "Excellent activity consistency with 12 workouts over 14 days and strong activity scores (91 on Jan 17, 86 on Jan 16, 82 on Jan 15)",
+      "Your HRV shows good recovery capacity with some strong readings like 69 ms on Jan 15 and your average of 54.8 ms indicates decent autonomic function",
+      "Sleep duration is consistently good at 7.4 hours average, with some nights showing quality deep sleep like 1.6h on Jan 20"
     ],
     "areas_to_improve": [
-      "Deep sleep consistency needs attention - you had critically low deep sleep (0.3h) on Jan 19th compared to your average of 1.1h, which directly correlates with your readiness crash to 37",
-      "HRV shows significant fluctuation from 43ms to 69ms in the past week, suggesting your autonomic nervous system is under variable stress - focus on consistent bedtime routines and stress management",
-      "Sleep duration inconsistency is problematic, ranging from 6.2h to 8.8h - aim for consistent 7.5-8h nightly as irregular sleep patterns can trigger POTS flares"
+      "Address deep sleep inconsistency - you had only 0.3h on Jan 19 compared to 1.6h on Jan 20, suggesting sleep environment or routine needs stabilization",
+      "Monitor the connection between poor sleep and elevated heart rate - your RHR jumped to 57 bpm on Jan 19 when sleep quality dropped, indicating autonomic stress",
+      "Investigate what caused the Jan 19 crash (readiness 37, HRV 43, steps only 725) to identify and avoid similar triggers"
     ],
-    "pots_specific_insights": "Your data shows the classic POTS pattern where poor sleep quality (especially low deep sleep on Jan 19th) immediately impacts autonomic function, evidenced by the readiness score plummeting to 37 and elevated resting HR of 57. The HRV variability (43-69ms) suggests your autonomic nervous system is working harder on some days, likely correlating with hydration, sleep quality, and activity levels.",
-    "focus_for_next_week": "Establish a strict sleep schedule targeting 7.5-8 hours nightly with a consistent bedtime routine to stabilize your deep sleep phases, as this appears to be the key driver of your readiness and recovery variability."
+    "pots_specific_insights": "The dramatic variability in your metrics, especially the Jan 19 episode with elevated RHR (57 vs 46-50 typical) and crashed readiness, suggests your autonomic nervous system is still quite reactive to stressors. Your generally good HRV average of 54.8 ms is encouraging for POTS management, but the fluctuations indicate you need consistent sleep and recovery protocols.",
+    "focus_for_next_week": "Prioritize sleep consistency by maintaining the same bedtime routine that gave you 1.6h deep sleep on Jan 20, and identify what environmental or lifestyle factors contributed to the Jan 19 autonomic disruption"
   }
 }
