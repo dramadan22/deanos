@@ -2,7 +2,7 @@ name: Update Research Feed
 
 on:
   schedule:
-    - cron: "0 15 * * *"
+    - cron: "0 15 * * 6"  # 7am PST (15:00 UTC) every Saturday
   workflow_dispatch:
 
 jobs:

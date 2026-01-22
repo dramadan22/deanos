@@ -4239,14 +4239,40 @@
                 if (!feed || feed.items.length === 0) {
                     container.innerHTML = '<div class="empty-state"><p>No research updates yet</p></div>';
                 } else {
-                    container.innerHTML = feed.items.slice(0, 8).map(item => `
-                        <div class="research-feed-item">
-                            <div class="research-feed-title">
-                                <a href="${item.url}" target="_blank">${item.title}</a>
+                    const newItems = feed.items.filter(item => item.isNew);
+                    const olderItems = feed.items.filter(item => !item.isNew);
+
+                    let html = '';
+
+                    // New This Week section
+                    if (newItems.length > 0) {
+                        html += `<div style="margin-bottom: 1rem;">
+                            <div style="font-size: 0.85rem; font-weight: 600; color: var(--forest); margin-bottom: 0.5rem;">&#10024; New This Week (${newItems.length})</div>
+                            ${newItems.slice(0, 5).map(item => `
+                                <div class="research-feed-item" style="background: var(--forest-light); border-left: 3px solid var(--forest);">
+                                    <div class="research-feed-title">
+                                        <a href="${item.url}" target="_blank">${item.title}</a>
+                                    </div>
+                                    <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
+                                </div>
+                            `).join('')}
+                        </div>`;
+                    }
+
+                    // Previous items
+                    if (olderItems.length > 0) {
+                        const showCount = newItems.length > 0 ? 3 : 8;
+                        html += olderItems.slice(0, showCount).map(item => `
+                            <div class="research-feed-item">
+                                <div class="research-feed-title">
+                                    <a href="${item.url}" target="_blank">${item.title}</a>
+                                </div>
+                                <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
                             </div>
-                            <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
-                        </div>
-                    `).join('');
+                        `).join('');
+                    }
+
+                    container.innerHTML = html;
                 }
                 if (updatedLabel) {
                     updatedLabel.textContent = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated time unknown';

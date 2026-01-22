@@ -139,7 +139,21 @@ def dedupe_items(items):
     return deduped
 
 
+def load_existing_feed():
+    """Load the existing feed to compare for new items."""
+    try:
+        with open("research-feed.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {"items": [], "updated": None}
+
+
 def main():
+    # Load existing feed to determine what's new
+    existing = load_existing_feed()
+    existing_urls = {item.get("url", "").lower() for item in existing.get("items", [])}
+    last_updated = existing.get("updated")
+
     all_items = []
     for feed in FEEDS:
         try:
@@ -161,8 +175,17 @@ def main():
         key=lambda item: item["published"] or "",
         reverse=True,
     )
+
+    # Mark items as new if they weren't in the previous feed
+    for item in deduped:
+        item["isNew"] = item.get("url", "").lower() not in existing_urls
+
+    new_count = sum(1 for item in deduped if item.get("isNew"))
+    print(f"Found {new_count} new items since last update")
+
     output = {
         "updated": datetime.now(timezone.utc).isoformat(),
+        "lastUpdated": last_updated,
         "items": deduped[:50],
     }
 
