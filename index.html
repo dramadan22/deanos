@@ -3742,12 +3742,34 @@
 
         function renderTaskItem(task) {
             const categoryIcon = task.category === 'work' ? '&#128188;' : '&#127968;';
+            let dueDateDisplay = '';
+            if (task.dueDate) {
+                const today = new Date(getToday() + 'T00:00:00');
+                const dueDate = new Date(task.dueDate + 'T00:00:00');
+                const diffDays = Math.round((dueDate - today) / (1000 * 60 * 60 * 24));
+                let dueDateText = '';
+                let dueDateColor = 'var(--text-muted)';
+                if (diffDays < 0) {
+                    dueDateText = 'Overdue';
+                    dueDateColor = 'var(--coral)';
+                } else if (diffDays === 0) {
+                    dueDateText = 'Today';
+                    dueDateColor = 'var(--amber)';
+                } else if (diffDays === 1) {
+                    dueDateText = 'Tomorrow';
+                } else if (diffDays <= 7) {
+                    dueDateText = dueDate.toLocaleDateString('en-US', { weekday: 'short' });
+                } else {
+                    dueDateText = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                }
+                dueDateDisplay = `<span style="font-size: 0.75rem; color: ${dueDateColor}; margin-left: 0.5rem;">${dueDateText}</span>`;
+            }
             return `
                 <div class="task-item ${task.completed ? 'completed' : ''}">
                     <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask('${task.id}')">
                         ${task.completed ? '&#10003;' : ''}
                     </div>
-                    <span class="task-text">${task.title}</span>
+                    <span class="task-text">${task.title}${dueDateDisplay}</span>
                     <span style="font-size: 0.8rem; color: var(--text-muted);">${categoryIcon}</span>
                     <button class="task-delete" onclick="editTask('${task.id}')" title="Edit">&#9998;</button>
                     <button class="task-delete" onclick="deleteTask('${task.id}')" title="Delete">&#128465;</button>
