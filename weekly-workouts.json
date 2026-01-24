@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-11T21:12:48.218799+00:00",
+  "updated": "2026-01-24T06:16:24.776183+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -7,48 +7,48 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Chest Press Machine",
-          "sets": "3x10-12",
+          "name": "Cable Chest Press",
+          "sets": "4x8-10",
           "instructions": [
-            "Setup: Adjust seat height so handles align with mid-chest level",
-            "Execution: Push handles forward in controlled motion, squeeze chest at top",
-            "Form cue: Keep shoulder blades pressed against pad, avoid locking elbows"
+            "Setup: Adjust cable handles to chest height, grab handles with palms facing down",
+            "Execution: Press handles forward until arms are fully extended, squeeze chest at the top",
+            "Form cue: Keep core tight and avoid arching your back"
           ]
         },
         {
-          "name": "Cable Lat Pulldown",
-          "sets": "3x10-12",
+          "name": "Lat Pulldown Machine",
+          "sets": "4x8-10",
           "instructions": [
-            "Setup: Adjust thigh pad and select wide grip bar at comfortable width",
+            "Setup: Adjust thigh pad to secure legs, grab bar with wide overhand grip",
             "Execution: Pull bar down to upper chest, squeeze shoulder blades together",
-            "Form cue: Lean back slightly, avoid using momentum or swinging"
+            "Form cue: Lean back slightly and avoid using momentum"
           ]
         },
         {
           "name": "Cable Lateral Raises",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Set cables to lowest position, grab handles with arms at sides",
-            "Execution: Raise arms out to sides until parallel with floor",
-            "Form cue: Keep slight bend in elbows, lead with pinkies, control the negative"
-          ]
-        },
-        {
-          "name": "Seated Cable Row",
-          "sets": "3x10-12",
-          "instructions": [
-            "Setup: Sit with chest up, grab handle with both hands, slight bend in knees",
-            "Execution: Pull handle to lower chest, squeeze shoulder blades together",
-            "Form cue: Keep torso upright, avoid using lower back to pull"
+            "Setup: Set cables to lowest position, grab handles with arms at your sides",
+            "Execution: Raise arms out to sides until parallel to floor, control the descent",
+            "Form cue: Keep slight bend in elbows and lift with your delts, not your traps"
           ]
         },
         {
           "name": "Cable Tricep Pushdowns",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Stand facing cable machine with straight bar attached high",
-            "Execution: Push bar down until arms are straight, squeeze triceps",
-            "Form cue: Keep elbows tucked at sides, only forearms should move"
+            "Setup: Attach rope or bar to high cable, stand with feet shoulder-width apart",
+            "Execution: Push weight down until arms are fully extended, squeeze triceps",
+            "Form cue: Keep elbows tucked at your sides throughout the movement"
+          ]
+        },
+        {
+          "name": "Cable Bicep Curls",
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Set cable to lowest position, grab bar with underhand grip",
+            "Execution: Curl weight up by flexing biceps, lower with control",
+            "Form cue: Keep elbows stationary and avoid swinging your body"
           ]
         }
       ]
@@ -62,45 +62,45 @@
           "name": "Leg Press Machine",
           "sets": "4x8-10",
           "instructions": [
-            "Setup: Sit in machine with feet shoulder-width apart on platform",
-            "Execution: Lower weight until knees reach 90 degrees, press through heels",
-            "Form cue: Keep knees aligned with toes, maintain contact with back pad"
+            "Setup: Sit in machine with back flat against pad, place feet shoulder-width apart on platform",
+            "Execution: Lower weight until knees reach 90 degrees, push through heels to return",
+            "Form cue: Keep knees aligned with toes and maintain steady tempo"
           ]
         },
         {
-          "name": "Seated Leg Curl",
+          "name": "Leg Curl Machine",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Adjust back pad and leg pad to fit comfortably behind calves",
-            "Execution: Curl heels toward glutes, squeeze hamstrings at top",
-            "Form cue: Keep hips pressed into seat, control the weight on return"
+            "Setup: Lie face down with pad positioned behind your ankles",
+            "Execution: Curl heels toward glutes by contracting hamstrings, lower slowly",
+            "Form cue: Keep hips pressed down and avoid lifting your torso"
           ]
         },
         {
           "name": "Leg Extension Machine",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Adjust back pad and position leg pad above ankles",
-            "Execution: Extend legs until straight, squeeze quadriceps at top",
-            "Form cue: Keep back against pad, avoid locking knees aggressively"
+            "Setup: Sit with back against pad, position ankles behind the lower pad",
+            "Execution: Extend legs until fully straight, squeeze quads at top",
+            "Form cue: Control the weight down and avoid locking knees aggressively"
           ]
         },
         {
-          "name": "Standing Calf Raise Machine",
+          "name": "Cable Hip Abductions",
           "sets": "3x15-20",
           "instructions": [
-            "Setup: Position shoulders under pads, balls of feet on platform",
-            "Execution: Rise up on toes as high as possible, squeeze calves",
-            "Form cue: Keep legs straight, get full range of motion, pause at top"
+            "Setup: Attach ankle strap to low cable, stand sideways to machine",
+            "Execution: Lift leg out to the side against resistance, return with control",
+            "Form cue: Keep torso upright and focus on using your glutes"
           ]
         },
         {
-          "name": "Cable Glute Kickbacks",
-          "sets": "3x12-15 each leg",
+          "name": "Calf Press on Leg Press",
+          "sets": "4x15-20",
           "instructions": [
-            "Setup: Attach ankle strap to low cable, face machine holding handles",
-            "Execution: Kick leg straight back, squeeze glute at top position",
-            "Form cue: Keep hips square, avoid arching lower back, control the return"
+            "Setup: Position feet on lower portion of leg press platform, balls of feet on edge",
+            "Execution: Push through balls of feet to raise weight, lower with full stretch",
+            "Form cue: Get full range of motion and pause briefly at the top"
           ]
         }
       ]
@@ -112,7 +112,12 @@
       "exercises": [
         {
           "name": "Personal Training Session",
-          "sets": "Full body, guided by Josh"
+          "sets": "Full body, guided by Josh",
+          "instructions": [
+            "Follow Josh's programming and guidance",
+            "Focus on form corrections and new movement patterns",
+            "Communicate any concerns or feedback during the session"
+          ]
         }
       ]
     },
@@ -126,34 +131,38 @@
           "sets": "25 minutes moderate intensity",
           "instructions": [
             "Setup: Adjust seat so legs have slight bend at full extension",
-            "Execution: Maintain steady pace at 65-75% perceived effort with 2-minute intervals at higher intensity every 5 minutes"
+            "Execution: Maintain steady pace at 60-70% max heart rate",
+            "Form cue: Keep shoulders relaxed and engage core throughout"
           ]
         },
         {
-          "name": "Dynamic Warm-up Stretches",
+          "name": "Upper Body Stretching",
           "sets": "10 minutes",
           "instructions": [
-            "Step 1: Arm circles forward and backward 10 each direction",
-            "Step 2: Leg swings front to back and side to side 10 each leg",
-            "Step 3: Hip circles and ankle rolls 10 each direction"
+            "Step 1: Chest doorway stretch - 30 seconds each arm",
+            "Step 2: Overhead tricep stretch - 30 seconds each arm",
+            "Step 3: Cross-body shoulder stretch - 30 seconds each arm",
+            "Step 4: Cat-cow stretches - 10 slow repetitions"
           ]
         },
         {
-          "name": "Static Stretching Routine",
-          "sets": "15 minutes",
+          "name": "Lower Body Stretching",
+          "sets": "10 minutes",
           "instructions": [
-            "Step 1: Hold each stretch for 30-45 seconds without bouncing",
-            "Step 2: Focus on chest, shoulders, hip flexors, hamstrings, and calves",
-            "Step 3: Include spinal twists and cat-cow stretches for back mobility"
+            "Step 1: Standing quad stretch - 45 seconds each leg",
+            "Step 2: Seated hamstring stretch - 45 seconds each leg",
+            "Step 3: Figure-4 hip stretch - 45 seconds each side",
+            "Step 4: Calf stretch against wall - 45 seconds each leg"
           ]
         },
         {
           "name": "Foam Rolling",
-          "sets": "10 minutes",
+          "sets": "5 minutes",
           "instructions": [
-            "Step 1: Roll each muscle group slowly for 60-90 seconds",
-            "Step 2: Focus on IT bands, quads, hamstrings, and upper back",
-            "Step 3: Apply moderate pressure and pause on tender spots"
+            "Step 1: Roll IT band and quads - 1 minute each leg",
+            "Step 2: Roll upper back and lats - 1 minute",
+            "Step 3: Roll glutes and piriformis - 1 minute",
+            "Form cue: Move slowly and pause on tight spots"
           ]
         }
       ]
@@ -161,34 +170,34 @@
   ],
   "sources": [
     {
-      "title": "Pitting facts against sensationalism regarding the role of LDL cholesterol in ASCVD",
-      "url": "https://peterattiamd.com/the-role-of-ldl-cholesterol-in-ascvd/",
-      "source": "Peter Attia",
-      "published": "2026-01-10T12:00:00+00:00"
-    },
-    {
-      "title": "Essentials: Optimizing Workspace for Productivity, Focus & Creativity",
-      "url": "https://www.hubermanlab.com/episode/essentials-optimizing-workspace-for-productivity-focus-and-creativity",
+      "title": "Essentials: Therapy, Treating Trauma & Other Life Challenges | Dr. Paul Conti",
+      "url": "https://www.hubermanlab.com/episode/essentials-therapy-treating-trauma-and-other-life-challenges-paul-conti",
       "source": "Huberman Lab",
-      "published": "2026-01-08T09:00:00+00:00"
+      "published": "2026-01-22T09:00:00+00:00"
     },
     {
-      "title": "Best Ways to Build Better Habits & Break Bad Ones | James Clear",
-      "url": "https://www.hubermanlab.com/episode/best-ways-to-build-better-habits-and-break-bad-ones-james-clear",
+      "title": "Build Muscle & Strength & Forge Your Life Path | Dorian Yates",
+      "url": "https://www.hubermanlab.com/episode/build-muscle-and-strength-and-forge-your-life-path-dorian-yates",
       "source": "Huberman Lab",
-      "published": "2026-01-05T09:00:00+00:00"
+      "published": "2026-01-19T09:00:00+00:00"
     },
     {
-      "title": "#378 \u2012 Women\u2019s health and performance: how training, nutrition, and hormones interact across life stages | Abbie Smith-Ryan, Ph.D.",
-      "url": "https://peterattiamd.com/abbiesmithryan/",
+      "title": "#380 \u2012 The seed oil debate: are they uniquely harmful relative to other dietary fats? | Layne Norton, Ph.D.",
+      "url": "https://peterattiamd.com/laynenorton4/",
       "source": "Peter Attia",
-      "published": "2026-01-05T05:15:00+00:00"
+      "published": "2026-01-19T05:15:00+00:00"
     },
     {
-      "title": "Oldies-But-Goodies: January 2026 Edition",
-      "url": "https://peterattiamd.com/oldies-but-goodies-january-2026/",
+      "title": "A recent study on exercise intensity has been widely misinterpreted",
+      "url": "https://peterattiamd.com/exercise-intensity-equivalence/",
       "source": "Peter Attia",
-      "published": "2026-01-03T12:00:00+00:00"
+      "published": "2026-01-17T12:00:00+00:00"
+    },
+    {
+      "title": "Essentials: Tools to Boost Attention & Memory | Dr. Wendy Suzuki",
+      "url": "https://www.hubermanlab.com/episode/essentials-tools-to-boost-attention-and-memory-wendy-suzuki",
+      "source": "Huberman Lab",
+      "published": "2026-01-15T09:00:00+00:00"
     }
   ]
 }
