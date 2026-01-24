@@ -1,17 +1,18 @@
 {
-  "updated": "2026-01-23T15:15:11.873828+00:00",
-  "data_range": "2026-01-10 to 2026-01-23",
+  "updated": "2026-01-24T15:10:26.984721+00:00",
+  "data_range": "2026-01-11 to 2026-01-24",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-01-10 to 2026-01-23",
+    "date_range": "2026-01-11 to 2026-01-24",
     "sleep": {
-      "avg_score": 80.2,
-      "avg_hours": 7.5,
+      "avg_score": 80.1,
+      "avg_hours": 7.4,
       "avg_deep_hours": 1.1,
       "avg_rem_hours": 1.4,
-      "avg_efficiency": 82.3,
+      "avg_efficiency": 83.5,
       "scores": [
+        78,
         80,
         88,
         86,
@@ -24,13 +25,13 @@
         88,
         77,
         83,
-        81,
-        80
+        81
       ]
     },
     "readiness": {
-      "avg_score": 79.8,
+      "avg_score": 79.9,
       "scores": [
+        80,
         82,
         82,
         83,
@@ -43,16 +44,16 @@
         85,
         79,
         88,
-        83,
-        78
+        83
       ]
     },
     "activity": {
-      "avg_score": 88.8,
-      "avg_steps": 5133.4,
-      "avg_calories": 397.2,
+      "avg_score": 89.9,
+      "avg_steps": 5388.8,
+      "avg_calories": 414.5,
       "scores": [
         null,
+        89,
         92,
         null,
         null,
@@ -64,15 +65,15 @@
         89,
         93,
         94,
-        93,
-        79
+        93
       ]
     },
     "heart": {
-      "avg_hrv": 54.2,
-      "avg_resting_hr": 48.7,
+      "avg_hrv": 53.3,
+      "avg_resting_hr": 48.5,
       "hrv_values": [
         null,
+        52,
         48,
         49,
         48,
@@ -84,29 +85,28 @@
         60,
         66,
         49,
-        51,
-        63
+        51
       ]
     },
     "recovery": {
-      "avg_temp_deviation": 0.2,
-      "avg_breath_rate": 15.0
+      "avg_temp_deviation": 0.1,
+      "avg_breath_rate": 15.1
     },
-    "workouts_count": 9
+    "workouts_count": 11
   },
   "analysis": {
-    "overall_assessment": "Your health metrics show generally strong performance with an average sleep score of 80.2 and readiness score of 79.8, indicating good recovery patterns. However, January 19th stands out as a concerning day with very low deep sleep (0.3h), poor readiness (37), and elevated resting heart rate (57 bpm), suggesting a significant stress response or potential POTS flare.",
+    "overall_assessment": "Your overall health metrics show solid consistency with an 80.1 sleep score and 79.9 readiness score over 14 days, indicating good baseline health management. However, there's concerning variability in your autonomic markers, particularly the dramatic dip on January 19th when your readiness dropped to 37 and resting heart rate spiked to 57 bpm.",
     "whats_going_well": [
-      "Excellent activity consistency with 9 workouts over 14 days and strong activity scores averaging 88.8, showing you're maintaining good movement habits",
-      "Your resting heart rate averages a healthy 48.7 bpm and shows good variability (45-51 bpm on most days), indicating strong cardiovascular fitness",
-      "Sleep duration is consistently good at 7.5 hours average, with several nights achieving optimal deep sleep like January 20th (1.6h) and January 21st (1.5h)"
+      "Your average resting heart rate of 48.5 bpm is excellent for POTS management, showing good cardiovascular conditioning with most days (Jan 20-23) maintaining a stable 45-47 bpm range",
+      "Sleep efficiency of 83.5% demonstrates you're getting quality rest when you do sleep, with your best nights (Jan 21-22) scoring 86-88 and providing 1.3-1.5 hours of deep sleep",
+      "You're maintaining consistent activity levels with 11 workouts over 14 days and an average of 5,388 steps, showing good commitment to movement despite POTS challenges"
     ],
     "areas_to_improve": [
-      "Deep sleep consistency needs attention - you had a concerning drop to just 0.3 hours on January 19th compared to your 1.1 hour average, impacting autonomic recovery",
-      "HRV shows concerning variability, dropping to 43ms on January 19th when your average is 54.2ms, suggesting your nervous system was under significant stress",
-      "The dramatic readiness drop to 37 on January 19th (versus your 79.8 average) indicates you may need better early warning recognition of POTS symptom onset"
+      "Deep sleep consistency needs attention - you had only 0.3 hours on Jan 19th compared to your 1.1-hour average, which directly correlates with your autonomic nervous system disruption that day",
+      "HRV stability requires focus as it dropped to 43ms on Jan 19th (your lowest) when your readiness crashed, indicating autonomic stress that's particularly problematic for POTS management",
+      "Sleep duration consistency could be optimized - ranging from 6.2 to 8.8 hours creates autonomic instability, aim for a narrower 7-8 hour window nightly"
     ],
-    "pots_specific_insights": "The January 19th data pattern (low HRV, elevated RHR to 57, poor deep sleep, crashed readiness) suggests a potential POTS flare that significantly impacted your autonomic nervous system recovery. Your body showed classic signs of dysautonomia stress, but recovered well in subsequent days, indicating good overall POTS management.",
-    "focus_for_next_week": "Monitor your evening routine and stress levels more closely to prevent another deep sleep crash like January 19th - consider implementing a consistent pre-sleep protocol when HRV drops below 45ms or RHR exceeds 52 bpm"
+    "pots_specific_insights": "The January 19th data pattern (low HRV of 43ms, elevated RHR of 57 bpm, poor deep sleep of 0.3h, and crashed readiness of 37) suggests an autonomic flare that's classic for POTS episodes. Your recovery by January 21st shows your system can bounce back when you prioritize rest and maintain consistent sleep schedules.",
+    "focus_for_next_week": "Establish a consistent bedtime routine targeting 7-7.5 hours of sleep nightly to prevent the autonomic variability that triggered your January 19th crash, as sleep consistency is critical for POTS symptom management."
   }
 }
