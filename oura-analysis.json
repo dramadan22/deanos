@@ -1,37 +1,37 @@
 {
-  "updated": "2026-01-25T15:09:54.120555+00:00",
+  "updated": "2026-01-26T15:19:53.428967+00:00",
   "data_range": "2026-01-12 to 2026-01-25",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
     "date_range": "2026-01-12 to 2026-01-25",
     "sleep": {
-      "avg_score": 80.0,
-      "avg_hours": 7.4,
-      "avg_deep_hours": 1.1,
-      "avg_rem_hours": 1.4,
-      "avg_efficiency": 83.2,
+      "avg_score": null,
+      "avg_hours": null,
+      "avg_deep_hours": null,
+      "avg_rem_hours": null,
+      "avg_efficiency": null,
       "scores": [
         null,
-        78,
-        80,
-        88,
-        86,
-        82,
-        67,
-        68,
-        82,
-        84,
-        77,
-        88,
-        77,
-        83
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ]
     },
     "readiness": {
-      "avg_score": 79.7,
+      "avg_score": 80.1,
       "scores": [
-        null,
+        85,
         80,
         82,
         82,
@@ -48,11 +48,11 @@
       ]
     },
     "activity": {
-      "avg_score": 89.6,
-      "avg_steps": 5581.1,
-      "avg_calories": 445.9,
+      "avg_score": 89.9,
+      "avg_steps": 5681.2,
+      "avg_calories": 464.5,
       "scores": [
-        null,
+        93,
         85,
         94,
         92,
@@ -69,44 +69,44 @@
       ]
     },
     "heart": {
-      "avg_hrv": 52.6,
-      "avg_resting_hr": 48.5,
+      "avg_hrv": null,
+      "avg_resting_hr": null,
       "hrv_values": [
         null,
-        42,
-        52,
-        48,
-        49,
-        48,
-        43,
-        54,
-        50,
-        54,
-        69,
-        60,
-        66,
-        49
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ]
     },
     "recovery": {
       "avg_temp_deviation": 0.2,
-      "avg_breath_rate": 15.1
+      "avg_breath_rate": null
     },
-    "workouts_count": 12
+    "workouts_count": 13
   },
   "analysis": {
-    "overall_assessment": "Your overall metrics show solid performance with an average sleep score of 80/100 and readiness of 79.7/100, indicating good recovery capacity. However, there's notable variability in your daily patterns, particularly evident in the significant dip on January 19th (readiness dropped to 37, RHR spiked to 57 bpm) followed by a recovery period.",
+    "overall_assessment": "Your data shows significant gaps in critical health metrics, with missing sleep, HRV, and heart rate data that are essential for POTS management. However, your readiness scores average a solid 80.1/100 and activity levels remain strong at 89.9/100 despite these monitoring challenges.",
     "whats_going_well": [
-      "Excellent sleep efficiency at 83.2% and consistent 7.4-hour average duration, providing stable foundation for POTS management",
-      "Strong activity consistency with 12 workouts over 14 days and high activity scores (89.6/100 average), showing good cardiovascular conditioning",
-      "Good recovery demonstrated by bounce-back from January 19th's poor metrics - readiness improved from 37 to 83 within 2 days"
+      "Strong activity consistency with 13 workouts over 14 days and an excellent average activity score of 89.9/100",
+      "Good readiness scores averaging 80.1/100, suggesting your body is generally coping well with daily demands",
+      "Active recovery from the significant dip on January 19th (readiness dropped to 37) - you bounced back to 81-85 range within days"
     ],
     "areas_to_improve": [
-      "Deep sleep is inconsistent, ranging from just 0.3h to 1.6h (January 19th vs 20th) - aim for more consistent sleep hygiene routine to stabilize this critical recovery phase",
-      "HRV shows concerning variability (42-52 ms in recent days) and the January 19th episode suggests autonomic stress - consider stress management techniques and earlier bedtimes on high-stress days",
-      "Step count varies dramatically (725 to 7113 steps), indicating potential boom-bust cycles - aim for more consistent daily movement between 4000-6000 steps to avoid POTS flare triggers"
+      "Critical data gaps in sleep tracking, HRV, and resting heart rate need immediate attention - ensure proper ring fit and charging routine for complete POTS monitoring",
+      "Step count inconsistency ranging from 725 to 7113 steps suggests potential symptom flare management issues - aim for more consistent daily movement",
+      "The dramatic readiness drop to 37 on January 19th with only 725 steps indicates a significant recovery event that needs investigation"
     ],
-    "pots_specific_insights": "The January 19th data pattern (very low HRV of 43, elevated RHR of 57, poor readiness of 37 despite long sleep) suggests a POTS flare episode, but your quick recovery within 2 days indicates good management strategies are working. Your average resting HR of 48.5 bpm is excellent for POTS, suggesting good cardiovascular conditioning.",
-    "focus_for_next_week": "Prioritize consistent daily step counts between 4000-6000 to avoid the dramatic swings that may trigger POTS symptoms, while maintaining your excellent sleep duration consistency."
+    "pots_specific_insights": "Without HRV and heart rate data, you're missing crucial autonomic nervous system indicators that help predict POTS flare-ups and guide activity pacing. The temperature deviation averaging 0.2\u00b0C suggests stable thermoregulation, which is positive for POTS management.",
+    "focus_for_next_week": "Prioritize fixing your Oura Ring's data collection issues to restore sleep, HRV, and heart rate monitoring - these metrics are non-negotiable for effective POTS symptom tracking and management"
   }
 }
