@@ -1,36 +1,38 @@
 {
-  "updated": "2026-01-26T15:19:53.428967+00:00",
-  "data_range": "2026-01-12 to 2026-01-25",
+  "updated": "2026-01-27T15:20:22.766438+00:00",
+  "data_range": "2026-01-14 to 2026-01-27",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-01-12 to 2026-01-25",
+    "date_range": "2026-01-14 to 2026-01-27",
     "sleep": {
-      "avg_score": null,
-      "avg_hours": null,
-      "avg_deep_hours": null,
-      "avg_rem_hours": null,
-      "avg_efficiency": null,
+      "avg_score": 81.4,
+      "avg_hours": 7.5,
+      "avg_deep_hours": 1.1,
+      "avg_rem_hours": 1.5,
+      "avg_efficiency": 83.2,
       "scores": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        89,
+        91,
+        80,
+        78,
+        80,
+        88,
+        86,
+        82,
+        67,
+        68,
+        82,
+        84,
+        77,
+        88
       ]
     },
     "readiness": {
       "avg_score": 80.1,
       "scores": [
+        83,
+        84,
         85,
         80,
         82,
@@ -42,16 +44,16 @@
         87,
         92,
         83,
-        85,
-        79,
-        88
+        85
       ]
     },
     "activity": {
-      "avg_score": 89.9,
-      "avg_steps": 5681.2,
-      "avg_calories": 464.5,
+      "avg_score": 89.1,
+      "avg_steps": 5494.8,
+      "avg_calories": 436.7,
       "scores": [
+        null,
+        90,
         93,
         85,
         94,
@@ -63,50 +65,48 @@
         91,
         86,
         82,
-        89,
-        93,
-        94
+        89
       ]
     },
     "heart": {
-      "avg_hrv": null,
-      "avg_resting_hr": null,
+      "avg_hrv": 53.2,
+      "avg_resting_hr": 48.5,
       "hrv_values": [
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        63,
+        59,
+        42,
+        52,
+        48,
+        49,
+        48,
+        43,
+        54,
+        50,
+        54,
+        69,
+        60
       ]
     },
     "recovery": {
       "avg_temp_deviation": 0.2,
-      "avg_breath_rate": null
+      "avg_breath_rate": 15.1
     },
-    "workouts_count": 13
+    "workouts_count": 11
   },
   "analysis": {
-    "overall_assessment": "Your data shows significant gaps in critical health metrics, with missing sleep, HRV, and heart rate data that are essential for POTS management. However, your readiness scores average a solid 80.1/100 and activity levels remain strong at 89.9/100 despite these monitoring challenges.",
+    "overall_assessment": "Your metrics show strong overall health management with an excellent average sleep score of 81.4/100 and good readiness scores averaging 80.1/100. However, there's notable HRV variability (ranging from 42-63ms in recent days) and some inconsistency in deep sleep duration that may impact your POTS management.",
     "whats_going_well": [
-      "Strong activity consistency with 13 workouts over 14 days and an excellent average activity score of 89.9/100",
-      "Good readiness scores averaging 80.1/100, suggesting your body is generally coping well with daily demands",
-      "Active recovery from the significant dip on January 19th (readiness dropped to 37) - you bounced back to 81-85 range within days"
+      "Excellent sleep consistency with 7.5 hour average duration and strong sleep efficiency at 83.2%, which is crucial for autonomic nervous system regulation with POTS",
+      "Outstanding activity management with 11 workouts over 14 days and high activity scores averaging 89.1/100, showing you're maintaining fitness without overexertion",
+      "Good resting heart rate control averaging 48.5 bpm with relatively stable values (45-54 bpm range), indicating well-managed cardiovascular baseline"
     ],
     "areas_to_improve": [
-      "Critical data gaps in sleep tracking, HRV, and resting heart rate need immediate attention - ensure proper ring fit and charging routine for complete POTS monitoring",
-      "Step count inconsistency ranging from 725 to 7113 steps suggests potential symptom flare management issues - aim for more consistent daily movement",
-      "The dramatic readiness drop to 37 on January 19th with only 725 steps indicates a significant recovery event that needs investigation"
+      "Address HRV volatility - your recent week shows significant swings from 42ms to 63ms, suggesting inconsistent autonomic recovery. Focus on consistent sleep/wake times and stress management",
+      "Optimize deep sleep duration which averaged only 1.1 hours and dropped to 0.9 hours on Jan 24-25, below the typical 1.5-2 hour target needed for physical recovery",
+      "Balance activity levels more evenly - step counts vary dramatically from 3,217 to 8,310 daily, which can trigger POTS symptoms through inconsistent orthostatic stress"
     ],
-    "pots_specific_insights": "Without HRV and heart rate data, you're missing crucial autonomic nervous system indicators that help predict POTS flare-ups and guide activity pacing. The temperature deviation averaging 0.2\u00b0C suggests stable thermoregulation, which is positive for POTS management.",
-    "focus_for_next_week": "Prioritize fixing your Oura Ring's data collection issues to restore sleep, HRV, and heart rate monitoring - these metrics are non-negotiable for effective POTS symptom tracking and management"
+    "pots_specific_insights": "Your HRV patterns and sleep quality directly correlate with readiness scores, which is particularly important for POTS as autonomic dysfunction requires consistent nervous system recovery. The temperature deviation staying low at 0.2\u00b0C suggests good thermoregulation, which often challenges POTS patients.",
+    "focus_for_next_week": "Establish a more consistent daily activity target around 5,000-6,000 steps to avoid the dramatic swings that can destabilize your autonomic nervous system and trigger POTS symptoms"
   }
 }
