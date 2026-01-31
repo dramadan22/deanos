@@ -1,216 +1,19 @@
 {
-  "updated": "2026-01-24T06:16:24.776165+00:00",
-  "meals": [
-    {
-      "day": "Monday",
-      "breakfast": {
-        "title": "Greek Yogurt Protein Bowl",
-        "description": "High-protein Greek yogurt topped with nuts, seeds, and berries for a quick power breakfast.",
-        "time": "5 min",
-        "protein": "30g",
-        "instructions": [
-          "Mix 1 cup Greek yogurt with 1 scoop vanilla protein powder",
-          "Top with 2 tbsp chopped walnuts and 1 tbsp chia seeds",
-          "Add 1/2 cup mixed berries",
-          "Drizzle with 1 tsp honey if desired"
-        ]
-      },
-      "lunch": {
-        "title": "Chicken Caesar Wrap",
-        "description": "Grilled chicken breast wrapped with romaine lettuce and Caesar dressing in a whole wheat tortilla.",
-        "time": "15 min",
-        "protein": "35g",
-        "instructions": [
-          "Season and grill 5 oz chicken breast for 6-7 minutes per side",
-          "Let chicken rest 2 minutes, then slice",
-          "Lay out large whole wheat tortilla, spread 2 tbsp Caesar dressing",
-          "Add sliced chicken, 1 cup chopped romaine, and 2 tbsp parmesan cheese",
-          "Roll tightly and slice in half"
-        ]
-      },
-      "dinner": {
-        "title": "Beef and Broccoli Stir-Fry",
-        "description": "Quick stir-fried lean beef with broccoli served over brown rice for a balanced dinner.",
-        "time": "20 min",
-        "protein": "32g",
-        "instructions": [
-          "Heat 1 tbsp oil in large pan over high heat",
-          "Cook 5 oz sliced beef sirloin for 3-4 minutes until browned",
-          "Add 2 cups broccoli florets and cook 3 minutes",
-          "Add 3 tbsp soy sauce and 1 tsp garlic powder, stir 1 minute",
-          "Serve over 1/2 cup cooked brown rice"
-        ]
-      }
-    },
-    {
-      "day": "Tuesday",
-      "breakfast": {
-        "title": "Scrambled Egg and Cheese Wrap",
-        "description": "Fluffy scrambled eggs with cheese wrapped in a tortilla with spinach for a portable breakfast.",
-        "time": "10 min",
-        "protein": "28g",
-        "instructions": [
-          "Whisk 3 whole eggs with 2 egg whites in a bowl",
-          "Scramble eggs in non-stick pan over medium heat for 3-4 minutes",
-          "Add 1/4 cup shredded cheddar cheese and fold",
-          "Place eggs and 1 cup fresh spinach in whole wheat tortilla",
-          "Roll up and serve immediately"
-        ]
-      },
-      "lunch": {
-        "title": "Tuna and White Bean Salad",
-        "description": "Protein-packed salad combining canned tuna with white beans and fresh vegetables.",
-        "time": "10 min",
-        "protein": "38g",
-        "instructions": [
-          "Drain and rinse 1 can white beans and 1 can tuna in water",
-          "Mix beans and tuna in large bowl",
-          "Add 1 diced cucumber, 1/4 diced red onion, and 2 tbsp olive oil",
-          "Season with lemon juice, salt, and pepper",
-          "Serve over 2 cups mixed greens"
-        ]
-      },
-      "dinner": {
-        "title": "Baked Salmon with Quinoa",
-        "description": "Herb-seasoned baked salmon fillet served with fluffy quinoa and roasted vegetables.",
-        "time": "25 min",
-        "protein": "34g",
-        "instructions": [
-          "Preheat oven to 400\u00b0F and season 6 oz salmon fillet with herbs and lemon",
-          "Bake salmon for 12-15 minutes until flaky",
-          "Cook 1/3 cup quinoa according to package directions",
-          "Steam 1 cup mixed vegetables for 5 minutes",
-          "Serve salmon over quinoa with vegetables on the side"
-        ]
-      }
-    },
-    {
-      "day": "Wednesday",
-      "breakfast": {
-        "title": "Protein Pancakes",
-        "description": "Fluffy pancakes made with protein powder and eggs for a high-protein morning treat.",
-        "time": "15 min",
-        "protein": "32g",
-        "instructions": [
-          "Blend 2 eggs, 1 scoop protein powder, 1/4 cup oats, and 1/4 cup milk",
-          "Heat non-stick pan over medium heat",
-          "Pour batter to make 3 pancakes, cook 2-3 minutes per side",
-          "Stack pancakes and top with 2 tbsp Greek yogurt",
-          "Add berries and a drizzle of sugar-free syrup"
-        ]
-      },
-      "lunch": {
-        "title": "Turkey and Hummus Pita",
-        "description": "Lean turkey slices with hummus and vegetables stuffed in a whole wheat pita pocket.",
-        "time": "8 min",
-        "protein": "29g",
-        "instructions": [
-          "Warm whole wheat pita pocket in toaster",
-          "Spread 3 tbsp hummus inside pita",
-          "Add 4 oz sliced turkey breast",
-          "Stuff with 1/4 cup diced tomatoes and cucumber",
-          "Add handful of lettuce and serve"
-        ]
-      },
-      "dinner": {
-        "title": "Chicken and Black Bean Bowl",
-        "description": "Seasoned chicken breast over black beans with peppers and onions for a Mexican-inspired meal.",
-        "time": "22 min",
-        "protein": "40g",
-        "instructions": [
-          "Season 6 oz chicken breast with cumin, paprika, and garlic powder",
-          "Grill chicken 6-7 minutes per side, then slice",
-          "Saut\u00e9 1/2 cup each diced bell peppers and onions for 5 minutes",
-          "Heat 3/4 cup canned black beans with seasonings",
-          "Serve chicken over beans with saut\u00e9ed vegetables and 2 tbsp Greek yogurt"
-        ]
-      }
-    },
-    {
-      "day": "Thursday",
-      "breakfast": {
-        "title": "Cottage Cheese and Fruit Bowl",
-        "description": "Creamy cottage cheese paired with fresh fruit and nuts for a refreshing high-protein start.",
-        "time": "5 min",
-        "protein": "27g",
-        "instructions": [
-          "Scoop 1 cup cottage cheese into bowl",
-          "Top with 1/2 cup diced peaches or pineapple",
-          "Sprinkle 2 tbsp chopped almonds on top",
-          "Add 1 tbsp ground flaxseed for extra nutrition"
-        ]
-      },
-      "lunch": {
-        "title": "Lentil and Veggie Soup",
-        "description": "Hearty lentil soup loaded with vegetables and served with whole grain bread.",
-        "time": "25 min",
-        "protein": "26g",
-        "instructions": [
-          "Saut\u00e9 1/2 cup each diced onion, carrot, and celery for 5 minutes",
-          "Add 1 cup dried red lentils and 3 cups vegetable broth",
-          "Simmer 15 minutes until lentils are tender",
-          "Season with salt, pepper, and herbs",
-          "Serve with 1 slice whole grain bread with 1 tbsp almond butter"
-        ]
-      },
-      "dinner": {
-        "title": "Pork Tenderloin with Sweet Potato",
-        "description": "Lean pork tenderloin served with roasted sweet potato and green beans for a complete meal.",
-        "time": "30 min",
-        "protein": "35g",
-        "instructions": [
-          "Preheat oven to 425\u00b0F and season 5 oz pork tenderloin with rosemary and thyme",
-          "Roast pork for 20-25 minutes until internal temp reaches 145\u00b0F",
-          "Meanwhile, roast 1 medium diced sweet potato for 25 minutes",
-          "Steam 1 cup green beans for 5 minutes",
-          "Let pork rest 5 minutes before slicing and serving"
-        ]
-      }
-    },
-    {
-      "day": "Friday",
-      "breakfast": {
-        "title": "Smoked Salmon Bagel",
-        "description": "Everything bagel topped with cream cheese, smoked salmon, and capers for a restaurant-quality breakfast.",
-        "time": "8 min",
-        "protein": "31g",
-        "instructions": [
-          "Toast 1 everything bagel until golden",
-          "Spread 2 tbsp cream cheese on both halves",
-          "Layer 3 oz smoked salmon on bottom half",
-          "Top with thin red onion slices and 1 tsp capers",
-          "Close sandwich and serve immediately"
-        ]
-      },
-      "lunch": {
-        "title": "Chickpea Salad Sandwich",
-        "description": "Mashed chickpea salad with vegetables served on whole grain bread for a plant-based protein lunch.",
-        "time": "12 min",
-        "protein": "25g",
-        "instructions": [
-          "Drain and mash 1 can chickpeas, leaving some chunks",
-          "Mix with 2 tbsp mayo, 1 diced celery stalk, and 1/4 diced onion",
-          "Add 1 tbsp lemon juice, salt, and pepper",
-          "Toast 2 slices whole grain bread",
-          "Spread chickpea salad on bread with lettuce and tomato"
-        ]
-      },
-      "dinner": {
-        "title": "Shrimp and Zucchini Noodles",
-        "description": "Garlic butter shrimp served over spiralized zucchini noodles for a light but protein-rich dinner.",
-        "time": "18 min",
-        "protein": "36g",
-        "instructions": [
-          "Spiralize 2 medium zucchini into noodles using spiralizer or peeler",
-          "Heat 1 tbsp butter in large pan over medium-high heat",
-          "Cook 6 oz large shrimp for 2-3 minutes per side until pink",
-          "Add minced garlic and cook 30 seconds",
-          "Toss in zucchini noodles for 2 minutes, season with lemon and parmesan"
-        ]
-      }
-    }
-  ],
+  "updated": "2026-01-31T06:24:32.896755+00:00",
+  "meals": [],
   "items": [
+    {
+      "title": "Italian Chopped Salad",
+      "url": "https://www.skinnytaste.com/italian-chopped-salad/?adt_ei=*|EMAIL|*",
+      "source": "Skinnytaste",
+      "published": "2026-01-28T18:10:26+00:00"
+    },
+    {
+      "title": "Slow Cooker Green Chili Pork Stew (So Easy, So Flavorful!)",
+      "url": "https://www.skinnytaste.com/slow-cooker-pork-and-green-chile-stew/?adt_ei=*|EMAIL|*",
+      "source": "Skinnytaste",
+      "published": "2026-01-26T18:28:11+00:00"
+    },
     {
       "title": "The Simple Cabbage Soup I Make on Cold Nights",
       "url": "https://www.skinnytaste.com/cabbage-soup/?adt_ei=*|EMAIL|*",
@@ -240,18 +43,6 @@
       "url": "https://www.skinnytaste.com/turkey-sausage-kale-and-white-bean-soup/?adt_ei=*|EMAIL|*",
       "source": "Skinnytaste",
       "published": "2026-01-13T21:24:05+00:00"
-    },
-    {
-      "title": "Green Curry Tofu That Beats Takeout",
-      "url": "https://www.skinnytaste.com/tofu-green-curry-with-vegetables/?adt_ei=*|EMAIL|*",
-      "source": "Skinnytaste",
-      "published": "2026-01-12T18:51:27+00:00"
-    },
-    {
-      "title": "I Made These Honey Sriracha Cauliflower Wings in the Air Fryer and We Devoured Them",
-      "url": "https://www.skinnytaste.com/air-fryer-cauliflower-wings-with-honey-sriracha/?adt_ei=*|EMAIL|*",
-      "source": "Skinnytaste",
-      "published": "2026-01-08T20:25:59+00:00"
     }
   ]
 }
