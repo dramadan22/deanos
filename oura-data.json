@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-07T15:14:10.914991+00:00",
+  "updated": "2026-02-07T15:35:04.864123+00:00",
   "start_date": "2025-11-09",
   "end_date": "2026-02-07",
   "days_requested": 90,
@@ -1003,7 +1003,7 @@
       "average_hr": 78,
       "min_hr": 50,
       "max_hr": 126,
-      "awake_hr": 71,
+      "awake_hr": 72,
       "spo2_average": null
     },
     {
