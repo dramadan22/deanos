@@ -1,5 +1,5 @@
 {
-  "updated": "2026-01-31T06:24:32.896773+00:00",
+  "updated": "2026-02-07T06:28:35.739795+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -8,47 +8,47 @@
       "exercises": [
         {
           "name": "Chest Press Machine",
-          "sets": "4x8-10",
+          "sets": "4x8-12",
           "instructions": [
-            "Setup: Adjust seat so handles align with mid-chest, feet flat on floor",
-            "Execution: Press handles forward in controlled motion, pause briefly at full extension",
-            "Form cue: Keep shoulder blades pulled back against pad, avoid locking elbows completely"
+            "Setup: Adjust seat so handles align with mid-chest, back flat against pad",
+            "Execution: Push handles forward with controlled motion, pause briefly at full extension",
+            "Form cue: Keep shoulders back and avoid locking elbows completely"
+          ]
+        },
+        {
+          "name": "Seated Cable Row",
+          "sets": "4x8-12",
+          "instructions": [
+            "Setup: Sit with feet planted, grab handle with neutral grip, chest up",
+            "Execution: Pull handle to lower chest, squeeze shoulder blades together",
+            "Form cue: Avoid using momentum, keep torso stable throughout movement"
           ]
         },
         {
           "name": "Lat Pulldown Machine",
-          "sets": "4x8-10",
+          "sets": "3x10-12",
           "instructions": [
-            "Setup: Adjust thigh pad to secure legs, grip bar slightly wider than shoulder-width",
-            "Execution: Pull bar down to upper chest, squeeze shoulder blades together",
-            "Form cue: Lead with elbows, avoid using momentum or leaning back excessively"
+            "Setup: Adjust thigh pad, grip bar wider than shoulder-width",
+            "Execution: Pull bar down to upper chest, lean back slightly",
+            "Form cue: Focus on pulling with lats, not arms, control the negative"
           ]
         },
         {
-          "name": "Cable Shoulder Press",
-          "sets": "3x10-12",
+          "name": "Cable Lateral Raises",
+          "sets": "3x12-15",
           "instructions": [
-            "Setup: Set cables at shoulder height, step forward into staggered stance",
-            "Execution: Press handles overhead simultaneously, bring down to shoulder level",
-            "Form cue: Keep core engaged, avoid arching lower back during press"
+            "Setup: Set cable at lowest position, stand sideways to machine",
+            "Execution: Raise arm out to side until parallel with floor",
+            "Form cue: Slight bend in elbow, lead with pinky finger, control descent"
           ]
         },
         {
           "name": "Cable Tricep Pushdowns",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Set cable high with rope attachment, stand with slight forward lean",
-            "Execution: Push rope down and apart at bottom, squeeze triceps",
-            "Form cue: Keep elbows pinned to sides, control the weight on the way up"
-          ]
-        },
-        {
-          "name": "Cable Bicep Curls",
-          "sets": "3x12-15",
-          "instructions": [
-            "Setup: Set cable low with straight bar, stand with feet shoulder-width apart",
-            "Execution: Curl bar up to chest level, squeeze biceps at top",
-            "Form cue: Keep elbows stationary at sides, avoid swinging or using back"
+            "Setup: Stand facing cable machine, rope or bar attachment at chest height",
+            "Execution: Push attachment down keeping elbows at sides",
+            "Form cue: Keep elbows stationary, squeeze triceps at bottom"
           ]
         }
       ]
@@ -60,47 +60,47 @@
       "exercises": [
         {
           "name": "Leg Press Machine",
-          "sets": "4x8-10",
+          "sets": "4x8-12",
           "instructions": [
-            "Setup: Sit with back flat against pad, feet shoulder-width apart on platform",
-            "Execution: Lower weight until knees reach 90 degrees, press back to start",
-            "Form cue: Keep knees aligned with toes, don't let knees cave inward"
+            "Setup: Sit in machine, feet shoulder-width apart on platform",
+            "Execution: Lower weight until knees reach 90 degrees, press through heels",
+            "Form cue: Keep knees aligned with toes, don't lock knees at top"
           ]
         },
         {
-          "name": "Leg Curl Machine (Seated)",
+          "name": "Seated Leg Curls",
           "sets": "3x10-12",
           "instructions": [
-            "Setup: Adjust back pad and leg pad, ankles behind lower pad",
+            "Setup: Adjust back pad and leg pad, sit with back flat",
             "Execution: Curl heels toward glutes, squeeze hamstrings at top",
-            "Form cue: Keep back against pad, control the weight during extension"
+            "Form cue: Control both lifting and lowering phases, full range of motion"
           ]
         },
         {
           "name": "Leg Extension Machine",
-          "sets": "3x10-12",
+          "sets": "3x12-15",
           "instructions": [
-            "Setup: Adjust back pad and ankle pad, sit with knees at 90 degrees",
-            "Execution: Extend legs until straight, pause briefly at top",
-            "Form cue: Keep back against pad, avoid jerky movements at top"
+            "Setup: Adjust back pad and leg pad, sit with back supported",
+            "Execution: Extend legs until straight, pause and squeeze quads",
+            "Form cue: Don't swing weight up, control the negative portion"
           ]
         },
         {
           "name": "Cable Romanian Deadlifts",
           "sets": "3x10-12",
           "instructions": [
-            "Setup: Set cable low with straight bar, stand arm's length away",
-            "Execution: Hinge at hips, push hips back while lowering bar along legs",
-            "Form cue: Keep knees slightly bent, feel stretch in hamstrings"
+            "Setup: Stand facing low cable with rope or bar attachment",
+            "Execution: Hinge at hips, keep slight knee bend, lower with straight back",
+            "Form cue: Push hips back, feel stretch in hamstrings, drive hips forward to return"
           ]
         },
         {
-          "name": "Calf Raise Machine",
+          "name": "Calf Press on Leg Press",
           "sets": "3x15-20",
           "instructions": [
-            "Setup: Position shoulders under pads, balls of feet on platform",
-            "Execution: Rise up on toes as high as possible, lower slowly",
-            "Form cue: Keep legs straight, pause at top for maximum contraction"
+            "Setup: Position balls of feet on bottom edge of leg press platform",
+            "Execution: Press through balls of feet, full range of motion",
+            "Form cue: Pause at top contraction, control the stretch at bottom"
           ]
         }
       ]
@@ -122,41 +122,47 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Elliptical Machine",
-          "sets": "25 minutes, moderate intensity",
+          "name": "Incline Treadmill Walk",
+          "sets": "25 minutes",
           "instructions": [
-            "Setup: Adjust stride and resistance to comfortable level",
-            "Execution: Maintain steady pace at 65-75% max heart rate, use arm handles for full body engagement"
+            "Setup: Set treadmill to 3-4 mph with 5-8% incline",
+            "Execution: Maintain steady pace, pump arms naturally, breathe rhythmically"
           ]
         },
         {
-          "name": "Dynamic Stretching Circuit",
-          "sets": "10 minutes",
+          "name": "Dynamic Warm-up",
+          "sets": "5 minutes",
           "instructions": [
-            "Step 1: Arm circles, leg swings, torso twists - 30 seconds each",
-            "Step 2: Walking lunges with rotation, high knees, butt kicks - 30 seconds each"
+            "Step 1: Arm circles forward and backward 10 each",
+            "Step 2: Leg swings front to back and side to side 10 each leg",
+            "Step 3: Hip circles and torso twists 10 each direction"
           ]
         },
         {
-          "name": "Static Stretching Routine",
+          "name": "Full Body Stretch Routine",
           "sets": "15 minutes",
           "instructions": [
-            "Step 1: Hold each stretch for 30-45 seconds: chest doorway stretch, seated forward fold, figure-4 hip stretch",
-            "Step 2: Cat-cow poses, child's pose, standing quad stretch, calf stretch against wall"
-          ]
-        },
-        {
-          "name": "Foam Rolling",
-          "sets": "10 minutes",
-          "instructions": [
-            "Step 1: Roll IT bands, quads, hamstrings, and calves - 60 seconds each leg",
-            "Step 2: Roll upper back, lats, and glutes - focus on tight spots with slow, controlled movements"
+            "Step 1: Hold each stretch for 30-60 seconds, breathe deeply",
+            "Step 2: Target chest, shoulders, hip flexors, hamstrings, calves",
+            "Step 3: Use stretching mats in designated area, focus on tight areas from workouts"
           ]
         }
       ]
     }
   ],
   "sources": [
+    {
+      "title": "How Dopamine & Serotonin Shape Decisions, Motivation & Learning | Dr. Read Montague",
+      "url": "https://www.hubermanlab.com/episode/how-dopamine-serotonin-shape-decisions-motivation-and-learning-read-montague",
+      "source": "Huberman Lab",
+      "published": "2026-02-02T09:00:00+00:00"
+    },
+    {
+      "title": "Metformin misses the mark?",
+      "url": "https://peterattiamd.com/does-metformin-miss-the-mark/",
+      "source": "Peter Attia",
+      "published": "2026-01-31T12:00:00+00:00"
+    },
     {
       "title": "Essentials: Using Play to Rewire & Improve Your Brain",
       "url": "https://www.hubermanlab.com/episode/essentials-using-play-to-rewire-and-improve-your-brain",
@@ -174,18 +180,6 @@
       "url": "https://www.hubermanlab.com/episode/science-and-tools-of-learning-and-memory-david-eagleman",
       "source": "Huberman Lab",
       "published": "2026-01-26T09:00:00+00:00"
-    },
-    {
-      "title": "#381 \u2012 Alzheimer\u2019s disease in women: how hormonal transitions impact the female brain, the role of HRT, genetics, and lifestyle on risk, and emerging diagnostics and therapies | Lisa Mosconi, Ph.D.",
-      "url": "https://peterattiamd.com/lisamosconi/",
-      "source": "Peter Attia",
-      "published": "2026-01-26T05:15:00+00:00"
-    },
-    {
-      "title": "The absence of atherosclerosis is not an excuse to ignore heart attack symptoms\u2014especially for women",
-      "url": "https://peterattiamd.com/non-atherosclerotic-heart-attacks/",
-      "source": "Peter Attia",
-      "published": "2026-01-24T12:00:00+00:00"
     }
   ]
 }
