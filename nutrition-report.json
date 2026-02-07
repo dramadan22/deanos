@@ -1,22 +1,6 @@
 {
-  "updated": "2026-01-31T14:14:32.388394+00:00",
-  "weekOf": "2026-01-31",
-  "analysis": {
-    "strengths": [
-      "No processed foods or refined sugars logged",
-      "Clean eating approach with no inflammatory foods recorded"
-    ],
-    "gaps": [
-      "No protein sources logged to support muscle preservation and metabolic health",
-      "Missing fiber-rich vegetables and fruits needed for gut microbiome health",
-      "No omega-3 sources like fatty fish for brain health and inflammation control",
-      "Absence of magnesium-rich foods like leafy greens, nuts, and seeds"
-    ],
-    "suggestions": [
-      "Prep protein sources like grilled salmon, chicken thighs, or Greek yogurt for easy meals",
-      "Batch cook colorful vegetables like broccoli, spinach, and bell peppers for fiber and polyphenols",
-      "Stock up on nuts, seeds, and avocados for healthy fats and micronutrients"
-    ]
-  },
-  "mealsAnalyzed": 1
+  "updated": "2026-02-07T14:16:30.448804+00:00",
+  "weekOf": "2026-02-07",
+  "analysis": null,
+  "mealsAnalyzed": 0
 }
