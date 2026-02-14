@@ -964,6 +964,24 @@
             font-style: italic;
         }
 
+        /* Watchlist */
+        .watchlist-source-badge {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: var(--forest-bg);
+            color: var(--forest);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .watchlist-item-actions {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
         .tier-badge {
             padding: 0.25rem 0.6rem;
             border-radius: 4px;
@@ -2414,6 +2432,9 @@
                 <button class="sidebar-btn" data-view="consumption">
                     <span class="sidebar-icon">&#127916;</span> Consumed
                 </button>
+                <button class="sidebar-btn" data-view="watchlist">
+                    <span class="sidebar-icon">&#128209;</span> Watchlist
+                </button>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-label">Plan</div>
@@ -2620,6 +2641,24 @@
                 </div>
 
                 <div id="consumptionList"></div>
+            </div>
+
+            <!-- Watchlist View -->
+            <div class="module-view" id="watchlistView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128209; Watchlist</h2>
+                    <button class="btn btn-primary" onclick="openWatchlistModalWithContext()">+ Add</button>
+                </div>
+
+                <div class="consumption-tabs" id="watchlistTabs">
+                    <button class="consumption-tab active" data-watchlisttab="movie">&#127910; Movies</button>
+                    <button class="consumption-tab" data-watchlisttab="tvshow">&#128250; TV Shows</button>
+                    <button class="consumption-tab" data-watchlisttab="book">&#128218; Books</button>
+                    <button class="consumption-tab" data-watchlisttab="game">&#127918; Games</button>
+                    <button class="consumption-tab" data-watchlisttab="article">&#128196; Articles</button>
+                </div>
+
+                <div id="watchlistList"></div>
             </div>
 
             <!-- Notes View -->
@@ -2912,6 +2951,26 @@
 
                 <div class="card" style="margin-top: 1rem;">
                     <div class="card-header">
+                        <div class="card-title">&#128214; Goodreads Integration</div>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            Your Goodreads "to-read" shelf syncs weekly via GitHub Actions. Books appear in Watchlist &gt; Books.
+                        </p>
+                        <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-sm);">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Setup:</p>
+                            <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                <li style="margin-bottom: 0.25rem;">Go to <a href="https://www.goodreads.com/review/list" target="_blank" style="color: var(--forest);">goodreads.com/review/list</a> and click the RSS link at the bottom</li>
+                                <li style="margin-bottom: 0.25rem;">Your RSS URL looks like: <code style="font-size: 0.8rem;">goodreads.com/review/list_rss/USER_ID?key=RSS_KEY&amp;shelf=to-read</code></li>
+                                <li style="margin-bottom: 0.25rem;">Add <code>GOODREADS_USER_ID</code> and <code>GOODREADS_RSS_KEY</code> as GitHub repository secrets</li>
+                                <li>The feed syncs every Sunday, or trigger manually from GitHub Actions</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
                         <div class="card-title">&#128272; Security</div>
                     </div>
                     <div class="card-body">
@@ -3038,6 +3097,39 @@
         </div>
     </div>
 
+    <!-- Watchlist Modal -->
+    <div class="modal-overlay" id="watchlistModal">
+        <div class="modal">
+            <h3 class="modal-title" id="watchlistModalTitle">Add to Watchlist</h3>
+            <div class="form-group">
+                <label class="form-label">Type</label>
+                <select class="input-field" id="watchlistType">
+                    <option value="movie">Movie</option>
+                    <option value="tvshow">TV Show</option>
+                    <option value="book">Book</option>
+                    <option value="game">Game</option>
+                    <option value="article">Article</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" class="input-field" id="watchlistTitle" placeholder="What do you want to watch/read/play?">
+            </div>
+            <div class="form-group">
+                <label class="form-label">URL (optional)</label>
+                <input type="url" class="input-field" id="watchlistUrl" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes (optional)</label>
+                <textarea class="input-field" id="watchlistNotes" rows="2" placeholder="Who recommended it? Why does it interest you?"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeWatchlistModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addWatchlistItem()" id="watchlistSubmitBtn">Add</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Note Modal -->
     <div class="modal-overlay" id="noteModal">
         <div class="modal">
@@ -3143,6 +3235,7 @@
             symptoms: [],
             tasks: [],
             consumption: [],
+            watchlist: [],
             notes: [],
             quickLogs: {}, // Keyed by date string
             yearlyItems: {
@@ -3293,6 +3386,8 @@
 
         // ==================== NAVIGATION ====================
         let currentConsumptionTab = 'tvshow';
+        let currentWatchlistTab = 'movie';
+        let goodreadsFeedCache = null;
         let selectedTier = 'B';
         let selectedMood = 3;
         let researchFeedCache = null;
@@ -3312,6 +3407,7 @@
             else if (viewName === 'health') renderHealth();
             else if (viewName === 'tasks') renderTasks();
             else if (viewName === 'consumption') renderConsumption();
+            else if (viewName === 'watchlist') renderWatchlist();
             else if (viewName === 'notes') renderNotes();
             else if (viewName === 'research') renderResearch();
             else if (viewName === 'insights') renderInsights();
@@ -4383,6 +4479,217 @@
             // Render Oura data
             renderOuraData();
         }
+
+        // ==================== WATCHLIST ====================
+
+        function openWatchlistModal() {
+            document.getElementById('watchlistModalTitle').textContent = 'Add to Watchlist';
+            document.getElementById('watchlistSubmitBtn').textContent = 'Add';
+            document.getElementById('watchlistTitle').value = '';
+            document.getElementById('watchlistUrl').value = '';
+            document.getElementById('watchlistNotes').value = '';
+            document.getElementById('watchlistModal').classList.add('active');
+        }
+
+        function openWatchlistModalWithContext() {
+            document.getElementById('watchlistType').value = currentWatchlistTab;
+            openWatchlistModal();
+        }
+
+        function closeWatchlistModal() {
+            document.getElementById('watchlistModal').classList.remove('active');
+            document.getElementById('watchlistTitle').value = '';
+            document.getElementById('watchlistUrl').value = '';
+            document.getElementById('watchlistNotes').value = '';
+        }
+
+        function addWatchlistItem() {
+            const title = document.getElementById('watchlistTitle').value.trim();
+            if (!title) return;
+
+            if (!appData.watchlist) appData.watchlist = [];
+
+            appData.watchlist.push({
+                id: generateId(),
+                type: document.getElementById('watchlistType').value,
+                title: title,
+                notes: document.getElementById('watchlistNotes').value.trim(),
+                url: normalizeUrl(document.getElementById('watchlistUrl').value),
+                dateAdded: new Date().toISOString().split('T')[0],
+                source: 'manual'
+            });
+
+            saveData();
+            closeWatchlistModal();
+            renderWatchlist();
+        }
+
+        function deleteWatchlistItem(id) {
+            appData.watchlist = appData.watchlist.filter(w => w.id !== id);
+            saveData();
+            renderWatchlist();
+        }
+
+        function moveToConsumed(id) {
+            const item = appData.watchlist.find(w => w.id === id);
+            if (!item) return;
+
+            const typeMap = { movie: 'movie', tvshow: 'tvshow', book: 'book', game: 'movie', article: 'book' };
+            document.getElementById('consumptionType').value = typeMap[item.type] || 'movie';
+            document.getElementById('consumptionTitle').value = item.title;
+            document.getElementById('consumptionNotes').value = item.notes || '';
+            document.getElementById('consumptionUrl').value = item.url || '';
+            document.getElementById('consumptionDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('consumptionScore').value = 70;
+            document.getElementById('consumptionScoreDisplay').textContent = '70';
+            toggleConsumptionUrlField();
+            document.getElementById('consumptionModal').classList.add('active');
+
+            appData.watchlist = appData.watchlist.filter(w => w.id !== id);
+            saveData();
+            renderWatchlist();
+        }
+
+        async function loadGoodreadsFeed() {
+            if (goodreadsFeedCache) return goodreadsFeedCache;
+            try {
+                const response = await fetch('goodreads-feed.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to load Goodreads feed');
+                const data = await response.json();
+                goodreadsFeedCache = data;
+                return data;
+            } catch (error) {
+                goodreadsFeedCache = { updated: null, books: [], error: true };
+                return goodreadsFeedCache;
+            }
+        }
+
+        function renderWatchlist() {
+            if (!appData.watchlist) appData.watchlist = [];
+
+            document.querySelectorAll('#watchlistTabs .consumption-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.watchlisttab === currentWatchlistTab);
+            });
+
+            const container = document.getElementById('watchlistList');
+            const manualItems = appData.watchlist
+                .filter(w => w.type === currentWatchlistTab)
+                .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+            if (currentWatchlistTab === 'book') {
+                renderWatchlistBooks(container, manualItems);
+            } else {
+                renderWatchlistItems(container, manualItems);
+            }
+        }
+
+        function renderWatchlistItems(container, items) {
+            const icons = {
+                movie: '&#127910;',
+                tvshow: '&#128250;',
+                book: '&#128218;',
+                game: '&#127918;',
+                article: '&#128196;'
+            };
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128209;</div><p>Nothing on your list yet</p></div>';
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                const itemUrl = normalizeUrl(item.url);
+                const titleHtml = itemUrl
+                    ? `<a href="${itemUrl}" target="_blank" style="color: inherit; text-decoration: none;">${escapeHtml(item.title)} &#128279;</a>`
+                    : escapeHtml(item.title);
+                return `
+                    <div class="consumption-item">
+                        <div class="consumption-poster">${icons[item.type] || '&#128209;'}</div>
+                        <div class="consumption-info">
+                            <div class="consumption-title">${titleHtml}</div>
+                            <div class="consumption-meta">Added ${new Date(item.dateAdded).toLocaleDateString()}</div>
+                            ${item.notes ? `<div class="consumption-notes">"${escapeHtml(item.notes)}"</div>` : ''}
+                        </div>
+                        <div class="watchlist-item-actions">
+                            <button class="task-delete" onclick="moveToConsumed('${item.id}')" style="opacity: 1;" title="Mark as consumed">&#9989;</button>
+                            <button class="task-delete" onclick="deleteWatchlistItem('${item.id}')" style="opacity: 1;" title="Remove">&#128465;</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function renderWatchlistBooks(container, manualItems) {
+            const goodreads = await loadGoodreadsFeed();
+            const goodreadsBooks = (goodreads && goodreads.books) ? goodreads.books : [];
+
+            let html = '';
+
+            if (manualItems.length > 0) {
+                html += manualItems.map(item => {
+                    const itemUrl = normalizeUrl(item.url);
+                    const titleHtml = itemUrl
+                        ? `<a href="${itemUrl}" target="_blank" style="color: inherit; text-decoration: none;">${escapeHtml(item.title)} &#128279;</a>`
+                        : escapeHtml(item.title);
+                    return `
+                        <div class="consumption-item">
+                            <div class="consumption-poster">&#128218;</div>
+                            <div class="consumption-info">
+                                <div class="consumption-title">${titleHtml}</div>
+                                <div class="consumption-meta">Added ${new Date(item.dateAdded).toLocaleDateString()}</div>
+                                ${item.notes ? `<div class="consumption-notes">"${escapeHtml(item.notes)}"</div>` : ''}
+                            </div>
+                            <div class="watchlist-item-actions">
+                                <button class="task-delete" onclick="moveToConsumed('${item.id}')" style="opacity: 1;" title="Mark as consumed">&#9989;</button>
+                                <button class="task-delete" onclick="deleteWatchlistItem('${item.id}')" style="opacity: 1;" title="Remove">&#128465;</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            if (goodreadsBooks.length > 0) {
+                html += `
+                    <div style="margin-top: ${manualItems.length > 0 ? '1.5rem' : '0'}; margin-bottom: 0.75rem;">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--forest); margin-bottom: 0.25rem;">
+                            &#128214; From Goodreads (${goodreadsBooks.length})
+                        </div>
+                        ${goodreads.updated ? `<div style="font-size: 0.75rem; color: var(--text-muted);">Last synced ${new Date(goodreads.updated).toLocaleDateString()}</div>` : ''}
+                    </div>
+                `;
+                html += goodreadsBooks.map(book => `
+                    <div class="consumption-item" style="border-left: 3px solid var(--forest);">
+                        <div class="consumption-poster" style="background: transparent; width: 50px; height: 70px; overflow: hidden; font-size: 2rem;">
+                            ${book.image_url
+                                ? `<img src="${book.image_url}" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">`
+                                : '&#128218;'
+                            }
+                        </div>
+                        <div class="consumption-info">
+                            <div class="consumption-title">
+                                <a href="${book.link}" target="_blank" style="color: inherit; text-decoration: none;">${escapeHtml(book.title)} &#128279;</a>
+                            </div>
+                            <div class="consumption-meta">${escapeHtml(book.author || '')}${book.average_rating ? ` &bull; ${book.average_rating} avg` : ''}</div>
+                        </div>
+                        <span class="watchlist-source-badge">Goodreads</span>
+                    </div>
+                `).join('');
+            }
+
+            if (!html) {
+                html = '<div class="empty-state"><div class="empty-icon">&#128218;</div><p>No books on your list yet</p></div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Watchlist tab switching
+        document.querySelectorAll('#watchlistTabs .consumption-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentWatchlistTab = tab.dataset.watchlisttab;
+                renderWatchlist();
+            });
+        });
 
         // ==================== INSIGHTS ====================
         function renderInsights() {
