@@ -1,6 +1,17 @@
 {
-  "updated": "2026-02-07T14:16:30.448804+00:00",
-  "weekOf": "2026-02-07",
-  "analysis": null,
-  "mealsAnalyzed": 0
+  "updated": "2026-02-14T14:16:59.961896+00:00",
+  "weekOf": "2026-02-14",
+  "analysis": {
+    "strengths": [
+      "No analysis possible - no meals were logged during this period"
+    ],
+    "gaps": [
+      "No analysis possible - no meals were logged during this period"
+    ],
+    "suggestions": [
+      "Consider logging meals to enable nutritional analysis and optimization recommendations",
+      "Focus on establishing consistent meal patterns with adequate protein, fiber-rich vegetables, and omega-3 sources"
+    ]
+  },
+  "mealsAnalyzed": 7
 }
