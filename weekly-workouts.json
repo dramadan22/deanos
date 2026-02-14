@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-07T06:28:35.739795+00:00",
+  "updated": "2026-02-14T06:30:59.893086+00:00",
   "workouts": [
     {
       "day": "Monday",
@@ -8,47 +8,47 @@
       "exercises": [
         {
           "name": "Chest Press Machine",
-          "sets": "4x8-12",
+          "sets": "4x8-10",
           "instructions": [
-            "Setup: Adjust seat so handles align with mid-chest, back flat against pad",
-            "Execution: Push handles forward with controlled motion, pause briefly at full extension",
-            "Form cue: Keep shoulders back and avoid locking elbows completely"
+            "Setup: Adjust seat height so handles align with mid-chest, back flat against pad",
+            "Execution: Push handles forward in controlled motion, pause briefly at full extension",
+            "Form cue: Keep shoulders back and down, avoid locking elbows completely"
           ]
         },
         {
-          "name": "Seated Cable Row",
-          "sets": "4x8-12",
+          "name": "Cable Seated Row",
+          "sets": "4x8-10",
           "instructions": [
-            "Setup: Sit with feet planted, grab handle with neutral grip, chest up",
-            "Execution: Pull handle to lower chest, squeeze shoulder blades together",
-            "Form cue: Avoid using momentum, keep torso stable throughout movement"
+            "Setup: Sit with chest up, feet planted, grab handle with neutral grip",
+            "Execution: Pull handle to lower chest, squeezing shoulder blades together",
+            "Form cue: Lead with elbows, avoid using momentum or leaning back excessively"
           ]
         },
         {
-          "name": "Lat Pulldown Machine",
+          "name": "Shoulder Press Machine",
           "sets": "3x10-12",
           "instructions": [
-            "Setup: Adjust thigh pad, grip bar wider than shoulder-width",
-            "Execution: Pull bar down to upper chest, lean back slightly",
-            "Form cue: Focus on pulling with lats, not arms, control the negative"
+            "Setup: Adjust seat so handles start at shoulder height, core engaged",
+            "Execution: Press handles overhead in smooth arc, lower with control",
+            "Form cue: Keep wrists straight, avoid pressing too far behind head"
           ]
         },
         {
-          "name": "Cable Lateral Raises",
-          "sets": "3x12-15",
+          "name": "Cable Lat Pulldown",
+          "sets": "3x10-12",
           "instructions": [
-            "Setup: Set cable at lowest position, stand sideways to machine",
-            "Execution: Raise arm out to side until parallel with floor",
-            "Form cue: Slight bend in elbow, lead with pinky finger, control descent"
+            "Setup: Adjust thigh pad, grip bar slightly wider than shoulders",
+            "Execution: Pull bar to upper chest, focus on using lats not arms",
+            "Form cue: Lean back slightly, pull elbows down and back"
           ]
         },
         {
           "name": "Cable Tricep Pushdowns",
           "sets": "3x12-15",
           "instructions": [
-            "Setup: Stand facing cable machine, rope or bar attachment at chest height",
-            "Execution: Push attachment down keeping elbows at sides",
-            "Form cue: Keep elbows stationary, squeeze triceps at bottom"
+            "Setup: Stand upright, elbows at sides, grip rope or bar attachment",
+            "Execution: Push weight down by extending forearms, squeeze triceps at bottom",
+            "Form cue: Keep elbows stationary, control the weight on return"
           ]
         }
       ]
@@ -60,47 +60,47 @@
       "exercises": [
         {
           "name": "Leg Press Machine",
-          "sets": "4x8-12",
+          "sets": "4x8-10",
           "instructions": [
-            "Setup: Sit in machine, feet shoulder-width apart on platform",
-            "Execution: Lower weight until knees reach 90 degrees, press through heels",
-            "Form cue: Keep knees aligned with toes, don't lock knees at top"
+            "Setup: Sit with back flat, feet shoulder-width apart on platform",
+            "Execution: Lower weight by bending knees to 90 degrees, press through heels",
+            "Form cue: Keep knees aligned with toes, don't let knees cave inward"
           ]
         },
         {
-          "name": "Seated Leg Curls",
+          "name": "Hamstring Curl Machine",
           "sets": "3x10-12",
           "instructions": [
-            "Setup: Adjust back pad and leg pad, sit with back flat",
+            "Setup: Lie face down, pad positioned just above ankles, hips down",
             "Execution: Curl heels toward glutes, squeeze hamstrings at top",
-            "Form cue: Control both lifting and lowering phases, full range of motion"
-          ]
-        },
-        {
-          "name": "Leg Extension Machine",
-          "sets": "3x12-15",
-          "instructions": [
-            "Setup: Adjust back pad and leg pad, sit with back supported",
-            "Execution: Extend legs until straight, pause and squeeze quads",
-            "Form cue: Don't swing weight up, control the negative portion"
+            "Form cue: Keep hips pressed into pad, control the eccentric portion"
           ]
         },
         {
           "name": "Cable Romanian Deadlifts",
           "sets": "3x10-12",
           "instructions": [
-            "Setup: Stand facing low cable with rope or bar attachment",
-            "Execution: Hinge at hips, keep slight knee bend, lower with straight back",
-            "Form cue: Push hips back, feel stretch in hamstrings, drive hips forward to return"
+            "Setup: Stand facing cable machine, hold bar with overhand grip",
+            "Execution: Hinge at hips, push hips back while lowering bar along legs",
+            "Form cue: Keep chest up, slight knee bend, feel stretch in hamstrings"
           ]
         },
         {
-          "name": "Calf Press on Leg Press",
+          "name": "Leg Extension Machine",
+          "sets": "3x12-15",
+          "instructions": [
+            "Setup: Sit with back against pad, pad positioned on lower shins",
+            "Execution: Extend legs to straighten knees, squeeze quads at top",
+            "Form cue: Control the weight down, don't swing or use momentum"
+          ]
+        },
+        {
+          "name": "Cable Calf Raises",
           "sets": "3x15-20",
           "instructions": [
-            "Setup: Position balls of feet on bottom edge of leg press platform",
-            "Execution: Press through balls of feet, full range of motion",
-            "Form cue: Pause at top contraction, control the stretch at bottom"
+            "Setup: Stand on platform with cable weight, balls of feet on edge",
+            "Execution: Rise up on toes as high as possible, pause, lower slowly",
+            "Form cue: Keep legs straight, full range of motion, squeeze calves at top"
           ]
         }
       ]
@@ -112,7 +112,7 @@
       "exercises": [
         {
           "name": "Personal Training Session",
-          "sets": "Full body, guided by Josh"
+          "sets": "Full body workout guided by trainer Josh"
         }
       ]
     },
@@ -122,35 +122,53 @@
       "location": "LA Fitness",
       "exercises": [
         {
-          "name": "Incline Treadmill Walk",
-          "sets": "25 minutes",
+          "name": "Elliptical Machine",
+          "sets": "25 minutes at moderate intensity",
           "instructions": [
-            "Setup: Set treadmill to 3-4 mph with 5-8% incline",
-            "Execution: Maintain steady pace, pump arms naturally, breathe rhythmically"
+            "Setup: Adjust foot pedals, hold handles lightly for balance",
+            "Execution: Maintain steady pace at 65-75% max heart rate, use forward motion"
           ]
         },
         {
-          "name": "Dynamic Warm-up",
+          "name": "Dynamic Hip Mobility",
           "sets": "5 minutes",
           "instructions": [
-            "Step 1: Arm circles forward and backward 10 each",
-            "Step 2: Leg swings front to back and side to side 10 each leg",
-            "Step 3: Hip circles and torso twists 10 each direction"
+            "Step 1: Leg swings front/back and side/side, 10 each direction per leg",
+            "Step 2: Walking lunges with torso rotation, 10 per side"
           ]
         },
         {
-          "name": "Full Body Stretch Routine",
-          "sets": "15 minutes",
+          "name": "Upper Body Stretching",
+          "sets": "10 minutes",
           "instructions": [
-            "Step 1: Hold each stretch for 30-60 seconds, breathe deeply",
-            "Step 2: Target chest, shoulders, hip flexors, hamstrings, calves",
-            "Step 3: Use stretching mats in designated area, focus on tight areas from workouts"
+            "Step 1: Shoulder circles and arm crosses, chest doorway stretch 30 seconds",
+            "Step 2: Overhead tricep stretch, neck rolls, upper trap stretch each side"
+          ]
+        },
+        {
+          "name": "Lower Body Stretching",
+          "sets": "10 minutes",
+          "instructions": [
+            "Step 1: Seated hamstring stretch, figure-4 hip stretch, 45 seconds each",
+            "Step 2: Standing quad stretch, calf stretch against wall, 30 seconds each side"
           ]
         }
       ]
     }
   ],
   "sources": [
+    {
+      "title": "Essentials: The Science of Love, Desire & Attachment",
+      "url": "https://www.hubermanlab.com/episode/essentials-the-science-of-love-desire-and-attachment",
+      "source": "Huberman Lab",
+      "published": "2026-02-12T09:00:00+00:00"
+    },
+    {
+      "title": "How Genes Shape Your Risk Taking & Morals | Dr. Kathryn Paige Harden",
+      "url": "https://www.hubermanlab.com/episode/how-genes-shape-your-risk-taking-and-morals-kathryn-paige-harden",
+      "source": "Huberman Lab",
+      "published": "2026-02-09T09:00:00+00:00"
+    },
     {
       "title": "How Dopamine & Serotonin Shape Decisions, Motivation & Learning | Dr. Read Montague",
       "url": "https://www.hubermanlab.com/episode/how-dopamine-serotonin-shape-decisions-motivation-and-learning-read-montague",
@@ -168,18 +186,6 @@
       "url": "https://www.hubermanlab.com/episode/essentials-using-play-to-rewire-and-improve-your-brain",
       "source": "Huberman Lab",
       "published": "2026-01-29T09:00:00+00:00"
-    },
-    {
-      "title": "Navigating the complex relationship between statins, GLP-1, and glycemic control",
-      "url": "https://peterattiamd.com/statins-and-hba1c/",
-      "source": "Peter Attia",
-      "published": "2026-01-29T02:00:00+00:00"
-    },
-    {
-      "title": "Science & Tools of Learning & Memory | Dr. David Eagleman",
-      "url": "https://www.hubermanlab.com/episode/science-and-tools-of-learning-and-memory-david-eagleman",
-      "source": "Huberman Lab",
-      "published": "2026-01-26T09:00:00+00:00"
     }
   ]
 }
