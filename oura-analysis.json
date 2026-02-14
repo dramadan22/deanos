@@ -1,17 +1,18 @@
 {
-  "updated": "2026-02-13T15:31:14.143872+00:00",
-  "data_range": "2026-01-31 to 2026-02-13",
+  "updated": "2026-02-14T15:14:56.339939+00:00",
+  "data_range": "2026-02-01 to 2026-02-14",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-01-31 to 2026-02-13",
+    "date_range": "2026-02-01 to 2026-02-14",
     "sleep": {
-      "avg_score": 82.8,
-      "avg_hours": 7.6,
+      "avg_score": 83.3,
+      "avg_hours": 7.7,
       "avg_deep_hours": 1.2,
       "avg_rem_hours": 1.5,
-      "avg_efficiency": 85.4,
+      "avg_efficiency": 85.8,
       "scores": [
+        80,
         86,
         81,
         80,
@@ -24,13 +25,13 @@
         76,
         90,
         81,
-        88,
-        73
+        88
       ]
     },
     "readiness": {
-      "avg_score": 86.1,
+      "avg_score": 86.7,
       "scores": [
+        86,
         84,
         86,
         89,
@@ -43,16 +44,16 @@
         81,
         88,
         85,
-        90,
-        78
+        90
       ]
     },
     "activity": {
-      "avg_score": 83.8,
-      "avg_steps": 6656.3,
-      "avg_calories": 573.4,
+      "avg_score": 83.5,
+      "avg_steps": 6823.0,
+      "avg_calories": 578.9,
       "scores": [
         null,
+        89,
         87,
         83,
         76,
@@ -64,15 +65,15 @@
         79,
         83,
         87,
-        90,
-        93
+        90
       ]
     },
     "heart": {
-      "avg_hrv": 63.8,
-      "avg_resting_hr": 47.4,
+      "avg_hrv": 64.2,
+      "avg_resting_hr": 47.1,
       "hrv_values": [
         null,
+        73,
         68,
         72,
         70,
@@ -84,29 +85,28 @@
         50,
         72,
         52,
-        56,
-        69
+        56
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.1,
-      "avg_breath_rate": 14.9
+      "avg_breath_rate": 15.0
     },
     "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "Your metrics show strong overall health management with excellent readiness scores averaging 86.1/100 and good sleep quality at 82.8/100. The high activity level with 18 workouts over 14 days demonstrates impressive engagement, though some variability in recovery patterns suggests room for optimization.",
+    "overall_assessment": "Your health metrics show strong performance with an excellent 83.3 sleep score and 86.7 readiness score, indicating good recovery patterns. However, there's some variability in your deep sleep (ranging from 0.8-1.6 hours) and HRV (55-73 ms) that suggests your autonomic system is working through some fluctuations.",
     "whats_going_well": [
-      "Excellent readiness scores consistently above 80, with peak scores of 93 on Feb 10th and 90 on Feb 8th, indicating strong recovery capacity",
-      "Strong HRV readings averaging 63.8ms with several days showing 68-76ms, suggesting good autonomic nervous system regulation despite POTS",
-      "Consistent sleep duration averaging 7.6 hours with good efficiency at 85.4%, providing the stable sleep foundation crucial for POTS management"
+      "Your sleep duration is consistently solid at 7.7 hours average with good efficiency at 85.8%, providing the stable sleep foundation crucial for POTS management",
+      "Your readiness scores are excellent, staying above 84 in the last week and averaging 86.7, indicating your body is recovering well from daily stressors",
+      "Your resting heart rate is remarkably low and stable at 47.1 bpm average (45-53 range), suggesting good cardiovascular conditioning despite POTS"
     ],
     "areas_to_improve": [
-      "Deep sleep shows concerning variability (0.7-1.6 hours) with particularly low amounts on Feb 10th (0.8h) and Feb 7th (0.7h) - aim for consistent pre-sleep routines and cooler room temperature",
-      "REM sleep averaging only 1.5 hours appears low for your sleep duration - consider reducing caffeine after 2pm and maintaining consistent sleep/wake times",
-      "HRV dropped notably to 55ms on Feb 8th compared to your typical 68-76ms range - monitor stress levels and consider gentle recovery activities on lower HRV days"
+      "Deep sleep shows significant variability (0.8-1.6 hours), particularly the concerning 0.8 hour drop on Feb 10th - focus on consistent bedtime routines and sleep environment optimization",
+      "HRV fluctuations from 55-73 ms suggest autonomic stress variations - consider tracking potential triggers like meal timing, hydration, or stress levels around the lower readings",
+      "Activity levels show inconsistency with steps ranging from 4,085-8,366 - aim for more consistent moderate activity to support POTS symptom management without overdoing it"
     ],
-    "pots_specific_insights": "Your relatively low resting heart rate averaging 47.4 bpm combined with strong HRV suggests good cardiovascular conditioning, which is beneficial for POTS symptom management. The consistent readiness scores above 80 indicate your autonomic nervous system is responding well to your current activity and recovery balance.",
-    "focus_for_next_week": "Prioritize deep sleep consistency by establishing a wind-down routine 1 hour before bed and keeping your bedroom temperature between 65-68\u00b0F, as stable deep sleep is crucial for autonomic nervous system regulation in POTS."
+    "pots_specific_insights": "Your low resting heart rate combined with good HRV (64.2 ms average) suggests your autonomic training is working well, but the day-to-day HRV variations indicate you should continue monitoring for POTS flare triggers. The consistent sleep duration is excellent for autonomic stability, which is critical for managing POTS symptoms.",
+    "focus_for_next_week": "Prioritize consistent deep sleep by maintaining the same bedtime routine that worked on your best nights (Feb 8th, 10th, 13th when you got 1.4-1.6 hours deep sleep) and track what factors might have contributed to the 0.8 hour dip on Feb 10th."
   }
 }
