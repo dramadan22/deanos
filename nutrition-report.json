@@ -1,17 +1,17 @@
 {
-  "updated": "2026-02-14T14:16:59.961896+00:00",
-  "weekOf": "2026-02-14",
+  "updated": "2026-02-21T14:15:40.138359+00:00",
+  "weekOf": "2026-02-21",
   "analysis": {
     "strengths": [
-      "No analysis possible - no meals were logged during this period"
+      "Unable to identify nutritional strengths as no meals were logged"
     ],
     "gaps": [
-      "No analysis possible - no meals were logged during this period"
+      "Unable to assess nutrient gaps as no food intake was recorded"
     ],
     "suggestions": [
-      "Consider logging meals to enable nutritional analysis and optimization recommendations",
-      "Focus on establishing consistent meal patterns with adequate protein, fiber-rich vegetables, and omega-3 sources"
+      "Start logging meals to enable nutritional analysis and personalized recommendations",
+      "Consider beginning with protein-rich breakfast options like eggs with vegetables or Greek yogurt with berries"
     ]
   },
-  "mealsAnalyzed": 7
+  "mealsAnalyzed": 2
 }
