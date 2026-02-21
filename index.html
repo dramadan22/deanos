@@ -4781,7 +4781,9 @@
 
         // ==================== WEEKLY PLANNER ====================
         function getISOWeekKey(date = new Date()) {
+            // Shift +1 day so Sunday-start weeks map to a single ISO week key
             const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            d.setUTCDate(d.getUTCDate() + 1);
             const dayNum = d.getUTCDay() || 7;
             d.setUTCDate(d.getUTCDate() + 4 - dayNum);
             const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
@@ -4791,9 +4793,7 @@
 
         function getWeekStartDate(date = new Date()) {
             const d = new Date(date);
-            const day = d.getDay();
-            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-            d.setDate(diff);
+            d.setDate(d.getDate() - d.getDay()); // Go back to Sunday
             return d.toISOString().split('T')[0];
         }
 
@@ -4803,7 +4803,7 @@
         }
 
         function createEmptyWeekPlan(weekKey, startDate) {
-            const dayKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
             const dayData = {};
             dayKeys.forEach(d => {
                 dayData[d] = {
@@ -4824,7 +4824,7 @@
         }
 
         function getWeekStartForKey(weekKey) {
-            // Parse "2026-W07" -> get the Monday of that ISO week
+            // Parse "2026-W07" -> get the Sunday that starts this week
             const match = weekKey.match(/^(\d{4})-W(\d{2})$/);
             if (!match) return getWeekStartDate();
             const year = parseInt(match[1]);
@@ -4834,6 +4834,8 @@
             const dayOfWeek = jan4.getUTCDay() || 7;
             const monday = new Date(jan4);
             monday.setUTCDate(jan4.getUTCDate() - dayOfWeek + 1 + (week - 1) * 7);
+            // Sunday is 1 day before Monday
+            monday.setUTCDate(monday.getUTCDate() - 1);
             return monday.toISOString().split('T')[0];
         }
 
@@ -4843,6 +4845,12 @@
             if (!appData.weeklyPlanner[currentPlannerWeekKey]) {
                 const startDate = getWeekStartForKey(currentPlannerWeekKey);
                 appData.weeklyPlanner[currentPlannerWeekKey] = createEmptyWeekPlan(currentPlannerWeekKey, startDate);
+                saveData();
+            }
+            // Keep startDate in sync with current week-start logic
+            const correctStart = getWeekStartForKey(currentPlannerWeekKey);
+            if (appData.weeklyPlanner[currentPlannerWeekKey].startDate !== correctStart) {
+                appData.weeklyPlanner[currentPlannerWeekKey].startDate = correctStart;
                 saveData();
             }
             return appData.weeklyPlanner[currentPlannerWeekKey];
@@ -4880,7 +4888,7 @@
             if (!currentPlannerDay) currentPlannerDay = getTodayDayKey();
 
             const plan = getCurrentWeekPlannerData();
-            const start = new Date(plan.startDate + 'T00:00:00');
+            const start = new Date(getWeekStartForKey(currentPlannerWeekKey) + 'T00:00:00');
             const end = new Date(start);
             end.setDate(end.getDate() + 6);
             const fmt = { month: 'short', day: 'numeric' };
@@ -4912,7 +4920,7 @@
         function renderPlannerWeekView() {
             const plan = getCurrentWeekPlannerData();
             const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-            const dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
             const today = getTodayDayKey();
             const isCurrentWeek = currentPlannerWeekKey === getISOWeekKey();
 
@@ -4959,7 +4967,7 @@
         function renderPlannerDayView() {
             const plan = getCurrentWeekPlannerData();
             const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-            const dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
             const day = plan.days[currentPlannerDay];
 
             const selectorContainer = document.getElementById('plannerDaySelector');
@@ -5221,7 +5229,7 @@
 
         function autoGenerateGroceryList() {
             const plan = getCurrentWeekPlannerData();
-            const dayOrder = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
             const mealTexts = [];
             dayOrder.forEach(dk => {
