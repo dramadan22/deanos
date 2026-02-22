@@ -2365,6 +2365,432 @@
                 padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
             }
         }
+        /* ==================== HEALTHOS ==================== */
+        .healthos-hero {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .healthos-hero-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--forest);
+            font-family: 'Merriweather', serif;
+            line-height: 1.2;
+        }
+
+        .healthos-hero-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .healthos-hero-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .healthos-progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--bg-input);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .healthos-progress-fill {
+            height: 100%;
+            background: var(--forest);
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+        .healthos-progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+        }
+
+        .healthos-day-strip {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .healthos-day-card {
+            min-width: 100px;
+            flex-shrink: 0;
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+
+        .healthos-day-card.positive {
+            border-color: var(--forest);
+            background: var(--forest-bg);
+        }
+
+        .healthos-day-card.negative {
+            border-color: var(--red-soft);
+            background: var(--red-bg);
+        }
+
+        .healthos-day-card.today {
+            box-shadow: 0 0 0 2px var(--forest);
+        }
+
+        .healthos-day-card-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .healthos-day-card-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .healthos-day-card-amount.positive { color: var(--forest); }
+        .healthos-day-card-amount.negative { color: var(--red-soft); }
+
+        .healthos-day-card-icons {
+            font-size: 0.7rem;
+            margin-top: 0.35rem;
+            display: flex;
+            gap: 0.15rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .healthos-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            min-height: 48px;
+            background: var(--bg-card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            font-family: inherit;
+            font-weight: 500;
+            width: 100%;
+            text-align: left;
+        }
+
+        .healthos-toggle:hover {
+            background: var(--forest-bg);
+            border-color: var(--forest);
+            color: var(--forest);
+        }
+
+        .healthos-toggle.active {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+            box-shadow: 0 2px 8px rgba(45, 90, 61, 0.25);
+        }
+
+        .healthos-toggle.negative:hover {
+            background: var(--red-bg);
+            border-color: var(--red-soft);
+            color: var(--red-soft);
+        }
+
+        .healthos-toggle.negative.active {
+            background: var(--red-soft);
+            color: white;
+            border-color: var(--red-soft);
+            box-shadow: 0 2px 8px rgba(199, 93, 93, 0.25);
+        }
+
+        .healthos-toggle-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .healthos-toggle-label {
+            flex: 1;
+        }
+
+        .healthos-toggle-value {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        .healthos-toggle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .healthos-live-total {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .healthos-live-total.positive { color: var(--forest); }
+        .healthos-live-total.negative { color: var(--red-soft); }
+
+        .healthos-line-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .healthos-line-item:last-child { border-bottom: none; }
+        .healthos-line-item-value.positive { color: var(--forest); font-weight: 600; }
+        .healthos-line-item-value.negative { color: var(--red-soft); font-weight: 600; }
+
+        .healthos-oura-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .healthos-oura-row:last-child { border-bottom: none; }
+
+        .healthos-oura-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .healthos-oura-value {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .healthos-oura-dollar {
+            font-size: 0.8rem;
+            color: var(--forest);
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .healthos-counter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .healthos-counter-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            font-family: inherit;
+        }
+
+        .healthos-counter-btn:hover {
+            border-color: var(--red-soft);
+            color: var(--red-soft);
+        }
+
+        .healthos-counter-num {
+            font-weight: 700;
+            font-size: 1rem;
+            min-width: 1.5rem;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .healthos-wishlist-card {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            margin-bottom: 0.75rem;
+            opacity: 0.7;
+            transition: all var(--transition-fast);
+        }
+
+        .healthos-wishlist-card.ready {
+            opacity: 1;
+            border-color: var(--forest);
+            background: var(--forest-bg);
+        }
+
+        .healthos-wishlist-card.purchased {
+            opacity: 0.5;
+        }
+
+        .healthos-wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .healthos-wishlist-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .healthos-wishlist-price {
+            font-weight: 700;
+            color: var(--forest);
+        }
+
+        .healthos-wishlist-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .healthos-wishlist-progress-fill {
+            height: 100%;
+            background: var(--forest);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+
+        .healthos-wishlist-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .healthos-wishlist-card.ready .healthos-wishlist-status {
+            color: var(--forest);
+            font-weight: 600;
+        }
+
+        .healthos-section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .healthos-condition-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.85rem;
+        }
+
+        .healthos-condition-row:last-child { border-bottom: none; }
+
+        .healthos-condition-name { color: var(--text-primary); flex: 1; }
+        .healthos-condition-lifetime { color: var(--text-secondary); width: 80px; text-align: right; }
+        .healthos-condition-monthly { color: var(--forest); font-weight: 600; width: 80px; text-align: right; }
+
+        .healthos-balance-card {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .healthos-balance-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .healthos-balance-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .healthos-balance-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest);
+            font-family: 'Merriweather', serif;
+        }
+
+        .healthos-date-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .healthos-date-nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.4rem 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .healthos-date-nav-btn:hover {
+            border-color: var(--forest);
+            color: var(--forest);
+        }
+
+        .healthos-date-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 160px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .healthos-toggle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .healthos-hero-amount {
+                font-size: 2.5rem;
+            }
+
+            .healthos-live-total {
+                font-size: 2rem;
+            }
+
+            .healthos-day-card {
+                min-width: 80px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -2425,6 +2851,9 @@
                 <div class="sidebar-label">Track</div>
                 <button class="sidebar-btn" data-view="health">
                     <span class="sidebar-icon">&#128154;</span> Health
+                </button>
+                <button class="sidebar-btn" data-view="healthOS">
+                    <span class="sidebar-icon">&#128176;</span> HealthOS
                 </button>
                 <button class="sidebar-btn" data-view="tasks">
                     <span class="sidebar-icon">&#9745;</span> Tasks
@@ -2539,6 +2968,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- HealthOS View -->
+            <div class="module-view" id="healthOSView">
+                <div class="view-header">
+                    <h2 class="view-title">&#128176; HealthOS</h2>
+                </div>
+                <div class="consumption-tabs" id="healthOSTabs">
+                    <button class="consumption-tab active" data-hostab="dashboard">Dashboard</button>
+                    <button class="consumption-tab" data-hostab="dailylog">Daily Log</button>
+                    <button class="consumption-tab" data-hostab="wishlist">Wishlist</button>
+                </div>
+                <div id="healthOSDashboard"></div>
+                <div id="healthOSDailyLog" style="display: none;"></div>
+                <div id="healthOSWishlist" style="display: none;"></div>
             </div>
 
             <!-- Tasks View -->
@@ -3405,6 +3849,7 @@
             // Render view content
             if (viewName === 'morning') renderMorning();
             else if (viewName === 'health') renderHealth();
+            else if (viewName === 'healthOS') renderHealthOS();
             else if (viewName === 'tasks') renderTasks();
             else if (viewName === 'consumption') renderConsumption();
             else if (viewName === 'watchlist') renderWatchlist();
@@ -5993,6 +6438,15 @@
 
             const content = JSON.stringify(dataToSync, null, 2);
 
+            const healthosContent = JSON.stringify({
+                updated: new Date().toISOString(),
+                config: hosGetConfig(),
+                balance: hosGetBalance(),
+                log: hosGetLog(),
+                wishlist: hosGetWishlist(),
+                history: hosGetHistory()
+            }, null, 2);
+
             try {
                 let gistId = settings.gistId;
 
@@ -6009,7 +6463,8 @@
                             public: false,
                             files: {
                                 'deanos-data.json': { content },
-                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) }
+                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) },
+                                'healthos-data.json': { content: healthosContent }
                             }
                         })
                     });
@@ -6033,7 +6488,8 @@
                         body: JSON.stringify({
                             files: {
                                 'deanos-data.json': { content },
-                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) }
+                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) },
+                                'healthos-data.json': { content: healthosContent }
                             }
                         })
                     });
@@ -6123,6 +6579,816 @@
                 statusEl.innerHTML = `<p style="color: var(--red-soft);">Restore failed: ${error.message}</p>`;
                 showNotification('Restore failed', 'error');
             }
+        }
+
+        // ==================== HEALTHOS ====================
+
+        // --- Named Constants (dollar values) ---
+        const HOS_CARDIO_VALUE = 1.85;
+        const HOS_STRENGTH_VALUE = 1.50;
+        const HOS_HEALTHY_BREAKFAST = 0.45;
+        const HOS_HEALTHY_LUNCH = 0.45;
+        const HOS_HEALTHY_DINNER = 0.55;
+        const HOS_OMEGA3_VALUE = 0.25;
+        const HOS_HYDRATION_VALUE = 0.20;
+        const HOS_SLEEP_85_PLUS = 0.75;
+        const HOS_SLEEP_70_84 = 0.55;
+        const HOS_SLEEP_60_69 = 0.30;
+        const HOS_STEPS_8K_PLUS = 0.20;
+        const HOS_STEPS_5K_PLUS = 0.10;
+        const HOS_HRV_50_PLUS = 0.15;
+        const HOS_LOW_STRESS_VALUE = 0.20;
+
+        const HOS_SKIP_CARDIO = -1.85;
+        const HOS_SKIP_STRENGTH = -1.50;
+        const HOS_FRIED_FOOD = -0.55;
+        const HOS_PROCESSED_MEAL = -0.45;
+        const HOS_PROCESSED_MEAT = -0.40;
+        const HOS_SUGARY_DRINK = -0.25;
+        const HOS_ALCOHOL_PER_DRINK = -0.35;
+        const HOS_UNHEALTHY_SNACK = -0.20;
+        const HOS_SHORT_SLEEP = -0.45;
+        const HOS_SEDENTARY_DAY = -0.25;
+
+        const HOS_MONTHLY_TARGET = 61.60;
+
+        const HOS_CONDITIONS = [
+            { name: 'Cardiovascular Disease', lifetime: 8120, monthly: 15.89 },
+            { name: 'Type 2 Diabetes', lifetime: 5500, monthly: 10.76 },
+            { name: 'Dementia / Alzheimer\'s', lifetime: 4800, monthly: 9.39 },
+            { name: 'Heart Failure', lifetime: 3200, monthly: 6.26 },
+            { name: 'Hypertension', lifetime: 2940, monthly: 5.75 },
+            { name: 'Osteoporosis', lifetime: 2800, monthly: 5.48 },
+            { name: 'POTS Management', lifetime: 2500, monthly: 4.89 },
+            { name: 'Metabolic Syndrome', lifetime: 720, monthly: 1.41 },
+            { name: 'Depression / Mental Health', lifetime: 705, monthly: 1.38 },
+            { name: 'Cancer (modifiable)', lifetime: 500, monthly: 0.98 }
+        ];
+        const HOS_LIFETIME_TOTAL = 31785;
+
+        // --- localStorage helpers ---
+        function hosLoad(key, fallback) {
+            const raw = localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : fallback;
+        }
+
+        function hosSave(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+            scheduleCloudSync();
+        }
+
+        function hosGetConfig() {
+            return hosLoad('healthos_config', { dailyTarget: HOS_MONTHLY_TARGET, monthlyTarget: HOS_MONTHLY_TARGET });
+        }
+
+        function hosGetBalance() {
+            return hosLoad('healthos_balance', { lifetime: 0, currentMonth: 0, lastResetMonth: new Date().toISOString().slice(0, 7) });
+        }
+
+        function hosGetWishlist() {
+            return hosLoad('healthos_wishlist', []);
+        }
+
+        function hosGetLog() {
+            return hosLoad('healthos_log', {});
+        }
+
+        function hosGetHistory() {
+            return hosLoad('healthos_history', []);
+        }
+
+        function hosGetDayLog(dateStr) {
+            const log = hosGetLog();
+            if (!log[dateStr]) {
+                log[dateStr] = {
+                    strengthTraining: false,
+                    healthyBreakfast: false,
+                    healthyLunch: false,
+                    healthyDinner: false,
+                    omega3: false,
+                    hydration: false,
+                    friedFood: false,
+                    processedMeat: false,
+                    sugaryDrink: false,
+                    unhealthySnack: false,
+                    alcohol: 0,
+                    manualCardio: false,
+                    sleepScore: 0,
+                    sleepDuration: 0,
+                    activityScore: 0,
+                    cardioDetected: false,
+                    hrv: 0,
+                    steps: 0,
+                    stressScore: 0,
+                    ouraFetched: false
+                };
+                hosSave('healthos_log', log);
+            }
+            return log[dateStr];
+        }
+
+        function hosSaveDayLog(dateStr, dayData) {
+            const log = hosGetLog();
+            log[dateStr] = dayData;
+            hosSave('healthos_log', log);
+        }
+
+        // --- Monthly Reset Logic ---
+        function hosCheckMonthReset() {
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            const balance = hosGetBalance();
+            if (balance.lastResetMonth !== currentMonth) {
+                const history = hosGetHistory();
+                if (balance.lastResetMonth) {
+                    history.push({ month: balance.lastResetMonth, amount: balance.currentMonth });
+                    hosSave('healthos_history', history);
+                }
+                balance.lifetime += balance.currentMonth;
+                balance.currentMonth = 0;
+                balance.lastResetMonth = currentMonth;
+                hosSave('healthos_balance', balance);
+            }
+        }
+
+        // Run on load
+        hosCheckMonthReset();
+
+        // --- calculateDayValue() — Pure Function ---
+        function calculateDayValue(dayData) {
+            const breakdown = [];
+            let gross = 0;
+            let penalties = 0;
+
+            // Cardio: Oura detected OR manual, never double-count
+            const hasCardio = (dayData.ouraFetched && dayData.cardioDetected) || (!dayData.ouraFetched && dayData.manualCardio) || (dayData.ouraFetched && !dayData.cardioDetected && dayData.manualCardio);
+            if (hasCardio) {
+                breakdown.push({ label: 'Cardio session', value: HOS_CARDIO_VALUE, type: 'positive' });
+                gross += HOS_CARDIO_VALUE;
+            }
+
+            // Strength
+            if (dayData.strengthTraining) {
+                breakdown.push({ label: 'Strength training', value: HOS_STRENGTH_VALUE, type: 'positive' });
+                gross += HOS_STRENGTH_VALUE;
+            }
+
+            // Meals
+            if (dayData.healthyBreakfast) {
+                breakdown.push({ label: 'Healthy breakfast', value: HOS_HEALTHY_BREAKFAST, type: 'positive' });
+                gross += HOS_HEALTHY_BREAKFAST;
+            }
+            if (dayData.healthyLunch) {
+                breakdown.push({ label: 'Healthy lunch', value: HOS_HEALTHY_LUNCH, type: 'positive' });
+                gross += HOS_HEALTHY_LUNCH;
+            }
+            if (dayData.healthyDinner) {
+                breakdown.push({ label: 'Healthy dinner', value: HOS_HEALTHY_DINNER, type: 'positive' });
+                gross += HOS_HEALTHY_DINNER;
+            }
+
+            // Omega-3
+            if (dayData.omega3) {
+                breakdown.push({ label: 'Omega-3', value: HOS_OMEGA3_VALUE, type: 'positive' });
+                gross += HOS_OMEGA3_VALUE;
+            }
+
+            // Hydration
+            if (dayData.hydration) {
+                breakdown.push({ label: 'Hydration goal', value: HOS_HYDRATION_VALUE, type: 'positive' });
+                gross += HOS_HYDRATION_VALUE;
+            }
+
+            // Sleep score (graduated)
+            if (dayData.sleepScore >= 85) {
+                breakdown.push({ label: 'Sleep score 85+', value: HOS_SLEEP_85_PLUS, type: 'positive' });
+                gross += HOS_SLEEP_85_PLUS;
+            } else if (dayData.sleepScore >= 70) {
+                breakdown.push({ label: 'Sleep score 70-84', value: HOS_SLEEP_70_84, type: 'positive' });
+                gross += HOS_SLEEP_70_84;
+            } else if (dayData.sleepScore >= 60) {
+                breakdown.push({ label: 'Sleep score 60-69', value: HOS_SLEEP_60_69, type: 'positive' });
+                gross += HOS_SLEEP_60_69;
+            }
+
+            // Steps (graduated)
+            if (dayData.steps >= 8000) {
+                breakdown.push({ label: 'Steps 8,000+', value: HOS_STEPS_8K_PLUS, type: 'positive' });
+                gross += HOS_STEPS_8K_PLUS;
+            } else if (dayData.steps >= 5000) {
+                breakdown.push({ label: 'Steps 5,000+', value: HOS_STEPS_5K_PLUS, type: 'positive' });
+                gross += HOS_STEPS_5K_PLUS;
+            }
+
+            // HRV
+            if (dayData.hrv >= 50) {
+                breakdown.push({ label: 'HRV \u2265 50', value: HOS_HRV_50_PLUS, type: 'positive' });
+                gross += HOS_HRV_50_PLUS;
+            }
+
+            // Stress (using readiness as proxy)
+            if (dayData.stressScore >= 70) {
+                breakdown.push({ label: 'Low stress day', value: HOS_LOW_STRESS_VALUE, type: 'positive' });
+                gross += HOS_LOW_STRESS_VALUE;
+            }
+
+            // --- Negatives ---
+            if (dayData.friedFood) {
+                breakdown.push({ label: 'Fried food', value: HOS_FRIED_FOOD, type: 'negative' });
+                penalties += Math.abs(HOS_FRIED_FOOD);
+            }
+            if (dayData.processedMeat) {
+                breakdown.push({ label: 'Processed meat', value: HOS_PROCESSED_MEAT, type: 'negative' });
+                penalties += Math.abs(HOS_PROCESSED_MEAT);
+            }
+            if (dayData.sugaryDrink) {
+                breakdown.push({ label: 'Sugary drink', value: HOS_SUGARY_DRINK, type: 'negative' });
+                penalties += Math.abs(HOS_SUGARY_DRINK);
+            }
+            if (dayData.unhealthySnack) {
+                breakdown.push({ label: 'Unhealthy snack', value: HOS_UNHEALTHY_SNACK, type: 'negative' });
+                penalties += Math.abs(HOS_UNHEALTHY_SNACK);
+            }
+            if (dayData.alcohol > 0) {
+                const alcoholCost = HOS_ALCOHOL_PER_DRINK * dayData.alcohol;
+                breakdown.push({ label: `Alcohol (${dayData.alcohol} drink${dayData.alcohol > 1 ? 's' : ''})`, value: alcoholCost, type: 'negative' });
+                penalties += Math.abs(alcoholCost);
+            }
+            if (dayData.sleepDuration > 0 && dayData.sleepDuration < 6) {
+                breakdown.push({ label: 'Sleep < 6 hours', value: HOS_SHORT_SLEEP, type: 'negative' });
+                penalties += Math.abs(HOS_SHORT_SLEEP);
+            }
+            if (dayData.steps > 0 && dayData.steps < 3000) {
+                breakdown.push({ label: 'Sedentary day', value: HOS_SEDENTARY_DAY, type: 'negative' });
+                penalties += Math.abs(HOS_SEDENTARY_DAY);
+            }
+
+            const net = Math.round((gross - penalties) * 100) / 100;
+            return { gross: Math.round(gross * 100) / 100, net, breakdown };
+        }
+
+        // --- fetchOuraForDate ---
+        function fetchOuraForDate(dateStr) {
+            const dayLog = hosGetDayLog(dateStr);
+            if (dayLog.ouraFetched) return;
+
+            const raw = localStorage.getItem('deanOS_ouraData');
+            if (!raw) return;
+
+            const ouraData = JSON.parse(raw);
+            const days = ouraData.days || [];
+            const workouts = ouraData.workouts || [];
+
+            const day = days.find(d => d.date === dateStr);
+            if (day) {
+                dayLog.sleepScore = day.sleep_score || 0;
+                dayLog.sleepDuration = day.total_sleep_seconds ? Math.round((day.total_sleep_seconds / 3600) * 10) / 10 : 0;
+                dayLog.activityScore = day.activity_score || 0;
+                dayLog.steps = day.steps || 0;
+                dayLog.hrv = day.average_hrv || 0;
+                dayLog.stressScore = day.readiness_score || 0; // proxy
+            }
+
+            // Cardio detection: look for cycling/running sessions with duration > 20 min
+            const dayWorkouts = workouts.filter(w => w.date === dateStr);
+            dayLog.cardioDetected = dayWorkouts.some(w => {
+                if (!w.start_datetime || !w.end_datetime) return false;
+                const start = new Date(w.start_datetime);
+                const end = new Date(w.end_datetime);
+                const durationMin = (end - start) / 60000;
+                const cardioTypes = ['cycling', 'running', 'walking', 'swimming', 'rowing', 'elliptical', 'indoor_cycling'];
+                return cardioTypes.includes(w.activity) && durationMin > 20;
+            });
+
+            dayLog.ouraFetched = true;
+            hosSaveDayLog(dateStr, dayLog);
+        }
+
+        // --- Recalculate month from logs ---
+        function hosRecalculateMonth() {
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            const log = hosGetLog();
+            let monthTotal = 0;
+
+            Object.keys(log).forEach(dateStr => {
+                if (dateStr.startsWith(currentMonth)) {
+                    const result = calculateDayValue(log[dateStr]);
+                    monthTotal += result.net;
+                }
+            });
+
+            const balance = hosGetBalance();
+            balance.currentMonth = Math.round(monthTotal * 100) / 100;
+            hosSave('healthos_balance', balance);
+        }
+
+        // --- State ---
+        let currentHOSTab = 'dashboard';
+        let currentHOSDate = new Date().toISOString().split('T')[0];
+
+        // --- Tab switching ---
+        document.querySelectorAll('#healthOSTabs .consumption-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentHOSTab = tab.dataset.hostab;
+                renderHealthOS();
+            });
+        });
+
+        // --- Main render ---
+        function renderHealthOS() {
+            hosCheckMonthReset();
+
+            document.querySelectorAll('#healthOSTabs .consumption-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.hostab === currentHOSTab);
+            });
+
+            document.getElementById('healthOSDashboard').style.display = currentHOSTab === 'dashboard' ? 'block' : 'none';
+            document.getElementById('healthOSDailyLog').style.display = currentHOSTab === 'dailylog' ? 'block' : 'none';
+            document.getElementById('healthOSWishlist').style.display = currentHOSTab === 'wishlist' ? 'block' : 'none';
+
+            if (currentHOSTab === 'dashboard') renderHOSDashboard();
+            else if (currentHOSTab === 'dailylog') renderHOSDailyLog();
+            else if (currentHOSTab === 'wishlist') renderHOSWishlist();
+        }
+
+        // --- Dashboard ---
+        function renderHOSDashboard() {
+            hosRecalculateMonth();
+            const balance = hosGetBalance();
+            const pct = Math.min(100, (balance.currentMonth / HOS_MONTHLY_TARGET) * 100);
+            const now = new Date();
+            const monthLabel = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            // 7-day strip data
+            const stripDays = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const ds = d.toISOString().split('T')[0];
+                const dayLog = hosGetDayLog(ds);
+                fetchOuraForDate(ds);
+                const result = calculateDayValue(dayLog);
+                stripDays.push({
+                    date: d,
+                    dateStr: ds,
+                    net: result.net,
+                    breakdown: result.breakdown,
+                    isToday: i === 0
+                });
+            }
+
+            const container = document.getElementById('healthOSDashboard');
+            container.innerHTML = `
+                <div class="card">
+                    <div class="card-body healthos-hero">
+                        <div class="healthos-hero-label">${monthLabel}</div>
+                        <div class="healthos-hero-amount">$${balance.currentMonth.toFixed(2)}</div>
+                        <div class="healthos-hero-label">saved this month</div>
+                        <div class="healthos-progress-bar">
+                            <div class="healthos-progress-fill" style="width: ${pct}%"></div>
+                        </div>
+                        <div class="healthos-progress-label">
+                            <span>$0</span>
+                            <span>$${HOS_MONTHLY_TARGET.toFixed(2)} target</span>
+                        </div>
+                        <div class="healthos-hero-subtitle">Your routine protects against $${HOS_LIFETIME_TOTAL.toLocaleString()} in expected lifetime healthcare costs</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128197; Last 7 Days</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="healthos-day-strip">
+                            ${stripDays.map(sd => {
+                                const cls = sd.net >= 0 ? 'positive' : 'negative';
+                                const dayLabel = sd.date.toLocaleDateString('en-US', { weekday: 'short' });
+                                const dateLabel = sd.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                                const icons = sd.breakdown.filter(b => b.type === 'positive').map(b => {
+                                    if (b.label.includes('Cardio')) return '\u{1F6B4}';
+                                    if (b.label.includes('Strength')) return '\u{1F4AA}';
+                                    if (b.label.includes('breakfast') || b.label.includes('lunch') || b.label.includes('dinner')) return '\u{1F957}';
+                                    if (b.label.includes('Sleep')) return '\u{1F634}';
+                                    if (b.label.includes('Steps')) return '\u{1F6B6}';
+                                    return '';
+                                }).filter(Boolean).join('');
+                                return `
+                                    <div class="healthos-day-card ${cls} ${sd.isToday ? 'today' : ''}" onclick="hosViewDay('${sd.dateStr}')">
+                                        <div class="healthos-day-card-date">${dayLabel}<br>${dateLabel}</div>
+                                        <div class="healthos-day-card-amount ${cls}">${sd.net >= 0 ? '+' : ''}$${sd.net.toFixed(2)}</div>
+                                        <div class="healthos-day-card-icons">${icons}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header" style="cursor: pointer;" onclick="hosToggleConditions()">
+                        <div class="card-title">&#129657; Condition Breakdown</div>
+                        <span id="hosConditionToggle" style="color: var(--text-muted); font-size: 0.85rem;">Show</span>
+                    </div>
+                    <div class="card-body" id="hosConditionSection" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); margin-bottom: 0.25rem;">
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">CONDITION</span>
+                            <div style="display: flex;">
+                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); width: 80px; text-align: right;">LIFETIME</span>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); width: 80px; text-align: right;">/MONTH</span>
+                            </div>
+                        </div>
+                        ${HOS_CONDITIONS.map(c => `
+                            <div class="healthos-condition-row">
+                                <span class="healthos-condition-name">${c.name}</span>
+                                <span class="healthos-condition-lifetime">$${c.lifetime.toLocaleString()}</span>
+                                <span class="healthos-condition-monthly">$${c.monthly.toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                        <div class="healthos-condition-row" style="border-top: 2px solid var(--border); margin-top: 0.25rem; padding-top: 0.5rem; font-weight: 700;">
+                            <span class="healthos-condition-name">Total</span>
+                            <span class="healthos-condition-lifetime">$${HOS_LIFETIME_TOTAL.toLocaleString()}</span>
+                            <span class="healthos-condition-monthly">$${HOS_MONTHLY_TARGET.toFixed(2)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-body healthos-balance-card">
+                        <div class="healthos-balance-item">
+                            <div class="healthos-balance-label">This Month</div>
+                            <div class="healthos-balance-value">$${balance.currentMonth.toFixed(2)}</div>
+                        </div>
+                        <div class="healthos-balance-item">
+                            <div class="healthos-balance-label">Lifetime Savings</div>
+                            <div class="healthos-balance-value">$${(balance.lifetime + balance.currentMonth).toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function hosToggleConditions() {
+            const section = document.getElementById('hosConditionSection');
+            const toggle = document.getElementById('hosConditionToggle');
+            const visible = section.style.display !== 'none';
+            section.style.display = visible ? 'none' : 'block';
+            toggle.textContent = visible ? 'Show' : 'Hide';
+        }
+
+        function hosViewDay(dateStr) {
+            currentHOSDate = dateStr;
+            currentHOSTab = 'dailylog';
+            renderHealthOS();
+        }
+
+        // --- Daily Log ---
+        function renderHOSDailyLog() {
+            const dateStr = currentHOSDate;
+            fetchOuraForDate(dateStr);
+            const dayLog = hosGetDayLog(dateStr);
+            const result = calculateDayValue(dayLog);
+
+            const dateObj = new Date(dateStr + 'T00:00:00');
+            const dateLabel = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+            const isToday = dateStr === new Date().toISOString().split('T')[0];
+
+            const container = document.getElementById('healthOSDailyLog');
+            container.innerHTML = `
+                <div class="healthos-date-nav">
+                    <button class="healthos-date-nav-btn" onclick="hosNavDate(-1)">&#9664;</button>
+                    <div class="healthos-date-label">${dateLabel}</div>
+                    <button class="healthos-date-nav-btn" onclick="hosNavDate(1)">&#9654;</button>
+                    ${!isToday ? '<button class="healthos-date-nav-btn" onclick="hosNavToday()">Today</button>' : ''}
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="healthos-live-total ${result.net >= 0 ? 'positive' : 'negative'}">
+                            ${result.net >= 0 ? '+' : ''}$${result.net.toFixed(2)}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128141; Oura Data</div>
+                        ${dayLog.ouraFetched ? '<span style="font-size: 0.75rem; color: var(--forest);">&#10003; Synced</span>' : '<span style="font-size: 0.75rem; color: var(--text-muted);">No data</span>'}
+                    </div>
+                    <div class="card-body">
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#128564; Sleep Score</span>
+                            <span>
+                                <span class="healthos-oura-value">${dayLog.sleepScore || '—'}</span>
+                                ${dayLog.sleepScore ? `<span class="healthos-oura-dollar">+$${dayLog.sleepScore >= 85 ? HOS_SLEEP_85_PLUS.toFixed(2) : dayLog.sleepScore >= 70 ? HOS_SLEEP_70_84.toFixed(2) : dayLog.sleepScore >= 60 ? HOS_SLEEP_60_69.toFixed(2) : '0.00'}</span>` : ''}
+                            </span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#128164; Sleep Duration</span>
+                            <span class="healthos-oura-value">${dayLog.sleepDuration ? dayLog.sleepDuration.toFixed(1) + 'h' : '—'}</span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#9889; Activity Score</span>
+                            <span class="healthos-oura-value">${dayLog.activityScore || '—'}</span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#128694; Steps</span>
+                            <span>
+                                <span class="healthos-oura-value">${dayLog.steps ? dayLog.steps.toLocaleString() : '—'}</span>
+                                ${dayLog.steps >= 8000 ? `<span class="healthos-oura-dollar">+$${HOS_STEPS_8K_PLUS.toFixed(2)}</span>` : dayLog.steps >= 5000 ? `<span class="healthos-oura-dollar">+$${HOS_STEPS_5K_PLUS.toFixed(2)}</span>` : ''}
+                            </span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#128147; HRV</span>
+                            <span>
+                                <span class="healthos-oura-value">${dayLog.hrv || '—'}</span>
+                                ${dayLog.hrv >= 50 ? `<span class="healthos-oura-dollar">+$${HOS_HRV_50_PLUS.toFixed(2)}</span>` : ''}
+                            </span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#128170; Readiness</span>
+                            <span>
+                                <span class="healthos-oura-value">${dayLog.stressScore || '—'}</span>
+                                ${dayLog.stressScore >= 70 ? `<span class="healthos-oura-dollar">+$${HOS_LOW_STRESS_VALUE.toFixed(2)}</span>` : ''}
+                            </span>
+                        </div>
+                        <div class="healthos-oura-row">
+                            <span class="healthos-oura-label">&#127947; Cardio Detected</span>
+                            <span class="healthos-oura-value">${dayLog.cardioDetected ? '&#10003; Yes' : '&#10007; No'}</span>
+                        </div>
+                        ${!dayLog.cardioDetected ? `
+                            <div style="margin-top: 0.5rem;">
+                                <button class="healthos-toggle ${dayLog.manualCardio ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'manualCardio')" style="font-size: 0.85rem;">
+                                    <span class="healthos-toggle-icon">&#127947;</span>
+                                    <span class="healthos-toggle-label">Manual cardio override</span>
+                                    <span class="healthos-toggle-value">+$${HOS_CARDIO_VALUE.toFixed(2)}</span>
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#10024; Good Habits</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="healthos-toggle-grid">
+                            <button class="healthos-toggle ${dayLog.strengthTraining ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'strengthTraining')">
+                                <span class="healthos-toggle-icon">&#128170;</span>
+                                <span class="healthos-toggle-label">Strength</span>
+                                <span class="healthos-toggle-value">+$${HOS_STRENGTH_VALUE.toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle ${dayLog.healthyBreakfast ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyBreakfast')">
+                                <span class="healthos-toggle-icon">&#127749;</span>
+                                <span class="healthos-toggle-label">Healthy Breakfast</span>
+                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_BREAKFAST.toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle ${dayLog.healthyLunch ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyLunch')">
+                                <span class="healthos-toggle-icon">&#129367;</span>
+                                <span class="healthos-toggle-label">Healthy Lunch</span>
+                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_LUNCH.toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle ${dayLog.healthyDinner ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyDinner')">
+                                <span class="healthos-toggle-icon">&#127869;</span>
+                                <span class="healthos-toggle-label">Healthy Dinner</span>
+                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_DINNER.toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle ${dayLog.omega3 ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'omega3')">
+                                <span class="healthos-toggle-icon">&#128031;</span>
+                                <span class="healthos-toggle-label">Omega-3</span>
+                                <span class="healthos-toggle-value">+$${HOS_OMEGA3_VALUE.toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle ${dayLog.hydration ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'hydration')">
+                                <span class="healthos-toggle-icon">&#128167;</span>
+                                <span class="healthos-toggle-label">Hydration Goal</span>
+                                <span class="healthos-toggle-value">+$${HOS_HYDRATION_VALUE.toFixed(2)}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#9888; Setbacks</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="healthos-toggle-grid">
+                            <button class="healthos-toggle negative ${dayLog.friedFood ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'friedFood')">
+                                <span class="healthos-toggle-icon">&#127839;</span>
+                                <span class="healthos-toggle-label">Fried Food</span>
+                                <span class="healthos-toggle-value">$${Math.abs(HOS_FRIED_FOOD).toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle negative ${dayLog.processedMeat ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'processedMeat')">
+                                <span class="healthos-toggle-icon">&#129385;</span>
+                                <span class="healthos-toggle-label">Processed Meat</span>
+                                <span class="healthos-toggle-value">$${Math.abs(HOS_PROCESSED_MEAT).toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle negative ${dayLog.sugaryDrink ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'sugaryDrink')">
+                                <span class="healthos-toggle-icon">&#129380;</span>
+                                <span class="healthos-toggle-label">Sugary Drink</span>
+                                <span class="healthos-toggle-value">$${Math.abs(HOS_SUGARY_DRINK).toFixed(2)}</span>
+                            </button>
+                            <button class="healthos-toggle negative ${dayLog.unhealthySnack ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'unhealthySnack')">
+                                <span class="healthos-toggle-icon">&#127851;</span>
+                                <span class="healthos-toggle-label">Unhealthy Snack</span>
+                                <span class="healthos-toggle-value">$${Math.abs(HOS_UNHEALTHY_SNACK).toFixed(2)}</span>
+                            </button>
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <div class="healthos-section-label">Alcohol</div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div class="healthos-counter">
+                                    <button class="healthos-counter-btn" onclick="hosAlcohol('${dateStr}', -1)">&#8722;</button>
+                                    <span class="healthos-counter-num">${dayLog.alcohol || 0}</span>
+                                    <button class="healthos-counter-btn" onclick="hosAlcohol('${dateStr}', 1)">+</button>
+                                </div>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">drinks</span>
+                                ${dayLog.alcohol > 0 ? `<span style="font-size: 0.85rem; color: var(--red-soft); font-weight: 600;">-$${(Math.abs(HOS_ALCOHOL_PER_DRINK) * dayLog.alcohol).toFixed(2)}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#128203; Breakdown</div>
+                    </div>
+                    <div class="card-body">
+                        ${result.breakdown.length > 0 ? result.breakdown.map(b => `
+                            <div class="healthos-line-item">
+                                <span>${b.label}</span>
+                                <span class="healthos-line-item-value ${b.type}">${b.value >= 0 ? '+' : ''}$${Math.abs(b.value).toFixed(2)}</span>
+                            </div>
+                        `).join('') : '<div class="empty-state"><p>No activity logged yet</p></div>'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function hosToggle(dateStr, field) {
+            const dayLog = hosGetDayLog(dateStr);
+            dayLog[field] = !dayLog[field];
+            hosSaveDayLog(dateStr, dayLog);
+            hosRecalculateMonth();
+            renderHOSDailyLog();
+        }
+
+        function hosAlcohol(dateStr, delta) {
+            const dayLog = hosGetDayLog(dateStr);
+            dayLog.alcohol = Math.max(0, (dayLog.alcohol || 0) + delta);
+            hosSaveDayLog(dateStr, dayLog);
+            hosRecalculateMonth();
+            renderHOSDailyLog();
+        }
+
+        function hosNavDate(delta) {
+            const d = new Date(currentHOSDate + 'T00:00:00');
+            d.setDate(d.getDate() + delta);
+            currentHOSDate = d.toISOString().split('T')[0];
+            renderHOSDailyLog();
+        }
+
+        function hosNavToday() {
+            currentHOSDate = new Date().toISOString().split('T')[0];
+            renderHOSDailyLog();
+        }
+
+        // --- Wishlist ---
+        function renderHOSWishlist() {
+            hosRecalculateMonth();
+            const balance = hosGetBalance();
+            const totalAvailable = balance.lifetime + balance.currentMonth;
+            const wishlist = hosGetWishlist();
+            const spent = wishlist.filter(w => w.purchased).reduce((sum, w) => sum + w.price, 0);
+            const available = Math.round((totalAvailable - spent) * 100) / 100;
+
+            const container = document.getElementById('healthOSWishlist');
+            container.innerHTML = `
+                <div class="card">
+                    <div class="card-body healthos-balance-card">
+                        <div class="healthos-balance-item">
+                            <div class="healthos-balance-label">Available to Spend</div>
+                            <div class="healthos-balance-value">$${available.toFixed(2)}</div>
+                        </div>
+                        <div class="healthos-balance-item">
+                            <div class="healthos-balance-label">Earned This Month</div>
+                            <div class="healthos-balance-value">$${balance.currentMonth.toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-header">
+                        <div class="card-title">&#10133; Add Wishlist Item</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Item Name</label>
+                            <input type="text" class="input-field" id="hosWishlistName" placeholder="What do you want?">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Price ($)</label>
+                            <input type="number" class="input-field" id="hosWishlistPrice" step="0.01" min="0" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL (optional)</label>
+                            <input type="text" class="input-field" id="hosWishlistUrl" placeholder="https://...">
+                        </div>
+                        <button class="btn btn-primary" onclick="hosAddWishlistItem()" style="width: 100%; margin-top: 0.5rem;">Add Item</button>
+                    </div>
+                </div>
+
+                ${wishlist.filter(w => !w.purchased).length > 0 ? `
+                    <div class="healthos-section-label">Wishlist</div>
+                    ${wishlist.filter(w => !w.purchased).map(item => {
+                        const progress = Math.min(100, (available / item.price) * 100);
+                        const ready = available >= item.price;
+                        return `
+                            <div class="healthos-wishlist-card ${ready ? 'ready' : ''}">
+                                <div class="healthos-wishlist-header">
+                                    <span class="healthos-wishlist-name">${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" style="color: inherit; text-decoration: underline;">${escapeHtml(item.name)}</a>` : escapeHtml(item.name)}</span>
+                                    <span class="healthos-wishlist-price">$${item.price.toFixed(2)}</span>
+                                </div>
+                                <div class="healthos-wishlist-progress">
+                                    <div class="healthos-wishlist-progress-fill" style="width: ${progress}%"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="healthos-wishlist-status">${ready ? '&#10003; Ready to spend!' : `$${available.toFixed(2)} of $${item.price.toFixed(2)} earned`}</span>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        ${ready ? `<button class="btn btn-primary btn-small" onclick="hosPurchaseItem('${item.id}')">Buy It!</button>` : ''}
+                                        <button class="btn btn-secondary btn-small" onclick="hosRemoveWishlistItem('${item.id}')">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                ` : ''}
+
+                ${wishlist.filter(w => w.purchased).length > 0 ? `
+                    <div class="healthos-section-label" style="margin-top: 1.5rem;">&#10003; Purchased</div>
+                    ${wishlist.filter(w => w.purchased).map(item => `
+                        <div class="healthos-wishlist-card purchased">
+                            <div class="healthos-wishlist-header">
+                                <span class="healthos-wishlist-name">${escapeHtml(item.name)}</span>
+                                <span class="healthos-wishlist-price">$${item.price.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                ` : ''}
+            `;
+        }
+
+        function hosAddWishlistItem() {
+            const name = document.getElementById('hosWishlistName').value.trim();
+            const price = parseFloat(document.getElementById('hosWishlistPrice').value);
+            const url = document.getElementById('hosWishlistUrl').value.trim();
+
+            if (!name || !price || price <= 0) {
+                showNotification('Please enter a name and price', 'error');
+                return;
+            }
+
+            const wishlist = hosGetWishlist();
+            wishlist.push({
+                id: generateId(),
+                name,
+                price,
+                url: url || null,
+                unlocked: false,
+                purchased: false
+            });
+            hosSave('healthos_wishlist', wishlist);
+            showNotification(`Added "${name}" to wishlist!`, 'success');
+            renderHOSWishlist();
+        }
+
+        function hosPurchaseItem(itemId) {
+            const wishlist = hosGetWishlist();
+            const item = wishlist.find(w => w.id === itemId);
+            if (!item) return;
+
+            const balance = hosGetBalance();
+            const totalAvailable = balance.lifetime + balance.currentMonth;
+            const spent = wishlist.filter(w => w.purchased).reduce((sum, w) => sum + w.price, 0);
+            const available = totalAvailable - spent;
+
+            if (available < item.price) {
+                showNotification('Not enough balance!', 'error');
+                return;
+            }
+
+            item.purchased = true;
+            item.unlocked = true;
+            hosSave('healthos_wishlist', wishlist);
+            showNotification(`Purchased "${item.name}" for $${item.price.toFixed(2)}!`, 'success');
+            renderHOSWishlist();
+        }
+
+        function hosRemoveWishlistItem(itemId) {
+            let wishlist = hosGetWishlist();
+            wishlist = wishlist.filter(w => w.id !== itemId);
+            hosSave('healthos_wishlist', wishlist);
+            renderHOSWishlist();
         }
 
         // ==================== NUTRITION REPORT ====================
