@@ -1,17 +1,18 @@
 {
-  "updated": "2026-02-24T15:43:49.300042+00:00",
-  "data_range": "2026-02-11 to 2026-02-24",
+  "updated": "2026-02-25T15:49:11.760089+00:00",
+  "data_range": "2026-02-12 to 2026-02-25",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-02-11 to 2026-02-24",
+    "date_range": "2026-02-12 to 2026-02-25",
     "sleep": {
-      "avg_score": 81.9,
-      "avg_hours": 7.2,
-      "avg_deep_hours": 1.3,
-      "avg_rem_hours": 1.4,
-      "avg_efficiency": 84.7,
+      "avg_score": 82.2,
+      "avg_hours": 7.3,
+      "avg_deep_hours": 1.2,
+      "avg_rem_hours": 1.5,
+      "avg_efficiency": 84.8,
       "scores": [
+        84,
         87,
         87,
         82,
@@ -24,13 +25,13 @@
         72,
         80,
         86,
-        81,
-        80
+        81
       ]
     },
     "readiness": {
-      "avg_score": 84.0,
+      "avg_score": 83.9,
       "scores": [
+        87,
         88,
         87,
         85,
@@ -43,16 +44,16 @@
         68,
         86,
         84,
-        86,
-        89
+        86
       ]
     },
     "activity": {
-      "avg_score": 87.2,
-      "avg_steps": 7750.5,
-      "avg_calories": 623.2,
+      "avg_score": 87.3,
+      "avg_steps": 7494.2,
+      "avg_calories": 585.4,
       "scores": [
         null,
+        85,
         80,
         92,
         90,
@@ -64,15 +65,15 @@
         88,
         86,
         89,
-        87,
-        83
+        87
       ]
     },
     "heart": {
-      "avg_hrv": 61.8,
+      "avg_hrv": 61.0,
       "avg_resting_hr": 48.1,
       "hrv_values": [
         null,
+        62,
         64,
         62,
         69,
@@ -84,29 +85,14 @@
         32,
         75,
         73,
-        68,
-        72
+        68
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
-      "avg_breath_rate": 14.9
+      "avg_breath_rate": 15.0
     },
-    "workouts_count": 19
+    "workouts_count": 17
   },
-  "analysis": {
-    "overall_assessment": "Your metrics show excellent overall health management with consistently strong sleep scores (average 81.9/100) and readiness scores (84.0/100). Your HRV of 61.8 ms and low resting heart rate of 48.1 bpm indicate good cardiovascular fitness and autonomic nervous system function, which is particularly encouraging given your POTS condition.",
-    "whats_going_well": [
-      "Sleep quality is consistently strong with scores ranging from 80-87/100 over the past week, showing good sleep hygiene habits that support autonomic function",
-      "HRV levels are healthy at 61.8 ms average with recent readings of 64, 62, and 69 ms indicating good nervous system recovery and adaptation",
-      "High activity engagement with 19 workouts over 14 days and strong activity scores (87.2/100 average) while maintaining good readiness scores suggests well-balanced exercise tolerance"
-    ],
-    "areas_to_improve": [
-      "Deep sleep is inconsistent, varying from 0.7h to 1.8h with an average of only 1.3h - aim for more consistent sleep timing and consider sleep environment optimization to stabilize this crucial recovery metric",
-      "Sleep duration dropped to 6.7h and 6.9h on Feb 18th and 22nd - prioritize 7.5-8+ hours nightly as consistent sleep length is vital for POTS symptom management",
-      "HRV dipped to 53 ms on Feb 18th coinciding with your lowest readiness score (78) - monitor stress levels and consider additional recovery practices when HRV drops below your baseline"
-    ],
-    "pots_specific_insights": "Your consistently low resting heart rate (45-54 bpm range) and stable HRV suggest good autonomic nervous system regulation, which is excellent for POTS management. The correlation between your lowest HRV (53 ms) and reduced readiness indicates your body is effectively signaling when it needs more recovery time.",
-    "focus_for_next_week": "Prioritize consistent 7.5+ hour sleep duration by setting a fixed bedtime, as your data shows sleep length directly impacts your readiness scores and recovery metrics that are crucial for POTS symptom control."
-  }
+  "analysis": null
 }
