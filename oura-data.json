@@ -1,21 +1,10 @@
 {
-  "updated": "2026-02-28T15:11:28.641800+00:00",
-  "start_date": "2025-11-30",
-  "end_date": "2026-02-28",
+  "updated": "2026-03-01T15:12:21.145858+00:00",
+  "start_date": "2025-12-01",
+  "end_date": "2026-03-01",
   "days_requested": 90,
   "days_returned": 91,
   "workouts": [
-    {
-      "date": "2025-11-30",
-      "activity": "strengthTraining",
-      "calories": 166.12103271484375,
-      "distance": null,
-      "start_datetime": "2025-11-30T06:49:00.000-07:00",
-      "end_datetime": "2025-11-30T07:22:00.000-07:00",
-      "intensity": "moderate",
-      "label": null,
-      "source": "confirmed"
-    },
     {
       "date": "2025-12-12",
       "activity": "walking",
@@ -1027,9 +1016,53 @@
       "intensity": "moderate",
       "label": null,
       "source": "manual"
+    },
+    {
+      "date": "2026-02-28",
+      "activity": "walking",
+      "calories": 173.34214782714844,
+      "distance": null,
+      "start_datetime": "2026-02-28T09:17:00.000-08:00",
+      "end_datetime": "2026-02-28T09:47:00.000-08:00",
+      "intensity": "moderate",
+      "label": null,
+      "source": "confirmed"
     }
   ],
   "days": [
+    {
+      "date": "2026-03-01",
+      "sleep_score": 71,
+      "sleep_contributors": {
+        "deep_sleep": 96,
+        "efficiency": 69,
+        "latency": 75,
+        "rem_sleep": 62,
+        "restfulness": 79,
+        "timing": 100,
+        "total_sleep": 54
+      },
+      "readiness_score": 81,
+      "temperature_deviation": -0.06,
+      "temperature_trend_deviation": -0.1,
+      "readiness_contributors": {
+        "activity_balance": 90,
+        "body_temperature": 100,
+        "hrv_balance": 98,
+        "previous_day_activity": 84,
+        "previous_night": 58,
+        "recovery_index": 72,
+        "resting_heart_rate": 80,
+        "sleep_balance": 78,
+        "sleep_regularity": 94
+      },
+      "resting_hr": 52,
+      "average_hr": 59,
+      "min_hr": 48,
+      "max_hr": 148,
+      "awake_hr": 63,
+      "spo2_average": 97.767
+    },
     {
       "date": "2026-02-28",
       "sleep_score": 72,
@@ -1042,6 +1075,19 @@
         "timing": 100,
         "total_sleep": 72
       },
+      "bedtime_start": "2026-02-27T21:54:31.000-08:00",
+      "bedtime_end": "2026-02-28T06:07:32.000-08:00",
+      "total_sleep_seconds": 24300,
+      "deep_sleep_seconds": 2940,
+      "rem_sleep_seconds": 3060,
+      "light_sleep_seconds": 18300,
+      "awake_seconds": 5281,
+      "sleep_efficiency": 82,
+      "average_hrv": 83,
+      "lowest_hr": 47,
+      "average_hr_sleep": 53.875,
+      "average_breath": 16.625,
+      "restless_periods": 163,
       "readiness_score": 82,
       "temperature_deviation": -0.16,
       "temperature_trend_deviation": -0.02,
@@ -1056,11 +1102,30 @@
         "sleep_balance": 83,
         "sleep_regularity": 94
       },
-      "resting_hr": 54,
-      "average_hr": 89,
-      "min_hr": 47,
-      "max_hr": 139,
-      "awake_hr": 64
+      "activity_score": 80,
+      "steps": 7065,
+      "active_calories": 430,
+      "total_calories": 2725,
+      "distance_meters": 7151,
+      "high_activity_seconds": 0,
+      "medium_activity_seconds": 2280,
+      "low_activity_seconds": 14460,
+      "sedentary_seconds": 40860,
+      "inactivity_alerts": 2,
+      "activity_contributors": {
+        "meet_daily_targets": 60,
+        "move_every_hour": 78,
+        "recovery_time": 97,
+        "stay_active": 60,
+        "training_frequency": 96,
+        "training_volume": 97
+      },
+      "resting_hr": 63,
+      "average_hr": 92,
+      "min_hr": 52,
+      "max_hr": 148,
+      "awake_hr": 65,
+      "spo2_average": 97.574
     },
     {
       "date": "2026-02-27",
@@ -1119,11 +1184,7 @@
         "training_frequency": 100,
         "training_volume": 97
       },
-      "resting_hr": null,
-      "average_hr": 86,
-      "min_hr": 51,
-      "max_hr": 130,
-      "awake_hr": 66
+      "spo2_average": 97.833
     },
     {
       "date": "2026-02-26",
@@ -1181,7 +1242,8 @@
         "stay_active": 72,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.975
     },
     {
       "date": "2026-02-25",
@@ -1239,7 +1301,8 @@
         "stay_active": 73,
         "training_frequency": 96,
         "training_volume": 95
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2026-02-24",
@@ -1297,7 +1360,8 @@
         "stay_active": 55,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.7
     },
     {
       "date": "2026-02-23",
@@ -1355,7 +1419,8 @@
         "stay_active": 58,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.719
     },
     {
       "date": "2026-02-22",
@@ -1413,7 +1478,8 @@
         "stay_active": 90,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.708
     },
     {
       "date": "2026-02-21",
@@ -1471,7 +1537,8 @@
         "stay_active": 72,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.252
     },
     {
       "date": "2026-02-20",
@@ -1529,7 +1596,8 @@
         "stay_active": 79,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.811
     },
     {
       "date": "2026-02-19",
@@ -1587,7 +1655,8 @@
         "stay_active": 61,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 98.117
     },
     {
       "date": "2026-02-18",
@@ -1645,7 +1714,8 @@
         "stay_active": 71,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2026-02-17",
@@ -1703,7 +1773,8 @@
         "stay_active": 70,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 96.124
     },
     {
       "date": "2026-02-16",
@@ -1761,7 +1832,8 @@
         "stay_active": 75,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 96.864
     },
     {
       "date": "2026-02-15",
@@ -1819,7 +1891,8 @@
         "stay_active": 72,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 96.558
     },
     {
       "date": "2026-02-14",
@@ -1877,7 +1950,8 @@
         "stay_active": 72,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.669
     },
     {
       "date": "2026-02-13",
@@ -1935,7 +2009,8 @@
         "stay_active": 67,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.262
     },
     {
       "date": "2026-02-12",
@@ -1993,7 +2068,8 @@
         "stay_active": 81,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.304
     },
     {
       "date": "2026-02-11",
@@ -2051,7 +2127,8 @@
         "stay_active": 85,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 98.054
     },
     {
       "date": "2026-02-10",
@@ -2109,7 +2186,8 @@
         "stay_active": 69,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.785
     },
     {
       "date": "2026-02-09",
@@ -2167,7 +2245,8 @@
         "stay_active": 66,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.512
     },
     {
       "date": "2026-02-08",
@@ -2225,7 +2304,8 @@
         "stay_active": 75,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.164
     },
     {
       "date": "2026-02-07",
@@ -2283,7 +2363,8 @@
         "stay_active": 71,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.189
     },
     {
       "date": "2026-02-06",
@@ -2341,7 +2422,8 @@
         "stay_active": 71,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2026-02-05",
@@ -2399,7 +2481,8 @@
         "stay_active": 62,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.661
     },
     {
       "date": "2026-02-04",
@@ -2457,7 +2540,8 @@
         "stay_active": 58,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 98.064
     },
     {
       "date": "2026-02-03",
@@ -2515,7 +2599,8 @@
         "stay_active": 64,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.307
     },
     {
       "date": "2026-02-02",
@@ -2573,7 +2658,8 @@
         "stay_active": 76,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 98.16
     },
     {
       "date": "2026-02-01",
@@ -2631,7 +2717,8 @@
         "stay_active": 75,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.6
     },
     {
       "date": "2026-01-31",
@@ -2689,7 +2776,8 @@
         "stay_active": 71,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 96.44
     },
     {
       "date": "2026-01-30",
@@ -2747,7 +2835,8 @@
         "stay_active": 63,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 96.872
     },
     {
       "date": "2026-01-29",
@@ -2805,7 +2894,8 @@
         "stay_active": 68,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.129
     },
     {
       "date": "2026-01-28",
@@ -2863,7 +2953,8 @@
         "stay_active": 68,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.756
     },
     {
       "date": "2026-01-27",
@@ -2921,7 +3012,8 @@
         "stay_active": 62,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 96.657
     },
     {
       "date": "2026-01-26",
@@ -2979,7 +3071,8 @@
         "stay_active": 73,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 95.893
     },
     {
       "date": "2026-01-25",
@@ -3037,7 +3130,8 @@
         "stay_active": 94,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 96.882
     },
     {
       "date": "2026-01-24",
@@ -3095,7 +3189,8 @@
         "stay_active": 76,
         "training_frequency": 96,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.314
     },
     {
       "date": "2026-01-23",
@@ -3153,7 +3248,8 @@
         "stay_active": 67,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.275
     },
     {
       "date": "2026-01-22",
@@ -3211,7 +3307,8 @@
         "stay_active": 58,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 96.423
     },
     {
       "date": "2026-01-21",
@@ -3269,7 +3366,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.401
     },
     {
       "date": "2026-01-20",
@@ -3327,7 +3425,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.675
     },
     {
       "date": "2026-01-19",
@@ -3385,7 +3484,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 96.727
     },
     {
       "date": "2026-01-18",
@@ -3443,7 +3543,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.676
     },
     {
       "date": "2026-01-17",
@@ -3501,7 +3602,8 @@
         "stay_active": 85,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.555
     },
     {
       "date": "2026-01-16",
@@ -3559,7 +3661,8 @@
         "stay_active": 78,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 95.068
     },
     {
       "date": "2026-01-15",
@@ -3617,7 +3720,8 @@
         "stay_active": 72,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.778
     },
     {
       "date": "2026-01-14",
@@ -3675,7 +3779,8 @@
         "stay_active": 69,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.563
     },
     {
       "date": "2026-01-13",
@@ -3733,7 +3838,8 @@
         "stay_active": 63,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.558
     },
     {
       "date": "2026-01-12",
@@ -3791,7 +3897,8 @@
         "stay_active": 70,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.669
     },
     {
       "date": "2026-01-11",
@@ -3849,7 +3956,8 @@
         "stay_active": 66,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.13
     },
     {
       "date": "2026-01-10",
@@ -3907,7 +4015,8 @@
         "stay_active": 61,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.306
     },
     {
       "date": "2026-01-09",
@@ -3965,7 +4074,8 @@
         "stay_active": 62,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 96.571
     },
     {
       "date": "2026-01-08",
@@ -4023,7 +4133,8 @@
         "stay_active": 62,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 96.513
     },
     {
       "date": "2026-01-07",
@@ -4081,7 +4192,8 @@
         "stay_active": 63,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.313
     },
     {
       "date": "2026-01-06",
@@ -4139,7 +4251,8 @@
         "stay_active": 61,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.4
     },
     {
       "date": "2026-01-05",
@@ -4197,7 +4310,8 @@
         "stay_active": 68,
         "training_frequency": 100,
         "training_volume": 99
-      }
+      },
+      "spo2_average": 97.439
     },
     {
       "date": "2026-01-04",
@@ -4255,7 +4369,8 @@
         "stay_active": 82,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.73
     },
     {
       "date": "2026-01-03",
@@ -4313,7 +4428,8 @@
         "stay_active": 83,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.149
     },
     {
       "date": "2026-01-02",
@@ -4371,7 +4487,8 @@
         "stay_active": 82,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 96.149
     },
     {
       "date": "2026-01-01",
@@ -4429,7 +4546,8 @@
         "stay_active": 87,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 96.752
     },
     {
       "date": "2025-12-31",
@@ -4487,7 +4605,8 @@
         "stay_active": 69,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2025-12-30",
@@ -4545,7 +4664,8 @@
         "stay_active": 65,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.352
     },
     {
       "date": "2025-12-29",
@@ -4603,7 +4723,8 @@
         "stay_active": 73,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.505
     },
     {
       "date": "2025-12-28",
@@ -4661,7 +4782,8 @@
         "stay_active": 67,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 96.991
     },
     {
       "date": "2025-12-27",
@@ -4719,7 +4841,8 @@
         "stay_active": 69,
         "training_frequency": 96,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 97.5
     },
     {
       "date": "2025-12-26",
@@ -4777,7 +4900,8 @@
         "stay_active": 73,
         "training_frequency": 71,
         "training_volume": 95
-      }
+      },
+      "spo2_average": 97.252
     },
     {
       "date": "2025-12-25",
@@ -4835,7 +4959,8 @@
         "stay_active": 57,
         "training_frequency": 71,
         "training_volume": 68
-      }
+      },
+      "spo2_average": 96.773
     },
     {
       "date": "2025-12-24",
@@ -4893,7 +5018,8 @@
         "stay_active": 73,
         "training_frequency": 96,
         "training_volume": 80
-      }
+      },
+      "spo2_average": 96.531
     },
     {
       "date": "2025-12-23",
@@ -4951,7 +5077,8 @@
         "stay_active": 51,
         "training_frequency": 96,
         "training_volume": 63
-      }
+      },
+      "spo2_average": 96.698
     },
     {
       "date": "2025-12-22",
@@ -5009,7 +5136,8 @@
         "stay_active": 76,
         "training_frequency": 100,
         "training_volume": 86
-      }
+      },
+      "spo2_average": 97.192
     },
     {
       "date": "2025-12-21",
@@ -5067,7 +5195,8 @@
         "stay_active": 57,
         "training_frequency": 100,
         "training_volume": 95
-      }
+      },
+      "spo2_average": 96.906
     },
     {
       "date": "2025-12-20",
@@ -5125,7 +5254,8 @@
         "stay_active": 84,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 97.13
     },
     {
       "date": "2025-12-19",
@@ -5183,7 +5313,8 @@
         "stay_active": 47,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 96.367
     },
     {
       "date": "2025-12-18",
@@ -5241,7 +5372,8 @@
         "stay_active": 63,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2025-12-17",
@@ -5299,7 +5431,8 @@
         "stay_active": 62,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 97.589
     },
     {
       "date": "2025-12-16",
@@ -5357,7 +5490,8 @@
         "stay_active": 49,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 98.618
     },
     {
       "date": "2025-12-15",
@@ -5415,7 +5549,8 @@
         "stay_active": 49,
         "training_frequency": 100,
         "training_volume": 96
-      }
+      },
+      "spo2_average": 97.167
     },
     {
       "date": "2025-12-14",
@@ -5473,7 +5608,8 @@
         "stay_active": 74,
         "training_frequency": 100,
         "training_volume": 98
-      }
+      },
+      "spo2_average": 97.252
     },
     {
       "date": "2025-12-13",
@@ -5531,7 +5667,8 @@
         "stay_active": 42,
         "training_frequency": 100,
         "training_volume": 97
-      }
+      },
+      "spo2_average": 97.275
     },
     {
       "date": "2025-12-12",
@@ -5589,7 +5726,8 @@
         "stay_active": 88,
         "training_frequency": 100,
         "training_volume": 100
-      }
+      },
+      "spo2_average": 97.214
     },
     {
       "date": "2025-12-11",
@@ -5647,7 +5785,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2025-12-10",
@@ -5705,7 +5844,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 96.976
     },
     {
       "date": "2025-12-09",
@@ -5763,7 +5903,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.368
     },
     {
       "date": "2025-12-08",
@@ -5821,7 +5962,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.223
     },
     {
       "date": "2025-12-07",
@@ -5879,7 +6021,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.934
     },
     {
       "date": "2025-12-06",
@@ -5937,7 +6080,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.614
     },
     {
       "date": "2025-12-05",
@@ -5995,7 +6139,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.246
     },
     {
       "date": "2025-12-04",
@@ -6053,7 +6198,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": null
     },
     {
       "date": "2025-12-03",
@@ -6111,7 +6257,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.152
     },
     {
       "date": "2025-12-02",
@@ -6169,7 +6316,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
+      },
+      "spo2_average": 97.217
     },
     {
       "date": "2025-12-01",
@@ -6227,65 +6375,8 @@
         "stay_active": null,
         "training_frequency": null,
         "training_volume": null
-      }
-    },
-    {
-      "date": "2025-11-30",
-      "sleep_score": 83,
-      "sleep_contributors": {
-        "deep_sleep": 97,
-        "efficiency": 69,
-        "latency": 89,
-        "rem_sleep": 84,
-        "restfulness": 48,
-        "timing": 100,
-        "total_sleep": 92
       },
-      "bedtime_start": "2025-11-29T20:27:27.000-07:00",
-      "bedtime_end": "2025-11-30T06:43:52.000-07:00",
-      "total_sleep_seconds": 29070,
-      "deep_sleep_seconds": 6780,
-      "rem_sleep_seconds": 5700,
-      "light_sleep_seconds": 16590,
-      "awake_seconds": 7915,
-      "sleep_efficiency": 79,
-      "average_hrv": 49,
-      "lowest_hr": 47,
-      "average_hr_sleep": 52.5,
-      "average_breath": 15.25,
-      "restless_periods": 219,
-      "readiness_score": 81,
-      "temperature_deviation": 0.35,
-      "temperature_trend_deviation": 0.3,
-      "readiness_contributors": {
-        "activity_balance": null,
-        "body_temperature": 77,
-        "hrv_balance": 85,
-        "previous_day_activity": null,
-        "previous_night": 90,
-        "recovery_index": 100,
-        "resting_heart_rate": 88,
-        "sleep_balance": 95,
-        "sleep_regularity": 77
-      },
-      "activity_score": null,
-      "steps": 8498,
-      "active_calories": 520,
-      "total_calories": 2775,
-      "distance_meters": 9354,
-      "high_activity_seconds": 0,
-      "medium_activity_seconds": 3300,
-      "low_activity_seconds": 14100,
-      "sedentary_seconds": 39060,
-      "inactivity_alerts": 0,
-      "activity_contributors": {
-        "meet_daily_targets": null,
-        "move_every_hour": null,
-        "recovery_time": null,
-        "stay_active": null,
-        "training_frequency": null,
-        "training_volume": null
-      }
+      "spo2_average": 97.574
     }
   ]
 }
