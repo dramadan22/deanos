@@ -1,18 +1,6 @@
 {
-  "updated": "2026-03-07T14:13:57.241328+00:00",
-  "weekOf": "2026-03-07",
-  "analysis": {
-    "strengths": [
-      "Unable to identify nutritional strengths as no meals were logged in the provided data"
-    ],
-    "gaps": [
-      "Unable to assess protein intake as no food items were recorded",
-      "Unable to evaluate fiber and vegetable intake without logged meals"
-    ],
-    "suggestions": [
-      "Start logging meals to enable nutritional analysis and personalized recommendations",
-      "Consider beginning with simple whole food meals like lean protein, vegetables, and healthy fats"
-    ]
-  },
-  "mealsAnalyzed": 5
+  "updated": "2026-03-14T14:18:57.410098+00:00",
+  "weekOf": "2026-03-14",
+  "analysis": null,
+  "mealsAnalyzed": 0
 }
