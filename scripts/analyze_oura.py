@@ -129,7 +129,15 @@ def analyze_with_claude(summary):
         for d in daily
     ])
 
-    prompt = f"""Analyze this Oura Ring health data and provide personalized insights. The user has POTS (Postural Orthostatic Tachycardia Syndrome), so consider how sleep, HRV, and recovery metrics are especially important for managing their condition.
+    prompt = f"""Analyze this Oura Ring health data and provide personalized insights for a patient managing three concurrent conditions:
+
+1. Post-COVID autonomic dysfunction (POTS with vasovagal syncope) — HRV is the primary biomarker for autonomic nervous system health. Low or declining HRV signals sympathetic overdrive. Resting HR trends matter because tachycardia at rest suggests poor autonomic regulation. Sleep quality directly affects next-day orthostatic tolerance.
+
+2. Early Hashimoto's thyroiditis (TPO 267) — Temperature deviations can signal thyroid flares or immune activation. Deep sleep is when the immune system does most of its repair work; insufficient deep sleep may worsen autoimmune activity. Elevated resting HR can also indicate thyroid hormone fluctuations.
+
+3. Vestibular symptoms from suspected neurovascular compression at bilateral IACs — Poor sleep and low HRV worsen vestibular compensation. Recovery metrics indicate whether the nervous system has capacity for vestibular rehab exercises.
+
+The patient follows a structured daily protocol: LMNT electrolytes, iron bisglycinate (every other day), magnesium threonate (AM) + glycinate (PM), DGL, zinc carnosine, selenium, omega-3, plus daily exercises (diaphragmatic breathing, calf raises, walking) and vestibular rehab (gaze stabilization, balance training).
 
 DATA SUMMARY ({stats['days_analyzed']} days: {stats['date_range']}):
 
@@ -158,11 +166,11 @@ HEART & RECOVERY:
 DAILY BREAKDOWN (last 7 days):
 {daily_text}
 
-Based on this data, provide analysis in the following format. Be specific and reference actual numbers from the data. Consider POTS-specific factors like the importance of consistent sleep for autonomic function, HRV as an indicator of nervous system health, and the balance between activity and recovery.
+Analyze with clinical specificity. Reference actual numbers. Look for patterns across days — do low-HRV days follow poor sleep? Are there temp deviation spikes suggesting immune activation? Is activity appropriately graded for POTS (avoiding overexertion that crashes autonomic function)?
 
 Return ONLY valid JSON in this exact format:
 {{
-  "overall_assessment": "A 2-3 sentence overall assessment of their health metrics this period",
+  "overall_assessment": "A 2-3 sentence overall assessment referencing the three conditions and key metrics",
   "whats_going_well": [
     "Specific positive observation 1 with data reference",
     "Specific positive observation 2 with data reference",
@@ -173,8 +181,10 @@ Return ONLY valid JSON in this exact format:
     "Specific area needing attention 2 with actionable advice",
     "Specific area needing attention 3 with actionable advice"
   ],
-  "pots_specific_insights": "1-2 sentences about what the data suggests for POTS management specifically",
-  "focus_for_next_week": "One specific, actionable thing to focus on this coming week"
+  "autonomic_assessment": "2-3 sentences on what HRV trends, resting HR, and recovery metrics suggest about current autonomic nervous system status and POTS stability",
+  "thyroid_immune_signals": "1-2 sentences on temperature deviations, deep sleep adequacy, and any patterns suggesting Hashimoto's flare activity",
+  "vestibular_readiness": "1-2 sentences on whether recovery metrics indicate capacity for vestibular rehab, and any days where rehab should be scaled back",
+  "focus_for_next_week": "One specific, actionable recommendation tied to whichever condition the data suggests needs the most attention right now"
 }}"""
 
     try:

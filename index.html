@@ -4321,11 +4321,27 @@
                         </ul>
                     </div>
 
-                    <!-- POTS Insights -->
-                    ${analysis.pots_specific_insights ? `
-                        <div style="padding: 0.75rem 1rem; background: var(--blue-bg); border-left: 3px solid var(--blue-soft); border-radius: var(--radius-sm); margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: var(--blue-soft); font-size: 0.85rem; margin-bottom: 0.25rem;">POTS-Specific Insight</div>
-                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.pots_specific_insights}</p>
+                    <!-- Autonomic Assessment -->
+                    ${analysis.autonomic_assessment ? `
+                        <div style="padding: 0.75rem 1rem; background: var(--blue-bg); border-left: 3px solid var(--blue-soft); border-radius: var(--radius-sm); margin-bottom: 0.75rem;">
+                            <div style="font-weight: 600; color: var(--blue-soft); font-size: 0.85rem; margin-bottom: 0.25rem;">Autonomic / POTS</div>
+                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.autonomic_assessment}</p>
+                        </div>
+                    ` : ''}
+
+                    <!-- Thyroid / Immune Signals -->
+                    ${analysis.thyroid_immune_signals ? `
+                        <div style="padding: 0.75rem 1rem; background: var(--purple-bg, var(--bg-input)); border-left: 3px solid var(--purple-soft, #9b59b6); border-radius: var(--radius-sm); margin-bottom: 0.75rem;">
+                            <div style="font-weight: 600; color: var(--purple-soft, #9b59b6); font-size: 0.85rem; margin-bottom: 0.25rem;">Thyroid / Hashimoto's</div>
+                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.thyroid_immune_signals}</p>
+                        </div>
+                    ` : ''}
+
+                    <!-- Vestibular Readiness -->
+                    ${analysis.vestibular_readiness ? `
+                        <div style="padding: 0.75rem 1rem; background: var(--amber-bg, #fef9e7); border-left: 3px solid var(--amber); border-radius: var(--radius-sm); margin-bottom: 1rem;">
+                            <div style="font-weight: 600; color: var(--amber); font-size: 0.85rem; margin-bottom: 0.25rem;">Vestibular Readiness</div>
+                            <p style="font-size: 0.9rem; color: var(--text-primary); margin: 0;">${analysis.vestibular_readiness}</p>
                         </div>
                     ` : ''}
 
