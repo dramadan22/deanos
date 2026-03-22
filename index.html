@@ -430,188 +430,6 @@
         }
 
 
-        .research-feed-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .research-feed-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .research-feed-item:last-child {
-            border-bottom: none;
-        }
-
-        .research-feed-title a {
-            color: var(--forest);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .research-feed-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* POTS Research Library Styles */
-        .pots-research-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .pots-category-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .pots-category-tab {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--bg-input);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.15s;
-        }
-
-        .pots-category-tab:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-        }
-
-        .pots-category-tab.active {
-            background: var(--forest);
-            color: white;
-            border-color: var(--forest);
-        }
-
-        .pots-research-item {
-            background: var(--bg-input);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .pots-research-item:hover {
-            background: var(--bg-hover);
-        }
-
-        .pots-research-item.expanded {
-            background: var(--forest-bg);
-        }
-
-        .pots-research-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .pots-research-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .pots-research-source {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .pots-research-expand {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            transition: transform 0.2s;
-        }
-
-        .pots-research-item.expanded .pots-research-expand {
-            transform: rotate(180deg);
-        }
-
-        .pots-research-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            line-height: 1.5;
-        }
-
-        .pots-research-details {
-            display: none;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .pots-research-item.expanded .pots-research-details {
-            display: block;
-        }
-
-        .pots-key-points {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .pots-key-points li {
-            padding: 0.4rem 0;
-            padding-left: 1.25rem;
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .pots-key-points li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--forest);
-            font-weight: bold;
-        }
-
-        .pots-research-link {
-            display: inline-block;
-            margin-top: 0.75rem;
-            color: var(--forest);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .pots-research-link:hover {
-            text-decoration: underline;
-        }
-
-        .pots-category-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .auto-feed-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
 
         /* Priority Tasks */
         .priority-section {
@@ -1412,27 +1230,6 @@
             margin-right: 0.25rem;
         }
 
-        /* Research */
-        .note-card {
-            background: var(--bg-input);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .note-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .note-content {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
 
         /* Health Metrics Log */
         .metric-log-item {
@@ -2003,7 +1800,7 @@
             }
 
             /* Consumption/Research list */
-            .consumption-item, .research-item {
+            .consumption-item {
                 padding: 0.875rem;
             }
 
@@ -2277,9 +2074,6 @@
                 <button class="sidebar-btn" data-view="notes">
                     <span class="sidebar-icon">&#128221;</span> Notes
                 </button>
-                <button class="sidebar-btn" data-view="research">
-                    <span class="sidebar-icon">&#128218;</span> Research
-                </button>
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-label">Progress</div>
@@ -2494,31 +2288,6 @@
                 </div>
             </div>
 
-            <!-- Research View -->
-            <div class="module-view" id="researchView">
-                <div class="view-header">
-                    <h2 class="view-title">&#128218; Research</h2>
-                    <button class="btn btn-primary" onclick="openNoteModal()">+ Add Note</button>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" class="input-field" id="researchSearch" placeholder="Search notes..." oninput="searchNotes()">
-                </div>
-
-                <!-- POTS Research Library -->
-                <div class="pots-research-section">
-                    <div class="card-header" style="padding: 0 0 1rem;">
-                        <div class="card-title">POTS Research Library</div>
-                        <span style="font-size: 0.8rem; color: var(--text-secondary);">Comprehensive guide compiled from 2025 research</span>
-                    </div>
-                    <div class="pots-category-tabs" id="potsCategoryTabs"></div>
-                    <div id="potsResearchContent">
-                        <div class="empty-state"><p>Loading POTS research...</p></div>
-                    </div>
-                </div>
-
-                <div id="notesList"></div>
-            </div>
 
             <!-- Insights View -->
             <div class="module-view" id="insightsView">
@@ -2885,41 +2654,6 @@
         </div>
     </div>
 
-    <!-- Note Modal -->
-    <div class="modal-overlay" id="noteModal">
-        <div class="modal">
-            <h3 class="modal-title">Add Research Note</h3>
-            <div class="form-group">
-                <label class="form-label">Title</label>
-                <input type="text" class="input-field" id="noteTitle" placeholder="Note title">
-            </div>
-            <div class="form-group">
-                <label class="form-label">URL (optional)</label>
-                <input type="url" class="input-field" id="noteUrl" placeholder="https://...">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Category</label>
-                <select class="input-field" id="noteCategory">
-                    <option value="health">Health Research</option>
-                    <option value="learning">Learning</option>
-                    <option value="work">Work Reference</option>
-                    <option value="ideas">Ideas</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Content</label>
-                <textarea class="input-field" id="noteContent" rows="5" placeholder="Your note..."></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Tags (comma-separated)</label>
-                <input type="text" class="input-field" id="noteTags" placeholder="pots, treatment, research">
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeNoteModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addNote()">Add Note </button>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Year Item Modal -->
@@ -3103,7 +2837,7 @@
         let goodreadsFeedCache = null;
         let selectedTier = 'B';
         let selectedMood = 3;
-        let researchFeedCache = null;
+
 
         function showView(viewName) {
             document.querySelectorAll('.module-view').forEach(v => v.classList.remove('active'));
@@ -3119,7 +2853,7 @@
             else if (viewName === 'consumption') renderConsumption();
             else if (viewName === 'watchlist') renderWatchlist();
             else if (viewName === 'notes') renderNotes();
-            else if (viewName === 'research') renderResearch();
+
             else if (viewName === 'insights') renderInsights();
             else if (viewName === 'yearlyTracker') renderYearlyTracker();
             else if (viewName === 'settings') renderSettings();
@@ -3749,226 +3483,6 @@
             }
         }
 
-        // ==================== RESEARCH ====================
-        function openNoteModal() { document.getElementById('noteModal').classList.add('active'); }
-        function closeNoteModal() {
-            document.getElementById('noteModal').classList.remove('active');
-            document.getElementById('noteTitle').value = '';
-            document.getElementById('noteUrl').value = '';
-            document.getElementById('noteContent').value = '';
-            document.getElementById('noteTags').value = '';
-        }
-
-        function addNote() {
-            const title = document.getElementById('noteTitle').value.trim();
-            const content = document.getElementById('noteContent').value.trim();
-            const url = normalizeUrl(document.getElementById('noteUrl').value);
-            if (!title) return;
-
-            appData.notes.push({
-                id: generateId(),
-                title,
-                url: url || null,
-                content,
-                category: document.getElementById('noteCategory').value,
-                tags: document.getElementById('noteTags').value.split(',').map(t => t.trim()).filter(t => t),
-                date: new Date().toISOString()
-            });
-
-            saveData();
-            closeNoteModal();
-            renderResearch();
-        }
-
-        function deleteNote(id) {
-            appData.notes = appData.notes.filter(n => n.id !== id);
-            saveData();
-            renderResearch();
-        }
-
-        function searchNotes() {
-            renderResearch(document.getElementById('researchSearch').value.toLowerCase());
-        }
-
-        async function loadResearchFeed() {
-            if (researchFeedCache) return researchFeedCache;
-            try {
-                const response = await fetch('research-feed.json', { cache: 'no-store' });
-                if (!response.ok) throw new Error('Failed to load feed');
-                const data = await response.json();
-                researchFeedCache = data;
-                return data;
-            } catch (error) {
-                researchFeedCache = { updated: null, items: [], error: true };
-                return researchFeedCache;
-            }
-        }
-
-        let potsResearchCache = null;
-        let currentPotsCategory = 0;
-
-        async function loadPotsResearch() {
-            if (potsResearchCache) return potsResearchCache;
-            try {
-                const response = await fetch('pots-research.json', { cache: 'no-store' });
-                if (!response.ok) throw new Error('Failed to load POTS research');
-                const data = await response.json();
-                potsResearchCache = data;
-                return data;
-            } catch (error) {
-                potsResearchCache = { updated: null, categories: [], error: true };
-                return potsResearchCache;
-            }
-        }
-
-        function renderPotsResearch() {
-            const tabsContainer = document.getElementById('potsCategoryTabs');
-            const contentContainer = document.getElementById('potsResearchContent');
-            if (!tabsContainer || !contentContainer) return;
-
-            loadPotsResearch().then(data => {
-                if (!data || !data.categories || data.categories.length === 0) {
-                    contentContainer.innerHTML = '<div class="empty-state"><p>No POTS research available</p></div>';
-                    return;
-                }
-
-                // Render category tabs
-                tabsContainer.innerHTML = data.categories.map((cat, idx) => `
-                    <button class="pots-category-tab ${idx === currentPotsCategory ? 'active' : ''}"
-                            onclick="selectPotsCategory(${idx})">
-                        ${cat.name}
-                    </button>
-                `).join('');
-
-                // Render current category content
-                const category = data.categories[currentPotsCategory];
-                contentContainer.innerHTML = `
-                    <div class="pots-category-description">${category.description}</div>
-                    ${category.items.map((item, idx) => `
-                        <div class="pots-research-item" onclick="togglePotsItem(this)">
-                            <div class="pots-research-header">
-                                <div>
-                                    <div class="pots-research-title">${item.title}</div>
-                                    <div class="pots-research-source">${item.source} ${item.year ? '• ' + item.year : ''}</div>
-                                </div>
-                                <span class="pots-research-expand">&#9662;</span>
-                            </div>
-                            <div class="pots-research-description">${item.description}</div>
-                            <div class="pots-research-details">
-                                ${item.keyPoints && item.keyPoints.length ? `
-                                    <ul class="pots-key-points">
-                                        ${item.keyPoints.map(point => `<li>${point}</li>`).join('')}
-                                    </ul>
-                                ` : ''}
-                                ${item.url ? `<a href="${item.url}" target="_blank" class="pots-research-link">Learn more &#8594;</a>` : ''}
-                            </div>
-                        </div>
-                    `).join('')}
-                `;
-            });
-        }
-
-        function selectPotsCategory(idx) {
-            currentPotsCategory = idx;
-            renderPotsResearch();
-        }
-
-        function togglePotsItem(element) {
-            element.classList.toggle('expanded');
-        }
-
-        function formatFeedDate(value) {
-            if (!value) return '';
-            const date = new Date(value);
-            if (Number.isNaN(date.getTime())) return value;
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        }
-
-        function renderResearchFeed() {
-            const container = document.getElementById('researchFeedList');
-            const updatedLabel = document.getElementById('researchFeedUpdated');
-            if (!container) return;
-
-            loadResearchFeed().then(feed => {
-                if (!feed || feed.items.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><p>No research updates yet</p></div>';
-                } else {
-                    const newItems = feed.items.filter(item => item.isNew);
-                    const olderItems = feed.items.filter(item => !item.isNew);
-
-                    let html = '';
-
-                    // New This Week section
-                    if (newItems.length > 0) {
-                        html += `<div style="margin-bottom: 1rem;">
-                            <div style="font-size: 0.85rem; font-weight: 600; color: var(--forest); margin-bottom: 0.5rem;">&#10024; New This Week (${newItems.length})</div>
-                            ${newItems.slice(0, 5).map(item => `
-                                <div class="research-feed-item" style="background: var(--forest-light); border-left: 3px solid var(--forest);">
-                                    <div class="research-feed-title">
-                                        <a href="${item.url}" target="_blank">${item.title}</a>
-                                    </div>
-                                    <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
-                                </div>
-                            `).join('')}
-                        </div>`;
-                    }
-
-                    // Previous items
-                    if (olderItems.length > 0) {
-                        const showCount = newItems.length > 0 ? 3 : 8;
-                        html += olderItems.slice(0, showCount).map(item => `
-                            <div class="research-feed-item">
-                                <div class="research-feed-title">
-                                    <a href="${item.url}" target="_blank">${item.title}</a>
-                                </div>
-                                <div class="research-feed-meta">${item.source || 'Source'} • ${formatFeedDate(item.published)}</div>
-                            </div>
-                        `).join('');
-                    }
-
-                    container.innerHTML = html;
-                }
-                if (updatedLabel) {
-                    updatedLabel.textContent = feed.updated ? `Updated ${formatFeedDate(feed.updated)}` : 'Updated time unknown';
-                }
-            });
-        }
-
-        function renderResearch(search = '') {
-            renderPotsResearch();
-            const container = document.getElementById('notesList');
-            let notes = appData.notes;
-
-            if (search) {
-                notes = notes.filter(n =>
-                    n.title.toLowerCase().includes(search) ||
-                    n.content.toLowerCase().includes(search) ||
-                    n.tags.some(t => t.toLowerCase().includes(search))
-                );
-            }
-
-            if (notes.length === 0) {
-                container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128218;</div><p>No notes yet</p></div>';
-                return;
-            }
-
-            const categoryIcons = { health: '&#128154;', learning: '&#128218;', work: '&#128188;', ideas: '&#128161;' };
-
-            container.innerHTML = notes.map(note => {
-                const noteUrl = normalizeUrl(note.url);
-                return `
-                <div class="note-card">
-                    <div class="note-title">
-                        <span>${categoryIcons[note.category]} ${noteUrl ? `<a href="${noteUrl}" target="_blank" style="color: var(--forest);">${note.title} &#128279;</a>` : note.title}</span>
-                        <button class="task-delete" onclick="deleteNote('${note.id}')" style="opacity: 1;">&#128465;</button>
-                    </div>
-                    ${noteUrl ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; word-break: break-all;">${noteUrl}</div>` : ''}
-                    <div class="note-content">${note.content ? (note.content.substring(0, 200) + (note.content.length > 200 ? '...' : '')) : ''}</div>
-                    ${note.tags && note.tags.length ? `<div>${note.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-                </div>
-            `;
-            }).join('');
-        }
 
         // ==================== HEALTH ====================
         function renderHealth() {
