@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-22T15:15:32.243861+00:00",
+  "updated": "2026-03-22T19:13:16.012993+00:00",
   "data_range": "2026-03-09 to 2026-03-22",
   "days_analyzed": 14,
   "summary_stats": {
@@ -95,18 +95,20 @@
     "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "Your overall health metrics are quite strong with excellent sleep scores (83.5/100 average), high readiness (85.6/100), and impressive activity levels (90.9/100 with 18 workouts). However, there's notable variability in your HRV (ranging from 58-85 ms) and some inconsistency in sleep duration that could impact your POTS management.",
+    "overall_assessment": "Your metrics show excellent autonomic stability with consistently high HRV (58-85 ms) and low resting heart rate (45-50 bpm), indicating well-managed POTS. Sleep quality is strong (average 83.5/100) with stable temperature deviations (-0.1\u00b0C average) suggesting minimal Hashimoto's flare activity, though deep sleep could be optimized for immune recovery.",
     "whats_going_well": [
-      "Excellent sleep quality with most nights scoring 85-91/100, particularly March 16th, 17th, and 19th showing optimal recovery",
-      "Strong activity consistency with 18 workouts over 14 days and good daily step counts (7,169-10,583 steps), demonstrating you're managing exercise well with POTS",
-      "Very low resting heart rate averaging 46.1 bpm with good stability (45-50 bpm range), indicating strong cardiovascular conditioning despite POTS"
+      "Exceptional HRV stability with values consistently above 58 ms and peak at 85 ms on 3/21, indicating robust parasympathetic tone and well-controlled autonomic dysfunction",
+      "Resting heart rate remains consistently low (45-50 bpm range) with no signs of tachycardia, demonstrating excellent POTS management and likely thyroid stability",
+      "Activity levels are appropriately graded with 8,066 average steps and 18 workouts over 14 days, maintaining fitness without autonomic overexertion"
     ],
     "areas_to_improve": [
-      "Sleep duration consistency - you dropped to 6.8 hours on March 18th compared to 8+ hours on better days, aim for 7.5-8.5 hours nightly for optimal POTS management",
-      "HRV volatility shows 27-point swings (58-85 ms) suggesting autonomic nervous system stress - consider meditation or breathing exercises on days when HRV drops below 65",
-      "Deep sleep is consistently low at 0.9-1.6 hours per night - prioritize sleep hygiene and consider earlier bedtimes to increase restorative sleep phases"
+      "Deep sleep averaging only 1.1 hours is suboptimal for Hashimoto's immune recovery - consider earlier magnesium glycinate timing or sleep environment optimization",
+      "HRV dropped from 72 to 60 ms between 3/19 and 3/20 following excellent sleep (8.2h, 1.6h deep), suggesting possible overtraining or inadequate recovery time",
+      "Missing data on 3/22 prevents pattern analysis - ensure consistent ring wearing for complete autonomic monitoring"
     ],
-    "pots_specific_insights": "Your low resting heart rate and high activity tolerance suggest excellent POTS management, but the HRV variability indicates your autonomic nervous system is still responding to stressors. The correlation between your best sleep nights (March 17th, 19th) and higher readiness scores shows sleep consistency is crucial for your condition.",
-    "focus_for_next_week": "Maintain 7.5-8+ hours of sleep nightly and track which pre-sleep routines correlate with your higher HRV days (like the 85 ms reading on March 21st)"
+    "autonomic_assessment": "Your autonomic nervous system shows remarkable stability with HRV consistently in the 58-85 ms range and resting HR maintaining 45-50 bpm throughout the period. The high readiness scores (80-91) combined with stable heart rate variability suggests your POTS management protocol is highly effective, with parasympathetic recovery occurring reliably overnight.",
+    "thyroid_immune_signals": "Temperature deviations remain tightly controlled around -0.1\u00b0C with no significant spikes, indicating minimal Hashimoto's inflammatory activity. However, deep sleep averaging 1.1 hours may be insufficient for optimal immune system repair and thyroid regulation.",
+    "vestibular_readiness": "Consistently high readiness scores (80-91) indicate excellent capacity for vestibular rehabilitation exercises throughout this period. Only 3/18 showed a lower readiness (80) following reduced sleep, but recovery was rapid by 3/19.",
+    "focus_for_next_week": "Prioritize deep sleep optimization through earlier evening routine, cooler sleep environment, or adjusted magnesium timing, as your 1.1-hour average is below the 1.5+ hours needed for optimal Hashimoto's immune recovery."
   }
 }
