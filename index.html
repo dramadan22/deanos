@@ -1510,229 +1510,6 @@
             border-color: var(--forest);
         }
 
-        /* ==================== WEEKLY PLANNER ==================== */
-
-        .planner-week-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.75rem;
-        }
-
-        @media (max-width: 1200px) {
-            .planner-week-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .planner-week-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .planner-week-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .planner-day-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            overflow: hidden;
-        }
-
-        .planner-day-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-            border-color: var(--forest);
-        }
-
-        .planner-day-today {
-            border-color: var(--forest);
-            border-width: 2px;
-        }
-
-        .planner-day-card-header {
-            background: var(--forest-bg);
-            padding: 0.5rem 0.75rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .planner-day-today .planner-day-card-header {
-            background: var(--forest);
-            color: white;
-        }
-
-        .planner-day-today .planner-day-name {
-            color: white;
-        }
-
-        .planner-day-today .planner-day-progress {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .planner-day-name {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--forest);
-        }
-
-        .planner-day-progress {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .planner-day-card-body {
-            padding: 0.5rem 0.75rem;
-        }
-
-        .planner-mini-item {
-            font-size: 0.78rem;
-            padding: 0.15rem 0;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .planner-mini-item.done {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .planner-mini-item.empty {
-            color: var(--text-muted);
-        }
-
-        .planner-mini-empty {
-            color: var(--border);
-        }
-
-        .planner-day-selector {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .planner-day-btn {
-            flex: 1;
-            padding: 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-family: inherit;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-            text-align: center;
-        }
-
-        .planner-day-btn:hover {
-            background: var(--forest-bg);
-            border-color: var(--forest);
-            color: var(--forest);
-        }
-
-        .planner-day-btn.active {
-            background: var(--forest);
-            color: white;
-            border-color: var(--forest);
-        }
-
-        .planner-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .planner-item:last-child {
-            border-bottom: none;
-        }
-
-        .planner-item.completed {
-            opacity: 0.6;
-        }
-
-        .planner-item.completed .planner-inline-input {
-            text-decoration: line-through;
-        }
-
-        .planner-item-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .planner-item-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .planner-inline-input {
-            width: 100%;
-            padding: 0.4rem 0.6rem;
-            border: 1px solid transparent;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-family: inherit;
-            background: transparent;
-            transition: all var(--transition-fast);
-        }
-
-        .planner-inline-input:hover {
-            background: var(--bg-input);
-            border-color: var(--border);
-        }
-
-        .planner-inline-input:focus {
-            outline: none;
-            border-color: var(--forest);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.1);
-        }
-
-        .planner-nav {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .planner-nav-btn {
-            padding: 0.3rem 0.6rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-family: inherit;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-        }
-
-        .planner-nav-btn:hover {
-            background: var(--forest-bg);
-            border-color: var(--forest);
-            color: var(--forest);
-        }
-
-        .planner-week-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-right: 0.5rem;
-        }
 
         /* Tasks Complete Animation */
         .tasks-complete-animation {
@@ -2365,430 +2142,71 @@
                 padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
             }
         }
-        /* ==================== HEALTHOS ==================== */
-        .healthos-hero {
-            text-align: center;
-            padding: 2rem 1rem;
-        }
 
-        .healthos-hero-amount {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--forest);
-            font-family: 'Merriweather', serif;
-            line-height: 1.2;
-        }
-
-        .healthos-hero-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-
-        .healthos-hero-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.75rem;
-            font-style: italic;
-        }
-
-        .healthos-progress-bar {
-            width: 100%;
-            height: 10px;
-            background: var(--bg-input);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-
-        .healthos-progress-fill {
-            height: 100%;
-            background: var(--forest);
-            border-radius: 5px;
-            transition: width 0.4s ease;
-        }
-
-        .healthos-progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.35rem;
-        }
-
-        .healthos-day-strip {
-            display: flex;
-            gap: 0.75rem;
-            overflow-x: auto;
-            padding: 0.5rem 0;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .healthos-day-card {
-            min-width: 100px;
-            flex-shrink: 0;
-            padding: 0.75rem;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            text-align: center;
-            transition: all var(--transition-fast);
-        }
-
-        .healthos-day-card.positive {
-            border-color: var(--forest);
-            background: var(--forest-bg);
-        }
-
-        .healthos-day-card.negative {
-            border-color: var(--red-soft);
-            background: var(--red-bg);
-        }
-
-        .healthos-day-card.today {
-            box-shadow: 0 0 0 2px var(--forest);
-        }
-
-        .healthos-day-card-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
-
-        .healthos-day-card-amount {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .healthos-day-card-amount.positive { color: var(--forest); }
-        .healthos-day-card-amount.negative { color: var(--red-soft); }
-
-        .healthos-day-card-icons {
+        /* ==================== DAILY PROTOCOL ==================== */
+        .protocol-section-label {
             font-size: 0.7rem;
-            margin-top: 0.35rem;
-            display: flex;
-            gap: 0.15rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .healthos-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            min-height: 48px;
-            background: var(--bg-card);
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-            font-family: inherit;
-            font-weight: 500;
-            width: 100%;
-            text-align: left;
-        }
-
-        .healthos-toggle:hover {
-            background: var(--forest-bg);
-            border-color: var(--forest);
-            color: var(--forest);
-        }
-
-        .healthos-toggle.active {
-            background: var(--forest);
-            color: white;
-            border-color: var(--forest);
-            box-shadow: 0 2px 8px rgba(45, 90, 61, 0.25);
-        }
-
-        .healthos-toggle.negative:hover {
-            background: var(--red-bg);
-            border-color: var(--red-soft);
-            color: var(--red-soft);
-        }
-
-        .healthos-toggle.negative.active {
-            background: var(--red-soft);
-            color: white;
-            border-color: var(--red-soft);
-            box-shadow: 0 2px 8px rgba(199, 93, 93, 0.25);
-        }
-
-        .healthos-toggle-icon {
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .healthos-toggle-label {
-            flex: 1;
-        }
-
-        .healthos-toggle-value {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            flex-shrink: 0;
-        }
-
-        .healthos-toggle-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .healthos-live-total {
-            font-size: 2.5rem;
             font-weight: 700;
-            font-family: 'Merriweather', serif;
-            text-align: center;
-            padding: 1rem 0;
-        }
-
-        .healthos-live-total.positive { color: var(--forest); }
-        .healthos-live-total.negative { color: var(--red-soft); }
-
-        .healthos-line-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            padding-bottom: 0.25rem;
             border-bottom: 1px solid var(--border-light);
         }
 
-        .healthos-line-item:last-child { border-bottom: none; }
-        .healthos-line-item-value.positive { color: var(--forest); font-weight: 600; }
-        .healthos-line-item-value.negative { color: var(--red-soft); font-weight: 600; }
-
-        .healthos-oura-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid var(--border-light);
+        .protocol-section-label:first-child {
+            margin-top: 0;
         }
 
-        .healthos-oura-row:last-child { border-bottom: none; }
-
-        .healthos-oura-label {
+        .protocol-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .healthos-oura-value {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-
-        .healthos-oura-dollar {
-            font-size: 0.8rem;
-            color: var(--forest);
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .healthos-counter {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .healthos-counter-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
+            gap: 0.6rem;
+            padding: 0.45rem 0;
             cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-            font-family: inherit;
+            transition: opacity var(--transition-fast);
         }
 
-        .healthos-counter-btn:hover {
-            border-color: var(--red-soft);
-            color: var(--red-soft);
-        }
-
-        .healthos-counter-num {
-            font-weight: 700;
-            font-size: 1rem;
-            min-width: 1.5rem;
-            text-align: center;
-            color: var(--text-primary);
-        }
-
-        .healthos-wishlist-card {
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-card);
-            margin-bottom: 0.75rem;
-            opacity: 0.7;
-            transition: all var(--transition-fast);
-        }
-
-        .healthos-wishlist-card.ready {
-            opacity: 1;
-            border-color: var(--forest);
-            background: var(--forest-bg);
-        }
-
-        .healthos-wishlist-card.purchased {
+        .protocol-item.checked {
             opacity: 0.5;
         }
 
-        .healthos-wishlist-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
+        .protocol-item.checked .protocol-label {
+            text-decoration: line-through;
         }
 
-        .healthos-wishlist-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .healthos-wishlist-price {
-            font-weight: 700;
-            color: var(--forest);
-        }
-
-        .healthos-wishlist-progress {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 0.5rem 0;
-        }
-
-        .healthos-wishlist-progress-fill {
-            height: 100%;
-            background: var(--forest);
-            border-radius: 3px;
-            transition: width 0.4s ease;
-        }
-
-        .healthos-wishlist-status {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .healthos-wishlist-card.ready .healthos-wishlist-status {
-            color: var(--forest);
-            font-weight: 600;
-        }
-
-        .healthos-section-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .healthos-condition-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.85rem;
-        }
-
-        .healthos-condition-row:last-child { border-bottom: none; }
-
-        .healthos-condition-name { color: var(--text-primary); flex: 1; }
-        .healthos-condition-lifetime { color: var(--text-secondary); width: 80px; text-align: right; }
-        .healthos-condition-monthly { color: var(--forest); font-weight: 600; width: 80px; text-align: right; }
-
-        .healthos-balance-card {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .healthos-balance-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .healthos-balance-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .healthos-balance-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--forest);
-            font-family: 'Merriweather', serif;
-        }
-
-        .healthos-date-nav {
+        .protocol-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .healthos-date-nav-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 0.4rem 0.75rem;
-            cursor: pointer;
-            font-family: inherit;
-            color: var(--text-secondary);
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            color: transparent;
             transition: all var(--transition-fast);
         }
 
-        .healthos-date-nav-btn:hover {
+        .protocol-item.checked .protocol-check {
+            background: var(--forest);
             border-color: var(--forest);
-            color: var(--forest);
+            color: white;
         }
 
-        .healthos-date-label {
-            font-weight: 600;
+        .protocol-label {
+            font-size: 0.88rem;
             color: var(--text-primary);
-            min-width: 160px;
-            text-align: center;
+            line-height: 1.3;
         }
 
-        @media (max-width: 768px) {
-            .healthos-toggle-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .healthos-hero-amount {
-                font-size: 2.5rem;
-            }
-
-            .healthos-live-total {
-                font-size: 2rem;
-            }
-
-            .healthos-day-card {
-                min-width: 80px;
-            }
+        .protocol-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
         }
 
     </style>
@@ -2852,9 +2270,6 @@
                 <button class="sidebar-btn" data-view="health">
                     <span class="sidebar-icon">&#128154;</span> Health
                 </button>
-                <button class="sidebar-btn" data-view="healthOS">
-                    <span class="sidebar-icon">&#128176;</span> HealthOS
-                </button>
                 <button class="sidebar-btn" data-view="tasks">
                     <span class="sidebar-icon">&#9745;</span> Tasks
                 </button>
@@ -2863,15 +2278,6 @@
                 </button>
                 <button class="sidebar-btn" data-view="watchlist">
                     <span class="sidebar-icon">&#128209;</span> Watchlist
-                </button>
-            </div>
-            <div class="sidebar-section">
-                <div class="sidebar-label">Plan</div>
-                <button class="sidebar-btn" data-view="planner">
-                    <span class="sidebar-icon">&#128197;</span> Weekly Planner
-                </button>
-                <button class="sidebar-btn" data-view="nutrition">
-                    <span class="sidebar-icon">&#129367;</span> Nutrition Log
                 </button>
             </div>
             <div class="sidebar-section">
@@ -2921,30 +2327,13 @@
                         </div>
                     </div>
 
-                    <!-- Meal Tracker -->
-                    <div class="card" id="mealTrackerCard">
+                    <!-- Daily Protocol -->
+                    <div class="card" id="protocolCard">
                         <div class="card-header">
-                            <div class="card-title">&#127858; Yesterday's Meals</div>
-                            <span style="font-size: 0.85rem; color: var(--text-secondary);" id="mealTrackerDate"></span>
+                            <div class="card-title">&#128137; Daily Protocol</div>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);" id="protocolProgress"></span>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Breakfast</label>
-                                <textarea class="input-field" id="mealBreakfast" rows="2" placeholder="What did you eat?"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Lunch</label>
-                                <textarea class="input-field" id="mealLunch" rows="2" placeholder="What did you eat?"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Dinner</label>
-                                <textarea class="input-field" id="mealDinner" rows="2" placeholder="What did you eat?"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Snacks</label>
-                                <textarea class="input-field" id="mealSnacks" rows="2" placeholder="What did you snack on?"></textarea>
-                            </div>
-                            <button class="btn btn-primary btn-small" onclick="saveMealTracker()" style="margin-top: 0.5rem; width: 100%;">Save Meals</button>
+                        <div class="card-body" id="protocolChecklist">
                         </div>
                     </div>
                 </div>
@@ -2970,20 +2359,6 @@
                 </div>
             </div>
 
-            <!-- HealthOS View -->
-            <div class="module-view" id="healthOSView">
-                <div class="view-header">
-                    <h2 class="view-title">&#128176; HealthOS</h2>
-                </div>
-                <div class="consumption-tabs" id="healthOSTabs">
-                    <button class="consumption-tab active" data-hostab="dashboard">Dashboard</button>
-                    <button class="consumption-tab" data-hostab="dailylog">Daily Log</button>
-                    <button class="consumption-tab" data-hostab="wishlist">Wishlist</button>
-                </div>
-                <div id="healthOSDashboard"></div>
-                <div id="healthOSDailyLog" style="display: none;"></div>
-                <div id="healthOSWishlist" style="display: none;"></div>
-            </div>
 
             <!-- Tasks View -->
             <div class="module-view" id="tasksView">
@@ -3176,65 +2551,9 @@
                 </div>
             </div>
 
-            <!-- Weekly Planner View -->
-            <div class="module-view" id="plannerView">
-                <div class="view-header">
-                    <h2 class="view-title">&#128197; Weekly Planner</h2>
-                    <div class="planner-nav">
-                        <span class="planner-week-label" id="plannerWeekLabel"></span>
-                        <button class="planner-nav-btn" onclick="plannerPrevWeek()">&#9664;</button>
-                        <button class="planner-nav-btn" onclick="plannerCurrentWeek()">Today</button>
-                        <button class="planner-nav-btn" onclick="plannerNextWeek()">&#9654;</button>
-                    </div>
-                </div>
 
-                <div class="consumption-tabs" id="plannerTabs">
-                    <button class="consumption-tab active" data-plannertab="week">Week Overview</button>
-                    <button class="consumption-tab" data-plannertab="day">Day View</button>
-                    <button class="consumption-tab" data-plannertab="grocery">Grocery List</button>
-                </div>
 
-                <div id="plannerWeekView"></div>
 
-                <div id="plannerDayView" style="display: none;">
-                    <div class="planner-day-selector" id="plannerDaySelector"></div>
-                    <div id="plannerDayContent"></div>
-                </div>
-
-                <div id="plannerGroceryView" style="display: none;"></div>
-            </div>
-
-            <!-- Nutrition Log View -->
-            <div class="module-view" id="nutritionView">
-                <div class="view-header">
-                    <h2 class="view-title">&#129367; Nutrition Log</h2>
-                </div>
-
-                <!-- Weekly Nutrition Report -->
-                <div class="card" id="nutritionReportCard">
-                    <div class="card-header">
-                        <div class="card-title">&#128202; Weekly Nutrition Analysis</div>
-                        <span id="nutritionReportDate" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
-                    </div>
-                    <div class="card-body" id="nutritionReportContent">
-                        <div class="empty-state">
-                            <p style="color: var(--text-secondary);">No nutrition report yet</p>
-                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log your meals daily and connect GitHub sync in Settings to receive weekly insights every Saturday.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Meal Log History -->
-                <div class="card" style="margin-top: 1.5rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#128221; Meal Log History</div>
-                        <button class="btn btn-primary" onclick="openAddMealModal()" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">+ Add Meal Log</button>
-                    </div>
-                    <div class="card-body" id="mealLogHistory">
-                        <p style="color: var(--text-secondary);">Loading meal history...</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Yearly Tracker View -->
             <div class="module-view" id="yearlyTrackerView">
@@ -3610,38 +2929,6 @@
         </div>
     </div>
 
-    <!-- Edit Meal Modal -->
-    <div class="modal-overlay" id="editMealModal">
-        <div class="modal" style="max-width: 420px;">
-            <h3 class="modal-title" id="editMealModalTitle">Edit Meals</h3>
-            <div class="form-group" id="editMealDateGroup" style="display: none;">
-                <label class="form-label">Date</label>
-                <input type="date" class="input-field" id="editMealDatePicker">
-            </div>
-            <div class="form-group" style="margin-bottom: 0.875rem;">
-                <label class="form-label">Breakfast</label>
-                <input type="text" class="input-field" id="editMealBreakfast" placeholder="What did you eat?">
-            </div>
-            <div class="form-group" style="margin-bottom: 0.875rem;">
-                <label class="form-label">Lunch</label>
-                <input type="text" class="input-field" id="editMealLunch" placeholder="What did you eat?">
-            </div>
-            <div class="form-group" style="margin-bottom: 0.875rem;">
-                <label class="form-label">Dinner</label>
-                <input type="text" class="input-field" id="editMealDinner" placeholder="What did you eat?">
-            </div>
-            <div class="form-group" style="margin-bottom: 0.875rem;">
-                <label class="form-label">Snacks</label>
-                <input type="text" class="input-field" id="editMealSnacks" placeholder="What did you snack on?">
-            </div>
-            <input type="hidden" id="editMealDate">
-            <input type="hidden" id="editMealMode" value="edit">
-            <div class="modal-actions" style="margin-top: 1rem; padding-top: 1rem;">
-                <button class="btn btn-secondary" onclick="closeEditMealModal()">Cancel</button>
-                <button class="btn btn-primary" id="editMealSubmitBtn" onclick="saveEditedMeal()">Save Changes</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Year Item Modal -->
     <div class="modal-overlay" id="yearItemModal">
@@ -3835,9 +3122,6 @@
         let selectedTier = 'B';
         let selectedMood = 3;
         let researchFeedCache = null;
-        let currentPlannerDay = null;
-        let currentPlannerWeekKey = null;
-        let currentPlannerTab = 'week';
 
         function showView(viewName) {
             document.querySelectorAll('.module-view').forEach(v => v.classList.remove('active'));
@@ -3849,15 +3133,12 @@
             // Render view content
             if (viewName === 'morning') renderMorning();
             else if (viewName === 'health') renderHealth();
-            else if (viewName === 'healthOS') renderHealthOS();
             else if (viewName === 'tasks') renderTasks();
             else if (viewName === 'consumption') renderConsumption();
             else if (viewName === 'watchlist') renderWatchlist();
             else if (viewName === 'notes') renderNotes();
             else if (viewName === 'research') renderResearch();
             else if (viewName === 'insights') renderInsights();
-            else if (viewName === 'planner') renderPlanner();
-            else if (viewName === 'nutrition') renderNutrition();
             else if (viewName === 'yearlyTracker') renderYearlyTracker();
             else if (viewName === 'settings') renderSettings();
         }
@@ -3882,8 +3163,8 @@
             // Update today's tasks
             renderTodayTasks();
 
-            // Update meal tracker
-            renderMealTracker();
+            // Update protocol checklist
+            renderProtocol();
         }
 
         function addSalt(amount) {
@@ -4169,218 +3450,6 @@
                 container.innerHTML = '<div class="empty-state"><p>No tasks due in the next week</p></div>';
             } else {
                 container.innerHTML = todayTasks.map(task => renderTaskItem(task)).join('');
-            }
-        }
-
-        function renderMealTracker() {
-            const mealTrackerCard = document.getElementById('mealTrackerCard');
-            const dateLabel = document.getElementById('mealTrackerDate');
-            const breakfastInput = document.getElementById('mealBreakfast');
-            const lunchInput = document.getElementById('mealLunch');
-            const dinnerInput = document.getElementById('mealDinner');
-            const snacksInput = document.getElementById('mealSnacks');
-
-            if (!breakfastInput || !lunchInput || !dinnerInput || !snacksInput) return;
-
-            const yesterday = getYesterday();
-            const log = appData.dailyLogs[yesterday];
-            const meals = log?.meals || {};
-
-            // Hide the meal tracker if yesterday's meals have already been logged
-            const hasMealsLogged = meals.breakfast || meals.lunch || meals.dinner || meals.snacks;
-            if (mealTrackerCard) {
-                mealTrackerCard.style.display = hasMealsLogged ? 'none' : 'block';
-            }
-
-            breakfastInput.value = meals.breakfast || '';
-            lunchInput.value = meals.lunch || '';
-            dinnerInput.value = meals.dinner || '';
-            snacksInput.value = meals.snacks || '';
-
-            if (dateLabel) {
-                dateLabel.textContent = new Date(`${yesterday}T00:00:00`).toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            }
-        }
-
-        function saveMealTracker() {
-            const yesterday = getYesterday();
-            const log = getLogByDate(yesterday);
-
-            log.meals = {
-                breakfast: document.getElementById('mealBreakfast').value.trim(),
-                lunch: document.getElementById('mealLunch').value.trim(),
-                dinner: document.getElementById('mealDinner').value.trim(),
-                snacks: document.getElementById('mealSnacks').value.trim()
-            };
-
-            saveData();
-            showNotification('Meals logged!', 'success');
-
-            // Hide the meal tracker card after saving
-            const mealTrackerCard = document.getElementById('mealTrackerCard');
-            if (mealTrackerCard) {
-                mealTrackerCard.style.display = 'none';
-            }
-
-            // Auto-sync to gist if configured
-            const settings = getGitHubSettings();
-            if (settings.token) {
-                syncMealsToGist().then(result => {
-                    if (result.success) {
-                        showNotification('Synced to cloud', 'success');
-                    }
-                });
-            }
-        }
-
-        function renderMealLogHistory() {
-            const container = document.getElementById('mealLogHistory');
-            if (!container) return;
-
-            // Get all dates with meal logs, sorted newest first
-            const mealDates = Object.keys(appData.dailyLogs)
-                .filter(date => {
-                    const log = appData.dailyLogs[date];
-                    const meals = log.meals || {};
-                    return meals.breakfast || meals.lunch || meals.dinner || meals.snacks;
-                })
-                .sort((a, b) => b.localeCompare(a))
-                .slice(0, 14); // Show last 14 days
-
-            if (mealDates.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <p style="color: var(--text-secondary);">No meals logged yet</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log yesterday's meals from the homepage to start tracking.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = mealDates.map(date => {
-                const log = appData.dailyLogs[date];
-                const meals = log.meals || {};
-                const dateObj = new Date(date + 'T00:00:00');
-                const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
-                const dateDisplay = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-                const mealItems = [];
-                if (meals.breakfast) mealItems.push(`<span style="color: var(--text-secondary);">B:</span> ${meals.breakfast}`);
-                if (meals.lunch) mealItems.push(`<span style="color: var(--text-secondary);">L:</span> ${meals.lunch}`);
-                if (meals.dinner) mealItems.push(`<span style="color: var(--text-secondary);">D:</span> ${meals.dinner}`);
-                if (meals.snacks) mealItems.push(`<span style="color: var(--text-secondary);">S:</span> ${meals.snacks}`);
-
-                return `
-                    <div style="padding: 0.75rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; color: var(--forest); margin-bottom: 0.25rem;">${dayName}, ${dateDisplay}</div>
-                            <div style="font-size: 0.9rem; line-height: 1.5;">
-                                ${mealItems.join('<br>')}
-                            </div>
-                        </div>
-                        <button onclick="openEditMealModal('${date}')" style="background: none; border: none; cursor: pointer; padding: 0.25rem 0.5rem; color: var(--text-muted); font-size: 0.85rem;">
-                            Edit
-                        </button>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function openAddMealModal() {
-            // Set to add mode
-            document.getElementById('editMealMode').value = 'add';
-            document.getElementById('editMealModalTitle').textContent = 'Log Meals';
-            document.getElementById('editMealSubmitBtn').textContent = 'Save';
-            document.getElementById('editMealDateGroup').style.display = 'block';
-
-            // Default to yesterday
-            const yesterday = getYesterday();
-            document.getElementById('editMealDatePicker').value = yesterday;
-            document.getElementById('editMealDatePicker').max = new Date().toISOString().split('T')[0];
-
-            // Clear fields
-            document.getElementById('editMealBreakfast').value = '';
-            document.getElementById('editMealLunch').value = '';
-            document.getElementById('editMealDinner').value = '';
-            document.getElementById('editMealSnacks').value = '';
-            document.getElementById('editMealDate').value = '';
-
-            document.getElementById('editMealModal').classList.add('active');
-        }
-
-        function openEditMealModal(dateStr) {
-            const log = appData.dailyLogs[dateStr];
-            const meals = log?.meals || {};
-
-            const dateObj = new Date(dateStr + 'T00:00:00');
-            const dateDisplay = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-
-            // Set to edit mode
-            document.getElementById('editMealMode').value = 'edit';
-            document.getElementById('editMealModalTitle').textContent = `Edit Meals - ${dateDisplay}`;
-            document.getElementById('editMealSubmitBtn').textContent = 'Save Changes';
-            document.getElementById('editMealDateGroup').style.display = 'none';
-
-            document.getElementById('editMealBreakfast').value = meals.breakfast || '';
-            document.getElementById('editMealLunch').value = meals.lunch || '';
-            document.getElementById('editMealDinner').value = meals.dinner || '';
-            document.getElementById('editMealSnacks').value = meals.snacks || '';
-            document.getElementById('editMealDate').value = dateStr;
-
-            document.getElementById('editMealModal').classList.add('active');
-        }
-
-        function closeEditMealModal() {
-            document.getElementById('editMealModal').classList.remove('active');
-            document.getElementById('editMealDateGroup').style.display = 'none';
-        }
-
-        function saveEditedMeal() {
-            const mode = document.getElementById('editMealMode').value;
-            let dateStr;
-
-            if (mode === 'add') {
-                dateStr = document.getElementById('editMealDatePicker').value;
-                if (!dateStr) {
-                    showNotification('Please select a date', 'error');
-                    return;
-                }
-            } else {
-                dateStr = document.getElementById('editMealDate').value;
-            }
-
-            const log = getLogByDate(dateStr);
-
-            log.meals = {
-                breakfast: document.getElementById('editMealBreakfast').value.trim(),
-                lunch: document.getElementById('editMealLunch').value.trim(),
-                dinner: document.getElementById('editMealDinner').value.trim(),
-                snacks: document.getElementById('editMealSnacks').value.trim()
-            };
-
-            saveData();
-            closeEditMealModal();
-            renderMealLogHistory();
-            showNotification(mode === 'add' ? 'Meals logged!' : 'Meals updated!', 'success');
-
-            // Also update the homepage meal tracker if it's for yesterday
-            const yesterday = getYesterday();
-            if (dateStr === yesterday) {
-                renderMealTracker();
-            }
-
-            // Auto-sync to gist if configured
-            const settings = getGitHubSettings();
-            if (settings.token) {
-                syncMealsToGist().then(result => {
-                    if (result.success) {
-                        showNotification('Synced to cloud', 'success');
-                    }
-                });
             }
         }
 
@@ -5222,504 +4291,6 @@
                     <div class="stat-label">Day Streak</div>
                 </div>
             `;
-        }
-
-        // ==================== WEEKLY PLANNER ====================
-        function getISOWeekKey(date = new Date()) {
-            // Shift +1 day so Sunday-start weeks map to a single ISO week key
-            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-            d.setUTCDate(d.getUTCDate() + 1);
-            const dayNum = d.getUTCDay() || 7;
-            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-            const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-            return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
-        }
-
-        function getWeekStartDate(date = new Date()) {
-            const d = new Date(date);
-            d.setDate(d.getDate() - d.getDay()); // Go back to Sunday
-            return d.toISOString().split('T')[0];
-        }
-
-        function getTodayDayKey() {
-            const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            return days[new Date().getDay()];
-        }
-
-        function createEmptyWeekPlan(weekKey, startDate) {
-            const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            const dayData = {};
-            dayKeys.forEach(d => {
-                dayData[d] = {
-                    meals: {
-                        breakfast: { text: '', done: false },
-                        lunch: { text: '', done: false },
-                        dinner: { text: '', done: false }
-                    },
-                    workout: { text: '', done: false }
-                };
-            });
-            return {
-                weekKey,
-                startDate: startDate || getWeekStartDate(),
-                createdAt: new Date().toISOString(),
-                days: dayData
-            };
-        }
-
-        function getWeekStartForKey(weekKey) {
-            // Parse "2026-W07" -> get the Sunday that starts this week
-            const match = weekKey.match(/^(\d{4})-W(\d{2})$/);
-            if (!match) return getWeekStartDate();
-            const year = parseInt(match[1]);
-            const week = parseInt(match[2]);
-            // Jan 4 is always in week 1
-            const jan4 = new Date(Date.UTC(year, 0, 4));
-            const dayOfWeek = jan4.getUTCDay() || 7;
-            const monday = new Date(jan4);
-            monday.setUTCDate(jan4.getUTCDate() - dayOfWeek + 1 + (week - 1) * 7);
-            // Sunday is 1 day before Monday
-            monday.setUTCDate(monday.getUTCDate() - 1);
-            return monday.toISOString().split('T')[0];
-        }
-
-        function getCurrentWeekPlannerData() {
-            if (!currentPlannerWeekKey) currentPlannerWeekKey = getISOWeekKey();
-            if (!appData.weeklyPlanner) appData.weeklyPlanner = {};
-            if (!appData.weeklyPlanner[currentPlannerWeekKey]) {
-                const startDate = getWeekStartForKey(currentPlannerWeekKey);
-                appData.weeklyPlanner[currentPlannerWeekKey] = createEmptyWeekPlan(currentPlannerWeekKey, startDate);
-                saveData();
-            }
-            // Keep startDate in sync with current week-start logic
-            const correctStart = getWeekStartForKey(currentPlannerWeekKey);
-            if (appData.weeklyPlanner[currentPlannerWeekKey].startDate !== correctStart) {
-                appData.weeklyPlanner[currentPlannerWeekKey].startDate = correctStart;
-                saveData();
-            }
-            return appData.weeklyPlanner[currentPlannerWeekKey];
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-
-        // Week navigation
-        function plannerPrevWeek() {
-            const startDate = new Date(getCurrentWeekPlannerData().startDate + 'T00:00:00');
-            startDate.setDate(startDate.getDate() - 7);
-            currentPlannerWeekKey = getISOWeekKey(startDate);
-            renderPlanner();
-        }
-
-        function plannerNextWeek() {
-            const startDate = new Date(getCurrentWeekPlannerData().startDate + 'T00:00:00');
-            startDate.setDate(startDate.getDate() + 7);
-            currentPlannerWeekKey = getISOWeekKey(startDate);
-            renderPlanner();
-        }
-
-        function plannerCurrentWeek() {
-            currentPlannerWeekKey = getISOWeekKey();
-            currentPlannerDay = getTodayDayKey();
-            renderPlanner();
-        }
-
-        // Main render
-        function renderPlanner() {
-            if (!currentPlannerWeekKey) currentPlannerWeekKey = getISOWeekKey();
-            if (!currentPlannerDay) currentPlannerDay = getTodayDayKey();
-
-            const plan = getCurrentWeekPlannerData();
-            const start = new Date(getWeekStartForKey(currentPlannerWeekKey) + 'T00:00:00');
-            const end = new Date(start);
-            end.setDate(end.getDate() + 6);
-            const fmt = { month: 'short', day: 'numeric' };
-            document.getElementById('plannerWeekLabel').textContent =
-                `${start.toLocaleDateString('en-US', fmt)} – ${end.toLocaleDateString('en-US', fmt)}`;
-
-            document.querySelectorAll('#plannerTabs .consumption-tab').forEach(tab => {
-                tab.classList.toggle('active', tab.dataset.plannertab === currentPlannerTab);
-            });
-
-            document.getElementById('plannerWeekView').style.display = currentPlannerTab === 'week' ? 'block' : 'none';
-            document.getElementById('plannerDayView').style.display = currentPlannerTab === 'day' ? 'block' : 'none';
-            document.getElementById('plannerGroceryView').style.display = currentPlannerTab === 'grocery' ? 'block' : 'none';
-
-            if (currentPlannerTab === 'week') renderPlannerWeekView();
-            else if (currentPlannerTab === 'day') renderPlannerDayView();
-            else if (currentPlannerTab === 'grocery') renderPlannerGroceryList();
-        }
-
-        // Tab switching
-        document.querySelectorAll('#plannerTabs .consumption-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                currentPlannerTab = tab.dataset.plannertab;
-                renderPlanner();
-            });
-        });
-
-        // Week Overview
-        function renderPlannerWeekView() {
-            const plan = getCurrentWeekPlannerData();
-            const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            const today = getTodayDayKey();
-            const isCurrentWeek = currentPlannerWeekKey === getISOWeekKey();
-
-            const container = document.getElementById('plannerWeekView');
-            container.innerHTML = `
-                <div class="planner-week-grid">
-                    ${dayOrder.map(dayKey => {
-                        const day = plan.days[dayKey];
-                        const isToday = isCurrentWeek && dayKey === today;
-                        const items = [day.meals.breakfast, day.meals.lunch, day.meals.dinner, day.workout];
-                        const totalItems = items.filter(i => i.text).length;
-                        const doneItems = items.filter(i => i.done).length;
-
-                        return `
-                            <div class="planner-day-card ${isToday ? 'planner-day-today' : ''}" onclick="switchToPlannerDay('${dayKey}')">
-                                <div class="planner-day-card-header">
-                                    <span class="planner-day-name">${dayNames[dayKey]}</span>
-                                    ${totalItems > 0 ? `<span class="planner-day-progress">${doneItems}/${totalItems}</span>` : ''}
-                                </div>
-                                <div class="planner-day-card-body">
-                                    ${renderMiniLine('B', day.meals.breakfast)}
-                                    ${renderMiniLine('L', day.meals.lunch)}
-                                    ${renderMiniLine('D', day.meals.dinner)}
-                                    ${renderMiniWorkout(day.workout)}
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-        }
-
-        function renderMiniLine(label, meal) {
-            if (!meal.text) return `<div class="planner-mini-item empty">${label}: <span class="planner-mini-empty">—</span></div>`;
-            return `<div class="planner-mini-item ${meal.done ? 'done' : ''}">${label}: ${escapeHtml(meal.text)}</div>`;
-        }
-
-        function renderMiniWorkout(workout) {
-            if (!workout.text) return `<div class="planner-mini-item empty">&#128170; <span class="planner-mini-empty">Rest day</span></div>`;
-            return `<div class="planner-mini-item ${workout.done ? 'done' : ''}">&#128170; ${escapeHtml(workout.text)}</div>`;
-        }
-
-        // Day View
-        function renderPlannerDayView() {
-            const plan = getCurrentWeekPlannerData();
-            const dayNames = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
-            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            const day = plan.days[currentPlannerDay];
-
-            const selectorContainer = document.getElementById('plannerDaySelector');
-            selectorContainer.innerHTML = dayOrder.map(dk => `
-                <button class="planner-day-btn ${dk === currentPlannerDay ? 'active' : ''}" onclick="selectPlannerDay('${dk}')">
-                    ${dayNames[dk].substring(0, 3)}
-                </button>
-            `).join('');
-
-            const contentContainer = document.getElementById('plannerDayContent');
-            contentContainer.innerHTML = `
-                <h3 style="font-family: 'Merriweather', serif; color: var(--forest); margin-bottom: 1rem;">
-                    ${dayNames[currentPlannerDay]}
-                </h3>
-
-                <div class="card" style="margin-bottom: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#127869; Meals</div>
-                    </div>
-                    <div class="card-body">
-                        ${renderPlannerMealItem('breakfast', 'Breakfast', day.meals.breakfast)}
-                        ${renderPlannerMealItem('lunch', 'Lunch', day.meals.lunch)}
-                        ${renderPlannerMealItem('dinner', 'Dinner', day.meals.dinner)}
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">&#128170; Workout</div>
-                    </div>
-                    <div class="card-body">
-                        ${renderPlannerWorkoutItem(day.workout)}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderPlannerMealItem(mealType, label, meal) {
-            return `
-                <div class="planner-item ${meal.done ? 'completed' : ''}">
-                    <div class="task-checkbox ${meal.done ? 'checked' : ''}"
-                         onclick="togglePlannerMeal('${currentPlannerDay}', '${mealType}')">
-                        ${meal.done ? '&#10003;' : ''}
-                    </div>
-                    <div class="planner-item-content">
-                        <div class="planner-item-label">${label}</div>
-                        <input type="text" class="planner-inline-input"
-                               value="${escapeHtml(meal.text)}"
-                               placeholder="What are you having?"
-                               onchange="updatePlannerMeal('${currentPlannerDay}', '${mealType}', this.value)"
-                               onkeydown="if(event.key==='Enter') this.blur()">
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderPlannerWorkoutItem(workout) {
-            return `
-                <div class="planner-item ${workout.done ? 'completed' : ''}">
-                    <div class="task-checkbox ${workout.done ? 'checked' : ''}"
-                         onclick="togglePlannerWorkout('${currentPlannerDay}')">
-                        ${workout.done ? '&#10003;' : ''}
-                    </div>
-                    <div class="planner-item-content">
-                        <input type="text" class="planner-inline-input"
-                               value="${escapeHtml(workout.text)}"
-                               placeholder="What's the workout? (leave blank for rest day)"
-                               onchange="updatePlannerWorkout('${currentPlannerDay}', this.value)"
-                               onkeydown="if(event.key==='Enter') this.blur()">
-                    </div>
-                </div>
-            `;
-        }
-
-        // Data mutation functions
-        function updatePlannerMeal(dayKey, mealType, value) {
-            const plan = getCurrentWeekPlannerData();
-            plan.days[dayKey].meals[mealType].text = value.trim();
-            saveData();
-            if (currentPlannerTab === 'week') renderPlannerWeekView();
-        }
-
-        function togglePlannerMeal(dayKey, mealType) {
-            const plan = getCurrentWeekPlannerData();
-            plan.days[dayKey].meals[mealType].done = !plan.days[dayKey].meals[mealType].done;
-            saveData();
-            if (currentPlannerTab === 'day') renderPlannerDayView();
-            else renderPlannerWeekView();
-        }
-
-        function updatePlannerWorkout(dayKey, value) {
-            const plan = getCurrentWeekPlannerData();
-            plan.days[dayKey].workout.text = value.trim();
-            saveData();
-            if (currentPlannerTab === 'week') renderPlannerWeekView();
-        }
-
-        function togglePlannerWorkout(dayKey) {
-            const plan = getCurrentWeekPlannerData();
-            plan.days[dayKey].workout.done = !plan.days[dayKey].workout.done;
-            saveData();
-            if (currentPlannerTab === 'day') renderPlannerDayView();
-            else renderPlannerWeekView();
-        }
-
-        function selectPlannerDay(dayKey) {
-            currentPlannerDay = dayKey;
-            renderPlannerDayView();
-        }
-
-        function switchToPlannerDay(dayKey) {
-            currentPlannerDay = dayKey;
-            currentPlannerTab = 'day';
-            renderPlanner();
-        }
-
-        // Grocery List
-        function renderPlannerGroceryList() {
-            const container = document.getElementById('plannerGroceryView');
-            if (!appData.groceryList) appData.groceryList = { items: [] };
-            const groceries = appData.groceryList;
-
-            const unchecked = groceries.items.filter(i => !i.checked);
-            const checked = groceries.items.filter(i => i.checked);
-
-            container.innerHTML = `
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">&#128722; Grocery List</div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-secondary" onclick="autoGenerateGroceryList()" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">Auto-fill from Meals</button>
-                            ${checked.length > 0 ? `<button class="btn btn-secondary" onclick="clearCheckedGroceries()" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">Clear Checked</button>` : ''}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-                            <input type="text" class="input-field" id="groceryItemInput"
-                                   placeholder="Add an item..."
-                                   onkeydown="if(event.key==='Enter') addGroceryItem()"
-                                   style="flex: 1;">
-                            <select class="input-field" id="groceryCategorySelect" style="width: auto; min-width: 120px;">
-                                <option value="Produce">Produce</option>
-                                <option value="Proteins">Proteins</option>
-                                <option value="Dairy">Dairy</option>
-                                <option value="Grains">Grains</option>
-                                <option value="Pantry">Pantry</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <button class="btn btn-primary" onclick="addGroceryItem()" style="padding: 0.35rem 0.7rem;">Add</button>
-                        </div>
-
-                        ${renderGroceryItemsByCategory(unchecked)}
-
-                        ${checked.length > 0 ? `
-                            <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.75rem;">
-                                <div style="cursor: pointer; color: var(--text-muted); font-size: 0.85rem; user-select: none;" onclick="toggleCheckedGroceries()">
-                                    &#9989; ${checked.length} item${checked.length > 1 ? 's' : ''} checked off
-                                    <span id="groceryCheckedToggle">&#9660;</span>
-                                </div>
-                                <div id="groceryCheckedList" style="display: none; margin-top: 0.5rem;">
-                                    ${checked.map(item => renderGroceryItem(item)).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderGroceryItemsByCategory(items) {
-            const grouped = {};
-            items.forEach(item => {
-                const cat = item.category || 'Other';
-                if (!grouped[cat]) grouped[cat] = [];
-                grouped[cat].push(item);
-            });
-
-            const categoryOrder = ['Produce', 'Proteins', 'Dairy', 'Grains', 'Pantry', 'Other'];
-            const html = categoryOrder
-                .filter(cat => grouped[cat] && grouped[cat].length > 0)
-                .map(cat => `
-                    <div style="margin-bottom: 0.75rem;">
-                        <h4 style="color: var(--forest); font-size: 0.9rem; margin-bottom: 0.4rem;">${cat}</h4>
-                        ${grouped[cat].map(item => renderGroceryItem(item)).join('')}
-                    </div>
-                `).join('');
-
-            return html || '<div class="empty-state"><p>No items yet. Add items above or auto-fill from your meal plan.</p></div>';
-        }
-
-        function renderGroceryItem(item) {
-            return `
-                <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; ${item.checked ? 'opacity: 0.5;' : ''}">
-                    <div class="task-checkbox ${item.checked ? 'checked' : ''}" onclick="toggleGroceryItem('${item.id}')">
-                        ${item.checked ? '&#10003;' : ''}
-                    </div>
-                    <span style="${item.checked ? 'text-decoration: line-through; color: var(--text-muted);' : ''}">${escapeHtml(item.text)}</span>
-                    <button onclick="deleteGroceryItem('${item.id}')" style="margin-left: auto; background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.85rem; padding: 0.2rem;" title="Delete">&#128465;</button>
-                </div>
-            `;
-        }
-
-        function addGroceryItem() {
-            const input = document.getElementById('groceryItemInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const category = document.getElementById('groceryCategorySelect').value;
-            if (!appData.groceryList) appData.groceryList = { items: [] };
-
-            appData.groceryList.items.push({
-                id: generateId(),
-                text: text,
-                checked: false,
-                category: category
-            });
-            saveData();
-            input.value = '';
-            renderPlannerGroceryList();
-        }
-
-        function toggleGroceryItem(id) {
-            if (!appData.groceryList) return;
-            const item = appData.groceryList.items.find(i => i.id === id);
-            if (item) {
-                item.checked = !item.checked;
-                saveData();
-                renderPlannerGroceryList();
-            }
-        }
-
-        function deleteGroceryItem(id) {
-            if (!appData.groceryList) return;
-            appData.groceryList.items = appData.groceryList.items.filter(i => i.id !== id);
-            saveData();
-            renderPlannerGroceryList();
-        }
-
-        function clearCheckedGroceries() {
-            if (!appData.groceryList) return;
-            const checkedCount = appData.groceryList.items.filter(i => i.checked).length;
-            if (checkedCount === 0) return;
-            if (confirm(`Remove ${checkedCount} checked item${checkedCount > 1 ? 's' : ''}?`)) {
-                appData.groceryList.items = appData.groceryList.items.filter(i => !i.checked);
-                saveData();
-                renderPlannerGroceryList();
-                showNotification('Checked items cleared', 'success');
-            }
-        }
-
-        function toggleCheckedGroceries() {
-            const list = document.getElementById('groceryCheckedList');
-            const toggle = document.getElementById('groceryCheckedToggle');
-            if (!list) return;
-            const isHidden = list.style.display === 'none';
-            list.style.display = isHidden ? 'block' : 'none';
-            toggle.textContent = isHidden ? '&#9650;' : '&#9660;';
-        }
-
-        function autoGenerateGroceryList() {
-            const plan = getCurrentWeekPlannerData();
-            const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-            const mealTexts = [];
-            dayOrder.forEach(dk => {
-                const day = plan.days[dk];
-                ['breakfast', 'lunch', 'dinner'].forEach(mt => {
-                    if (day.meals[mt].text) mealTexts.push(day.meals[mt].text);
-                });
-            });
-
-            if (mealTexts.length === 0) {
-                showNotification('No meals planned yet. Add meals first!', 'error');
-                return;
-            }
-
-            if (!appData.groceryList) appData.groceryList = { items: [] };
-
-            const existingTexts = new Set(appData.groceryList.items.map(i => i.text.toLowerCase()));
-            let added = 0;
-
-            mealTexts.forEach(text => {
-                if (!existingTexts.has(text.toLowerCase())) {
-                    appData.groceryList.items.push({
-                        id: generateId(),
-                        text: text,
-                        checked: false,
-                        category: 'Other'
-                    });
-                    existingTexts.add(text.toLowerCase());
-                    added++;
-                }
-            });
-
-            saveData();
-            renderPlannerGroceryList();
-            showNotification(`Added ${added} meal${added !== 1 ? 's' : ''} to grocery list`, 'success');
-        }
-
-        function renderNutrition() {
-            // Load and render nutrition report
-            loadNutritionReport().then(report => {
-                renderNutritionReport(report);
-            });
-
-            // Render meal log history
-            renderMealLogHistory();
         }
 
         // ==================== YEARLY TRACKER ====================
@@ -6581,886 +5152,114 @@
             }
         }
 
-        // ==================== HEALTHOS ====================
 
-        // --- Named Constants (dollar values) ---
-        const HOS_CARDIO_VALUE = 1.85;
-        const HOS_STRENGTH_VALUE = 1.50;
-        const HOS_HEALTHY_BREAKFAST = 0.45;
-        const HOS_HEALTHY_LUNCH = 0.45;
-        const HOS_HEALTHY_DINNER = 0.55;
-        const HOS_OMEGA3_VALUE = 0.25;
-        const HOS_HYDRATION_VALUE = 0.20;
-        const HOS_SLEEP_85_PLUS = 0.75;
-        const HOS_SLEEP_70_84 = 0.55;
-        const HOS_SLEEP_60_69 = 0.30;
-        const HOS_STEPS_8K_PLUS = 0.20;
-        const HOS_STEPS_5K_PLUS = 0.10;
-        const HOS_HRV_50_PLUS = 0.15;
-        const HOS_LOW_STRESS_VALUE = 0.20;
+        // ==================== DAILY PROTOCOL ====================
+        function getProtocolItems() {
+            const today = new Date();
+            const dayOfMonth = today.getDate();
+            const isIronDay = dayOfMonth % 2 === 1; // odd days = iron days
 
-        const HOS_SKIP_CARDIO = -1.85;
-        const HOS_SKIP_STRENGTH = -1.50;
-        const HOS_FRIED_FOOD = -0.55;
-        const HOS_PROCESSED_MEAL = -0.45;
-        const HOS_PROCESSED_MEAT = -0.40;
-        const HOS_SUGARY_DRINK = -0.25;
-        const HOS_ALCOHOL_PER_DRINK = -0.35;
-        const HOS_UNHEALTHY_SNACK = -0.20;
-        const HOS_SHORT_SLEEP = -0.45;
-        const HOS_SEDENTARY_DAY = -0.25;
+            const items = [];
 
-        const HOS_MONTHLY_TARGET = 61.60;
-
-        const HOS_CONDITIONS = [
-            { name: 'Cardiovascular Disease', lifetime: 8120, monthly: 15.89 },
-            { name: 'Type 2 Diabetes', lifetime: 5500, monthly: 10.76 },
-            { name: 'Dementia / Alzheimer\'s', lifetime: 4800, monthly: 9.39 },
-            { name: 'Heart Failure', lifetime: 3200, monthly: 6.26 },
-            { name: 'Hypertension', lifetime: 2940, monthly: 5.75 },
-            { name: 'Osteoporosis', lifetime: 2800, monthly: 5.48 },
-            { name: 'POTS Management', lifetime: 2500, monthly: 4.89 },
-            { name: 'Metabolic Syndrome', lifetime: 720, monthly: 1.41 },
-            { name: 'Depression / Mental Health', lifetime: 705, monthly: 1.38 },
-            { name: 'Cancer (modifiable)', lifetime: 500, monthly: 0.98 }
-        ];
-        const HOS_LIFETIME_TOTAL = 31785;
-
-        // --- localStorage helpers ---
-        function hosLoad(key, fallback) {
-            const raw = localStorage.getItem(key);
-            return raw ? JSON.parse(raw) : fallback;
-        }
-
-        function hosSave(key, data) {
-            localStorage.setItem(key, JSON.stringify(data));
-            scheduleCloudSync();
-        }
-
-        function hosGetConfig() {
-            return hosLoad('healthos_config', { dailyTarget: HOS_MONTHLY_TARGET, monthlyTarget: HOS_MONTHLY_TARGET });
-        }
-
-        function hosGetBalance() {
-            return hosLoad('healthos_balance', { lifetime: 0, currentMonth: 0, lastResetMonth: new Date().toISOString().slice(0, 7) });
-        }
-
-        function hosGetWishlist() {
-            return hosLoad('healthos_wishlist', []);
-        }
-
-        function hosGetLog() {
-            return hosLoad('healthos_log', {});
-        }
-
-        function hosGetHistory() {
-            return hosLoad('healthos_history', []);
-        }
-
-        function hosGetDayLog(dateStr) {
-            const log = hosGetLog();
-            if (!log[dateStr]) {
-                log[dateStr] = {
-                    strengthTraining: false,
-                    healthyBreakfast: false,
-                    healthyLunch: false,
-                    healthyDinner: false,
-                    omega3: false,
-                    hydration: false,
-                    friedFood: false,
-                    processedMeat: false,
-                    sugaryDrink: false,
-                    unhealthySnack: false,
-                    alcohol: 0,
-                    manualCardio: false,
-                    sleepScore: 0,
-                    sleepDuration: 0,
-                    activityScore: 0,
-                    cardioDetected: false,
-                    hrv: 0,
-                    steps: 0,
-                    stressScore: 0,
-                    ouraFetched: false
-                };
-                hosSave('healthos_log', log);
-            }
-            return log[dateStr];
-        }
-
-        function hosSaveDayLog(dateStr, dayData) {
-            const log = hosGetLog();
-            log[dateStr] = dayData;
-            hosSave('healthos_log', log);
-        }
-
-        // --- Monthly Reset Logic ---
-        function hosCheckMonthReset() {
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            const balance = hosGetBalance();
-            if (balance.lastResetMonth !== currentMonth) {
-                const history = hosGetHistory();
-                if (balance.lastResetMonth) {
-                    history.push({ month: balance.lastResetMonth, amount: balance.currentMonth });
-                    hosSave('healthos_history', history);
-                }
-                balance.lifetime += balance.currentMonth;
-                balance.currentMonth = 0;
-                balance.lastResetMonth = currentMonth;
-                hosSave('healthos_balance', balance);
-            }
-        }
-
-        // Run on load
-        hosCheckMonthReset();
-
-        // --- calculateDayValue() — Pure Function ---
-        function calculateDayValue(dayData) {
-            const breakdown = [];
-            let gross = 0;
-            let penalties = 0;
-
-            // Cardio: Oura detected OR manual, never double-count
-            const hasCardio = (dayData.ouraFetched && dayData.cardioDetected) || (!dayData.ouraFetched && dayData.manualCardio) || (dayData.ouraFetched && !dayData.cardioDetected && dayData.manualCardio);
-            if (hasCardio) {
-                breakdown.push({ label: 'Cardio session', value: HOS_CARDIO_VALUE, type: 'positive' });
-                gross += HOS_CARDIO_VALUE;
+            // Morning — Empty Stomach
+            items.push({ section: 'Morning — Empty Stomach' });
+            items.push({ id: 'lmnt_am', label: 'LMNT packet in 16oz water' });
+            items.push({ id: 'mag_threonate', label: 'Magnesium Threonate' });
+            if (isIronDay) {
+                items.push({ id: 'iron', label: 'Iron Bisglycinate + Vitamin C', note: 'Iron day' });
             }
 
-            // Strength
-            if (dayData.strengthTraining) {
-                breakdown.push({ label: 'Strength training', value: HOS_STRENGTH_VALUE, type: 'positive' });
-                gross += HOS_STRENGTH_VALUE;
+            // Before Breakfast
+            items.push({ section: 'Before Breakfast' });
+            items.push({ id: 'dgl_am', label: 'DGL Chewable (15-20 min before eating)' });
+            if (!isIronDay) {
+                items.push({ id: 'zinc_am', label: 'Zinc-Carnosine (1 capsule)' });
+            } else {
+                items.push({ id: 'zinc_am', label: 'Zinc-Carnosine — skip (iron day, take at lunch)', note: 'Iron day' });
             }
 
-            // Meals
-            if (dayData.healthyBreakfast) {
-                breakdown.push({ label: 'Healthy breakfast', value: HOS_HEALTHY_BREAKFAST, type: 'positive' });
-                gross += HOS_HEALTHY_BREAKFAST;
-            }
-            if (dayData.healthyLunch) {
-                breakdown.push({ label: 'Healthy lunch', value: HOS_HEALTHY_LUNCH, type: 'positive' });
-                gross += HOS_HEALTHY_LUNCH;
-            }
-            if (dayData.healthyDinner) {
-                breakdown.push({ label: 'Healthy dinner', value: HOS_HEALTHY_DINNER, type: 'positive' });
-                gross += HOS_HEALTHY_DINNER;
+            // With Lunch
+            items.push({ section: 'With Lunch' });
+            items.push({ id: 'dgl_lunch', label: 'DGL Chewable (15-20 min before eating)' });
+            items.push({ id: 'selenium', label: 'Selenium (Thorne)' });
+            items.push({ id: 'omega3', label: 'Omega-3 (EPA/DHA)' });
+            if (isIronDay) {
+                items.push({ id: 'zinc_lunch', label: 'Zinc-Carnosine (1 capsule)', note: 'Moved from breakfast — iron day' });
             }
 
-            // Omega-3
-            if (dayData.omega3) {
-                breakdown.push({ label: 'Omega-3', value: HOS_OMEGA3_VALUE, type: 'positive' });
-                gross += HOS_OMEGA3_VALUE;
-            }
+            // Afternoon
+            items.push({ section: 'Afternoon' });
+            items.push({ id: 'lmnt_pm', label: 'Second LMNT packet (if active)' });
 
-            // Hydration
-            if (dayData.hydration) {
-                breakdown.push({ label: 'Hydration goal', value: HOS_HYDRATION_VALUE, type: 'positive' });
-                gross += HOS_HYDRATION_VALUE;
-            }
+            // Before Dinner
+            items.push({ section: 'Before Dinner' });
+            items.push({ id: 'dgl_dinner', label: 'DGL Chewable (15-20 min before eating)' });
 
-            // Sleep score (graduated)
-            if (dayData.sleepScore >= 85) {
-                breakdown.push({ label: 'Sleep score 85+', value: HOS_SLEEP_85_PLUS, type: 'positive' });
-                gross += HOS_SLEEP_85_PLUS;
-            } else if (dayData.sleepScore >= 70) {
-                breakdown.push({ label: 'Sleep score 70-84', value: HOS_SLEEP_70_84, type: 'positive' });
-                gross += HOS_SLEEP_70_84;
-            } else if (dayData.sleepScore >= 60) {
-                breakdown.push({ label: 'Sleep score 60-69', value: HOS_SLEEP_60_69, type: 'positive' });
-                gross += HOS_SLEEP_60_69;
-            }
+            // Before Bed
+            items.push({ section: 'Before Bed' });
+            items.push({ id: 'mag_glycinate', label: 'Magnesium Glycinate 400mg' });
 
-            // Steps (graduated)
-            if (dayData.steps >= 8000) {
-                breakdown.push({ label: 'Steps 8,000+', value: HOS_STEPS_8K_PLUS, type: 'positive' });
-                gross += HOS_STEPS_8K_PLUS;
-            } else if (dayData.steps >= 5000) {
-                breakdown.push({ label: 'Steps 5,000+', value: HOS_STEPS_5K_PLUS, type: 'positive' });
-                gross += HOS_STEPS_5K_PLUS;
-            }
+            // Exercise — Daily Non-Negotiables
+            items.push({ section: 'Exercise — Daily' });
+            items.push({ id: 'breathing', label: 'Diaphragmatic breathing (10-15 min)' });
+            items.push({ id: 'calf_raises', label: 'Calf raises — 3 sets of 20' });
+            items.push({ id: 'walk', label: 'Walk 15-20 minutes' });
 
-            // HRV
-            if (dayData.hrv >= 50) {
-                breakdown.push({ label: 'HRV \u2265 50', value: HOS_HRV_50_PLUS, type: 'positive' });
-                gross += HOS_HRV_50_PLUS;
-            }
+            // Vestibular Rehab
+            items.push({ section: 'Vestibular Rehab' });
+            items.push({ id: 'gaze_1', label: 'Gaze stabilization — horizontal (30s)' });
+            items.push({ id: 'gaze_2', label: 'Gaze stabilization — vertical (30s)' });
+            items.push({ id: 'balance', label: 'Balance training (feet together + single leg + tandem walk)' });
 
-            // Stress (using readiness as proxy)
-            if (dayData.stressScore >= 70) {
-                breakdown.push({ label: 'Low stress day', value: HOS_LOW_STRESS_VALUE, type: 'positive' });
-                gross += HOS_LOW_STRESS_VALUE;
-            }
-
-            // --- Negatives ---
-            if (dayData.friedFood) {
-                breakdown.push({ label: 'Fried food', value: HOS_FRIED_FOOD, type: 'negative' });
-                penalties += Math.abs(HOS_FRIED_FOOD);
-            }
-            if (dayData.processedMeat) {
-                breakdown.push({ label: 'Processed meat', value: HOS_PROCESSED_MEAT, type: 'negative' });
-                penalties += Math.abs(HOS_PROCESSED_MEAT);
-            }
-            if (dayData.sugaryDrink) {
-                breakdown.push({ label: 'Sugary drink', value: HOS_SUGARY_DRINK, type: 'negative' });
-                penalties += Math.abs(HOS_SUGARY_DRINK);
-            }
-            if (dayData.unhealthySnack) {
-                breakdown.push({ label: 'Unhealthy snack', value: HOS_UNHEALTHY_SNACK, type: 'negative' });
-                penalties += Math.abs(HOS_UNHEALTHY_SNACK);
-            }
-            if (dayData.alcohol > 0) {
-                const alcoholCost = HOS_ALCOHOL_PER_DRINK * dayData.alcohol;
-                breakdown.push({ label: `Alcohol (${dayData.alcohol} drink${dayData.alcohol > 1 ? 's' : ''})`, value: alcoholCost, type: 'negative' });
-                penalties += Math.abs(alcoholCost);
-            }
-            if (dayData.sleepDuration > 0 && dayData.sleepDuration < 6) {
-                breakdown.push({ label: 'Sleep < 6 hours', value: HOS_SHORT_SLEEP, type: 'negative' });
-                penalties += Math.abs(HOS_SHORT_SLEEP);
-            }
-            if (dayData.steps > 0 && dayData.steps < 3000) {
-                breakdown.push({ label: 'Sedentary day', value: HOS_SEDENTARY_DAY, type: 'negative' });
-                penalties += Math.abs(HOS_SEDENTARY_DAY);
-            }
-
-            const net = Math.round((gross - penalties) * 100) / 100;
-            return { gross: Math.round(gross * 100) / 100, net, breakdown };
+            return items;
         }
 
-        // --- fetchOuraForDate ---
-        function fetchOuraForDate(dateStr) {
-            const dayLog = hosGetDayLog(dateStr);
-            if (dayLog.ouraFetched) return;
+        function getProtocolLog() {
+            const today = getToday();
+            const log = getTodayLog();
+            if (!log.protocol) log.protocol = {};
+            return log.protocol;
+        }
 
-            const raw = localStorage.getItem('deanOS_ouraData');
-            if (!raw) return;
+        function toggleProtocolItem(id) {
+            const log = getProtocolLog();
+            log[id] = !log[id];
+            saveData();
+            renderProtocol();
+        }
 
-            const ouraData = JSON.parse(raw);
-            const days = ouraData.days || [];
-            const workouts = ouraData.workouts || [];
+        function renderProtocol() {
+            const container = document.getElementById('protocolChecklist');
+            const progressEl = document.getElementById('protocolProgress');
+            if (!container) return;
 
-            const day = days.find(d => d.date === dateStr);
-            if (day) {
-                dayLog.sleepScore = day.sleep_score || 0;
-                dayLog.sleepDuration = day.total_sleep_seconds ? Math.round((day.total_sleep_seconds / 3600) * 10) / 10 : 0;
-                dayLog.activityScore = day.activity_score || 0;
-                dayLog.steps = day.steps || 0;
-                dayLog.hrv = day.average_hrv || 0;
-                dayLog.stressScore = day.readiness_score || 0; // proxy
+            const items = getProtocolItems();
+            const log = getProtocolLog();
+
+            const checkable = items.filter(i => i.id);
+            const checked = checkable.filter(i => log[i.id]);
+            if (progressEl) {
+                progressEl.textContent = `${checked.length}/${checkable.length}`;
             }
-
-            // Cardio detection: look for cycling/running sessions with duration > 20 min
-            const dayWorkouts = workouts.filter(w => w.date === dateStr);
-            dayLog.cardioDetected = dayWorkouts.some(w => {
-                if (!w.start_datetime || !w.end_datetime) return false;
-                const start = new Date(w.start_datetime);
-                const end = new Date(w.end_datetime);
-                const durationMin = (end - start) / 60000;
-                const cardioTypes = ['cycling', 'running', 'walking', 'swimming', 'rowing', 'elliptical', 'indoor_cycling'];
-                return cardioTypes.includes(w.activity) && durationMin > 20;
-            });
-
-            dayLog.ouraFetched = true;
-            hosSaveDayLog(dateStr, dayLog);
-        }
-
-        // --- Recalculate month from logs ---
-        function hosRecalculateMonth() {
-            const currentMonth = new Date().toISOString().slice(0, 7);
-            const log = hosGetLog();
-            let monthTotal = 0;
-
-            Object.keys(log).forEach(dateStr => {
-                if (dateStr.startsWith(currentMonth)) {
-                    const result = calculateDayValue(log[dateStr]);
-                    monthTotal += result.net;
-                }
-            });
-
-            const balance = hosGetBalance();
-            balance.currentMonth = Math.round(monthTotal * 100) / 100;
-            hosSave('healthos_balance', balance);
-        }
-
-        // --- State ---
-        let currentHOSTab = 'dashboard';
-        let currentHOSDate = new Date().toISOString().split('T')[0];
-
-        // --- Tab switching ---
-        document.querySelectorAll('#healthOSTabs .consumption-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                currentHOSTab = tab.dataset.hostab;
-                renderHealthOS();
-            });
-        });
-
-        // --- Main render ---
-        function renderHealthOS() {
-            hosCheckMonthReset();
-
-            document.querySelectorAll('#healthOSTabs .consumption-tab').forEach(tab => {
-                tab.classList.toggle('active', tab.dataset.hostab === currentHOSTab);
-            });
-
-            document.getElementById('healthOSDashboard').style.display = currentHOSTab === 'dashboard' ? 'block' : 'none';
-            document.getElementById('healthOSDailyLog').style.display = currentHOSTab === 'dailylog' ? 'block' : 'none';
-            document.getElementById('healthOSWishlist').style.display = currentHOSTab === 'wishlist' ? 'block' : 'none';
-
-            if (currentHOSTab === 'dashboard') renderHOSDashboard();
-            else if (currentHOSTab === 'dailylog') renderHOSDailyLog();
-            else if (currentHOSTab === 'wishlist') renderHOSWishlist();
-        }
-
-        // --- Dashboard ---
-        function renderHOSDashboard() {
-            hosRecalculateMonth();
-            const balance = hosGetBalance();
-            const pct = Math.min(100, (balance.currentMonth / HOS_MONTHLY_TARGET) * 100);
-            const now = new Date();
-            const monthLabel = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-            // 7-day strip data
-            const stripDays = [];
-            for (let i = 6; i >= 0; i--) {
-                const d = new Date();
-                d.setDate(d.getDate() - i);
-                const ds = d.toISOString().split('T')[0];
-                const dayLog = hosGetDayLog(ds);
-                fetchOuraForDate(ds);
-                const result = calculateDayValue(dayLog);
-                stripDays.push({
-                    date: d,
-                    dateStr: ds,
-                    net: result.net,
-                    breakdown: result.breakdown,
-                    isToday: i === 0
-                });
-            }
-
-            const container = document.getElementById('healthOSDashboard');
-            container.innerHTML = `
-                <div class="card">
-                    <div class="card-body healthos-hero">
-                        <div class="healthos-hero-label">${monthLabel}</div>
-                        <div class="healthos-hero-amount">$${balance.currentMonth.toFixed(2)}</div>
-                        <div class="healthos-hero-label">saved this month</div>
-                        <div class="healthos-progress-bar">
-                            <div class="healthos-progress-fill" style="width: ${pct}%"></div>
-                        </div>
-                        <div class="healthos-progress-label">
-                            <span>$0</span>
-                            <span>$${HOS_MONTHLY_TARGET.toFixed(2)} target</span>
-                        </div>
-                        <div class="healthos-hero-subtitle">Your routine protects against $${HOS_LIFETIME_TOTAL.toLocaleString()} in expected lifetime healthcare costs</div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#128197; Last 7 Days</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="healthos-day-strip">
-                            ${stripDays.map(sd => {
-                                const cls = sd.net >= 0 ? 'positive' : 'negative';
-                                const dayLabel = sd.date.toLocaleDateString('en-US', { weekday: 'short' });
-                                const dateLabel = sd.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                                const icons = sd.breakdown.filter(b => b.type === 'positive').map(b => {
-                                    if (b.label.includes('Cardio')) return '\u{1F6B4}';
-                                    if (b.label.includes('Strength')) return '\u{1F4AA}';
-                                    if (b.label.includes('breakfast') || b.label.includes('lunch') || b.label.includes('dinner')) return '\u{1F957}';
-                                    if (b.label.includes('Sleep')) return '\u{1F634}';
-                                    if (b.label.includes('Steps')) return '\u{1F6B6}';
-                                    return '';
-                                }).filter(Boolean).join('');
-                                return `
-                                    <div class="healthos-day-card ${cls} ${sd.isToday ? 'today' : ''}" onclick="hosViewDay('${sd.dateStr}')">
-                                        <div class="healthos-day-card-date">${dayLabel}<br>${dateLabel}</div>
-                                        <div class="healthos-day-card-amount ${cls}">${sd.net >= 0 ? '+' : ''}$${sd.net.toFixed(2)}</div>
-                                        <div class="healthos-day-card-icons">${icons}</div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header" style="cursor: pointer;" onclick="hosToggleConditions()">
-                        <div class="card-title">&#129657; Condition Breakdown</div>
-                        <span id="hosConditionToggle" style="color: var(--text-muted); font-size: 0.85rem;">Show</span>
-                    </div>
-                    <div class="card-body" id="hosConditionSection" style="display: none;">
-                        <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); margin-bottom: 0.25rem;">
-                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">CONDITION</span>
-                            <div style="display: flex;">
-                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); width: 80px; text-align: right;">LIFETIME</span>
-                                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); width: 80px; text-align: right;">/MONTH</span>
-                            </div>
-                        </div>
-                        ${HOS_CONDITIONS.map(c => `
-                            <div class="healthos-condition-row">
-                                <span class="healthos-condition-name">${c.name}</span>
-                                <span class="healthos-condition-lifetime">$${c.lifetime.toLocaleString()}</span>
-                                <span class="healthos-condition-monthly">$${c.monthly.toFixed(2)}</span>
-                            </div>
-                        `).join('')}
-                        <div class="healthos-condition-row" style="border-top: 2px solid var(--border); margin-top: 0.25rem; padding-top: 0.5rem; font-weight: 700;">
-                            <span class="healthos-condition-name">Total</span>
-                            <span class="healthos-condition-lifetime">$${HOS_LIFETIME_TOTAL.toLocaleString()}</span>
-                            <span class="healthos-condition-monthly">$${HOS_MONTHLY_TARGET.toFixed(2)}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-body healthos-balance-card">
-                        <div class="healthos-balance-item">
-                            <div class="healthos-balance-label">This Month</div>
-                            <div class="healthos-balance-value">$${balance.currentMonth.toFixed(2)}</div>
-                        </div>
-                        <div class="healthos-balance-item">
-                            <div class="healthos-balance-label">Lifetime Savings</div>
-                            <div class="healthos-balance-value">$${(balance.lifetime + balance.currentMonth).toFixed(2)}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function hosToggleConditions() {
-            const section = document.getElementById('hosConditionSection');
-            const toggle = document.getElementById('hosConditionToggle');
-            const visible = section.style.display !== 'none';
-            section.style.display = visible ? 'none' : 'block';
-            toggle.textContent = visible ? 'Show' : 'Hide';
-        }
-
-        function hosViewDay(dateStr) {
-            currentHOSDate = dateStr;
-            currentHOSTab = 'dailylog';
-            renderHealthOS();
-        }
-
-        // --- Daily Log ---
-        function renderHOSDailyLog() {
-            const dateStr = currentHOSDate;
-            fetchOuraForDate(dateStr);
-            const dayLog = hosGetDayLog(dateStr);
-            const result = calculateDayValue(dayLog);
-
-            const dateObj = new Date(dateStr + 'T00:00:00');
-            const dateLabel = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-            const isToday = dateStr === new Date().toISOString().split('T')[0];
-
-            const container = document.getElementById('healthOSDailyLog');
-            container.innerHTML = `
-                <div class="healthos-date-nav">
-                    <button class="healthos-date-nav-btn" onclick="hosNavDate(-1)">&#9664;</button>
-                    <div class="healthos-date-label">${dateLabel}</div>
-                    <button class="healthos-date-nav-btn" onclick="hosNavDate(1)">&#9654;</button>
-                    ${!isToday ? '<button class="healthos-date-nav-btn" onclick="hosNavToday()">Today</button>' : ''}
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="healthos-live-total ${result.net >= 0 ? 'positive' : 'negative'}">
-                            ${result.net >= 0 ? '+' : ''}$${result.net.toFixed(2)}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#128141; Oura Data</div>
-                        ${dayLog.ouraFetched ? '<span style="font-size: 0.75rem; color: var(--forest);">&#10003; Synced</span>' : '<span style="font-size: 0.75rem; color: var(--text-muted);">No data</span>'}
-                    </div>
-                    <div class="card-body">
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#128564; Sleep Score</span>
-                            <span>
-                                <span class="healthos-oura-value">${dayLog.sleepScore || '—'}</span>
-                                ${dayLog.sleepScore ? `<span class="healthos-oura-dollar">+$${dayLog.sleepScore >= 85 ? HOS_SLEEP_85_PLUS.toFixed(2) : dayLog.sleepScore >= 70 ? HOS_SLEEP_70_84.toFixed(2) : dayLog.sleepScore >= 60 ? HOS_SLEEP_60_69.toFixed(2) : '0.00'}</span>` : ''}
-                            </span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#128164; Sleep Duration</span>
-                            <span class="healthos-oura-value">${dayLog.sleepDuration ? dayLog.sleepDuration.toFixed(1) + 'h' : '—'}</span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#9889; Activity Score</span>
-                            <span class="healthos-oura-value">${dayLog.activityScore || '—'}</span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#128694; Steps</span>
-                            <span>
-                                <span class="healthos-oura-value">${dayLog.steps ? dayLog.steps.toLocaleString() : '—'}</span>
-                                ${dayLog.steps >= 8000 ? `<span class="healthos-oura-dollar">+$${HOS_STEPS_8K_PLUS.toFixed(2)}</span>` : dayLog.steps >= 5000 ? `<span class="healthos-oura-dollar">+$${HOS_STEPS_5K_PLUS.toFixed(2)}</span>` : ''}
-                            </span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#128147; HRV</span>
-                            <span>
-                                <span class="healthos-oura-value">${dayLog.hrv || '—'}</span>
-                                ${dayLog.hrv >= 50 ? `<span class="healthos-oura-dollar">+$${HOS_HRV_50_PLUS.toFixed(2)}</span>` : ''}
-                            </span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#128170; Readiness</span>
-                            <span>
-                                <span class="healthos-oura-value">${dayLog.stressScore || '—'}</span>
-                                ${dayLog.stressScore >= 70 ? `<span class="healthos-oura-dollar">+$${HOS_LOW_STRESS_VALUE.toFixed(2)}</span>` : ''}
-                            </span>
-                        </div>
-                        <div class="healthos-oura-row">
-                            <span class="healthos-oura-label">&#127947; Cardio Detected</span>
-                            <span class="healthos-oura-value">${dayLog.cardioDetected ? '&#10003; Yes' : '&#10007; No'}</span>
-                        </div>
-                        ${!dayLog.cardioDetected ? `
-                            <div style="margin-top: 0.5rem;">
-                                <button class="healthos-toggle ${dayLog.manualCardio ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'manualCardio')" style="font-size: 0.85rem;">
-                                    <span class="healthos-toggle-icon">&#127947;</span>
-                                    <span class="healthos-toggle-label">Manual cardio override</span>
-                                    <span class="healthos-toggle-value">+$${HOS_CARDIO_VALUE.toFixed(2)}</span>
-                                </button>
-                            </div>
-                        ` : ''}
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#10024; Good Habits</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="healthos-toggle-grid">
-                            <button class="healthos-toggle ${dayLog.strengthTraining ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'strengthTraining')">
-                                <span class="healthos-toggle-icon">&#128170;</span>
-                                <span class="healthos-toggle-label">Strength</span>
-                                <span class="healthos-toggle-value">+$${HOS_STRENGTH_VALUE.toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle ${dayLog.healthyBreakfast ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyBreakfast')">
-                                <span class="healthos-toggle-icon">&#127749;</span>
-                                <span class="healthos-toggle-label">Healthy Breakfast</span>
-                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_BREAKFAST.toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle ${dayLog.healthyLunch ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyLunch')">
-                                <span class="healthos-toggle-icon">&#129367;</span>
-                                <span class="healthos-toggle-label">Healthy Lunch</span>
-                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_LUNCH.toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle ${dayLog.healthyDinner ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'healthyDinner')">
-                                <span class="healthos-toggle-icon">&#127869;</span>
-                                <span class="healthos-toggle-label">Healthy Dinner</span>
-                                <span class="healthos-toggle-value">+$${HOS_HEALTHY_DINNER.toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle ${dayLog.omega3 ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'omega3')">
-                                <span class="healthos-toggle-icon">&#128031;</span>
-                                <span class="healthos-toggle-label">Omega-3</span>
-                                <span class="healthos-toggle-value">+$${HOS_OMEGA3_VALUE.toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle ${dayLog.hydration ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'hydration')">
-                                <span class="healthos-toggle-icon">&#128167;</span>
-                                <span class="healthos-toggle-label">Hydration Goal</span>
-                                <span class="healthos-toggle-value">+$${HOS_HYDRATION_VALUE.toFixed(2)}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#9888; Setbacks</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="healthos-toggle-grid">
-                            <button class="healthos-toggle negative ${dayLog.friedFood ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'friedFood')">
-                                <span class="healthos-toggle-icon">&#127839;</span>
-                                <span class="healthos-toggle-label">Fried Food</span>
-                                <span class="healthos-toggle-value">$${Math.abs(HOS_FRIED_FOOD).toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle negative ${dayLog.processedMeat ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'processedMeat')">
-                                <span class="healthos-toggle-icon">&#129385;</span>
-                                <span class="healthos-toggle-label">Processed Meat</span>
-                                <span class="healthos-toggle-value">$${Math.abs(HOS_PROCESSED_MEAT).toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle negative ${dayLog.sugaryDrink ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'sugaryDrink')">
-                                <span class="healthos-toggle-icon">&#129380;</span>
-                                <span class="healthos-toggle-label">Sugary Drink</span>
-                                <span class="healthos-toggle-value">$${Math.abs(HOS_SUGARY_DRINK).toFixed(2)}</span>
-                            </button>
-                            <button class="healthos-toggle negative ${dayLog.unhealthySnack ? 'active' : ''}" onclick="hosToggle('${dateStr}', 'unhealthySnack')">
-                                <span class="healthos-toggle-icon">&#127851;</span>
-                                <span class="healthos-toggle-label">Unhealthy Snack</span>
-                                <span class="healthos-toggle-value">$${Math.abs(HOS_UNHEALTHY_SNACK).toFixed(2)}</span>
-                            </button>
-                        </div>
-                        <div style="margin-top: 0.5rem;">
-                            <div class="healthos-section-label">Alcohol</div>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div class="healthos-counter">
-                                    <button class="healthos-counter-btn" onclick="hosAlcohol('${dateStr}', -1)">&#8722;</button>
-                                    <span class="healthos-counter-num">${dayLog.alcohol || 0}</span>
-                                    <button class="healthos-counter-btn" onclick="hosAlcohol('${dateStr}', 1)">+</button>
-                                </div>
-                                <span style="font-size: 0.85rem; color: var(--text-muted);">drinks</span>
-                                ${dayLog.alcohol > 0 ? `<span style="font-size: 0.85rem; color: var(--red-soft); font-weight: 600;">-$${(Math.abs(HOS_ALCOHOL_PER_DRINK) * dayLog.alcohol).toFixed(2)}</span>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#128203; Breakdown</div>
-                    </div>
-                    <div class="card-body">
-                        ${result.breakdown.length > 0 ? result.breakdown.map(b => `
-                            <div class="healthos-line-item">
-                                <span>${b.label}</span>
-                                <span class="healthos-line-item-value ${b.type}">${b.value >= 0 ? '+' : ''}$${Math.abs(b.value).toFixed(2)}</span>
-                            </div>
-                        `).join('') : '<div class="empty-state"><p>No activity logged yet</p></div>'}
-                    </div>
-                </div>
-            `;
-        }
-
-        function hosToggle(dateStr, field) {
-            const dayLog = hosGetDayLog(dateStr);
-            dayLog[field] = !dayLog[field];
-            hosSaveDayLog(dateStr, dayLog);
-            hosRecalculateMonth();
-            renderHOSDailyLog();
-        }
-
-        function hosAlcohol(dateStr, delta) {
-            const dayLog = hosGetDayLog(dateStr);
-            dayLog.alcohol = Math.max(0, (dayLog.alcohol || 0) + delta);
-            hosSaveDayLog(dateStr, dayLog);
-            hosRecalculateMonth();
-            renderHOSDailyLog();
-        }
-
-        function hosNavDate(delta) {
-            const d = new Date(currentHOSDate + 'T00:00:00');
-            d.setDate(d.getDate() + delta);
-            currentHOSDate = d.toISOString().split('T')[0];
-            renderHOSDailyLog();
-        }
-
-        function hosNavToday() {
-            currentHOSDate = new Date().toISOString().split('T')[0];
-            renderHOSDailyLog();
-        }
-
-        // --- Wishlist ---
-        function renderHOSWishlist() {
-            hosRecalculateMonth();
-            const balance = hosGetBalance();
-            const totalAvailable = balance.lifetime + balance.currentMonth;
-            const wishlist = hosGetWishlist();
-            const spent = wishlist.filter(w => w.purchased).reduce((sum, w) => sum + w.price, 0);
-            const available = Math.round((totalAvailable - spent) * 100) / 100;
-
-            const container = document.getElementById('healthOSWishlist');
-            container.innerHTML = `
-                <div class="card">
-                    <div class="card-body healthos-balance-card">
-                        <div class="healthos-balance-item">
-                            <div class="healthos-balance-label">Available to Spend</div>
-                            <div class="healthos-balance-value">$${available.toFixed(2)}</div>
-                        </div>
-                        <div class="healthos-balance-item">
-                            <div class="healthos-balance-label">Earned This Month</div>
-                            <div class="healthos-balance-value">$${balance.currentMonth.toFixed(2)}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 1rem;">
-                    <div class="card-header">
-                        <div class="card-title">&#10133; Add Wishlist Item</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label class="form-label">Item Name</label>
-                            <input type="text" class="input-field" id="hosWishlistName" placeholder="What do you want?">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Price ($)</label>
-                            <input type="number" class="input-field" id="hosWishlistPrice" step="0.01" min="0" placeholder="0.00">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">URL (optional)</label>
-                            <input type="text" class="input-field" id="hosWishlistUrl" placeholder="https://...">
-                        </div>
-                        <button class="btn btn-primary" onclick="hosAddWishlistItem()" style="width: 100%; margin-top: 0.5rem;">Add Item</button>
-                    </div>
-                </div>
-
-                ${wishlist.filter(w => !w.purchased).length > 0 ? `
-                    <div class="healthos-section-label">Wishlist</div>
-                    ${wishlist.filter(w => !w.purchased).map(item => {
-                        const progress = Math.min(100, (available / item.price) * 100);
-                        const ready = available >= item.price;
-                        return `
-                            <div class="healthos-wishlist-card ${ready ? 'ready' : ''}">
-                                <div class="healthos-wishlist-header">
-                                    <span class="healthos-wishlist-name">${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" style="color: inherit; text-decoration: underline;">${escapeHtml(item.name)}</a>` : escapeHtml(item.name)}</span>
-                                    <span class="healthos-wishlist-price">$${item.price.toFixed(2)}</span>
-                                </div>
-                                <div class="healthos-wishlist-progress">
-                                    <div class="healthos-wishlist-progress-fill" style="width: ${progress}%"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span class="healthos-wishlist-status">${ready ? '&#10003; Ready to spend!' : `$${available.toFixed(2)} of $${item.price.toFixed(2)} earned`}</span>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        ${ready ? `<button class="btn btn-primary btn-small" onclick="hosPurchaseItem('${item.id}')">Buy It!</button>` : ''}
-                                        <button class="btn btn-secondary btn-small" onclick="hosRemoveWishlistItem('${item.id}')">Remove</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                ` : ''}
-
-                ${wishlist.filter(w => w.purchased).length > 0 ? `
-                    <div class="healthos-section-label" style="margin-top: 1.5rem;">&#10003; Purchased</div>
-                    ${wishlist.filter(w => w.purchased).map(item => `
-                        <div class="healthos-wishlist-card purchased">
-                            <div class="healthos-wishlist-header">
-                                <span class="healthos-wishlist-name">${escapeHtml(item.name)}</span>
-                                <span class="healthos-wishlist-price">$${item.price.toFixed(2)}</span>
-                            </div>
-                        </div>
-                    `).join('')}
-                ` : ''}
-            `;
-        }
-
-        function hosAddWishlistItem() {
-            const name = document.getElementById('hosWishlistName').value.trim();
-            const price = parseFloat(document.getElementById('hosWishlistPrice').value);
-            const url = document.getElementById('hosWishlistUrl').value.trim();
-
-            if (!name || !price || price <= 0) {
-                showNotification('Please enter a name and price', 'error');
-                return;
-            }
-
-            const wishlist = hosGetWishlist();
-            wishlist.push({
-                id: generateId(),
-                name,
-                price,
-                url: url || null,
-                unlocked: false,
-                purchased: false
-            });
-            hosSave('healthos_wishlist', wishlist);
-            showNotification(`Added "${name}" to wishlist!`, 'success');
-            renderHOSWishlist();
-        }
-
-        function hosPurchaseItem(itemId) {
-            const wishlist = hosGetWishlist();
-            const item = wishlist.find(w => w.id === itemId);
-            if (!item) return;
-
-            const balance = hosGetBalance();
-            const totalAvailable = balance.lifetime + balance.currentMonth;
-            const spent = wishlist.filter(w => w.purchased).reduce((sum, w) => sum + w.price, 0);
-            const available = totalAvailable - spent;
-
-            if (available < item.price) {
-                showNotification('Not enough balance!', 'error');
-                return;
-            }
-
-            item.purchased = true;
-            item.unlocked = true;
-            hosSave('healthos_wishlist', wishlist);
-            showNotification(`Purchased "${item.name}" for $${item.price.toFixed(2)}!`, 'success');
-            renderHOSWishlist();
-        }
-
-        function hosRemoveWishlistItem(itemId) {
-            let wishlist = hosGetWishlist();
-            wishlist = wishlist.filter(w => w.id !== itemId);
-            hosSave('healthos_wishlist', wishlist);
-            renderHOSWishlist();
-        }
-
-        // ==================== NUTRITION REPORT ====================
-        async function loadNutritionReport() {
-            try {
-                const response = await fetch('nutrition-report.json');
-                if (!response.ok) return null;
-                return await response.json();
-            } catch (e) {
-                return null;
-            }
-        }
-
-        function renderNutritionReport(report) {
-            const container = document.getElementById('nutritionReportContent');
-            const dateEl = document.getElementById('nutritionReportDate');
-
-            if (!report || !report.analysis) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <p style="color: var(--text-secondary);">No nutrition report yet</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Log your meals daily and connect GitHub sync in Settings to receive weekly insights every Saturday.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            if (dateEl && report.weekOf) {
-                dateEl.textContent = `Week of ${new Date(report.weekOf).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`;
-            }
-
-            const analysis = report.analysis;
 
             let html = '';
-
-            // What you did well
-            if (analysis.strengths && analysis.strengths.length > 0) {
+            for (const item of items) {
+                if (item.section) {
+                    html += `<div class="protocol-section-label">${item.section}</div>`;
+                    continue;
+                }
+                const isDone = log[item.id] || false;
                 html += `
-                    <div style="margin-bottom: 1.25rem;">
-                        <h4 style="color: var(--forest); margin-bottom: 0.5rem; font-size: 1rem;">What You Did Well</h4>
-                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
-                            ${analysis.strengths.map(s => `<li style="margin-bottom: 0.3rem;">${s}</li>`).join('')}
-                        </ul>
+                    <div class="protocol-item ${isDone ? 'checked' : ''}" onclick="toggleProtocolItem('${item.id}')">
+                        <div class="protocol-check">${isDone ? '&#10003;' : ''}</div>
+                        <div>
+                            <div class="protocol-label">${item.label}</div>
+                            ${item.note ? `<div class="protocol-note">${item.note}</div>` : ''}
+                        </div>
                     </div>
                 `;
             }
-
-            // Areas to improve
-            if (analysis.gaps && analysis.gaps.length > 0) {
-                html += `
-                    <div style="margin-bottom: 1.25rem;">
-                        <h4 style="color: var(--amber); margin-bottom: 0.5rem; font-size: 1rem;">Nutrient Gaps to Address</h4>
-                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
-                            ${analysis.gaps.map(g => `<li style="margin-bottom: 0.3rem;">${g}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-
-            // Meal prep suggestions
-            if (analysis.suggestions && analysis.suggestions.length > 0) {
-                html += `
-                    <div>
-                        <h4 style="color: var(--blue-soft); margin-bottom: 0.5rem; font-size: 1rem;">Meal Prep Suggestions</h4>
-                        <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-primary);">
-                            ${analysis.suggestions.map(s => `<li style="margin-bottom: 0.3rem;">${s}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-
-            container.innerHTML = html || '<p style="color: var(--text-secondary);">Report data incomplete</p>';
+            container.innerHTML = html;
         }
 
         // ==================== INIT ====================
