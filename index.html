@@ -429,14 +429,6 @@
             flex: 1;
         }
 
-        #weeklyMealPlan.mealplan-refresh {
-            animation: mealPlanFade 0.45s ease;
-        }
-
-        @keyframes mealPlanFade {
-            from { opacity: 0.25; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .research-feed-card {
             background: var(--bg-card);
@@ -2975,8 +2967,6 @@
                 meals: [],
                 workouts: []
             },
-            weeklyPlanner: {},
-            groceryList: { items: [] }
         };
 
         function countUniqueDays(arr) {
@@ -3097,14 +3087,6 @@
             return shuffleArray(items).slice(0, Math.min(count, items.length));
         }
 
-        function triggerMealPlanRefresh() {
-            const container = document.getElementById('weeklyMealPlan');
-            if (!container) return;
-            container.classList.remove('mealplan-refresh');
-            void container.offsetWidth;
-            container.classList.add('mealplan-refresh');
-            setTimeout(() => container.classList.remove('mealplan-refresh'), 500);
-        }
 
         // ==================== NOTIFICATIONS ====================
         function showNotification(message, type = 'success') {
@@ -4854,140 +4836,20 @@
 
         function updateSyncStatus() {
             const lastCloudSync = localStorage.getItem('deanOS_lastCloudSync');
-            const lastMealSync = localStorage.getItem('deanOS_lastMealSync');
             const container = document.getElementById('lastSyncInfo');
             if (!container) return;
 
-            let html = '';
-
             if (lastCloudSync) {
                 const date = new Date(lastCloudSync);
-                html += `<p><strong>Last full sync:</strong> ${date.toLocaleString()}</p>`;
-            }
-
-            if (lastMealSync) {
-                const date = new Date(lastMealSync);
-                html += `<p><strong>Last meal sync:</strong> ${date.toLocaleString()}</p>`;
-            }
-
-            if (html) {
-                html += `<p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Use "Sync to Cloud" to backup all data. Use "Restore from Cloud" on new devices.</p>`;
-                container.innerHTML = html;
+                container.innerHTML = `
+                    <p><strong>Last full sync:</strong> ${date.toLocaleString()}</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Use "Sync to Cloud" to backup all data. Use "Restore from Cloud" on new devices.</p>
+                `;
             } else {
                 container.innerHTML = `<p style="color: var(--text-secondary);">No sync performed yet</p>`;
             }
         }
 
-        function getWeekMealLogs() {
-            const logs = [];
-            const today = new Date();
-
-            // Get last 7 days of meal logs
-            for (let i = 1; i <= 7; i++) {
-                const date = new Date(today);
-                date.setDate(date.getDate() - i);
-                const dateStr = date.toISOString().split('T')[0];
-                const log = appData.dailyLogs[dateStr];
-
-                if (log && log.meals) {
-                    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-                    logs.push({
-                        date: dateStr,
-                        day: dayName,
-                        meals: log.meals
-                    });
-                }
-            }
-
-            return logs.reverse(); // Oldest first
-        }
-
-        async function syncMealsToGist() {
-            const settings = getGitHubSettings();
-            if (!settings.token) {
-                return { success: false, error: 'No GitHub token configured' };
-            }
-
-            const mealLogs = getWeekMealLogs();
-            const content = JSON.stringify({
-                updated: new Date().toISOString(),
-                weekOf: new Date().toISOString().split('T')[0],
-                meals: mealLogs
-            }, null, 2);
-
-            try {
-                let gistId = settings.gistId;
-
-                if (!gistId) {
-                    // Create new gist
-                    const createResponse = await fetch('https://api.github.com/gists', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `token ${settings.token}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            description: 'DeanOS Meal Logs - Nutrition Analysis',
-                            public: false,
-                            files: {
-                                'meal-logs.json': { content }
-                            }
-                        })
-                    });
-
-                    if (!createResponse.ok) {
-                        throw new Error(`Failed to create gist: ${createResponse.status}`);
-                    }
-
-                    const gistData = await createResponse.json();
-                    gistId = gistData.id;
-                    localStorage.setItem('deanOS_gistId', gistId);
-                    document.getElementById('gistId').value = gistId;
-                } else {
-                    // Update existing gist
-                    const updateResponse = await fetch(`https://api.github.com/gists/${gistId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': `token ${settings.token}`,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            files: {
-                                'meal-logs.json': { content }
-                            }
-                        })
-                    });
-
-                    if (!updateResponse.ok) {
-                        throw new Error(`Failed to update gist: ${updateResponse.status}`);
-                    }
-                }
-
-                localStorage.setItem('deanOS_lastMealSync', new Date().toISOString());
-                updateSyncStatus();
-                return { success: true, gistId };
-
-            } catch (error) {
-                console.error('Gist sync error:', error);
-                return { success: false, error: error.message };
-            }
-        }
-
-        async function testGistSync() {
-            const statusEl = document.getElementById('syncStatus');
-            statusEl.innerHTML = '<p style="color: var(--blue-soft);">Testing sync...</p>';
-
-            const result = await syncMealsToGist();
-
-            if (result.success) {
-                statusEl.innerHTML = `
-                    <p style="color: var(--forest);">Sync successful!</p>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Gist ID: ${result.gistId}</p>
-                `;
-            } else {
-                statusEl.innerHTML = `<p style="color: var(--red-soft);">Sync failed: ${result.error}</p>`;
-            }
-        }
 
         // ==================== FULL CLOUD SYNC ====================
         async function syncAllDataToCloud() {
@@ -5009,15 +4871,6 @@
 
             const content = JSON.stringify(dataToSync, null, 2);
 
-            const healthosContent = JSON.stringify({
-                updated: new Date().toISOString(),
-                config: hosGetConfig(),
-                balance: hosGetBalance(),
-                log: hosGetLog(),
-                wishlist: hosGetWishlist(),
-                history: hosGetHistory()
-            }, null, 2);
-
             try {
                 let gistId = settings.gistId;
 
@@ -5033,9 +4886,7 @@
                             description: 'DeanOS Data Backup',
                             public: false,
                             files: {
-                                'deanos-data.json': { content },
-                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) },
-                                'healthos-data.json': { content: healthosContent }
+                                'deanos-data.json': { content }
                             }
                         })
                     });
@@ -5058,9 +4909,7 @@
                         },
                         body: JSON.stringify({
                             files: {
-                                'deanos-data.json': { content },
-                                'meal-logs.json': { content: JSON.stringify({ updated: new Date().toISOString(), meals: getWeekMealLogs() }, null, 2) },
-                                'healthos-data.json': { content: healthosContent }
+                                'deanos-data.json': { content }
                             }
                         })
                     });
