@@ -4537,11 +4537,15 @@
             const today = new Date();
             const dayOfMonth = today.getDate();
             const isIronDay = dayOfMonth % 2 === 1; // odd days = iron days
+            const isOmeprazoleDay = dayOfMonth % 2 === 1; // odd days, starting March 23
 
             const items = [];
 
             // Morning — Empty Stomach
             items.push({ section: 'Morning — Empty Stomach' });
+            if (isOmeprazoleDay) {
+                items.push({ id: 'omeprazole', label: 'Omeprazole (every other day taper)' });
+            }
             items.push({ id: 'lmnt_am', label: 'LMNT packet in 16oz water' });
             items.push({ id: 'mag_threonate', label: 'Magnesium Threonate' });
             if (isIronDay) {
