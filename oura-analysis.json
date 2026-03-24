@@ -1,17 +1,18 @@
 {
-  "updated": "2026-03-23T15:50:09.148058+00:00",
-  "data_range": "2026-03-10 to 2026-03-23",
+  "updated": "2026-03-24T15:54:42.600825+00:00",
+  "data_range": "2026-03-11 to 2026-03-24",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-03-10 to 2026-03-23",
+    "date_range": "2026-03-11 to 2026-03-24",
     "sleep": {
-      "avg_score": 84.0,
+      "avg_score": 84.1,
       "avg_hours": 7.5,
       "avg_deep_hours": 1.2,
       "avg_rem_hours": 1.6,
       "avg_efficiency": 87.5,
       "scores": [
+        84,
         87,
         80,
         83,
@@ -24,13 +25,13 @@
         91,
         95,
         82,
-        60,
-        82
+        60
       ]
     },
     "readiness": {
-      "avg_score": 85.6,
+      "avg_score": 85.8,
       "scores": [
+        90,
         91,
         83,
         87,
@@ -43,16 +44,16 @@
         89,
         90,
         91,
-        64,
-        87
+        64
       ]
     },
     "activity": {
-      "avg_score": 91.1,
-      "avg_steps": 8048.6,
-      "avg_calories": 669.3,
+      "avg_score": 90.5,
+      "avg_steps": 7524.9,
+      "avg_calories": 626.5,
       "scores": [
         null,
+        89,
         95,
         95,
         85,
@@ -64,15 +65,15 @@
         88,
         82,
         91,
-        94,
-        97
+        94
       ]
     },
     "heart": {
-      "avg_hrv": 70.1,
-      "avg_resting_hr": 46.0,
+      "avg_hrv": 68.4,
+      "avg_resting_hr": 45.9,
       "hrv_values": [
         null,
+        57,
         77,
         85,
         60,
@@ -84,31 +85,30 @@
         84,
         60,
         53,
-        78,
-        79
+        78
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.1,
       "avg_breath_rate": 14.9
     },
-    "workouts_count": 17
+    "workouts_count": 16
   },
   "analysis": {
-    "overall_assessment": "Your autonomic function appears well-managed with excellent HRV (70.1ms average) and low resting HR (46bpm), indicating good POTS control. However, consistently low deep sleep (1.1-1.6h range) may be limiting immune recovery needed for Hashimoto's management and vestibular compensation capacity.",
+    "overall_assessment": "Your data shows good autonomic stability with HRV averaging 68.4ms and consistent resting HR around 45-49 bpm, suggesting your POTS is well-managed. However, deep sleep is consistently low at 1.1-1.6 hours across most days, which could impair both immune regulation for Hashimoto's and vestibular compensation capacity.",
     "whats_going_well": [
-      "Exceptional HRV stability with readings of 77-85ms on March 21-22, suggesting strong autonomic recovery and POTS management",
-      "Consistently low resting HR averaging 46bpm indicates excellent cardiovascular conditioning and autonomic tone without tachycardia",
-      "Activity levels appropriately graded at 8,048 average steps with good readiness scores (85.6 average), showing proper pacing for POTS"
+      "Excellent HRV stability with values ranging 57-85ms over the week, indicating good autonomic nervous system regulation and POTS control",
+      "Consistent resting HR in the 44-49 bpm range shows no signs of thyroid-induced tachycardia or sympathetic overdrive",
+      "Strong overall sleep scores (79-91/100) and readiness scores (80-91/100) indicate your structured protocol is supporting recovery well"
     ],
     "areas_to_improve": [
-      "Deep sleep consistently low at 1.1h on 4 of 6 tracked days - aim for 1.5-2h minimum to support immune system repair for Hashimoto's",
-      "Sleep duration variability (6.8h to 8.2h) may be destabilizing circadian rhythms - target consistent 7.5-8h window nightly",
-      "March 20th showed HRV drop to 60ms despite good sleep - investigate potential triggers like dietary changes or stress that day"
+      "Deep sleep is critically low at only 1.1 hours on 4 of 7 nights - target interventions to increase deep sleep phases for better immune system repair",
+      "March 22nd shows concerning pattern of lowest deep sleep (1.1h) followed by HRV drop to 57ms on March 23rd, suggesting sleep quality directly impacts next-day autonomic function",
+      "Activity levels vary dramatically (3541 to 10583 steps) without clear pacing strategy - consider more consistent moderate activity to avoid autonomic crashes"
     ],
-    "autonomic_assessment": "Your autonomic nervous system shows excellent stability with high HRV (70.1ms average) and appropriate resting HR responses, indicating your POTS management protocol is highly effective. The HRV variability (58-85ms range) appears to correlate more with sleep quality than orthostatic stress, suggesting good autonomic reserve.",
-    "thyroid_immune_signals": "Temperature deviation averaging -0.1\u00b0C suggests no acute Hashimoto's flare activity currently. However, the consistently insufficient deep sleep (below 1.5h most nights) may be compromising immune system repair cycles needed to manage autoimmune activity.",
-    "vestibular_readiness": "High readiness scores (80-91 range) and stable HRV indicate good capacity for vestibular rehabilitation most days. Only March 18th with lower readiness (80) and reduced sleep might warrant scaling back intensive balance training.",
-    "focus_for_next_week": "Prioritize deep sleep optimization by maintaining consistent 8-hour sleep windows and investigating sleep architecture - consider earlier magnesium glycinate timing or bedroom temperature adjustment to increase deep sleep from current 1.1h average to target 1.5-2h for better Hashimoto's management"
+    "autonomic_assessment": "Your autonomic nervous system appears stable with HRV consistently above 50ms and no concerning resting HR elevations. The correlation between March 22nd's poor deep sleep and March 23rd's lowest HRV (57ms) suggests sleep quality is your primary autonomic regulator right now.",
+    "thyroid_immune_signals": "Temperature deviation averaging -0.1\u00b0C suggests no active thyroid flare, which is positive for Hashimoto's management. However, consistently inadequate deep sleep (well below the optimal 1.5-2 hours) may be compromising immune system repair cycles.",
+    "vestibular_readiness": "High readiness scores (80-91/100) indicate good capacity for vestibular rehab most days. March 22nd's lower readiness (83) following poor sleep suggests scaling back vestibular exercises when deep sleep drops below 1.1 hours.",
+    "focus_for_next_week": "Prioritize sleep optimization strategies to increase deep sleep duration above 1.5 hours nightly - consider adjusting magnesium timing, room temperature, or adding sleep hygiene interventions, as this will benefit all three conditions simultaneously"
   }
 }
