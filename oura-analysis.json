@@ -1,17 +1,18 @@
 {
-  "updated": "2026-03-24T15:54:42.600825+00:00",
-  "data_range": "2026-03-11 to 2026-03-24",
+  "updated": "2026-03-25T15:57:58.852074+00:00",
+  "data_range": "2026-03-12 to 2026-03-25",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-03-11 to 2026-03-24",
+    "date_range": "2026-03-12 to 2026-03-25",
     "sleep": {
-      "avg_score": 84.1,
-      "avg_hours": 7.5,
-      "avg_deep_hours": 1.2,
-      "avg_rem_hours": 1.6,
-      "avg_efficiency": 87.5,
+      "avg_score": 85.4,
+      "avg_hours": 7.7,
+      "avg_deep_hours": 1.3,
+      "avg_rem_hours": 1.7,
+      "avg_efficiency": 87.7,
       "scores": [
+        77,
         84,
         87,
         80,
@@ -24,13 +25,13 @@
         81,
         91,
         95,
-        82,
-        60
+        82
       ]
     },
     "readiness": {
-      "avg_score": 85.8,
+      "avg_score": 86.9,
       "scores": [
+        80,
         90,
         91,
         83,
@@ -43,16 +44,16 @@
         81,
         89,
         90,
-        91,
-        64
+        91
       ]
     },
     "activity": {
-      "avg_score": 90.5,
-      "avg_steps": 7524.9,
-      "avg_calories": 626.5,
+      "avg_score": 90.2,
+      "avg_steps": 7763.4,
+      "avg_calories": 658.2,
       "scores": [
         null,
+        91,
         89,
         95,
         95,
@@ -64,15 +65,15 @@
         93,
         88,
         82,
-        91,
-        94
+        91
       ]
     },
     "heart": {
-      "avg_hrv": 68.4,
+      "avg_hrv": 66.7,
       "avg_resting_hr": 45.9,
       "hrv_values": [
         null,
+        56,
         57,
         77,
         85,
@@ -84,31 +85,14 @@
         71,
         84,
         60,
-        53,
-        78
+        53
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.1,
-      "avg_breath_rate": 14.9
+      "avg_breath_rate": 14.8
     },
-    "workouts_count": 16
+    "workouts_count": 17
   },
-  "analysis": {
-    "overall_assessment": "Your data shows good autonomic stability with HRV averaging 68.4ms and consistent resting HR around 45-49 bpm, suggesting your POTS is well-managed. However, deep sleep is consistently low at 1.1-1.6 hours across most days, which could impair both immune regulation for Hashimoto's and vestibular compensation capacity.",
-    "whats_going_well": [
-      "Excellent HRV stability with values ranging 57-85ms over the week, indicating good autonomic nervous system regulation and POTS control",
-      "Consistent resting HR in the 44-49 bpm range shows no signs of thyroid-induced tachycardia or sympathetic overdrive",
-      "Strong overall sleep scores (79-91/100) and readiness scores (80-91/100) indicate your structured protocol is supporting recovery well"
-    ],
-    "areas_to_improve": [
-      "Deep sleep is critically low at only 1.1 hours on 4 of 7 nights - target interventions to increase deep sleep phases for better immune system repair",
-      "March 22nd shows concerning pattern of lowest deep sleep (1.1h) followed by HRV drop to 57ms on March 23rd, suggesting sleep quality directly impacts next-day autonomic function",
-      "Activity levels vary dramatically (3541 to 10583 steps) without clear pacing strategy - consider more consistent moderate activity to avoid autonomic crashes"
-    ],
-    "autonomic_assessment": "Your autonomic nervous system appears stable with HRV consistently above 50ms and no concerning resting HR elevations. The correlation between March 22nd's poor deep sleep and March 23rd's lowest HRV (57ms) suggests sleep quality is your primary autonomic regulator right now.",
-    "thyroid_immune_signals": "Temperature deviation averaging -0.1\u00b0C suggests no active thyroid flare, which is positive for Hashimoto's management. However, consistently inadequate deep sleep (well below the optimal 1.5-2 hours) may be compromising immune system repair cycles.",
-    "vestibular_readiness": "High readiness scores (80-91/100) indicate good capacity for vestibular rehab most days. March 22nd's lower readiness (83) following poor sleep suggests scaling back vestibular exercises when deep sleep drops below 1.1 hours.",
-    "focus_for_next_week": "Prioritize sleep optimization strategies to increase deep sleep duration above 1.5 hours nightly - consider adjusting magnesium timing, room temperature, or adding sleep hygiene interventions, as this will benefit all three conditions simultaneously"
-  }
+  "analysis": null
 }
