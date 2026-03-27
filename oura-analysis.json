@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-27T15:40:07.315438+00:00",
+  "updated": "2026-03-27T18:12:18.115717+00:00",
   "data_range": "2026-03-14 to 2026-03-27",
   "days_analyzed": 14,
   "summary_stats": {
@@ -94,5 +94,21 @@
     },
     "workouts_count": 18
   },
-  "analysis": null
+  "analysis": {
+    "overall_assessment": "Your data shows generally excellent autonomic stability with strong HRV (67.5ms average) and well-controlled resting HR (46.1 bpm), indicating good POTS management. However, concerning deep sleep deficiency on March 25th (only 0.1 hours) and declining HRV pattern from 85ms to 61ms over the last week suggest your nervous system is under increasing stress, which could impact both Hashimoto's immune regulation and vestibular compensation.",
+    "whats_going_well": [
+      "Excellent HRV baseline at 67.5ms average with peak reading of 85ms on March 21st, indicating strong parasympathetic recovery capacity for POTS management",
+      "Consistently low and stable resting HR averaging 46.1 bpm with minimal daily variation (44-47 bpm most days), suggesting good thyroid hormone stability without tachycardic episodes",
+      "Strong overall sleep efficiency at 87.9% with good duration averaging 7.6 hours, supporting autonomic recovery and immune system regulation"
+    ],
+    "areas_to_improve": [
+      "Address severe deep sleep disruption seen on March 25th (0.1 hours vs 1.2-1.6 hours on better nights) - consider what changed that night and implement consistent sleep hygiene to protect immune recovery time",
+      "Monitor declining HRV trend from 85ms (March 21st) to 61ms (March 26th) - this 28% drop suggests increasing sympathetic dominance that could worsen orthostatic intolerance",
+      "Investigate the RHR spike to 53 bpm on March 27th alongside missing activity data - this could indicate early autonomic decompensation or thyroid fluctuation requiring closer monitoring"
+    ],
+    "autonomic_assessment": "Your HRV shows concerning decline from 85ms to 61ms over 5 days, indicating mounting sympathetic stress that could destabilize POTS symptoms. The consistently low resting HR (44-47 bpm baseline) with recent spike to 53 bpm suggests your autonomic system was well-regulated but may be entering a stress phase. Recovery scores remaining high (80-92) indicate you still have capacity for gentle rehabilitation, but the HRV decline warrants scaling back intensity.",
+    "thyroid_immune_signals": "Temperature deviations averaging -0.1\u00b0C suggest stable thyroid function without inflammatory flares. The severe deep sleep loss on March 25th (0.1 hours) is concerning for immune system recovery, as this is when anti-inflammatory processes peak - insufficient deep sleep could trigger Hashimoto's activity.",
+    "vestibular_readiness": "Readiness scores of 80-92 indicate good capacity for vestibular rehabilitation most days. However, the declining HRV trend suggests your nervous system's compensation capacity is diminishing - consider lighter vestibular exercises on days when HRV drops below 60ms to prevent overwhelming recovery resources.",
+    "focus_for_next_week": "Prioritize deep sleep optimization to address the March 25th disruption and support the declining HRV trend - implement strict sleep hygiene, consider adjusting evening magnesium timing, and monitor for patterns that correlate with poor deep sleep to prevent autonomic decompensation."
+  }
 }

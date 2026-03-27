@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-27T15:40:03.751101+00:00",
+  "updated": "2026-03-27T18:11:59.369436+00:00",
   "start_date": "2025-12-27",
   "end_date": "2026-03-27",
   "days_requested": 90,
@@ -1307,9 +1307,9 @@
         "training_frequency": 100,
         "training_volume": 98
       },
-      "resting_hr": 72,
-      "average_hr": 83,
-      "min_hr": 62,
+      "resting_hr": 71,
+      "average_hr": 74,
+      "min_hr": 64,
       "max_hr": 130,
       "awake_hr": 74,
       "spo2_average": 98.24
