@@ -1,21 +1,10 @@
 {
-  "updated": "2026-03-27T18:11:59.369436+00:00",
-  "start_date": "2025-12-27",
-  "end_date": "2026-03-27",
+  "updated": "2026-03-28T15:19:20.123329+00:00",
+  "start_date": "2025-12-28",
+  "end_date": "2026-03-28",
   "days_requested": 90,
   "days_returned": 91,
   "workouts": [
-    {
-      "date": "2025-12-27",
-      "activity": "walking",
-      "calories": 177.25796508789062,
-      "distance": null,
-      "start_datetime": "2025-12-27T07:43:00.000-08:00",
-      "end_datetime": "2025-12-27T08:17:00.000-08:00",
-      "intensity": "moderate",
-      "label": null,
-      "source": "confirmed"
-    },
     {
       "date": "2025-12-28",
       "activity": "walking",
@@ -1218,36 +1207,75 @@
   ],
   "days": [
     {
+      "date": "2026-03-28",
+      "resting_hr": 54,
+      "average_hr": 77,
+      "min_hr": 46,
+      "max_hr": 106,
+      "awake_hr": 61
+    },
+    {
       "date": "2026-03-27",
-      "sleep_score": 75,
+      "sleep_score": 77,
       "sleep_contributors": {
-        "deep_sleep": 46,
-        "efficiency": 81,
+        "deep_sleep": 43,
+        "efficiency": 90,
         "latency": 67,
-        "rem_sleep": 77,
-        "restfulness": 81,
-        "timing": 82,
-        "total_sleep": 78
+        "rem_sleep": 78,
+        "restfulness": 78,
+        "timing": 85,
+        "total_sleep": 82
       },
-      "readiness_score": 82,
+      "bedtime_start": "2026-03-26T20:38:57.000-10:00",
+      "bedtime_end": "2026-03-27T05:00:15.000-10:00",
+      "total_sleep_seconds": 26400,
+      "deep_sleep_seconds": 2190,
+      "rem_sleep_seconds": 5190,
+      "light_sleep_seconds": 19020,
+      "awake_seconds": 3678,
+      "sleep_efficiency": 88,
+      "average_hrv": 53,
+      "lowest_hr": 47,
+      "average_hr_sleep": 52.375,
+      "average_breath": 14.125,
+      "restless_periods": 164,
+      "readiness_score": 83,
       "temperature_deviation": 0.2,
       "temperature_trend_deviation": 0.02,
       "readiness_contributors": {
         "activity_balance": 82,
         "body_temperature": 89,
-        "hrv_balance": 85,
+        "hrv_balance": 84,
         "previous_day_activity": 81,
-        "previous_night": 65,
-        "recovery_index": 91,
+        "previous_night": 70,
+        "recovery_index": 90,
         "resting_heart_rate": 83,
-        "sleep_balance": 83,
-        "sleep_regularity": 90
+        "sleep_balance": 85,
+        "sleep_regularity": 89
       },
-      "resting_hr": 53,
+      "activity_score": 92,
+      "steps": 13304,
+      "active_calories": 690,
+      "total_calories": 2982,
+      "distance_meters": 12980,
+      "high_activity_seconds": 0,
+      "medium_activity_seconds": 3120,
+      "low_activity_seconds": 20100,
+      "sedentary_seconds": 29040,
+      "inactivity_alerts": 0,
+      "activity_contributors": {
+        "meet_daily_targets": 78,
+        "move_every_hour": 100,
+        "recovery_time": 100,
+        "stay_active": 85,
+        "training_frequency": 100,
+        "training_volume": 98
+      },
+      "resting_hr": 56,
       "average_hr": 77,
-      "min_hr": 47,
-      "max_hr": 154,
-      "awake_hr": 66,
+      "min_hr": 52,
+      "max_hr": 110,
+      "awake_hr": 68,
       "spo2_average": 96.553
     },
     {
@@ -1307,11 +1335,6 @@
         "training_frequency": 100,
         "training_volume": 98
       },
-      "resting_hr": 71,
-      "average_hr": 74,
-      "min_hr": 64,
-      "max_hr": 130,
-      "awake_hr": 74,
       "spo2_average": 98.24
     },
     {
@@ -6505,65 +6528,6 @@
         "training_volume": 97
       },
       "spo2_average": 96.991
-    },
-    {
-      "date": "2025-12-27",
-      "sleep_score": 75,
-      "sleep_contributors": {
-        "deep_sleep": 68,
-        "efficiency": 74,
-        "latency": 91,
-        "rem_sleep": 60,
-        "restfulness": 55,
-        "timing": 100,
-        "total_sleep": 77
-      },
-      "bedtime_start": "2025-12-26T22:35:01.000-08:00",
-      "bedtime_end": "2025-12-27T07:16:14.000-08:00",
-      "total_sleep_seconds": 25470,
-      "deep_sleep_seconds": 3510,
-      "rem_sleep_seconds": 4140,
-      "light_sleep_seconds": 17820,
-      "awake_seconds": 5803,
-      "sleep_efficiency": 81,
-      "average_hrv": 41,
-      "lowest_hr": 48,
-      "average_hr_sleep": 52.125,
-      "average_breath": 15.125,
-      "restless_periods": 257,
-      "readiness_score": 81,
-      "temperature_deviation": 0.14,
-      "temperature_trend_deviation": 0.06,
-      "readiness_contributors": {
-        "activity_balance": 88,
-        "body_temperature": 93,
-        "hrv_balance": 71,
-        "previous_day_activity": 80,
-        "previous_night": 70,
-        "recovery_index": 100,
-        "resting_heart_rate": 82,
-        "sleep_balance": 83,
-        "sleep_regularity": 79
-      },
-      "activity_score": 75,
-      "steps": 8338,
-      "active_calories": 406,
-      "total_calories": 2639,
-      "distance_meters": 7003,
-      "high_activity_seconds": 0,
-      "medium_activity_seconds": 2760,
-      "low_activity_seconds": 11340,
-      "sedentary_seconds": 36240,
-      "inactivity_alerts": 1,
-      "activity_contributors": {
-        "meet_daily_targets": 25,
-        "move_every_hour": 95,
-        "recovery_time": 100,
-        "stay_active": 69,
-        "training_frequency": 96,
-        "training_volume": 96
-      },
-      "spo2_average": 97.5
     }
   ]
 }
