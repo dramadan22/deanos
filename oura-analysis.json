@@ -1,17 +1,18 @@
 {
-  "updated": "2026-03-30T15:58:22.459681+00:00",
-  "data_range": "2026-03-17 to 2026-03-30",
+  "updated": "2026-03-31T15:57:06.172883+00:00",
+  "data_range": "2026-03-18 to 2026-03-31",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-03-17 to 2026-03-30",
+    "date_range": "2026-03-18 to 2026-03-31",
     "sleep": {
-      "avg_score": 83.4,
-      "avg_hours": 7.5,
-      "avg_deep_hours": 1.2,
-      "avg_rem_hours": 1.6,
-      "avg_efficiency": 87.2,
+      "avg_score": 82.8,
+      "avg_hours": 7.4,
+      "avg_deep_hours": 1.1,
+      "avg_rem_hours": 1.5,
+      "avg_efficiency": 86.7,
       "scores": [
+        null,
         77,
         84,
         83,
@@ -24,13 +25,13 @@
         83,
         85,
         91,
-        79,
-        90
+        79
       ]
     },
     "readiness": {
-      "avg_score": 86.1,
+      "avg_score": 85.9,
       "scores": [
+        null,
         80,
         88,
         88,
@@ -43,16 +44,16 @@
         87,
         87,
         88,
-        80,
-        89
+        80
       ]
     },
     "activity": {
       "avg_score": 90.2,
-      "avg_steps": 8793.5,
-      "avg_calories": 648.2,
+      "avg_steps": 8931.5,
+      "avg_calories": 632.6,
       "scores": [
         null,
+        91,
         96,
         93,
         92,
@@ -64,15 +65,15 @@
         95,
         85,
         88,
-        88,
-        92
+        88
       ]
     },
     "heart": {
-      "avg_hrv": 63.5,
-      "avg_resting_hr": 45.9,
+      "avg_hrv": 63.2,
+      "avg_resting_hr": 45.8,
       "hrv_values": [
         null,
+        54,
         53,
         60,
         53,
@@ -84,31 +85,30 @@
         85,
         60,
         72,
-        71,
-        58
+        71
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
       "avg_breath_rate": 14.6
     },
-    "workouts_count": 13
+    "workouts_count": 15
   },
   "analysis": {
-    "overall_assessment": "Your autonomic function shows concerning instability with HRV fluctuating between 53-63ms and notable deep sleep deficits on multiple days (March 25: only 0.1h, March 27: 0.6h). The stable temperature deviation at 0.0\u00b0C suggests your Hashimoto's is well-controlled, but the inconsistent deep sleep could compromise immune regulation and vestibular compensation.",
+    "overall_assessment": "Your autonomic function shows promising stability with strong average HRV (63.2 ms) and well-controlled resting HR (45.8 bpm), suggesting effective POTS management. However, concerning deep sleep deficits (particularly March 25th with only 0.1 hours and March 27th with 0.6 hours) may be compromising immune regulation for Hashimoto's and limiting vestibular compensation capacity.",
     "whats_going_well": [
-      "Excellent resting heart rate averaging 45.9 bpm with stable range (43-51 bpm), indicating good baseline autonomic control for POTS management",
-      "Temperature deviation holding steady at 0.0\u00b0C throughout the period suggests your thyroid is stable and supplement protocol is effectively managing Hashimoto's inflammation",
-      "Strong activity consistency with 13 workouts completed and good step counts (6400-14589 daily) without triggering autonomic crashes, showing appropriate activity pacing"
+      "Excellent autonomic stability with average resting HR of 45.8 bpm indicating no tachycardic episodes and good POTS control",
+      "Strong overall sleep efficiency at 86.7% with consistently good sleep scores (77-90/100) showing your protocol supports restorative sleep",
+      "Well-graded activity levels averaging 8,931 steps with 15 workouts completed without apparent autonomic crashes, suggesting appropriate pacing for POTS"
     ],
     "areas_to_improve": [
-      "Deep sleep is critically inconsistent - March 25 only achieved 0.1 hours and March 27 only 0.6 hours, both well below the therapeutic 1+ hour threshold needed for immune repair and autonomic recovery",
-      "HRV shows concerning volatility (53ms on March 27/29 vs 63ms on March 25), suggesting sympathetic overdrive episodes that need stabilization through improved sleep consistency",
-      "March 30 data is incomplete preventing full autonomic assessment - ensure consistent ring wearing and charging to maintain monitoring continuity"
+      "Deep sleep deficiency is critical - you had severely inadequate deep sleep on March 25th (0.1h) and March 27th (0.6h) when you need 1.5-2+ hours for immune system repair in Hashimoto's",
+      "HRV shows concerning decline pattern from 63 (March 25th) to 53-54 (March 29th-30th) following poor deep sleep nights, indicating autonomic stress accumulation",
+      "Temperature deviation data is incomplete in the summary, but monitoring is essential to detect Hashimoto's flare activity - ensure consistent nighttime ring wear"
     ],
-    "autonomic_assessment": "Your HRV averaging 63.5ms is reasonable but the 10-point swings (53-63ms) indicate autonomic instability typical of POTS flares. The excellent resting HR control (43-51 bpm range) suggests your daily protocol is preventing tachycardic episodes, but the HRV volatility correlates directly with poor deep sleep nights, indicating sleep quality is your primary autonomic stressor.",
-    "thyroid_immune_signals": "Temperature stability at 0.0\u00b0C deviation indicates well-controlled Hashimoto's with no acute flare activity. However, the severely inadequate deep sleep on March 25 (0.1h) and March 27 (0.6h) could compromise immune system repair and potentially trigger future autoimmune activation.",
-    "vestibular_readiness": "Readiness scores of 80-92 indicate good capacity for vestibular rehab most days, with March 25 and March 30 (both 80) being marginal days where gentler balance training would be appropriate. The HRV dips on March 27/29 suggest scaling back complex gaze stabilization on those days in favor of basic exercises.",
-    "focus_for_next_week": "Prioritize deep sleep optimization - investigate sleep hygiene factors causing the severe deep sleep deficits (0.1-0.6h on multiple nights) as this is destabilizing your autonomic function and could compromise both POTS control and immune regulation."
+    "autonomic_assessment": "Your autonomic nervous system shows good baseline stability with average HRV of 63.2 ms and resting HR of 45.8 bpm, indicating effective POTS management without sympathetic overdrive. However, the HRV decline from 63 to 53-54 following poor deep sleep nights (March 25th, 27th) demonstrates how sleep deficits directly impact autonomic recovery capacity.",
+    "thyroid_immune_signals": "The severe deep sleep deficits on March 25th (0.1h) and March 27th (0.6h) are concerning for Hashimoto's management, as immune system repair occurs primarily during deep sleep phases. Temperature deviation averaging -0.0\u00b0C suggests stable thyroid function currently, but more granular daily tracking is needed.",
+    "vestibular_readiness": "Your consistently strong readiness scores (80-92) and stable HRV indicate good capacity for vestibular rehab exercises most days. However, scale back vestibular training intensity on days following poor deep sleep (like March 26th and 28th) when nervous system recovery is compromised.",
+    "focus_for_next_week": "Prioritize deep sleep optimization by investigating what disrupted sleep architecture on March 25th and 27th - consider earlier magnesium glycinate timing, room temperature adjustment, or stress reduction techniques, as inadequate deep sleep is undermining both Hashimoto's immune regulation and autonomic recovery."
   }
 }
