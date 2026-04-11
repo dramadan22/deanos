@@ -4541,41 +4541,66 @@
 
             const items = [];
 
-            // Morning — Empty Stomach
-            items.push({ section: 'Morning — Empty Stomach' });
+            // Morning — empty stomach
+            items.push({ section: 'Morning — empty stomach' });
             if (isOmeprazoleDay) {
-                items.push({ id: 'omeprazole', label: 'Omeprazole (every other day taper)' });
+                items.push({ id: 'omeprazole', label: 'Omeprazole', note: 'Every other day taper' });
             }
-            items.push({ id: 'lmnt_am', label: 'LMNT packet in 16oz water' });
+            items.push({ id: 'lmnt_am', label: 'LMNT in 16oz water' });
+            items.push({ id: 'mag_threonate', label: 'Magnesium Threonate' });
+            items.push({ id: 'nac_am', label: 'NAC' });
             if (isIronDay) {
-                items.push({ id: 'iron', label: 'Iron Bisglycinate + Vitamin C', note: 'Iron day' });
+                items.push({ id: 'iron', label: 'Iron Bisglycinate + Vitamin C', note: 'Iron day only' });
             }
 
-            // Before Breakfast
-            items.push({ section: 'Before Breakfast' });
-            items.push({ id: 'dgl_am', label: 'DGL Chewable (15-20 min before eating)' });
+            // 15 min before breakfast — empty stomach
+            items.push({ section: '15 min before breakfast — empty stomach' });
+            items.push({ id: 'enzymes_bf', label: 'Digestive Enzymes Ultra with Betaine HCL' });
+            items.push({ id: 'dgl_bf', label: 'DGL Chewable' });
+
+            // With breakfast — with food
+            items.push({ section: 'With breakfast — with food' });
             if (!isIronDay) {
-                items.push({ id: 'zinc_am', label: 'Zinc-Carnosine (1 capsule)' });
+                items.push({ id: 'zinc_bf', label: 'Zinc-Carnosine' });
             } else {
-                items.push({ id: 'zinc_am', label: 'Zinc-Carnosine — skip (iron day, take at lunch)', note: 'Iron day' });
+                items.push({ id: 'zinc_bf', label: 'Zinc-Carnosine — skip', note: 'Iron day' });
             }
 
-            // With Lunch
-            items.push({ section: 'With Lunch' });
-            items.push({ id: 'dgl_lunch', label: 'DGL Chewable (15-20 min before eating)' });
-            items.push({ id: 'selenium', label: 'Selenium (Thorne)' });
+            // 15 min before lunch — empty stomach
+            items.push({ section: '15 min before lunch — empty stomach' });
+            items.push({ id: 'enzymes_lunch', label: 'Digestive Enzymes Ultra with Betaine HCL' });
+            items.push({ id: 'dgl_lunch', label: 'DGL Chewable' });
+
+            // With lunch — with food
+            items.push({ section: 'With lunch — with food' });
+            items.push({ id: 'selenium', label: 'Selenium' });
             items.push({ id: 'omega3', label: 'Omega-3 (EPA/DHA)' });
+            items.push({ id: 'vit_d3', label: 'Vitamin D3' });
+            items.push({ id: 'vit_k2', label: 'Vitamin K2 (MK-7)' });
+            items.push({ id: 'zinc_lunch', label: 'Zinc-Carnosine' });
+            items.push({ id: 'curcumin_lunch', label: 'Curcumin' });
+
+            // Afternoon — no food required
+            items.push({ section: 'Afternoon — no food required' });
+            items.push({ id: 'lmnt_pm', label: 'Second LMNT packet (if active or on feet)' });
+            items.push({ id: 'brazil_nuts', label: '2-3 Brazil nuts' });
+
+            // 15 min before dinner — empty stomach
+            items.push({ section: '15 min before dinner — empty stomach' });
+            items.push({ id: 'nac_pm', label: 'NAC' });
+            items.push({ id: 'enzymes_dinner', label: 'Digestive Enzymes Ultra with Betaine HCL' });
+            items.push({ id: 'dgl_dinner', label: 'DGL Chewable' });
+
+            // With dinner — with food
+            items.push({ section: 'With dinner — with food' });
+            items.push({ id: 'curcumin_dinner', label: 'Curcumin' });
             if (isIronDay) {
-                items.push({ id: 'zinc_lunch', label: 'Zinc-Carnosine (1 capsule)', note: 'Moved from breakfast — iron day' });
+                items.push({ id: 'zinc_dinner', label: 'Zinc-Carnosine', note: 'Iron days only' });
             }
 
-            // Afternoon
-            items.push({ section: 'Afternoon' });
-            items.push({ id: 'lmnt_pm', label: 'Second LMNT packet (if active)' });
-
-            // Before Dinner
-            items.push({ section: 'Before Dinner' });
-            items.push({ id: 'dgl_dinner', label: 'DGL Chewable (15-20 min before eating)' });
+            // Before bed — empty stomach
+            items.push({ section: 'Before bed — empty stomach' });
+            items.push({ id: 'mag_glycinate', label: 'Magnesium Glycinate' });
 
             // Exercise — Daily Non-Negotiables
             items.push({ section: 'Exercise — Daily' });
