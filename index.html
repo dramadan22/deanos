@@ -2134,7 +2134,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">&#128141; Oura Ring Data</div>
-                        <button class="btn btn-secondary" onclick="syncOuraData()" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Sync</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-secondary" onclick="downloadOuraCSV()" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Download CSV</button>
+                            <button class="btn btn-secondary" onclick="syncOuraData()" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Sync</button>
+                        </div>
                     </div>
                     <div class="card-body" id="ouraDataDisplay">
                         <div class="empty-state">
@@ -3994,6 +3997,90 @@
             const hours = Math.floor(seconds / 3600);
             const mins = Math.floor((seconds % 3600) / 60);
             return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+        }
+
+        async function downloadOuraCSV() {
+            let data;
+            const stored = localStorage.getItem('deanOS_ouraData');
+            if (stored) {
+                try { data = JSON.parse(stored); } catch (e) { data = null; }
+            }
+            if (!data || !data.days || data.days.length === 0) {
+                try {
+                    const response = await fetch('oura-data.json', { cache: 'no-store' });
+                    if (!response.ok) throw new Error('not found');
+                    data = await response.json();
+                } catch (e) {
+                    showNotification('No Oura data loaded. Run Sync first.', 'error');
+                    return;
+                }
+            }
+
+            const days = data.days || [];
+            if (days.length === 0) {
+                showNotification('No Oura data to export', 'error');
+                return;
+            }
+
+            const baseCols = [
+                'date',
+                'sleep_score', 'readiness_score', 'activity_score',
+                'total_sleep_seconds', 'deep_sleep_seconds', 'rem_sleep_seconds', 'light_sleep_seconds', 'awake_seconds',
+                'sleep_efficiency', 'bedtime_start', 'bedtime_end',
+                'resting_hr', 'lowest_hr', 'average_hr', 'average_hr_sleep', 'min_hr', 'max_hr', 'awake_hr',
+                'average_hrv', 'average_breath', 'spo2_average',
+                'temperature_deviation', 'temperature_trend_deviation',
+                'steps', 'active_calories', 'total_calories', 'distance_meters',
+                'sedentary_seconds', 'low_activity_seconds', 'medium_activity_seconds', 'high_activity_seconds',
+                'inactivity_alerts', 'restless_periods',
+            ];
+            const sleepContribCols = ['deep_sleep', 'efficiency', 'latency', 'rem_sleep', 'restfulness', 'timing', 'total_sleep'];
+            const readinessContribCols = ['activity_balance', 'body_temperature', 'hrv_balance', 'previous_day_activity', 'previous_night', 'recovery_index', 'resting_heart_rate', 'sleep_balance', 'sleep_regularity'];
+            const activityContribKeys = new Set();
+            for (const d of days) {
+                if (d.activity_contributors) Object.keys(d.activity_contributors).forEach(k => activityContribKeys.add(k));
+            }
+            const activityContribCols = [...activityContribKeys].sort();
+
+            const headers = [
+                ...baseCols,
+                ...sleepContribCols.map(k => 'sleep_c_' + k),
+                ...readinessContribCols.map(k => 'readiness_c_' + k),
+                ...activityContribCols.map(k => 'activity_c_' + k),
+            ];
+
+            const escape = (v) => {
+                if (v === null || v === undefined) return '';
+                const s = String(v);
+                if (s.includes(',') || s.includes('"') || s.includes('\n')) {
+                    return '"' + s.replace(/"/g, '""') + '"';
+                }
+                return s;
+            };
+
+            const sortedDays = [...days].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+            const rows = [headers.join(',')];
+            for (const d of sortedDays) {
+                const row = [];
+                for (const col of baseCols) row.push(escape(d[col]));
+                for (const k of sleepContribCols) row.push(escape(d.sleep_contributors ? d.sleep_contributors[k] : undefined));
+                for (const k of readinessContribCols) row.push(escape(d.readiness_contributors ? d.readiness_contributors[k] : undefined));
+                for (const k of activityContribCols) row.push(escape(d.activity_contributors ? d.activity_contributors[k] : undefined));
+                rows.push(row.join(','));
+            }
+
+            const csv = rows.join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const today = new Date().toISOString().slice(0, 10);
+            a.download = `oura-data-${today}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showNotification(`Exported ${sortedDays.length} days to CSV`, 'success');
         }
 
         function renderOuraData() {
