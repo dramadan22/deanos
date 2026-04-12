@@ -2819,6 +2819,12 @@
             return getLogByDate(today);
         }
 
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
         function normalizeUrl(url) {
             if (!url) return '';
             const trimmed = url.trim();
@@ -4629,8 +4635,13 @@
                 `;
                 showNotification('Data restored from cloud!', 'success');
 
-                // Refresh all views
+                // Refresh current view
                 renderMorning();
+                const activeView = document.querySelector('.module-view.active');
+                if (activeView) {
+                    const viewName = activeView.id.replace('View', '');
+                    showView(viewName);
+                }
 
             } catch (error) {
                 console.error('Cloud restore error:', error);
