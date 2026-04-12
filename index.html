@@ -2715,9 +2715,23 @@
             const stored = localStorage.getItem('deanOSData');
             if (stored) {
                 const data = JSON.parse(stored);
-                return { ...DEFAULT_DATA, ...data, user: { ...DEFAULT_DATA.user, ...data.user } };
+                return mergeWithDefaults(data);
             }
             return JSON.parse(JSON.stringify(DEFAULT_DATA));
+        }
+
+        function mergeWithDefaults(data) {
+            const merged = { ...DEFAULT_DATA, ...data };
+            merged.user = { ...DEFAULT_DATA.user, ...(data.user || {}) };
+            merged.yearlyItems = { ...DEFAULT_DATA.yearlyItems, ...(data.yearlyItems || {}) };
+            // Ensure all array fields are never undefined/null
+            const arrayKeys = ['vitals', 'symptoms', 'tasks', 'consumption', 'watchlist', 'notes'];
+            for (const key of arrayKeys) {
+                if (!Array.isArray(merged[key])) merged[key] = DEFAULT_DATA[key] ? [...DEFAULT_DATA[key]] : [];
+            }
+            if (!merged.dailyLogs || typeof merged.dailyLogs !== 'object') merged.dailyLogs = {};
+            if (!merged.quickLogs || typeof merged.quickLogs !== 'object') merged.quickLogs = {};
+            return merged;
         }
 
         function saveData() {
@@ -2732,7 +2746,13 @@
             if (cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
             cloudSyncTimeout = setTimeout(() => {
                 const settings = getGitHubSettings();
-                if (settings.token && settings.gistId) {
+                // Only auto-sync if there's meaningful data (prevent pushing empty state to cloud)
+                const hasData = (appData.watchlist && appData.watchlist.length > 0) ||
+                    (appData.tasks && appData.tasks.length > 0) ||
+                    (appData.consumption && appData.consumption.length > 0) ||
+                    (appData.notes && appData.notes.length > 0) ||
+                    Object.keys(appData.dailyLogs || {}).length > 0;
+                if (settings.token && settings.gistId && hasData) {
                     syncAllDataToCloud().catch(err => console.log('Auto-sync skipped:', err));
                 }
             }, 30000); // 30 second debounce
@@ -4596,8 +4616,8 @@
                     throw new Error('Invalid data format');
                 }
 
-                // Restore the data
-                appData = cloudData.appData;
+                // Restore the data (merge with defaults to protect against missing keys)
+                appData = mergeWithDefaults(cloudData.appData);
                 saveData();
 
                 localStorage.setItem('deanOS_lastCloudSync', new Date().toISOString());
@@ -4843,7 +4863,7 @@
 
         function exportData() {
             const data = {
-                appData: JSON.parse(localStorage.getItem('deanOS_data') || '{}'),
+                appData: JSON.parse(localStorage.getItem('deanOSData') || '{}'),
                 ouraData: JSON.parse(localStorage.getItem('deanOS_ouraData') || '{}'),
                 exportDate: new Date().toISOString()
             };
