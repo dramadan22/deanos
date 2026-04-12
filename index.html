@@ -2240,7 +2240,7 @@
                     <button class="btn btn-primary" onclick="openConsumptionModalWithContext()">+ Add</button>
                 </div>
 
-                <div class="consumption-tabs">
+                <div class="consumption-tabs" id="consumptionTabs">
                     <button class="consumption-tab active" data-tab="tvshow">&#128250; TV Shows</button>
                     <button class="consumption-tab" data-tab="movie">&#127910; Movies</button>
                     <button class="consumption-tab" data-tab="book">&#128218; Books</button>
@@ -3381,7 +3381,7 @@
             document.getElementById('consumptionModal').classList.add('active');
         }
 
-        document.querySelectorAll('.consumption-tab').forEach(tab => {
+        document.querySelectorAll('#consumptionTabs .consumption-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 currentConsumptionTab = tab.dataset.tab;
                 renderConsumption();
