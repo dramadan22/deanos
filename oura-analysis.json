@@ -1,17 +1,18 @@
 {
-  "updated": "2026-04-12T15:26:12.061534+00:00",
-  "data_range": "2026-03-30 to 2026-04-12",
+  "updated": "2026-04-13T16:04:28.764652+00:00",
+  "data_range": "2026-03-31 to 2026-04-13",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-03-30 to 2026-04-12",
+    "date_range": "2026-03-31 to 2026-04-13",
     "sleep": {
-      "avg_score": 83.7,
+      "avg_score": 82.8,
       "avg_hours": 7.5,
-      "avg_deep_hours": 1.1,
+      "avg_deep_hours": 1.2,
       "avg_rem_hours": 1.6,
-      "avg_efficiency": 85.8,
+      "avg_efficiency": 86.2,
       "scores": [
+        64,
         82,
         86,
         85,
@@ -24,13 +25,13 @@
         93,
         67,
         84,
-        76,
-        77
+        76
       ]
     },
     "readiness": {
-      "avg_score": 84.2,
+      "avg_score": 83.3,
       "scores": [
+        67,
         88,
         84,
         84,
@@ -43,16 +44,16 @@
         87,
         80,
         84,
-        81,
-        80
+        81
       ]
     },
     "activity": {
-      "avg_score": 83.2,
-      "avg_steps": 6397.5,
-      "avg_calories": 502.5,
+      "avg_score": 83.1,
+      "avg_steps": 6019.8,
+      "avg_calories": 508.3,
       "scores": [
         null,
+        89,
         80,
         80,
         74,
@@ -64,15 +65,15 @@
         89,
         94,
         88,
-        86,
-        91
+        86
       ]
     },
     "heart": {
-      "avg_hrv": 64.1,
-      "avg_resting_hr": 46.4,
+      "avg_hrv": 66.2,
+      "avg_resting_hr": 46.8,
       "hrv_values": [
         null,
+        82,
         82,
         62,
         77,
@@ -84,31 +85,14 @@
         48,
         65,
         57,
-        41,
-        54
+        41
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
-      "avg_breath_rate": 15.0
+      "avg_breath_rate": 15.1
     },
-    "workouts_count": 14
+    "workouts_count": 13
   },
-  "analysis": {
-    "overall_assessment": "Your autonomic function shows excellent stability with a high average HRV of 64.1ms and well-controlled resting HR averaging 46.4 bpm, suggesting your POTS management protocol is working effectively. Sleep quality remains strong at 83.7/100 average with stable temperature deviations at 0.0\u00b0C, indicating minimal Hashimoto's flare activity. However, deep sleep averaging only 1.1 hours may be limiting immune repair and vestibular compensation capacity.",
-    "whats_going_well": [
-      "Autonomic stability is excellent - HRV remains consistently high (61-82ms range over past week) with no concerning drops below 50ms threshold",
-      "POTS management appears optimal with resting HR staying consistently low (46-52 bpm) and good activity tolerance averaging 6,397 steps daily",
-      "Temperature regulation is stable at 0.0\u00b0C average deviation, suggesting Hashimoto's is well-controlled with no recent immune flares"
-    ],
-    "areas_to_improve": [
-      "Deep sleep is suboptimal at 1.0-1.4 hours daily (should target 1.5-2+ hours) - consider earlier magnesium glycinate timing or additional sleep hygiene measures",
-      "Activity levels show high variability (5,030-8,703 steps) which can destabilize POTS - aim for more consistent daily step targets between 6,000-7,500",
-      "April 7th shows a concerning pattern of lower sleep score (82) with higher activity (8,703 steps) potentially indicating overexertion risk"
-    ],
-    "autonomic_assessment": "HRV trends are exceptionally strong with values consistently above 60ms and peaks at 82ms, indicating robust parasympathetic tone and excellent POTS stability. The stable resting HR in the 46-48 bpm range confirms good autonomic regulation without tachycardic episodes. Recovery metrics suggest your current protocol is effectively managing sympathetic overdrive.",
-    "thyroid_immune_signals": "Temperature deviations remain neutral at 0.0\u00b0C with no spikes suggesting minimal Hashimoto's immune activation currently. However, consistently low deep sleep (1.0-1.4h vs optimal 1.5-2h) may compromise immune system repair capacity long-term.",
-    "vestibular_readiness": "High readiness scores (79-88) and stable HRV indicate excellent capacity for vestibular rehabilitation exercises throughout this period. No days show the concerning combination of low HRV + poor sleep that would warrant scaling back vestibular rehab intensity.",
-    "focus_for_next_week": "Prioritize deep sleep optimization by adjusting magnesium glycinate timing to 2-3 hours before bed and implementing stricter sleep hygiene, as inadequate deep sleep is the primary limiting factor for both Hashimoto's immune repair and vestibular compensation."
-  }
+  "analysis": null
 }
