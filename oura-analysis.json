@@ -1,18 +1,19 @@
 {
-  "updated": "2026-04-13T16:04:28.764652+00:00",
-  "data_range": "2026-03-31 to 2026-04-13",
+  "updated": "2026-04-14T15:59:42.432755+00:00",
+  "data_range": "2026-04-01 to 2026-04-14",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-03-31 to 2026-04-13",
+    "date_range": "2026-04-01 to 2026-04-14",
     "sleep": {
-      "avg_score": 82.8,
-      "avg_hours": 7.5,
-      "avg_deep_hours": 1.2,
+      "avg_score": 83.4,
+      "avg_hours": 7.4,
+      "avg_deep_hours": 1.1,
       "avg_rem_hours": 1.6,
-      "avg_efficiency": 86.2,
+      "avg_efficiency": 86.8,
       "scores": [
-        64,
+        81,
+        68,
         82,
         86,
         85,
@@ -24,14 +25,14 @@
         90,
         93,
         67,
-        84,
-        76
+        84
       ]
     },
     "readiness": {
-      "avg_score": 83.3,
+      "avg_score": 84.0,
       "scores": [
-        67,
+        86,
+        72,
         88,
         84,
         84,
@@ -43,16 +44,16 @@
         89,
         87,
         80,
-        84,
-        81
+        84
       ]
     },
     "activity": {
-      "avg_score": 83.1,
-      "avg_steps": 6019.8,
-      "avg_calories": 508.3,
+      "avg_score": 83.3,
+      "avg_steps": 5959.8,
+      "avg_calories": 527.5,
       "scores": [
         null,
+        89,
         89,
         80,
         80,
@@ -64,15 +65,15 @@
         85,
         89,
         94,
-        88,
-        86
+        88
       ]
     },
     "heart": {
       "avg_hrv": 66.2,
-      "avg_resting_hr": 46.8,
+      "avg_resting_hr": 46.7,
       "hrv_values": [
         null,
+        41,
         82,
         82,
         62,
@@ -84,15 +85,30 @@
         69,
         48,
         65,
-        57,
-        41
+        57
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
-      "avg_breath_rate": 15.1
+      "avg_breath_rate": 15.0
     },
-    "workouts_count": 13
+    "workouts_count": 15
   },
-  "analysis": null
+  "analysis": {
+    "overall_assessment": "Your data shows generally strong recovery metrics with average HRV of 66.2ms and excellent sleep scores (83.4), suggesting good autonomic stability for POTS management. However, April 13th presents a concerning pattern with crashed HRV (41ms), poor sleep (68 score, only 0.5h deep sleep), and reduced readiness (72), indicating autonomic dysfunction that requires attention.",
+    "whats_going_well": [
+      "Resting heart rate remains well-controlled at average 46.7 bpm with minimal variation (46-53 range), suggesting stable autonomic regulation and no signs of thyroid-induced tachycardia",
+      "Sleep efficiency averaging 86.8% with consistently high sleep scores (80+ on 6/7 recent days) indicates your protocol is supporting restorative sleep critical for autonomic recovery",
+      "Activity levels are appropriately graded for POTS with moderate step counts (5026-8068) and 15 workouts over 14 days, avoiding overexertion while maintaining conditioning"
+    ],
+    "areas_to_improve": [
+      "Deep sleep averaging only 1.1 hours is suboptimal for immune system repair needed in Hashimoto's management - consider earlier magnesium glycinate timing or sleep environment optimization",
+      "April 13th crash pattern (HRV 41ms, sleep 68, readiness 72) needs investigation - identify triggers like stress, dietary changes, or overexertion that preceded this autonomic dysfunction episode",
+      "HRV volatility ranging from 41-82ms over recent days suggests autonomic instability - consider heart rate variability training or meditation to improve consistency"
+    ],
+    "autonomic_assessment": "Your autonomic nervous system shows mixed signals with generally good baseline function (average HRV 66.2ms, stable low resting HR) but concerning volatility. The April 13th crash with HRV dropping to 41ms following poor sleep suggests your autonomic system is still vulnerable to destabilization, requiring careful load management to prevent POTS symptom flares.",
+    "thyroid_immune_signals": "Temperature deviations averaging 0.0\u00b0C with no significant spikes suggest currently stable thyroid function without active inflammatory flares. However, the inadequate deep sleep (1.1h average, particularly 0.5h on April 13th) may compromise immune regulation needed for Hashimoto's management.",
+    "vestibular_readiness": "High readiness scores (84-88 on most days) indicate good capacity for vestibular rehabilitation exercises. However, scale back vestibular rehab intensity on days following poor recovery like April 14th (following the crash), when the nervous system lacks bandwidth for compensation training.",
+    "focus_for_next_week": "Prioritize identifying and eliminating triggers for autonomic crashes like April 13th - track correlations between evening activities, stress levels, meal timing, and next-day HRV to prevent sympathetic overdrive episodes that worsen POTS symptoms."
+  }
 }
