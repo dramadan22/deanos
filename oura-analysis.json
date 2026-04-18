@@ -1,17 +1,18 @@
 {
-  "updated": "2026-04-17T15:47:22.050852+00:00",
-  "data_range": "2026-04-04 to 2026-04-17",
+  "updated": "2026-04-18T15:27:49.468377+00:00",
+  "data_range": "2026-04-05 to 2026-04-18",
   "days_analyzed": 14,
   "summary_stats": {
     "days_analyzed": 14,
-    "date_range": "2026-04-04 to 2026-04-17",
+    "date_range": "2026-04-05 to 2026-04-18",
     "sleep": {
       "avg_score": 83.4,
       "avg_hours": 7.3,
       "avg_deep_hours": 1.1,
-      "avg_rem_hours": 1.5,
-      "avg_efficiency": 85.6,
+      "avg_rem_hours": 1.6,
+      "avg_efficiency": 85.7,
       "scores": [
+        90,
         87,
         80,
         76,
@@ -24,13 +25,13 @@
         87,
         82,
         92,
-        87,
-        90
+        87
       ]
     },
     "readiness": {
-      "avg_score": 84.1,
+      "avg_score": 83.7,
       "scores": [
+        83,
         87,
         87,
         79,
@@ -43,16 +44,16 @@
         87,
         79,
         86,
-        85,
-        89
+        85
       ]
     },
     "activity": {
-      "avg_score": 82.8,
-      "avg_steps": 6196.4,
-      "avg_calories": 560.9,
+      "avg_score": 83.2,
+      "avg_steps": 5993.0,
+      "avg_calories": 571.2,
       "scores": [
         null,
+        89,
         92,
         89,
         84,
@@ -64,15 +65,15 @@
         81,
         80,
         74,
-        80,
-        85
+        80
       ]
     },
     "heart": {
-      "avg_hrv": 69.6,
-      "avg_resting_hr": 46.8,
+      "avg_hrv": 69.8,
+      "avg_resting_hr": 47.2,
       "hrv_values": [
         null,
+        71,
         82,
         58,
         74,
@@ -84,31 +85,30 @@
         61,
         73,
         74,
-        70,
-        69
+        70
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
       "avg_breath_rate": 15.3
     },
-    "workouts_count": 17
+    "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "The data shows generally strong autonomic recovery with excellent average HRV (69.6ms) and low resting HR (46.8 bpm), suggesting good POTS management. However, there's concerning volatility with one crash day (4/13) showing poor sleep cascade effects, and deep sleep remains suboptimal for immune system recovery in Hashimoto's management.",
+    "overall_assessment": "The data shows generally strong management of all three conditions with excellent average metrics (HRV 69.8ms, resting HR 47.2bpm, sleep score 83.4), but reveals concerning volatility patterns that need attention. The dramatic HRV crash on 04-13 (41ms) following poor sleep (68 score, only 0.5h deep sleep) demonstrates how sleep disruption cascades into autonomic dysfunction, which is particularly problematic for POTS management.",
     "whats_going_well": [
-      "Excellent HRV recovery pattern with 82ms readings on 4/11, 4/12, and 4/16, indicating robust autonomic function and effective POTS protocol adherence",
-      "Resting heart rate remains consistently low (45-51 bpm range in recent week) with no sustained tachycardia, suggesting stable thyroid function and good autonomic regulation",
-      "Temperature deviations averaging 0.0\u00b0C with no significant spikes indicate absence of acute Hashimoto's flares or immune activation during this period"
+      "Resting heart rate remains consistently low (45-48 bpm on most days) indicating good autonomic control and suggesting thyroid hormone levels are well-managed",
+      "Temperature deviations averaging 0.0\u00b0C with no significant spikes suggests Hashimoto's is currently stable without active immune flares",
+      "Activity levels are appropriately graded for POTS (5000-6000 steps, 18 workouts over 14 days) without triggering autonomic crashes, as evidenced by maintaining good readiness scores"
     ],
     "areas_to_improve": [
-      "Deep sleep is consistently inadequate at 0.5-1.4 hours (well below optimal 1.5-2+ hours), which impairs immune system repair critical for Hashimoto's management and vestibular compensation",
-      "The dramatic crash on 4/13 (sleep 68, HRV drop to 41, only 5.5h sleep) shows vulnerability to sleep disruption cascading into autonomic dysfunction - need better sleep hygiene protocols",
-      "Activity levels show inconsistency (4601-8068 steps) which can destabilize POTS - aim for more consistent daily movement within the 5000-7000 step range that appears well-tolerated"
+      "Deep sleep consistency needs urgent attention - dropping to only 0.5 hours on 04-13 and averaging just 1.1 hours overall, which is insufficient for immune system repair in Hashimoto's",
+      "HRV volatility is concerning with swings from 82ms to 41ms between consecutive days (04-12 to 04-13), indicating autonomic instability that could trigger POTS symptoms",
+      "Sleep duration variability ranging from 5.5 to 7.7 hours suggests inconsistent sleep hygiene that's undermining vestibular compensation capacity"
     ],
-    "autonomic_assessment": "HRV trends show excellent baseline function with concerning volatility - the drop from 82ms to 41ms on 4/13 followed by recovery to 74ms then 82ms demonstrates classic POTS pattern where poor sleep triggers autonomic instability. The low, stable resting HR suggests the daily protocol is effectively managing sympathetic overdrive, but the system remains vulnerable to sleep disruption cascades.",
-    "thyroid_immune_signals": "Stable temperature deviations and absence of sustained elevated resting HR suggest current thyroid hormone levels are stable. However, consistently low deep sleep (averaging 1.1h vs optimal 1.5-2h) may be limiting immune system recovery and potentially allowing subclinical autoimmune activity.",
-    "vestibular_readiness": "Readiness scores of 84+ on most days indicate good capacity for vestibular rehab, but the crash day (4/13 readiness 72) suggests rehab intensity should be scaled back when readiness drops below 80. The generally strong HRV suggests the nervous system has adequate capacity for compensation work.",
-    "focus_for_next_week": "Prioritize deep sleep optimization through earlier bedtime and enhanced sleep hygiene, as the 4/13 crash pattern shows how sleep disruption cascades through all three conditions - poor sleep triggers autonomic instability, reduces immune recovery capacity, and impairs vestibular compensation."
+    "autonomic_assessment": "The HRV pattern reveals good baseline autonomic function (average 69.8ms) but dangerous volatility, particularly the 50% drop on 04-13 following sleep disruption. The consistently low resting HR (47.2 average) is positive for POTS management, suggesting the sympathetic nervous system isn't in chronic overdrive. However, the HRV instability indicates the autonomic system remains fragile and highly sensitive to sleep quality.",
+    "thyroid_immune_signals": "Temperature stability at 0.0\u00b0C deviation suggests no current Hashimoto's flare activity. However, the inadequate deep sleep averaging only 1.1 hours (optimal is 1.5-2 hours) may be compromising immune system regulation and could predispose to future autoimmune activation.",
+    "vestibular_readiness": "The readiness scores averaging 83.7 indicate generally good capacity for vestibular rehab, but the crash to 72 on 04-13 following poor sleep suggests rehab intensity should be scaled back on days following sleep scores below 75. The nervous system needs adequate recovery reserves for effective vestibular compensation.",
+    "focus_for_next_week": "Prioritize sleep consistency and deep sleep optimization through earlier bedtimes and enhanced sleep hygiene - the 04-13 crash pattern shows that poor sleep is the primary trigger destabilizing all three conditions simultaneously."
   }
 }
