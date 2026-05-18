@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T15:48:00.423931+00:00",
+  "updated": "2026-05-18T17:23:30.578519+00:00",
   "data_range": "2026-04-21 to 2026-05-04",
   "days_analyzed": 14,
   "summary_stats": {
@@ -95,20 +95,20 @@
     "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "Your autonomic function shows concerning volatility with HRV swinging from 35-77ms over recent days, while resting HR remains well-controlled at 44-49 bpm suggesting POTS stability. The consistently low deep sleep (0.6-1.1h most days) may be limiting immune recovery for Hashimoto's management and vestibular compensation capacity.",
+    "overall_assessment": "Your autonomic function shows good stability with strong average HRV (63.6ms) and low resting HR (47.4bpm), though May 4th's dramatic drop (HRV 35, RHR 56) suggests a significant autonomic stress event. Sleep architecture is adequate at 7.0 hours average, but consistently low deep sleep (0.6-1.1h recent days) may be limiting immune recovery for Hashimoto's management. Temperature stability at 0.0\u00b0C deviation indicates well-controlled thyroid/immune status currently.",
     "whats_going_well": [
-      "Resting heart rate remains consistently low at 44-49 bpm across all measured days, indicating good baseline autonomic control and POTS stability",
-      "Overall sleep scores are strong at 80-89/100 for 6 of 7 recent days with good 7+ hour durations, supporting recovery needs",
-      "Activity levels are appropriately graded at 78-92 points with step counts between 3925-8365, avoiding overexertion that could crash autonomic function"
+      "Excellent autonomic stability most days with HRV consistently 56-77ms and resting HR 44-49bpm from April 28-May 3, indicating good POTS management",
+      "Temperature deviations remain stable at 0.0\u00b0C average with no spikes, suggesting Hashimoto's is well-controlled without active immune flares",
+      "Activity pacing appears appropriate with 3925-8365 daily steps and 18 workouts over 14 days, avoiding overexertion that could crash autonomic function"
     ],
     "areas_to_improve": [
-      "Deep sleep is critically low at 0.6-1.1 hours most nights (well below 1.5+ hour target), limiting immune system repair needed for Hashimoto's management",
-      "HRV volatility is concerning with a dramatic drop from 77ms to 35ms between 5/1 and 5/4, suggesting autonomic instability requiring protocol adjustment",
-      "The incomplete data on 5/4 (0.8h sleep, missing readiness score) suggests a significant disruption that needs investigation and recovery focus"
+      "Deep sleep consistently low at 0.6-1.1 hours in recent days versus 1.6h on April 29th - consider earlier magnesium glycinate timing or sleep environment optimization",
+      "May 4th shows concerning autonomic crash (HRV dropped to 35, RHR spiked to 56) - identify potential triggers from May 3rd activities or stressors",
+      "Deep sleep averaging only 1.2 hours overall is suboptimal for immune system repair needed in Hashimoto's management - aim for 1.5+ hours nightly"
     ],
-    "autonomic_assessment": "HRV shows high volatility (35-77ms range) indicating unstable autonomic regulation, though the consistent low resting HR (44-49 bpm) suggests your POTS is reasonably controlled. The sharp HRV drop to 35ms on 5/4 coupled with severely reduced sleep duration signals autonomic stress that requires immediate attention to prevent POTS symptom escalation.",
-    "thyroid_immune_signals": "Temperature deviations remain stable at 0.0\u00b0C average, suggesting no acute Hashimoto's flare activity. However, consistently inadequate deep sleep (0.6-1.1h vs needed 1.5+ hours) may be compromising immune system repair and potentially allowing low-grade autoimmune activation.",
-    "vestibular_readiness": "The dramatic readiness score drop and HRV crash on 5/4 indicates severely limited capacity for vestibular rehab that day. Most other days show readiness scores of 77-89, suggesting good capacity for gentle vestibular exercises, but avoid intense rehab on days when HRV drops below 50ms.",
-    "focus_for_next_week": "Prioritize deep sleep optimization through earlier bedtime, cooler room temperature, and potentially adjusting evening magnesium timing, as inadequate deep sleep is the primary limiting factor for both Hashimoto's immune recovery and autonomic stability."
+    "autonomic_assessment": "Your autonomic nervous system shows generally excellent regulation with HRV 56-77ms and stable low resting HR 44-49bpm through May 3rd, indicating good POTS control and orthostatic tolerance capacity. However, May 4th's dramatic autonomic crash (HRV plummeted to 35, RHR jumped to 56) represents significant sympathetic overdrive that warrants investigation of preceding triggers and modified activity until recovery.",
+    "thyroid_immune_signals": "Temperature stability at 0.0\u00b0C deviation suggests no active Hashimoto's flares currently. However, consistently insufficient deep sleep (0.6-1.1h recent nights) may compromise immune system repair capacity and potentially predispose to future autoimmune activation.",
+    "vestibular_readiness": "High readiness scores (77-89) through May 3rd indicate good nervous system capacity for vestibular rehabilitation exercises. May 4th's compromised recovery suggests vestibular rehab should be scaled back to basic exercises until autonomic metrics normalize.",
+    "focus_for_next_week": "Prioritize deep sleep optimization through earlier supplement timing, cooler sleep environment, or stress reduction techniques, as inadequate deep sleep (averaging 1.2h vs optimal 1.5+h) is limiting immune recovery for Hashimoto's and may have contributed to the May 4th autonomic crash."
   }
 }
