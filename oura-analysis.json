@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-21T17:25:11.085925+00:00",
+  "updated": "2026-05-22T17:00:48.888341+00:00",
   "data_range": "2026-04-21 to 2026-05-04",
   "days_analyzed": 14,
   "summary_stats": {
@@ -95,20 +95,20 @@
     "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "Your data shows generally excellent management across all three conditions with strong sleep scores (85.4 average), good HRV (63.6ms average), and well-controlled resting HR (47.4 bpm). However, May 4th represents a significant crash with HRV dropping to 35ms and RHR spiking to 56 bpm, suggesting autonomic dysfunction flare that requires immediate attention.",
+    "overall_assessment": "Your metrics show generally strong autonomic stability with excellent average HRV (63.6ms) and well-controlled resting HR (47.4 bpm), indicating good POTS management. However, May 4th shows concerning autonomic disruption (HRV crashed to 35ms, RHR spiked to 56 bpm) alongside sleep failure, requiring immediate attention to prevent cascade effects across all three conditions.",
     "whats_going_well": [
-      "Excellent sleep quality maintenance with 7+ hour duration most nights and sleep scores consistently 80+ (except May 4th crash day)",
-      "Temperature deviations averaging 0.0\u00b0C across the period indicate well-controlled Hashimoto's with no apparent immune activation or thyroid flares",
-      "Activity levels appropriately graded for POTS management, staying in 3900-8400 step range without overexertion spikes that could trigger autonomic crashes"
+      "Excellent HRV stability through April 28-May 1 (ranging 69-77ms) demonstrates robust autonomic function and effective POTS protocol adherence",
+      "Consistent sleep duration averaging 7.0 hours with strong efficiency (85.1%) supports both thyroid hormone regulation and vestibular compensation",
+      "Well-graded activity levels averaging 6,292 steps with 18 workouts shows appropriate POTS exercise tolerance without autonomic overexertion"
     ],
     "areas_to_improve": [
-      "Deep sleep averaging only 1.2 hours is suboptimal for autoimmune recovery and vestibular compensation - aim to identify what disrupted deep sleep on May 2nd (0.7h) and April 28th (0.6h)",
-      "May 4th crash day shows classic POTS pattern (HRV 35, RHR 56, minimal sleep) - need protocol for early recognition and intervention when HRV drops below 50ms",
-      "HRV volatility ranging from 35-77ms suggests autonomic system still reactive - consider stress management or protocol adjustments on days when HRV drops below your 63ms baseline"
+      "Deep sleep deficiency is critical - averaging only 1.2 hours with several days below 1 hour (May 2: 0.7h, May 1: 0.8h) compromises immune regulation for Hashimoto's",
+      "May 4th autonomic crash (HRV 35ms, RHR 56 bpm, sleep failure) requires immediate investigation of triggers and protocol adjustments",
+      "HRV volatility pattern emerging (May 3: 56ms following May 2: 72ms) suggests autonomic instability that could impact vestibular compensation"
     ],
-    "autonomic_assessment": "Your autonomic nervous system shows good baseline stability with HRV averaging 63.6ms and controlled resting HR at 47.4 bpm, indicating effective POTS management. However, the May 4th crash (HRV 35, RHR 56) demonstrates your system remains vulnerable to autonomic storms, requiring vigilant monitoring when HRV trends downward.",
-    "thyroid_immune_signals": "Hashimoto's appears well-controlled with stable temperature deviations at 0.0\u00b0C and no inflammatory spikes. Deep sleep averaging 1.2 hours may be limiting optimal immune system repair, but the lack of temperature fluctuations suggests current supplement protocol is effective.",
-    "vestibular_readiness": "Recovery metrics indicate good capacity for vestibular rehab most days with readiness scores 77-89, but May 4th crash day would warrant scaling back or skipping vestibular exercises entirely. Days with HRV below 60ms may benefit from gentler rehab protocols.",
-    "focus_for_next_week": "Develop an early intervention protocol for when HRV drops below 50ms - increase electrolytes, prioritize sleep hygiene, and reduce vestibular rehab intensity to prevent crashes like May 4th from fully developing."
+    "autonomic_assessment": "Your autonomic nervous system shows generally excellent stability with strong average HRV and well-controlled resting heart rate indicating effective POTS management. However, the sharp autonomic disruption on May 4th (HRV dropping from 72ms to 35ms, RHR spiking to 56 bpm) represents significant sympathetic overdrive that requires immediate attention to prevent orthostatic intolerance escalation.",
+    "thyroid_immune_signals": "Temperature deviations remain stable at 0.0\u00b0C average, suggesting no acute Hashimoto's flare activity. However, consistently low deep sleep (particularly 0.6-0.8 hours on multiple days) may be compromising immune system repair capacity and potentially allowing subclinical autoimmune activation.",
+    "vestibular_readiness": "Recovery metrics through April 28-May 1 (readiness scores 85-89) indicate excellent capacity for vestibular rehabilitation exercises. May 4th autonomic crash warrants scaling back vestibular rehab intensity until HRV recovers above 50ms and sleep normalizes.",
+    "focus_for_next_week": "Prioritize deep sleep optimization through enhanced sleep hygiene and magnesium timing adjustment - aim for minimum 1.5 hours deep sleep nightly to support immune regulation and prevent autonomic crashes like May 4th."
   }
 }
