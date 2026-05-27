@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-26T17:50:12.379824+00:00",
+  "updated": "2026-05-27T17:49:22.393147+00:00",
   "data_range": "2026-04-21 to 2026-05-04",
   "days_analyzed": 14,
   "summary_stats": {
@@ -95,20 +95,20 @@
     "workouts_count": 18
   },
   "analysis": {
-    "overall_assessment": "Your autonomic function shows concerning instability with HRV dropping from 77ms to 35ms over recent days, while resting HR increased from 44-47bpm to 56bpm on 5/4, suggesting sympathetic overdrive. Sleep quality remains strong (average 85.4/100) with stable temperature deviations (0.0\u00b0C average), indicating well-controlled Hashimoto's activity. The dramatic decline in recovery metrics on 5/4 warrants immediate attention to prevent POTS exacerbation.",
+    "overall_assessment": "Your overall metrics are strong with good autonomic stability (average HRV 63.6ms, RHR 47.4bpm), but the dramatic crash on 5/4 (HRV plummeted to 35ms, RHR spiked to 56bpm) signals significant autonomic dysfunction requiring immediate attention. Deep sleep is consistently suboptimal at 0.6-1.6h across all measured days, which impacts both Hashimoto's immune regulation and vestibular compensation capacity.",
     "whats_going_well": [
-      "Temperature regulation is excellent with 0.0\u00b0C average deviation, suggesting your Hashimoto's is well-controlled and not currently flaring",
-      "Sleep efficiency remains strong at 85.1% with consistently good sleep scores (80-89/100 from 4/28-5/3), providing a solid foundation for autonomic recovery",
-      "Activity levels are appropriately graded with 6292 average daily steps and 18 workouts over 14 days, avoiding overexertion that could crash autonomic function"
+      "Excellent autonomic baseline with average HRV of 63.6ms and stable resting HR averaging 47.4bpm, indicating your POTS management protocol is working well",
+      "Activity levels are appropriately graded for POTS with consistent 3,925-8,365 daily steps and 18 workouts over 14 days without triggering sustained tachycardia",
+      "Sleep efficiency of 85.1% and duration averaging 7.0 hours shows good sleep architecture foundation despite deep sleep limitations"
     ],
     "areas_to_improve": [
-      "Deep sleep is consistently low at 0.6-1.1 hours over the last week (except 4/29 with 1.6h), well below the 1.5-2 hour target needed for optimal immune system repair in Hashimoto's",
-      "HRV shows alarming decline from 77ms (5/1) to 35ms (5/4) with corresponding RHR spike to 56bpm, indicating acute autonomic dysfunction requiring immediate intervention",
-      "The 5/4 data shows severe compromise with essentially no recorded sleep (0.8h), zero steps, and crashed recovery metrics - this suggests you may have experienced a significant POTS flare or syncope episode"
+      "Deep sleep critically low across all days (0.6-1.6h vs optimal 1.5-2h) - consider increasing evening magnesium glycinate dose or adding glycine supplementation",
+      "The 5/4 autonomic crash (HRV 35ms, RHR 56bpm) with zero steps suggests overexertion on 5/3 - implement stricter activity pacing with mandatory rest days",
+      "Breathing rate averaging 15.2/min is elevated for your condition - increase diaphragmatic breathing sessions from current frequency to 3x daily minimum"
     ],
-    "autonomic_assessment": "Your HRV trend shows dangerous instability, dropping 55% from 77ms to 35ms with resting HR spiking 26% to 56bpm on 5/4, indicating severe sympathetic overdrive. The pattern suggests your autonomic nervous system is currently in crisis mode, likely triggered by the events leading to the compromised 5/4 readings. This level of autonomic dysfunction significantly increases syncope risk and requires immediate protocol adjustments.",
-    "thyroid_immune_signals": "Temperature stability at 0.0\u00b0C deviation suggests your Hashimoto's is not currently contributing to symptoms. However, the declining deep sleep trend (averaging only 0.9h over last 7 days vs 1.2h overall) may compromise immune regulation and thyroid function if it continues.",
-    "vestibular_readiness": "The readiness scores of 77-89 from 5/1-5/3 indicate good capacity for vestibular rehab, but the crashed metrics on 5/4 suggest complete vestibular compensation breakdown. Scale back all vestibular exercises until HRV recovers above 50ms and RHR drops below 50bpm.",
-    "focus_for_next_week": "Prioritize autonomic recovery by implementing strict rest protocols - increase electrolyte intake, consider splitting magnesium doses more frequently throughout the day, and temporarily reduce all exercise to gentle walking only until HRV stabilizes above 60ms for 3 consecutive days."
+    "autonomic_assessment": "Your baseline autonomic function is remarkably stable with HRV consistently in 59-77ms range and RHR 44-49bpm from 4/28-5/1, indicating effective POTS management. However, the 5/4 crash (HRV dropped 22 points, RHR increased 9bpm) represents significant sympathetic overdrive, likely triggered by the high activity on 5/3 (8,365 steps), demonstrating your system still has limited exercise tolerance despite good baseline control.",
+    "thyroid_immune_signals": "Temperature deviation averaging 0.0\u00b0C suggests stable thyroid function without acute flares, which is positive for Hashimoto's management. However, consistently inadequate deep sleep (0.6-1.6h across all measured days) may be compromising immune system repair and could potentially trigger autoimmune activation over time.",
+    "vestibular_readiness": "Recovery metrics indicate good capacity for vestibular rehab on most days with readiness scores 77-89, but 5/4's autonomic crash signals you should pause vestibular exercises until HRV returns above 55ms and RHR drops below 50bpm. The consistent deep sleep deficit may be limiting your vestibular compensation progress.",
+    "focus_for_next_week": "Prioritize deep sleep enhancement as it's impacting all three conditions - increase evening magnesium glycinate to 600mg, add 3g glycine 1 hour before bed, and implement a strict 9:30 PM blue light cutoff with room temperature at 65-68\u00b0F to target 1.5+ hours deep sleep nightly."
   }
 }
