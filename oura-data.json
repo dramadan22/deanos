@@ -1,9 +1,9 @@
 {
-  "updated": "2026-06-11T17:58:55.163737+00:00",
-  "start_date": "2026-03-13",
-  "end_date": "2026-06-11",
+  "updated": "2026-06-12T17:29:10.475085+00:00",
+  "start_date": "2026-03-14",
+  "end_date": "2026-06-12",
   "days_requested": 90,
-  "days_returned": 53,
+  "days_returned": 52,
   "workouts": [
     {
       "date": "2026-03-14",
@@ -3775,65 +3775,6 @@
         "training_volume": 100
       },
       "spo2_average": 97.53
-    },
-    {
-      "date": "2026-03-13",
-      "sleep_score": 95,
-      "sleep_contributors": {
-        "deep_sleep": 95,
-        "efficiency": 98,
-        "latency": 81,
-        "rem_sleep": 100,
-        "restfulness": 84,
-        "timing": 100,
-        "total_sleep": 99
-      },
-      "bedtime_start": "2026-03-12T20:44:14.000-07:00",
-      "bedtime_end": "2026-03-13T06:17:35.000-07:00",
-      "total_sleep_seconds": 32040,
-      "deep_sleep_seconds": 5190,
-      "rem_sleep_seconds": 8820,
-      "light_sleep_seconds": 18030,
-      "awake_seconds": 2361,
-      "sleep_efficiency": 93,
-      "average_hrv": 60,
-      "lowest_hr": 44,
-      "average_hr_sleep": 49.875,
-      "average_breath": 15.0,
-      "restless_periods": 230,
-      "readiness_score": 90,
-      "temperature_deviation": -0.01,
-      "temperature_trend_deviation": -0.11,
-      "readiness_contributors": {
-        "activity_balance": 74,
-        "body_temperature": 100,
-        "hrv_balance": 91,
-        "previous_day_activity": 85,
-        "previous_night": 100,
-        "recovery_index": 100,
-        "resting_heart_rate": 100,
-        "sleep_balance": 76,
-        "sleep_regularity": 86
-      },
-      "activity_score": 82,
-      "steps": 4022,
-      "active_calories": 251,
-      "total_calories": 2513,
-      "distance_meters": 4078,
-      "high_activity_seconds": 60,
-      "medium_activity_seconds": 600,
-      "low_activity_seconds": 12960,
-      "sedentary_seconds": 39180,
-      "inactivity_alerts": 2,
-      "activity_contributors": {
-        "meet_daily_targets": 60,
-        "move_every_hour": 78,
-        "recovery_time": 100,
-        "stay_active": 63,
-        "training_frequency": 100,
-        "training_volume": 98
-      },
-      "spo2_average": 97.36
     }
   ]
 }
