@@ -1,16 +1,16 @@
 {
-  "updated": "2026-07-25T15:53:48.708706+00:00",
-  "data_range": "2026-04-26 to 2026-05-04",
-  "days_analyzed": 9,
+  "updated": "2026-07-26T15:52:07.740630+00:00",
+  "data_range": "2026-04-27 to 2026-05-04",
+  "days_analyzed": 8,
   "summary_stats": {
-    "days_analyzed": 9,
-    "date_range": "2026-04-26 to 2026-05-04",
+    "days_analyzed": 8,
+    "date_range": "2026-04-27 to 2026-05-04",
     "sleep": {
-      "avg_score": 86.2,
-      "avg_hours": 7.1,
-      "avg_deep_hours": 1.0,
+      "avg_score": 85.4,
+      "avg_hours": 6.9,
+      "avg_deep_hours": 0.9,
       "avg_rem_hours": 1.5,
-      "avg_efficiency": 83.9,
+      "avg_efficiency": 83.6,
       "scores": [
         null,
         82,
@@ -19,12 +19,11 @@
         85,
         89,
         81,
-        93,
-        92
+        93
       ]
     },
     "readiness": {
-      "avg_score": 85.1,
+      "avg_score": 84.6,
       "scores": [
         null,
         77,
@@ -33,14 +32,13 @@
         89,
         89,
         85,
-        83,
-        89
+        83
       ]
     },
     "activity": {
-      "avg_score": 87.6,
-      "avg_steps": 5683.4,
-      "avg_calories": 533.6,
+      "avg_score": 87.0,
+      "avg_steps": 5569.5,
+      "avg_calories": 510.1,
       "scores": [
         85,
         90,
@@ -49,13 +47,12 @@
         92,
         84,
         78,
-        87,
-        92
+        87
       ]
     },
     "heart": {
-      "avg_hrv": 64.9,
-      "avg_resting_hr": 47.7,
+      "avg_hrv": 65.2,
+      "avg_resting_hr": 47.6,
       "hrv_values": [
         35,
         56,
@@ -64,15 +61,14 @@
         59,
         69,
         75,
-        79,
-        62
+        79
       ]
     },
     "recovery": {
       "avg_temp_deviation": -0.0,
       "avg_breath_rate": 15.4
     },
-    "workouts_count": 8
+    "workouts_count": 7
   },
   "analysis": null
 }
