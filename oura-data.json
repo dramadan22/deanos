@@ -1,32 +1,10 @@
 {
-  "updated": "2026-07-27T16:51:29.121003+00:00",
-  "start_date": "2026-04-28",
-  "end_date": "2026-07-27",
+  "updated": "2026-07-28T16:26:25.113431+00:00",
+  "start_date": "2026-04-29",
+  "end_date": "2026-07-28",
   "days_requested": 90,
-  "days_returned": 7,
+  "days_returned": 6,
   "workouts": [
-    {
-      "date": "2026-04-27",
-      "activity": "walking",
-      "calories": 128.38140869140625,
-      "distance": null,
-      "start_datetime": "2026-04-27T18:02:00.000-07:00",
-      "end_datetime": "2026-04-27T18:28:00.000-07:00",
-      "intensity": "moderate",
-      "label": null,
-      "source": "confirmed"
-    },
-    {
-      "date": "2026-04-28",
-      "activity": "walking",
-      "calories": 191.61549377441406,
-      "distance": null,
-      "start_datetime": "2026-04-28T15:29:00.000-07:00",
-      "end_datetime": "2026-04-28T15:59:00.000-07:00",
-      "intensity": "moderate",
-      "label": null,
-      "source": "confirmed"
-    },
     {
       "date": "2026-04-29",
       "activity": "strengthTraining",
@@ -401,65 +379,6 @@
         "training_volume": 98
       },
       "spo2_average": 97.927
-    },
-    {
-      "date": "2026-04-28",
-      "sleep_score": 81,
-      "sleep_contributors": {
-        "deep_sleep": 39,
-        "efficiency": 93,
-        "latency": 83,
-        "rem_sleep": 72,
-        "restfulness": 84,
-        "timing": 100,
-        "total_sleep": 86
-      },
-      "bedtime_start": "2026-04-27T21:31:29.000-07:00",
-      "bedtime_end": "2026-04-28T06:04:53.000-07:00",
-      "total_sleep_seconds": 27360,
-      "deep_sleep_seconds": 2040,
-      "rem_sleep_seconds": 4860,
-      "light_sleep_seconds": 20460,
-      "awake_seconds": 3444,
-      "sleep_efficiency": 89,
-      "average_hrv": 75,
-      "lowest_hr": 46,
-      "average_hr_sleep": 51.125,
-      "average_breath": 15.25,
-      "restless_periods": 202,
-      "readiness_score": 85,
-      "temperature_deviation": 0.1,
-      "temperature_trend_deviation": 0.08,
-      "readiness_contributors": {
-        "activity_balance": 86,
-        "body_temperature": 97,
-        "hrv_balance": 82,
-        "previous_day_activity": 81,
-        "previous_night": 78,
-        "recovery_index": 88,
-        "resting_heart_rate": 91,
-        "sleep_balance": 86,
-        "sleep_regularity": 89
-      },
-      "activity_score": 78,
-      "steps": 6961,
-      "active_calories": 438,
-      "total_calories": 2703,
-      "distance_meters": 7081,
-      "high_activity_seconds": 0,
-      "medium_activity_seconds": 2580,
-      "low_activity_seconds": 12360,
-      "sedentary_seconds": 39300,
-      "inactivity_alerts": 0,
-      "activity_contributors": {
-        "meet_daily_targets": 60,
-        "move_every_hour": 100,
-        "recovery_time": 76,
-        "stay_active": 63,
-        "training_frequency": 100,
-        "training_volume": 98
-      },
-      "spo2_average": 97.557
     }
   ]
 }
