@@ -1,44 +1,9 @@
 {
-  "updated": "2026-08-02T15:49:53.080263+00:00",
-  "start_date": "2026-05-04",
-  "end_date": "2026-08-02",
+  "updated": "2026-08-03T17:02:45.175607+00:00",
+  "start_date": "2026-05-05",
+  "end_date": "2026-08-03",
   "days_requested": 90,
-  "days_returned": 1,
+  "days_returned": 0,
   "workouts": [],
-  "days": [
-    {
-      "date": "2026-05-04",
-      "bedtime_start": "2026-05-03T21:09:28.000-07:00",
-      "bedtime_end": "2026-05-03T22:34:30.000-07:00",
-      "total_sleep_seconds": 2790,
-      "deep_sleep_seconds": 540,
-      "rem_sleep_seconds": 90,
-      "light_sleep_seconds": 2160,
-      "awake_seconds": 2312,
-      "sleep_efficiency": 55,
-      "average_hrv": 35,
-      "lowest_hr": 56,
-      "average_hr_sleep": 61.125,
-      "average_breath": null,
-      "restless_periods": 6,
-      "activity_score": 85,
-      "steps": 0,
-      "active_calories": 0,
-      "total_calories": 1938,
-      "distance_meters": 0,
-      "high_activity_seconds": 0,
-      "medium_activity_seconds": 0,
-      "low_activity_seconds": 0,
-      "sedentary_seconds": 60,
-      "inactivity_alerts": 0,
-      "activity_contributors": {
-        "meet_daily_targets": 60,
-        "move_every_hour": 100,
-        "recovery_time": 100,
-        "stay_active": 72,
-        "training_frequency": 100,
-        "training_volume": 97
-      }
-    }
-  ]
+  "days": []
 }
